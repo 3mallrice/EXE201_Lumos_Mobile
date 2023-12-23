@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "873249372678",
+    "project_id": "lumos-841a0",
+    "storage_bucket": "lumos-841a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:873249372678:android:3358572d3b280e9bcca187",
+        "android_client_info": {
+          "package_name": "com.lumos.exe201_lumos_mobile_member"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYE_XhtekdPQQPkBYKrLBJ-UhKC7BIIKk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:873249372678:android:cb0f3feea7d66c40cca187",
+        "android_client_info": {
+          "package_name": "com.lumos.exe201_lumos_mobile_nurse"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYE_XhtekdPQQPkBYKrLBJ-UhKC7BIIKk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
