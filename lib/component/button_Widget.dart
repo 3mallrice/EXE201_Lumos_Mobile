@@ -13,8 +13,8 @@ class ButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30),
-        gradient: Gradients.button, //cách dùng màu gradient
+        borderRadius: BorderRadius.circular(9),
+        color: ColorPalette.pink,
       ),
       child: MaterialButton(
         minWidth: 0, // Đặt chiều ngang tối thiểu để fit chữ
