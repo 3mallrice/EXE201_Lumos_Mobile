@@ -1,4 +1,4 @@
-# exe201_lumos_mobile_member
+# exe201_lumos_mobile
 
 A Mobile App of Lumos for Member
 

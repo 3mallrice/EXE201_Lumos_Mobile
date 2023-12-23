@@ -1,6 +1,6 @@
-import 'package:exe201_lumos_mobile_member/core/const/color_const.dart';
-import 'package:exe201_lumos_mobile_member/representation/splash_screen.dart';
-import 'package:exe201_lumos_mobile_member/route.dart';
+import 'package:exe201_lumos_mobile/core/const/color_const.dart';
+import 'package:exe201_lumos_mobile/representation/splash_screen.dart';
+import 'package:exe201_lumos_mobile/route.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
