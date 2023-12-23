@@ -1,4 +1,3 @@
-import 'package:exe201_lumos_mobile/main.dart';
 import 'package:exe201_lumos_mobile/representation/splash_screen.dart';
 import 'package:flutter/material.dart';
 
