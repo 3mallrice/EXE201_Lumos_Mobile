@@ -1,5 +1,5 @@
-import 'package:exe201_lumos_mobile_member/core/helper/asset_helper.dart';
-import 'package:exe201_lumos_mobile_member/core/helper/image_helper.dart';
+import 'package:exe201_lumos_mobile/core/helper/asset_helper.dart';
+import 'package:exe201_lumos_mobile/core/helper/image_helper.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {

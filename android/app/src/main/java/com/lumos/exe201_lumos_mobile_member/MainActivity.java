@@ -1,4 +1,4 @@
-package com.lumos.exe201_lumos_mobile_member;
+package com.lumos.exe201_lumos_mobile;
 
 import io.flutter.embedding.android.FlutterActivity;
 

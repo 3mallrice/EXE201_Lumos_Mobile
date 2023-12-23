@@ -1,5 +1,5 @@
-import 'package:exe201_lumos_mobile_member/main.dart';
-import 'package:exe201_lumos_mobile_member/representation/splash_screen.dart';
+import 'package:exe201_lumos_mobile/main.dart';
+import 'package:exe201_lumos_mobile/representation/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 
