@@ -3,7 +3,7 @@ import 'package:exe201_lumos_mobile/core/helper/image_helper.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen ({Key? key}) : super(key : key);
+  const SplashScreen({Key? key}) : super(key: key);
 
   static String routeName = '/splash_screen';
 
@@ -17,7 +17,11 @@ class _SplashScreenState extends State<SplashScreen> {
     return Stack(
       // widget nào được viết trước sẽ nằm phía dưới còn widget nào viết sau sẽ nằm phía trên
       children: [
-        ImageHelper.loadFormAsset(AssetHelper.imgSplashBg, fit: BoxFit.fitWidth)
+        Positioned.fill(
+            child: ImageHelper.loadFormAsset(AssetHelper.imgSplashBg,
+                fit: BoxFit.fitWidth)),
+        Positioned.fill(
+            child: ImageHelper.loadFormAsset(AssetHelper.imgLogo)),
       ],
     );
   }
