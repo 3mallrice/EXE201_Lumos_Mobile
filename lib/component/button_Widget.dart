@@ -3,8 +3,7 @@ import 'package:exe201_lumos_mobile/core/const/textstyle_const.dart';
 import 'package:flutter/material.dart';
 
 class ButtonWidget extends StatelessWidget {
-  const ButtonWidget({Key? key, required this.title, this.ontap})
-      : super(key: key);
+  const ButtonWidget({super.key, required this.title, this.ontap});
 
   final String title;
   final Function()? ontap;

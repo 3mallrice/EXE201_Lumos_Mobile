@@ -1,19 +1,27 @@
+import 'package:exe201_lumos_mobile/core/helper/asset_helper.dart';
 import 'package:flutter/material.dart';
 import '../core/const/color_const.dart';
 
 class MyTextfield extends StatelessWidget {
   // ignore: prefer_typing_uninitialized_variables, non_constant_identifier_names
   final TextEditingController Controller;
-  final String hintText;
+  final String labelText;
+  final String? hintText;
   final bool obscureText;
+  final Widget? suffixIcon;
+  final TextInputAction? textInputAction;
+  final FloatingLabelBehavior? floatingLabelBehavior;
 
-  const MyTextfield({
-    super.key,
-    // ignore: non_constant_identifier_names
-    required this.Controller,
-    required this.obscureText,
-    required this.hintText,
-  });
+  const MyTextfield(
+      {super.key,
+      // ignore: non_constant_identifier_names
+      required this.Controller,
+      required this.obscureText,
+      required this.labelText,
+      this.hintText,
+      this.suffixIcon,
+      this.textInputAction,
+      this.floatingLabelBehavior});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +34,9 @@ class MyTextfield extends StatelessWidget {
           obscureText:
               obscureText, //True or False, when type hide or not... (password)
           // maxLength: 30,
+          textInputAction: textInputAction,
           decoration: InputDecoration(
+              enabled: true,
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12.0),
                 borderSide: const BorderSide(color: ColorPalette.blue),
@@ -35,13 +45,22 @@ class MyTextfield extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12.0),
                 borderSide: const BorderSide(color: ColorPalette.pink),
               ),
-              fillColor: const Color(0x50d9d9d9),
+              labelText: labelText,
+              labelStyle: const TextStyle(
+                  color: ColorPalette.blueBold,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18),
+              floatingLabelBehavior: floatingLabelBehavior,
+              fillColor: ColorPalette.white,
               filled: true,
+              isDense: true,
               hintText: hintText,
               hintStyle: const TextStyle(
-                  color: ColorPalette.white,
+                  color: ColorPalette.grey,
                   fontWeight: FontWeight.normal,
-                  fontSize: 15)),
+                  fontSize: 15),
+              suffixIcon: suffixIcon),
+          cursorColor: ColorPalette.primaryText, //màu con trỏ
         ),
       ),
     );
