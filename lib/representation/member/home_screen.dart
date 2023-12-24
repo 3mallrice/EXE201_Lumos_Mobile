@@ -1,8 +1,11 @@
+import 'package:exe201_lumos_mobile/component/app_bar.dart';
 import 'package:exe201_lumos_mobile/core/const/color_const.dart';
+import 'package:exe201_lumos_mobile/core/helper/asset_helper.dart';
+import 'package:exe201_lumos_mobile/core/helper/image_helper.dart';
 import 'package:flutter/material.dart';
 
 class MemberHome extends StatefulWidget {
-  const MemberHome({super.key});
+  const MemberHome({Key? key}) : super(key: key);
 
   static String routeName = '/member_home';
 
@@ -13,15 +16,31 @@ class MemberHome extends StatefulWidget {
 class _MemberHomeState extends State<MemberHome> {
   @override
   Widget build(BuildContext context) {
-    double screenWidth =
-        MediaQuery.of(context).size.width; //set width = screenWidth
-    return Container(
-      child: Row(
-        children: <Widget>[
-          Container(
-            width: screenWidth,
-            height: 56,
-            color: ColorPalette.blue,
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    return Scaffold(
+      appBar: const AppBarCom(
+        appBarText: 'Home',
+      ),
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: ImageHelper.loadFormAsset(
+              AssetHelper.memberBanner,
+            ),
+          ),
+          const Positioned(
+            top: 20.0,
+            left: 30.0,
+            child: Text(
+              'Medical At Home',
+              style: TextStyle(
+                fontFamily: 'poppins',
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                color: Color(0xFF0A4F45),
+              ),
+            ),
           ),
         ],
       ),
