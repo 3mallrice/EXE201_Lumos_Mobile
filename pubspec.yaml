@@ -84,6 +84,7 @@ flutter:
         - asset: assets/font/Poppins-SemiBoldItalic.otf
         - asset: assets/font/Poppins-Thin.otf
         - asset: assets/font/Poppins-ThinItalic.otf
+          style: normal
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
