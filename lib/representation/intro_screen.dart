@@ -3,6 +3,7 @@ import 'package:exe201_lumos_mobile/core/const/color_const.dart';
 import 'package:exe201_lumos_mobile/core/helper/asset_helper.dart';
 import 'package:exe201_lumos_mobile/core/helper/image_helper.dart';
 import 'package:exe201_lumos_mobile/login.dart';
+import 'package:exe201_lumos_mobile/representation/member/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class IntroScreen extends StatefulWidget {
@@ -58,6 +59,7 @@ class _IntroScreenState extends State<IntroScreen> {
                   title: 'Get Started',
                   ontap: () {
                     Navigator.of(context).pushNamed(Login.routeName);
+                    //Navigator.of(context).pushNamed(MemberHome.routeName);
                   },
                 ),
               ),
