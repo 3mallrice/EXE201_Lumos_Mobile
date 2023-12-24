@@ -9,6 +9,9 @@ class AssetHelper {
   static const String imgBgIntro3 = 'assets/img/bgIntro3.png';
   static const String imgIntro4 = 'assets/img/Intro4.png';
   static const String imgBgIntro4 = 'assets/img/bgIntro4.png';
+  static const String imglogo1 = 'assets/img/logo1.png';
+  static const String imglogo2 = 'assets/img/logo2.png';
+  static const String imglogo3 = 'assets/img/logo3.png';
 
   //member
   static const String memberBanner = 'assets/img/memberBanner.png';
