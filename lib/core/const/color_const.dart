@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class ColorPalette {
   static const Color blue = Color(0xFF6DDDCD);
   static const Color blueBold = Color(0xFF4ec4c6);
+  static const Color blueBold2 = Color(0xFF0A4F45);
   static const Color pink = Color(0xFFFF9F9F);
   static const Color white = Colors.white;
   static const Color grey = Colors.grey;

@@ -12,6 +12,7 @@ class AssetHelper {
   static const String imglogo1 = 'assets/img/logo1.png';
   static const String imglogo2 = 'assets/img/logo2.png';
   static const String imglogo3 = 'assets/img/logo3.png';
+  static const String googleLogo = 'assets/img/googleLogo.png';
 
   //member
   static const String memberBanner = 'assets/img/memberBanner.png';
