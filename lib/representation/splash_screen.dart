@@ -47,7 +47,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Positioned.fill(
             child: ImageHelper.loadFormAsset(AssetHelper.imgSplashBg,
                 fit: BoxFit.fitWidth)),
-        Positioned.fill(child: ImageHelper.loadFormAsset(AssetHelper.imgLogo)),
+        Positioned.fill(child: ImageHelper.loadFormAsset(AssetHelper.imglogo1)),
       ],
     );
   }
