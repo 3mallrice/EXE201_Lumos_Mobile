@@ -70,18 +70,20 @@ class _IntroScreenState extends State<IntroScreen> {
   }
 
   Widget _buildSlide(List<String> assets) {
-    return Stack(
-      children: [
-        Positioned.fill(
-          child: ImageHelper.loadFormAsset(
-            assets[1],
-            fit: BoxFit.fitHeight,
-          ),
-        ),
-        Positioned.fill(
-          child: ImageHelper.loadFormAsset(assets[0]),
-        ),
-      ],
-    );
+    return PopScope(
+        canPop: false,
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: ImageHelper.loadFormAsset(
+                assets[1],
+                fit: BoxFit.fitHeight,
+              ),
+            ),
+            Positioned.fill(
+              child: ImageHelper.loadFormAsset(assets[0]),
+            ),
+          ],
+        ));
   }
 }
