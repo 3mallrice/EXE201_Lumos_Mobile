@@ -41,14 +41,17 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      // widget nào được viết trước sẽ nằm phía dưới còn widget nào viết sau sẽ nằm phía trên
-      children: [
-        Positioned.fill(
-            child: ImageHelper.loadFormAsset(AssetHelper.imgSplashBg,
-                fit: BoxFit.fitWidth)),
-        Positioned.fill(child: ImageHelper.loadFormAsset(AssetHelper.imglogo1)),
-      ],
-    );
+    return PopScope(
+        canPop: false,
+        child: Stack(
+          // widget nào được viết trước sẽ nằm phía dưới còn widget nào viết sau sẽ nằm phía trên
+          children: [
+            Positioned.fill(
+                child: ImageHelper.loadFormAsset(AssetHelper.imgSplashBg,
+                    fit: BoxFit.fitWidth)),
+            Positioned.fill(
+                child: ImageHelper.loadFormAsset(AssetHelper.imglogo1)),
+          ],
+        ));
   }
 }
