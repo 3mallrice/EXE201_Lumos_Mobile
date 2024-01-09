@@ -5,7 +5,7 @@ import 'package:exe201_lumos_mobile/core/helper/image_helper.dart';
 import 'package:flutter/material.dart';
 
 class MemberHome extends StatefulWidget {
-  const MemberHome({Key? key}) : super(key: key);
+  const MemberHome({super.key});
 
   static String routeName = '/member_home';
 
