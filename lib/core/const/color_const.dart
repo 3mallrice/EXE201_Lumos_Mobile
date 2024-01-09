@@ -6,6 +6,7 @@ class ColorPalette {
   static const Color blueBold2 = Color(0xFF0A4F45);
   static const Color bluelight = Color(0xFFDEFDF9);
   static const Color pink = Color(0xFFFF9F9F);
+  static Color selectedPink = const Color(0xFFAE3030).withOpacity(0.42);
   static const Color white = Colors.white;
   static const Color grey = Colors.grey;
   static const Color primaryText = Color(0xFF141414);
