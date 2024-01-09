@@ -10,5 +10,9 @@ final Map<String, WidgetBuilder> routes = {
   IntroScreen.routeName: (context) => const IntroScreen(),
   Login.routeName: (context) => const Login(),
   SignUp.routeName: (context) => const SignUp(),
+
+  //Member
   MemberHome.routeName: (context) => const MemberHome()
+
+  //Nurse
 };
