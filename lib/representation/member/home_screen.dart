@@ -30,31 +30,32 @@ class _MemberHomeState extends State<MemberHome> {
                 fit: BoxFit.fill),
           ),
           const Positioned(
-              top: 50.0,
-              left: 30.0,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Medical At Home',
-                    style: TextStyle(
-                      fontFamily: 'poppins',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFF0A4F45),
-                    ),
+            top: 50.0,
+            left: 30.0,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Medical At Home',
+                  style: TextStyle(
+                    fontFamily: 'poppins',
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    color: Color(0xFF0A4F45),
                   ),
-                  Text(
-                    'Booking',
-                    style: TextStyle(
-                      fontFamily: 'poppins',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFF0A4F45),
-                    ),
+                ),
+                Text(
+                  'Booking',
+                  style: TextStyle(
+                    fontFamily: 'poppins',
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    color: Color(0xFF0A4F45),
                   ),
-                ],
-              )),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
