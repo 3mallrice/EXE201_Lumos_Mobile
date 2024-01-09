@@ -1,5 +1,4 @@
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
-import 'package:exe201_lumos_mobile/core/const/lumos_icons.dart';
 import 'package:exe201_lumos_mobile/representation/member/member_booking.dart';
 import 'package:exe201_lumos_mobile/representation/member/member_notification.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
 
 import '../../core/const/color_const.dart';
+import '../../core/const/lumos_icons.dart';
 import '../share/account_screen.dart';
 import 'home_screen.dart';
 
@@ -68,7 +68,7 @@ class _MemberMainState extends State<MemberMain> {
           items: [
             /// Home
             DotNavigationBarItem(
-              icon: const Icon(LumosIcon.home_1),
+              icon: const Icon(LumosIcons.home_1icon),
               selectedColor: ColorPalette.selectedPink,
             ),
 
