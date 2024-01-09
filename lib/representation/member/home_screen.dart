@@ -22,41 +22,42 @@ class _MemberHomeState extends State<MemberHome> {
           appBarText: 'Home',
         ),
         body: Container(
-          child: Stack(
-            children: [
-              Positioned.fill(
-                child: ImageHelper.loadFormAsset(
-                  AssetHelper.memberBanner,
+            child: Stack(
+              children: [
+                Positioned(
+                  top: 0,
+                  width: screenWidth,
+                  child: ImageHelper.loadFormAsset(AssetHelper.memberBanner,
+                      fit: BoxFit.fill),
                 ),
-              ),
-              const Positioned(
-                  top: 40.0,
-                  left: 30.0,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Medical At Home',
-                        style: TextStyle(
-                          fontFamily: 'poppins',
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          color: Color(0xFF0A4F45),
+                const Positioned(
+                    top: 50.0,
+                    left: 30.0,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Medical At Home',
+                          style: TextStyle(
+                            fontFamily: 'poppins',
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color: Color(0xFF0A4F45),
+                          ),
                         ),
-                      ),
-                      Text(
-                        'Booking',
-                        style: TextStyle(
-                          fontFamily: 'poppins',
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          color: Color(0xFF0A4F45),
+                        Text(
+                          'Booking',
+                          style: TextStyle(
+                            fontFamily: 'poppins',
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color: Color(0xFF0A4F45),
+                          ),
                         ),
-                      ),
-                    ],
-                  )),
-            ],
-          ),
-        ));
+                      ],
+                    )),
+              ],
+            ),
+            Stack));
   }
 }
