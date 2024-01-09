@@ -106,28 +106,33 @@ class _LoginState extends State<Login> {
                           ),
 
                           //password textfield
-                          MyTextfield(
-                            Controller: passwordController,
-                            obscureText: _passwordInVisible,
-                            labelText: 'Password',
-                            hintText: 'Your password',
-                            floatingLabelBehavior: FloatingLabelBehavior.always,
-                            textInputAction: TextInputAction.done,
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                _passwordInVisible
-                                    ? FontAwesomeIcons.eye
-                                    : FontAwesomeIcons
-                                        .eyeSlash, //change icon based on boolean value
-                                color: ColorPalette.grey,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  _passwordInVisible =
-                                      !_passwordInVisible; //change boolean value
-                                });
-                              },
-                            ),
+                          StatefulBuilder(
+                            builder: (context, setState) {
+                              return MyTextfield(
+                                Controller: passwordController,
+                                obscureText: _passwordInVisible,
+                                labelText: 'Password',
+                                hintText: 'Your password',
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.always,
+                                textInputAction: TextInputAction.done,
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    _passwordInVisible
+                                        ? FontAwesomeIcons.eye
+                                        : FontAwesomeIcons
+                                            .eyeSlash, //change icon based on boolean value
+                                    color: ColorPalette.grey,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      _passwordInVisible =
+                                          !_passwordInVisible; //change boolean value
+                                    });
+                                  },
+                                ),
+                              );
+                            },
                           ),
 
                           const SizedBox(
@@ -231,7 +236,6 @@ class _LoginState extends State<Login> {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  print(context);
                                   Navigator.of(context)
                                       .pushNamed(SignUp.routeName);
                                 },
