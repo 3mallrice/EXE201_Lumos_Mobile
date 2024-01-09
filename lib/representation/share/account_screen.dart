@@ -1,3 +1,4 @@
+import 'package:exe201_lumos_mobile/core/const/lumos_icons.dart';
 import 'package:exe201_lumos_mobile/core/helper/asset_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:exe201_lumos_mobile/component/app_bar.dart';
@@ -20,7 +21,7 @@ class _AccountScreenState extends State<AccountScreen> {
       ),
       body: Column(
         children: [
-          SizedBox(height: 28),
+          const SizedBox(height: 28),
           Center(
             child: Column(
               children: [
@@ -36,21 +37,24 @@ class _AccountScreenState extends State<AccountScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const SizedBox(
-                  width: 132,
-                  height: 23,
-                  child: Text(
-                    'Leslie Alexander',
-                    style: TextStyle(
-                      color: Color(0xFF0A4F45),
-                      fontSize: 16,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w500,
-                      height: 0.08,
-                      letterSpacing: 0.10,
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Leslie Alexander',
+                      style: TextStyle(
+                        color: Color(0xFF0A4F45),
+                        fontSize: 16,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w500,
+                        height: 0.08,
+                        letterSpacing: 0.10,
+                      ),
                     ),
-                  ),
-                )
+                    SizedBox(width: 8),
+                    Icon(LumosIcon.home_1),
+                  ],
+                ),
               ],
             ),
           ),
