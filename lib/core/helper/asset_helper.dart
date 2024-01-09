@@ -14,6 +14,9 @@ class AssetHelper {
   static const String imglogo3 = 'assets/img/logo3.png';
   static const String googleLogo = 'assets/img/googleLogo.png';
 
+  //share
+  static const String accountImg = 'assets/img/accountImg.png';
+
   //member
   static const String memberBanner = 'assets/img/memberBanner.png';
 }

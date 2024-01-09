@@ -20,7 +20,7 @@ class _MemberHomeState extends State<MemberHome> {
 
     return Scaffold(
         appBar: const AppBarCom(
-          appBarText: 'Home',
+          appBarText: 'Trang chủ',
         ),
         body: Stack(
           children: [
@@ -37,7 +37,7 @@ class _MemberHomeState extends State<MemberHome> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Medical At Home',
+                      'Y tế tại nhà',
                       style: TextStyle(
                         fontFamily: 'poppins',
                         fontSize: 20,
@@ -46,7 +46,7 @@ class _MemberHomeState extends State<MemberHome> {
                       ),
                     ),
                     Text(
-                      'Booking',
+                      'Đặt lịch',
                       style: TextStyle(
                         fontFamily: 'poppins',
                         fontSize: 20,
