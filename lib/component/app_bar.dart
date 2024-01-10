@@ -28,11 +28,12 @@ class AppBarCom extends StatelessWidget implements PreferredSizeWidget {
       child: AppBar(
         automaticallyImplyLeading: leading,
         leading: leftIcon,
+        iconTheme: const IconThemeData(color: ColorPalette.secondaryWhite),
         backgroundColor: backgroundColor ?? ColorPalette.blue,
         title: Text(
           appBarText,
           style: TextStyle(
-              color: textColor ?? const Color(0xFF0A4F45),
+              color: textColor ?? ColorPalette.blueBold2,
               fontSize: 24,
               fontWeight: FontWeight.bold),
         ),

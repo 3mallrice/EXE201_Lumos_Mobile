@@ -30,10 +30,20 @@ class Assets {
   static const String fontPoppinsThin = 'assets/font/Poppins-Thin.otf';
   static const String fontPoppinsThinItalic =
       'assets/font/Poppins-ThinItalic.otf';
+  static const String imgAccountImg = 'assets/img/accountImg.png';
+  static const String imgBgIntro1 = 'assets/img/bgIntro1.png';
+  static const String imgBgIntro2 = 'assets/img/bgIntro2.png';
+  static const String imgBgIntro3 = 'assets/img/bgIntro3.png';
+  static const String imgBgIntro4 = 'assets/img/bgIntro4.png';
+  static const String imgGoogleLogo = 'assets/img/googleLogo.png';
   static const String imgIntro1 = 'assets/img/Intro1.png';
   static const String imgIntro2 = 'assets/img/Intro2.png';
+  static const String imgIntro3 = 'assets/img/Intro3.png';
   static const String imgIntro4 = 'assets/img/Intro4.png';
-  static const String imgIntro5 = 'assets/img/Intro3.png';
+  static const String imgLogo1 = 'assets/img/logo1.png';
+  static const String imgLogo2 = 'assets/img/logo2.png';
+  static const String imgLogo3 = 'assets/img/logo3.png';
   static const String imgLumos = 'assets/img/Lumos.png';
+  static const String imgMemberBanner = 'assets/img/memberBanner.png';
   static const String imgSplashBg = 'assets/img/SplashBg.png';
 }
