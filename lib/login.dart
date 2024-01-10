@@ -1,6 +1,7 @@
 import 'package:exe201_lumos_mobile/core/const/color_const.dart';
 import 'package:exe201_lumos_mobile/core/helper/asset_helper.dart';
 import 'package:exe201_lumos_mobile/representation/member/home_screen.dart';
+import 'package:exe201_lumos_mobile/representation/member/member_main_navbar.dart';
 import 'package:exe201_lumos_mobile/representation/share/account_screen.dart';
 import 'package:exe201_lumos_mobile/representation/share/account_update.dart';
 import 'package:exe201_lumos_mobile/sign_up.dart';
@@ -37,8 +38,8 @@ class _LoginState extends State<Login> {
     String email = emailController.text;
     String password = passwordController.text;
 
-    Navigator.of(context).pushNamed(MemberHome.routeName);
-    //Navigator.of(context).pushNamed(UpdateAccount.routeName);
+    //Navigator.of(context).pushNamed(MemberHome.routeName);
+    Navigator.of(context).pushNamed(MemberMain.routName);
   }
 
   //forget password
