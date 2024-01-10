@@ -90,7 +90,7 @@ flutter:
 
     - family: LumosIcons #tên của bộ icons . Nhớ đặt đúng tên đã đặt như trên web nhé
       fonts:
-            - asset: assets/font/LumosIcons.ttf #đường dẫn file .ttf
+        - asset: assets/font/LumosIcons.ttf #đường dẫn file .ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
