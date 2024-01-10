@@ -58,7 +58,7 @@ class _AccountScreenState extends State<AccountScreen> {
                           letterSpacing: 0.10,
                         ),
                       ),
-                      const SizedBox(width: 8),
+                      const SizedBox(width: 3),
                       IconButton(
                         onPressed: () {
                           Navigator.of(context)
