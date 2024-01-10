@@ -239,6 +239,7 @@ class _LoginState extends State<Login> {
                               ),
                               GestureDetector(
                                 onTap: () {
+                                  print(context);
                                   Navigator.of(context)
                                       .pushNamed(SignUp.routeName);
                                 },
