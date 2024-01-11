@@ -33,28 +33,30 @@ class _MemberHomeState extends State<MemberHome> {
           const Positioned(
               top: 50.0,
               left: 30.0,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Y tế tại nhà',
-                    style: TextStyle(
-                      fontFamily: 'poppins',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      color: ColorPalette.blueBold2,
+              child: SizedBox(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Y tế tại nhà',
+                      style: TextStyle(
+                        fontFamily: 'poppins',
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        color: ColorPalette.blueBold2,
+                      ),
                     ),
-                  ),
-                  Text(
-                    'Đặt lịch',
-                    style: TextStyle(
-                      fontFamily: 'poppins',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      color: ColorPalette.blueBold2,
+                    Text(
+                      'Đặt lịch',
+                      style: TextStyle(
+                        fontFamily: 'poppins',
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        color: ColorPalette.blueBold2,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               )),
         ],
       ),
