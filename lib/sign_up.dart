@@ -1,5 +1,4 @@
 import 'package:exe201_lumos_mobile/login.dart';
-import 'package:exe201_lumos_mobile/representation/member/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
