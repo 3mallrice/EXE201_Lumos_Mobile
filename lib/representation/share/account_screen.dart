@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:exe201_lumos_mobile/component/app_bar.dart';
 
 class AccountScreen extends StatefulWidget {
-  const AccountScreen({Key? key});
+  const AccountScreen({super.key});
 
   static String routeName = '/account_screen';
 
@@ -44,81 +44,13 @@ class _AccountScreenState extends State<AccountScreen> {
                       fit: BoxFit.fill,
                     ),
                   ),
-                  const SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'Leslie Alexander',
-                        style: TextStyle(
-                          color: ColorPalette.blueBold2,
-                          fontSize: 16,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w500,
-                          height: 0.08,
-                          letterSpacing: 0.10,
-                        ),
-                      ),
-                      const SizedBox(width: 3),
-                      IconButton(
-                        onPressed: () {
-                          Navigator.of(context)
-                              .pushNamed(UpdateAccount.routeName);
-                        },
-                        icon: const Icon(
-                          LumosIcons.edit_2icon,
-                          color: ColorPalette.blueBold2,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 34,
-                  ),
-                  MyButtonList(
-                    text: 'Hóa đơn',
-                    leftIcon: Icons.credit_card,
-                    rightIcon: Icons.arrow_forward_ios,
-                    onPressed: () {
-                      //Navigator.of(context).pushNamed(BillScreen.routName);
-                    },
-                  ),
-                  const SizedBox(
-                    height: 34,
-                  ),
-                  MyButtonList(
-                    text: 'Đặt chỗ',
-                    leftIcon: Icons.calendar_month_outlined,
-                    rightIcon: Icons.arrow_forward_ios,
-                    onPressed: () {
-                      //Navigator.of(context).pushNamed(BillScreen.routName);
-                    },
-                  ),
-                  const SizedBox(
-                    height: 34,
-                  ),
-                  MyButtonList(
-                    text: 'Về Lumos',
-                    leftIcon: LumosIcons.hearticon,
-                    rightIcon: Icons.arrow_forward_ios,
-                    onPressed: () {
-                      //Navigator.of(context).pushNamed(BillScreen.routName);
-                    },
-                  ),
-                  const SizedBox(
-                    height: 42,
-                  ),
-                  MyButton(
-                    onTap: () {
-                      //Navigator.of(context).pushNamed(BillScreen.routName);
-                    },
-                    width: 243,
-                    height: 58,
-                    text: 'Đăng xuất',
-                    color: ColorPalette.pink,
-                    widget: const Text(
-                      'Đăng xuất',
-                      textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Leslie Alexander',
                       style: TextStyle(
                         color: ColorPalette.blueBold2,
                         fontSize: 16,
@@ -144,7 +76,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 const SizedBox(
                   height: 34,
                 ),
-                MyAccountButton(
+                MyButtonList(
                   text: 'Hóa đơn',
                   leftIcon: Icons.credit_card,
                   rightIcon: Icons.arrow_forward_ios,
@@ -155,7 +87,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 const SizedBox(
                   height: 34,
                 ),
-                MyAccountButton(
+                MyButtonList(
                   text: 'Đặt chỗ',
                   leftIcon: Icons.calendar_month_outlined,
                   rightIcon: Icons.arrow_forward_ios,
@@ -166,7 +98,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 const SizedBox(
                   height: 34,
                 ),
-                MyAccountButton(
+                MyButtonList(
                   text: 'Về Lumos',
                   leftIcon: LumosIcons.hearticon,
                   rightIcon: Icons.arrow_forward_ios,
@@ -185,25 +117,26 @@ class _AccountScreenState extends State<AccountScreen> {
                   height: 58,
                   text: 'Đăng xuất',
                   color: ColorPalette.pink,
+                  borderRadius: 20,
                   widget: const Text(
                     'Đăng xuất',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: ColorPalette.secondaryWhite,
-                      fontSize: 20,
+                      color: ColorPalette.blueBold2,
+                      fontSize: 16,
                       fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w700,
-                      height: 0.04,
-                      letterSpacing: -0.28,
+                      fontWeight: FontWeight.w500,
+                      height: 0.08,
+                      letterSpacing: 0.10,
                     ),
                   ),
-                  borderRadius: 66.50,
                 ),
+                const SizedBox(width: 3),
                 const SizedBox(
                   height: 55,
                   child: Center(
                     child: Text(
-                      '© Copyright of Lumos',
+                      '© All copyright of Lumos',
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
