@@ -1,13 +1,13 @@
 import 'package:exe201_lumos_mobile/core/const/color_const.dart';
 import 'package:flutter/material.dart';
 
-class MyAccountButton extends StatelessWidget {
+class MyButtonList extends StatelessWidget {
   final String text;
   final IconData leftIcon;
   final IconData? rightIcon;
   final Function()? onPressed;
 
-  const MyAccountButton({
+  const MyButtonList({
     super.key,
     required this.text,
     required this.leftIcon,

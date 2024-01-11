@@ -1,12 +1,12 @@
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:exe201_lumos_mobile/representation/member/member_booking.dart';
+import 'package:exe201_lumos_mobile/representation/member/member_home.dart';
 import 'package:exe201_lumos_mobile/representation/member/member_notification.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/const/color_const.dart';
 import '../../core/const/lumos_icons.dart';
 import '../share/account_screen.dart';
-import 'home_screen.dart';
 
 class MemberMain extends StatefulWidget {
   const MemberMain({super.key});

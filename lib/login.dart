@@ -1,6 +1,5 @@
 import 'package:exe201_lumos_mobile/core/const/color_const.dart';
 import 'package:exe201_lumos_mobile/core/helper/asset_helper.dart';
-import 'package:exe201_lumos_mobile/representation/member/home_screen.dart';
 import 'package:exe201_lumos_mobile/representation/member/member_main_navbar.dart';
 import 'package:exe201_lumos_mobile/representation/share/account_screen.dart';
 import 'package:exe201_lumos_mobile/representation/share/account_update.dart';
@@ -24,8 +23,8 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   //text controller
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   bool _passwordInVisible = true;
 
   @override

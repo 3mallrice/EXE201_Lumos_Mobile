@@ -2,7 +2,6 @@ import 'package:exe201_lumos_mobile/component/button_widget.dart';
 import 'package:exe201_lumos_mobile/core/helper/asset_helper.dart';
 import 'package:exe201_lumos_mobile/core/helper/image_helper.dart';
 import 'package:exe201_lumos_mobile/login.dart';
-import 'package:exe201_lumos_mobile/representation/member/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class IntroScreen extends StatefulWidget {
