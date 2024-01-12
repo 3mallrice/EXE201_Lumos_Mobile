@@ -39,6 +39,7 @@ class _MemberMainState extends State<MemberMain> {
           AccountScreen(),
         ],
       ),
+      extendBody: true,
       extendBodyBehindAppBar: true,
       bottomNavigationBar: DotNavigationBar(
         backgroundColor: ColorPalette.pink,
@@ -49,6 +50,8 @@ class _MemberMainState extends State<MemberMain> {
         splashBorderRadius: 20,
         enableFloatingNavBar: true,
         enablePaddingAnimation: false,
+        marginR: const EdgeInsets.symmetric(horizontal: 40),
+        paddingR: const EdgeInsets.symmetric(vertical: 3),
         items: [
           /// Home
           DotNavigationBarItem(
