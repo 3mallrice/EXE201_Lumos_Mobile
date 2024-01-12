@@ -6,6 +6,7 @@ import 'package:exe201_lumos_mobile/representation/member/member_main_navbar.dar
 import 'package:exe201_lumos_mobile/representation/member/payment_method.dart';
 import 'package:exe201_lumos_mobile/representation/share/account_screen.dart';
 import 'package:exe201_lumos_mobile/representation/share/account_update.dart';
+import 'package:exe201_lumos_mobile/representation/share/bill_screen.dart';
 import 'package:exe201_lumos_mobile/representation/splash_screen.dart';
 import 'package:exe201_lumos_mobile/sign_up.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ final Map<String, WidgetBuilder> routes = {
   //share
   AccountScreen.routeName: (context) => const AccountScreen(),
   UpdateAccount.routeName: (context) => const UpdateAccount(),
+  BillScreen.routeName: (context) => const BillScreen(),
 
   //Member
   MemberMain.routName: (context) => const MemberMain(),
