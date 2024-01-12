@@ -5,7 +5,7 @@ import 'package:exe201_lumos_mobile/core/helper/image_helper.dart';
 import 'package:flutter/material.dart';
 
 class MemberHome extends StatefulWidget {
-  const MemberHome({super.key});
+  const MemberHome({Key? key}) : super(key: key);
 
   static String routeName = '/member_home';
 
@@ -27,37 +27,40 @@ class _MemberHomeState extends State<MemberHome> {
           Positioned(
             top: 0,
             width: screenWidth,
-            child: ImageHelper.loadFormAsset(AssetHelper.memberBanner,
-                fit: BoxFit.fill),
+            child: ImageHelper.loadFormAsset(
+              AssetHelper.memberBanner,
+              fit: BoxFit.fill,
+            ),
           ),
           const Positioned(
-              top: 50.0,
-              left: 30.0,
-              child: SizedBox(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Y tế tại nhà',
-                      style: TextStyle(
-                        fontFamily: 'poppins',
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                        color: ColorPalette.blueBold2,
-                      ),
+            top: 50.0,
+            left: 30.0,
+            child: SizedBox(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Y tế tại nhà',
+                    style: TextStyle(
+                      fontFamily: 'poppins',
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      color: ColorPalette.blueBold2,
                     ),
-                    Text(
-                      'Đặt lịch',
-                      style: TextStyle(
-                        fontFamily: 'poppins',
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                        color: ColorPalette.blueBold2,
-                      ),
+                  ),
+                  Text(
+                    'Đặt lịch',
+                    style: TextStyle(
+                      fontFamily: 'poppins',
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      color: ColorPalette.blueBold2,
                     ),
-                  ],
-                ),
-              )),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
