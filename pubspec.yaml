@@ -86,6 +86,9 @@ flutter:
         - asset: assets/font/Poppins-SemiBoldItalic.otf
         - asset: assets/font/Poppins-Thin.otf
         - asset: assets/font/Poppins-ThinItalic.otf
+        - asset: assets/font/verdana.ttf
+        - asset: assets/font/verdana-bold.ttf
+        - asset: assets/font/verdana-bold-italic.ttf
           style: normal
 
     - family: LumosIcons #tên của bộ icons . Nhớ đặt đúng tên đã đặt như trên web nhé

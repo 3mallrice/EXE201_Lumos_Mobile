@@ -3,6 +3,7 @@ import 'package:exe201_lumos_mobile/component/my_button.dart';
 import 'package:exe201_lumos_mobile/core/const/color_const.dart';
 import 'package:exe201_lumos_mobile/core/const/lumos_icons.dart';
 import 'package:exe201_lumos_mobile/core/helper/asset_helper.dart';
+import 'package:exe201_lumos_mobile/representation/share/about_lumos.dart';
 import 'package:exe201_lumos_mobile/representation/share/account_update.dart';
 import 'package:exe201_lumos_mobile/representation/share/bill_screen.dart';
 import 'package:flutter/material.dart';
@@ -105,7 +106,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     leftIcon: LumosIcons.hearticon,
                     rightIcon: Icons.arrow_forward_ios,
                     onPressed: () {
-                      //Navigator.of(context).pushNamed(BillScreen.routName);
+                      Navigator.of(context).pushNamed(AboutUs.routeName);
                     },
                   ),
                   const SizedBox(
@@ -119,17 +120,17 @@ class _AccountScreenState extends State<AccountScreen> {
                     height: 58,
                     text: 'Đăng xuất',
                     color: ColorPalette.pink,
-                    borderRadius: 20,
+                    borderRadius: 66.50,
                     widget: const Text(
                       'Đăng xuất',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: ColorPalette.blueBold2,
-                        fontSize: 16,
+                        color: ColorPalette.secondaryWhite,
+                        fontSize: 20,
                         fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
-                        height: 0.08,
-                        letterSpacing: 0.10,
+                        fontWeight: FontWeight.w700,
+                        height: 0.04,
+                        letterSpacing: -0.28,
                       ),
                     ),
                   ),
