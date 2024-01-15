@@ -141,7 +141,7 @@ class _AboutUsState extends State<AboutUs> {
                     color: ColorPalette.bluelight,
                   ),
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -149,12 +149,12 @@ class _AboutUsState extends State<AboutUs> {
                       Row(
                         children: [
                           Text(
-                            'Connect to',
+                            'Liên hệ với',
                             style: GoogleFonts.raleway(
                               textStyle: const TextStyle(
                                 color: ColorPalette.blueBold2,
                                 fontSize: 16,
-                                fontFamily: 'verdana',
+                                // fontFamily: 'verdana',
                                 fontWeight: FontWeight.w400,
                                 height: 0.08,
                                 letterSpacing: 0.10,
@@ -167,7 +167,7 @@ class _AboutUsState extends State<AboutUs> {
                               textStyle: const TextStyle(
                                 color: ColorPalette.blueBold2,
                                 fontSize: 16,
-                                fontFamily: 'verdana',
+                                // fontFamily: 'verdana',
                                 fontWeight: FontWeight.w700,
                                 height: 0.08,
                                 letterSpacing: 0.10,
