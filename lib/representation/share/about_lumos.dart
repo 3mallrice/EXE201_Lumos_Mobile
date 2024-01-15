@@ -1,11 +1,13 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:exe201_lumos_mobile/component/app_bar.dart';
 import 'package:exe201_lumos_mobile/core/const/color_const.dart';
 import 'package:exe201_lumos_mobile/core/const/zalo_icon.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:ionicons/ionicons.dart';
 
 class AboutUs extends StatefulWidget {
-  const AboutUs({Key? key}) : super(key: key);
+  const AboutUs({super.key});
 
   static String routeName = '/about_lumos';
 
@@ -47,19 +49,21 @@ class _AboutUsState extends State<AboutUs> {
                       ),
                     ),
                   ),
-                  child: const Column(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Trở thành partner',
-                        style: TextStyle(
-                          color: ColorPalette.blueBold2,
-                          fontSize: 16,
-                          fontFamily: 'verdana',
-                          fontWeight: FontWeight.w400,
-                          height: 0.08,
-                          letterSpacing: 0.10,
+                        style: GoogleFonts.raleway(
+                          textStyle: const TextStyle(
+                            color: ColorPalette.blueBold2,
+                            fontSize: 16,
+                            // fontFamily: 'verdana',
+                            fontWeight: FontWeight.normal,
+                            height: 0.08,
+                            letterSpacing: 0.10,
+                          ),
                         ),
                       ),
                     ],
@@ -78,19 +82,21 @@ class _AboutUsState extends State<AboutUs> {
                   ),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
-                  child: const Column(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Licence & Policy',
-                        style: TextStyle(
-                          color: ColorPalette.blueBold2,
-                          fontSize: 16,
-                          fontFamily: 'verdana',
-                          fontWeight: FontWeight.w400,
-                          height: 0.08,
-                          letterSpacing: 0.10,
+                        style: GoogleFonts.raleway(
+                          textStyle: const TextStyle(
+                            color: ColorPalette.blueBold2,
+                            fontSize: 16,
+                            // fontFamily: 'verdana',
+                            fontWeight: FontWeight.w400,
+                            height: 0.08,
+                            letterSpacing: 0.10,
+                          ),
                         ),
                       ),
                     ],
@@ -109,19 +115,21 @@ class _AboutUsState extends State<AboutUs> {
                   ),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
-                  child: const Column(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Lumos.com.vn',
-                        style: TextStyle(
-                          color: ColorPalette.blueBold2,
-                          fontSize: 16,
-                          fontFamily: 'verdana',
-                          fontWeight: FontWeight.w700,
-                          height: 0.08,
-                          letterSpacing: 0.10,
+                        style: GoogleFonts.raleway(
+                          textStyle: const TextStyle(
+                            color: ColorPalette.blueBold2,
+                            fontSize: 16,
+                            fontFamily: 'verdana',
+                            fontWeight: FontWeight.w700,
+                            height: 0.08,
+                            letterSpacing: 0.10,
+                          ),
                         ),
                       ),
                     ],
@@ -138,28 +146,32 @@ class _AboutUsState extends State<AboutUs> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Row(
+                      Row(
                         children: [
                           Text(
                             'Connect to',
-                            style: TextStyle(
-                              color: ColorPalette.blueBold2,
-                              fontSize: 16,
-                              fontFamily: 'verdana',
-                              fontWeight: FontWeight.w400,
-                              height: 0.08,
-                              letterSpacing: 0.10,
+                            style: GoogleFonts.raleway(
+                              textStyle: const TextStyle(
+                                color: ColorPalette.blueBold2,
+                                fontSize: 16,
+                                fontFamily: 'verdana',
+                                fontWeight: FontWeight.w400,
+                                height: 0.08,
+                                letterSpacing: 0.10,
+                              ),
                             ),
                           ),
                           Text(
                             ' Lumos',
-                            style: TextStyle(
-                              color: ColorPalette.blueBold2,
-                              fontSize: 16,
-                              fontFamily: 'verdana',
-                              fontWeight: FontWeight.w700,
-                              height: 0.08,
-                              letterSpacing: 0.10,
+                            style: GoogleFonts.raleway(
+                              textStyle: const TextStyle(
+                                color: ColorPalette.blueBold2,
+                                fontSize: 16,
+                                fontFamily: 'verdana',
+                                fontWeight: FontWeight.w700,
+                                height: 0.08,
+                                letterSpacing: 0.10,
+                              ),
                             ),
                           ),
                         ],
@@ -180,7 +192,7 @@ class _AboutUsState extends State<AboutUs> {
                                   // Navigator.of(context).pushNamed(UpdateAccount.routeName);
                                 },
                                 icon: const Icon(
-                                  Icons.facebook_sharp,
+                                  EvaIcons.facebook,
                                   size: 38,
                                 ),
                                 color: Colors.white,
@@ -198,7 +210,8 @@ class _AboutUsState extends State<AboutUs> {
                                   // Navigator.of(context).pushNamed(UpdateAccount.routeName);
                                 },
                                 icon: const Icon(
-                                  FontAwesomeIcons.squareYoutube,
+                                  // FontAwesomeIcons.squareYoutube,
+                                  Ionicons.logo_youtube,
                                   size: 38,
                                 ),
                                 color: Colors.white,
@@ -216,7 +229,7 @@ class _AboutUsState extends State<AboutUs> {
                                   // Navigator.of(context).pushNamed(UpdateAccount.routeName);
                                 },
                                 icon: const Icon(
-                                  FontAwesomeIcons.tiktok,
+                                  Ionicons.logo_tiktok,
                                   size: 38,
                                 ),
                                 color: Colors.white,
