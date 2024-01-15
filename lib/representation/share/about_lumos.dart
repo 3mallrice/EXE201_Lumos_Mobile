@@ -131,12 +131,6 @@ class _AboutUsState extends State<AboutUs> {
                   height: 150,
                   decoration: const BoxDecoration(
                     color: ColorPalette.bluelight,
-                    border: Border(
-                      bottom: BorderSide(
-                        color: ColorPalette.secondaryWhite,
-                        width: 2,
-                      ),
-                    ),
                   ),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
