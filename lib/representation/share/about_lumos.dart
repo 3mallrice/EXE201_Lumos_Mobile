@@ -21,16 +21,17 @@ class _AboutUsState extends State<AboutUs> {
         appBarText: 'Về chúng tôi',
         leading: true,
       ),
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          return Container(
+      body: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
             margin: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               color: ColorPalette.bluelight,
             ),
-            height: constraints.maxHeight,
             child: ListView(
+              shrinkWrap: true,
               padding: const EdgeInsets.symmetric(vertical: 10),
               children: [
                 Container(
@@ -253,8 +254,8 @@ class _AboutUsState extends State<AboutUs> {
                 ),
               ],
             ),
-          );
-        },
+          ),
+        ],
       ),
     );
   }
