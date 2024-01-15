@@ -181,6 +181,8 @@ class _AboutUsState extends State<AboutUs> {
                         child: Row(
                           children: [
                             Container(
+                              height: 52,
+                              width: 52,
                               margin: const EdgeInsets.symmetric(
                                   horizontal: 14, vertical: 8),
                               decoration: const ShapeDecoration(
@@ -193,12 +195,14 @@ class _AboutUsState extends State<AboutUs> {
                                 },
                                 icon: const Icon(
                                   EvaIcons.facebook,
-                                  size: 38,
+                                  size: 35,
                                 ),
                                 color: Colors.white,
                               ),
                             ),
                             Container(
+                              height: 52,
+                              width: 52,
                               margin: const EdgeInsets.symmetric(
                                   horizontal: 14, vertical: 8),
                               decoration: const ShapeDecoration(
@@ -206,18 +210,20 @@ class _AboutUsState extends State<AboutUs> {
                                 shape: CircleBorder(),
                               ),
                               child: IconButton(
+                                padding: const EdgeInsets.only(bottom: 3),
                                 onPressed: () {
                                   // Navigator.of(context).pushNamed(UpdateAccount.routeName);
                                 },
                                 icon: const Icon(
-                                  // FontAwesomeIcons.squareYoutube,
                                   Ionicons.logo_youtube,
-                                  size: 38,
+                                  size: 35,
                                 ),
                                 color: Colors.white,
                               ),
                             ),
                             Container(
+                              height: 52,
+                              width: 52,
                               margin: const EdgeInsets.symmetric(
                                   horizontal: 14, vertical: 8),
                               decoration: const ShapeDecoration(
@@ -225,17 +231,21 @@ class _AboutUsState extends State<AboutUs> {
                                 shape: CircleBorder(),
                               ),
                               child: IconButton(
+                                padding: const EdgeInsets.only(bottom: 2),
                                 onPressed: () {
                                   // Navigator.of(context).pushNamed(UpdateAccount.routeName);
                                 },
                                 icon: const Icon(
                                   Ionicons.logo_tiktok,
-                                  size: 38,
+                                  size: 30,
+                                  fill: 1,
                                 ),
                                 color: Colors.white,
                               ),
                             ),
                             Container(
+                              height: 52,
+                              width: 52,
                               margin: const EdgeInsets.symmetric(
                                   horizontal: 14, vertical: 8),
                               decoration: const ShapeDecoration(
@@ -248,7 +258,7 @@ class _AboutUsState extends State<AboutUs> {
                                 },
                                 icon: const Icon(
                                   ZaloIcon.group_1000004349,
-                                  size: 38,
+                                  size: 30,
                                 ),
                                 color: Colors.white,
                               ),
