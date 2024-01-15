@@ -53,7 +53,7 @@ class MyButtonBill extends StatelessWidget {
                 style: const TextStyle(
                   color: Color(0xFF0A4F45),
                   fontSize: 14,
-                  fontFamily: 'Poppins',
+                  fontFamily: 'verdana',
                   fontWeight: FontWeight.w400,
                   height: 0.10,
                   letterSpacing: 0.10,
@@ -68,7 +68,7 @@ class MyButtonBill extends StatelessWidget {
                 style: const TextStyle(
                   color: Color(0xFF0A4F45),
                   fontSize: 14,
-                  fontFamily: 'Poppins',
+                  fontFamily: 'verdana',
                   fontWeight: FontWeight.w400,
                   height: 0.10,
                   letterSpacing: 0.10,

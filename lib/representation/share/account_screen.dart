@@ -57,7 +57,7 @@ class _AccountScreenState extends State<AccountScreen> {
                         style: TextStyle(
                           color: ColorPalette.blueBold2,
                           fontSize: 16,
-                          fontFamily: 'Poppins',
+                          fontFamily: 'verdana',
                           fontWeight: FontWeight.w500,
                           height: 0.08,
                           letterSpacing: 0.10,
@@ -127,7 +127,7 @@ class _AccountScreenState extends State<AccountScreen> {
                       style: TextStyle(
                         color: ColorPalette.secondaryWhite,
                         fontSize: 20,
-                        fontFamily: 'Poppins',
+                        fontFamily: 'verdana',
                         fontWeight: FontWeight.w700,
                         height: 0.04,
                         letterSpacing: -0.28,

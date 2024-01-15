@@ -16,7 +16,7 @@ class ButtonWidget extends StatelessWidget {
         color: ColorPalette.pink,
       ),
       child: MaterialButton(
-        minWidth: 0, // Đặt chiều ngang tối thiểu để fit chữ
+        minWidth: 0,
         height: 40,
         onPressed: ontap,
         child: Text(

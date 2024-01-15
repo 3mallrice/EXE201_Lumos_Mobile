@@ -42,7 +42,7 @@ class _MemberHomeState extends State<MemberHome> {
                   Text(
                     'Y tế tại nhà',
                     style: TextStyle(
-                      fontFamily: 'poppins',
+                      fontFamily: 'verdana',
                       fontSize: 20,
                       fontWeight: FontWeight.w700,
                       color: ColorPalette.blueBold2,
@@ -51,7 +51,7 @@ class _MemberHomeState extends State<MemberHome> {
                   Text(
                     'Đặt lịch',
                     style: TextStyle(
-                      fontFamily: 'poppins',
+                      fontFamily: 'verdana',
                       fontSize: 20,
                       fontWeight: FontWeight.w700,
                       color: ColorPalette.blueBold2,

@@ -36,6 +36,7 @@ class MyTextfield extends StatelessWidget {
         child: TextField(
           style: TextStyle(
             color: textColor ?? ColorPalette.blueBold2.withOpacity(0.65),
+            fontFamily: 'verdana',
           ),
           controller: Controller, //require?
           obscureText:
@@ -56,6 +57,7 @@ class MyTextfield extends StatelessWidget {
             labelStyle: const TextStyle(
               color: ColorPalette.blueBold,
               fontWeight: FontWeight.bold,
+              fontFamily: 'verdana',
               fontSize: 18,
             ),
             floatingLabelBehavior: floatingLabelBehavior,
@@ -66,6 +68,7 @@ class MyTextfield extends StatelessWidget {
             hintStyle: const TextStyle(
               color: ColorPalette.grey,
               fontWeight: FontWeight.normal,
+              fontFamily: 'verdana',
               fontSize: 15,
             ),
             suffixIcon: suffixIcon,

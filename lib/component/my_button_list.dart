@@ -49,7 +49,7 @@ class MyButtonList extends StatelessWidget {
                   style: const TextStyle(
                     color: ColorPalette.blueBold2,
                     fontSize: 20,
-                    fontFamily: 'Poppins',
+                    fontFamily: 'verdana',
                     fontWeight: FontWeight.w400,
                     height: 0.08,
                     letterSpacing: 0.10,
