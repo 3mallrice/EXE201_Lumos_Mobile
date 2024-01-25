@@ -1,3 +1,4 @@
+import 'package:exe201_lumos_mobile/component/my_button.dart';
 import 'package:exe201_lumos_mobile/core/const/color_const.dart';
 import 'package:exe201_lumos_mobile/core/helper/asset_helper.dart';
 import 'package:flutter/material.dart';
@@ -30,125 +31,66 @@ class _MemberHomeState extends State<MemberHome> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: Align(
-        alignment: AlignmentDirectional.topCenter,
-        child: SingleChildScrollView(
-          child: FractionallySizedBox(
-            widthFactor: 0.95,
-            child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(18),
-              decoration: ShapeDecoration(
-                color: ColorPalette.bluelight,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(22),
-                ),
+      body: Center(
+        child: FractionallySizedBox(
+          widthFactor: 0.9,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      //
+                    },
+                    icon: const Icon(
+                      Icons.pregnant_woman,
+                      color: ColorPalette.blueBold2,
+                    ),
+                    label: const Text(
+                      'Mẹ bầu',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(0xFF0A4F45),
+                        fontSize: 20,
+                        fontFamily: 'Raleway',
+                        fontWeight: FontWeight.w500,
+                        height: 0.06,
+                        letterSpacing: 0.10,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      primary: ColorPalette.blue,
+                    ),
+                  ),
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      //
+                    },
+                    icon: const Icon(
+                      Icons.child_friendly,
+                      color: ColorPalette.blueBold2,
+                    ),
+                    label: const Text(
+                      'Em bé',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(0xFF0A4F45),
+                        fontSize: 20,
+                        fontFamily: 'Raleway',
+                        fontWeight: FontWeight.w500,
+                        height: 0.06,
+                        letterSpacing: 0.10,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      primary: ColorPalette.blue,
+                    ),
+                  ),
+                ],
               ),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      margin:
-                          const EdgeInsetsDirectional.symmetric(horizontal: 18),
-                      child: Stack(
-                        alignment: AlignmentDirectional.center,
-                        children: [
-                          Container(
-                            width: 65,
-                            height: 65,
-                            decoration: const ShapeDecoration(
-                              color: ColorPalette.blue,
-                              shape: OvalBorder(),
-                            ),
-                          ),
-                          const Positioned(
-                            child: Icon(
-                              Icons.medical_services,
-                              color: ColorPalette.blueBold2,
-                              size: 31,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin:
-                          const EdgeInsetsDirectional.symmetric(horizontal: 18),
-                      child: Stack(
-                        alignment: AlignmentDirectional.center,
-                        children: [
-                          Container(
-                            width: 65,
-                            height: 65,
-                            decoration: const ShapeDecoration(
-                              color: ColorPalette.blue,
-                              shape: OvalBorder(),
-                            ),
-                          ),
-                          const Positioned(
-                            child: Icon(
-                              Icons.medical_services,
-                              color: ColorPalette.blueBold2,
-                              size: 31,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin:
-                          const EdgeInsetsDirectional.symmetric(horizontal: 18),
-                      child: Stack(
-                        alignment: AlignmentDirectional.center,
-                        children: [
-                          Container(
-                            width: 65,
-                            height: 65,
-                            decoration: const ShapeDecoration(
-                              color: ColorPalette.blue,
-                              shape: OvalBorder(),
-                            ),
-                          ),
-                          const Positioned(
-                            child: Icon(
-                              Icons.medical_services,
-                              color: ColorPalette.blueBold2,
-                              size: 31,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin:
-                          const EdgeInsetsDirectional.symmetric(horizontal: 18),
-                      child: Stack(
-                        alignment: AlignmentDirectional.center,
-                        children: [
-                          Container(
-                            width: 65,
-                            height: 65,
-                            decoration: const ShapeDecoration(
-                              color: ColorPalette.blue,
-                              shape: OvalBorder(),
-                            ),
-                          ),
-                          const Positioned(
-                            child: Icon(
-                              Icons.medical_services,
-                              color: ColorPalette.blueBold2,
-                              size: 31,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            ],
           ),
         ),
       ),
