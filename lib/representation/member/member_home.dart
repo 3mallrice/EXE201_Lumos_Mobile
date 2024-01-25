@@ -1,7 +1,5 @@
-import 'package:exe201_lumos_mobile/component/app_bar.dart';
 import 'package:exe201_lumos_mobile/core/const/color_const.dart';
 import 'package:exe201_lumos_mobile/core/helper/asset_helper.dart';
-import 'package:exe201_lumos_mobile/core/helper/image_helper.dart';
 import 'package:flutter/material.dart';
 
 class MemberHome extends StatefulWidget {
@@ -19,49 +17,140 @@ class _MemberHomeState extends State<MemberHome> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      appBar: const AppBarCom(
-        appBarText: 'Trang chủ',
-      ),
-      body: Stack(
-        children: [
-          Positioned(
-            top: 0,
-            width: screenWidth,
-            child: ImageHelper.loadFormAsset(
-              AssetHelper.memberBanner,
-              fit: BoxFit.fill,
-            ),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: FractionallySizedBox(
+          widthFactor: 0.3,
+          child: Image.asset(
+            AssetHelper.imglogo2,
+            fit: BoxFit.fitWidth,
           ),
-          const Positioned(
-            top: 50.0,
-            left: 30.0,
-            child: SizedBox(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Y tế tại nhà',
-                    style: TextStyle(
-                      fontFamily: 'verdana',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      color: ColorPalette.blueBold2,
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      body: Align(
+        alignment: AlignmentDirectional.topCenter,
+        child: SingleChildScrollView(
+          child: FractionallySizedBox(
+            widthFactor: 0.95,
+            child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(18),
+              decoration: ShapeDecoration(
+                color: ColorPalette.bluelight,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(22),
+                ),
+              ),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      margin:
+                          const EdgeInsetsDirectional.symmetric(horizontal: 18),
+                      child: Stack(
+                        alignment: AlignmentDirectional.center,
+                        children: [
+                          Container(
+                            width: 65,
+                            height: 65,
+                            decoration: const ShapeDecoration(
+                              color: ColorPalette.blue,
+                              shape: OvalBorder(),
+                            ),
+                          ),
+                          const Positioned(
+                            child: Icon(
+                              Icons.medical_services,
+                              color: ColorPalette.blueBold2,
+                              size: 31,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  Text(
-                    'Đặt lịch',
-                    style: TextStyle(
-                      fontFamily: 'verdana',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      color: ColorPalette.blueBold2,
+                    Container(
+                      margin:
+                          const EdgeInsetsDirectional.symmetric(horizontal: 18),
+                      child: Stack(
+                        alignment: AlignmentDirectional.center,
+                        children: [
+                          Container(
+                            width: 65,
+                            height: 65,
+                            decoration: const ShapeDecoration(
+                              color: ColorPalette.blue,
+                              shape: OvalBorder(),
+                            ),
+                          ),
+                          const Positioned(
+                            child: Icon(
+                              Icons.medical_services,
+                              color: ColorPalette.blueBold2,
+                              size: 31,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                    Container(
+                      margin:
+                          const EdgeInsetsDirectional.symmetric(horizontal: 18),
+                      child: Stack(
+                        alignment: AlignmentDirectional.center,
+                        children: [
+                          Container(
+                            width: 65,
+                            height: 65,
+                            decoration: const ShapeDecoration(
+                              color: ColorPalette.blue,
+                              shape: OvalBorder(),
+                            ),
+                          ),
+                          const Positioned(
+                            child: Icon(
+                              Icons.medical_services,
+                              color: ColorPalette.blueBold2,
+                              size: 31,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin:
+                          const EdgeInsetsDirectional.symmetric(horizontal: 18),
+                      child: Stack(
+                        alignment: AlignmentDirectional.center,
+                        children: [
+                          Container(
+                            width: 65,
+                            height: 65,
+                            decoration: const ShapeDecoration(
+                              color: ColorPalette.blue,
+                              shape: OvalBorder(),
+                            ),
+                          ),
+                          const Positioned(
+                            child: Icon(
+                              Icons.medical_services,
+                              color: ColorPalette.blueBold2,
+                              size: 31,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }

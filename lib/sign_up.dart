@@ -64,206 +64,213 @@ class _SignUpState extends State<SignUp> {
                 SafeArea(
                   child: Center(
                     child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          //logo
-                          SizedBox(
-                            height: 150,
-                            width: 250,
-                            child: Image.asset(
-                              AssetHelper.imglogo1,
-                              fit: BoxFit.fitHeight,
-                            ),
-                          ),
-
-                          //welcome back, you've been missed!
-                          const Text(
-                            'Sign up',
-                            style: TextStyle(
-                              color: ColorPalette.blueBold2,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 28,
-                            ),
-                          ),
-
-                          const SizedBox(
-                            height: 20,
-                          ),
-
-                          //name textfield
-                          MyTextfield(
-                            Controller: emailController,
-                            labelText: 'Name',
-                            hintText: 'Your Name',
-                            floatingLabelBehavior: FloatingLabelBehavior.always,
-                            obscureText: false,
-                            textInputAction: TextInputAction.next,
-                          ),
-
-                          const SizedBox(
-                            height: 20,
-                          ),
-
-                          //email textfield
-                          MyTextfield(
-                            Controller: emailController,
-                            labelText: 'Email',
-                            hintText: 'Your Email',
-                            floatingLabelBehavior: FloatingLabelBehavior.always,
-                            obscureText: false,
-                            textInputAction: TextInputAction.next,
-                          ),
-
-                          const SizedBox(
-                            height: 20,
-                          ),
-
-                          //phone textfield
-                          MyTextfield(
-                            Controller: emailController,
-                            labelText: 'Phone',
-                            hintText: 'Your Phone',
-                            floatingLabelBehavior: FloatingLabelBehavior.always,
-                            obscureText: false,
-                            textInputAction: TextInputAction.next,
-                          ),
-
-                          const SizedBox(
-                            height: 20,
-                          ),
-
-                          //Address textfield
-                          MyTextfield(
-                            Controller: emailController,
-                            labelText: 'Address',
-                            hintText: 'Your Address',
-                            floatingLabelBehavior: FloatingLabelBehavior.always,
-                            obscureText: false,
-                            textInputAction: TextInputAction.next,
-                          ),
-
-                          const SizedBox(
-                            height: 20,
-                          ),
-
-                          //password textfield
-                          StatefulBuilder(
-                            builder: (context, setState) {
-                              return MyTextfield(
-                                Controller: passwordController,
-                                obscureText: _passwordInVisible,
-                                labelText: 'Password',
-                                hintText: 'Your password',
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.always,
-                                textInputAction: TextInputAction.next,
-                                suffixIcon: IconButton(
-                                  icon: Icon(
-                                    _passwordInVisible
-                                        ? FontAwesomeIcons.eye
-                                        : FontAwesomeIcons
-                                            .eyeSlash, //change icon based on boolean value
-                                    color: ColorPalette.grey,
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      _passwordInVisible =
-                                          !_passwordInVisible; //change boolean value
-                                    });
-                                  },
-                                ),
-                              );
-                            },
-                          ),
-
-                          const SizedBox(
-                            height: 20,
-                          ),
-
-                          StatefulBuilder(
-                            builder: (context, setState) {
-                              return MyTextfield(
-                                Controller: passwordController,
-                                obscureText: _confirmPasswordInVisible,
-                                labelText: 'Password',
-                                hintText: 'Your password',
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.always,
-                                textInputAction: TextInputAction.done,
-                                suffixIcon: IconButton(
-                                  icon: Icon(
-                                    _confirmPasswordInVisible
-                                        ? FontAwesomeIcons.eye
-                                        : FontAwesomeIcons
-                                            .eyeSlash, //change icon based on boolean value
-                                    color: ColorPalette.grey,
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      _confirmPasswordInVisible =
-                                          !_confirmPasswordInVisible; //change boolean value
-                                    });
-                                  },
-                                ),
-                              );
-                            },
-                          ),
-
-                          const SizedBox(
-                            height: 30,
-                          ),
-
-                          //sign-in button
-                          MyButton(
-                            onTap: onPressedLogin,
-                            borderRadius: 66.5,
-                            height: 55,
-                            text: 'Sign up',
-                            color: ColorPalette.pink,
-                            widget: const Text(
-                              'Sign up',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                  color: ColorPalette.white),
-                            ),
-                          ),
-
-                          const SizedBox(
-                            height: 50,
-                          ),
-
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Already have an account? ",
-                                style: TextStyle(
-                                    color: ColorPalette.blueBold2
-                                        .withOpacity(0.65),
-                                    fontSize: 16),
+                      child: FractionallySizedBox(
+                        widthFactor: 0.9,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            //logo
+                            SizedBox(
+                              height: 150,
+                              width: 250,
+                              child: Image.asset(
+                                AssetHelper.imglogo1,
+                                fit: BoxFit.fitHeight,
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context)
-                                      .pushNamed(Login.routeName);
-                                },
-                                child: const Text(
-                                  'Sign in',
+                            ),
+
+                            //welcome back, you've been missed!
+                            const Text(
+                              'Đăng ký',
+                              style: TextStyle(
+                                color: ColorPalette.blueBold2,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 28,
+                              ),
+                            ),
+
+                            const SizedBox(
+                              height: 20,
+                            ),
+
+                            //name textfield
+                            MyTextfield(
+                              Controller: emailController,
+                              labelText: 'Họ và Tên',
+                              hintText: 'Nguyễn Văn A',
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.always,
+                              obscureText: false,
+                              textInputAction: TextInputAction.next,
+                            ),
+
+                            const SizedBox(
+                              height: 20,
+                            ),
+
+                            //email textfield
+                            MyTextfield(
+                              Controller: emailController,
+                              labelText: 'Email',
+                              hintText: 'a@gmail.com',
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.always,
+                              obscureText: false,
+                              textInputAction: TextInputAction.next,
+                            ),
+
+                            const SizedBox(
+                              height: 20,
+                            ),
+
+                            //phone textfield
+                            MyTextfield(
+                              Controller: emailController,
+                              labelText: 'Số điện thoại',
+                              hintText: '0912345678',
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.always,
+                              obscureText: false,
+                              textInputAction: TextInputAction.next,
+                            ),
+
+                            const SizedBox(
+                              height: 20,
+                            ),
+
+                            //Address textfield
+                            MyTextfield(
+                              Controller: emailController,
+                              labelText: 'Địa chỉ',
+                              hintText: '68 abc, phường abc, ...',
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.always,
+                              obscureText: false,
+                              textInputAction: TextInputAction.next,
+                            ),
+
+                            const SizedBox(
+                              height: 20,
+                            ),
+
+                            //password textfield
+                            StatefulBuilder(
+                              builder: (context, setState) {
+                                return MyTextfield(
+                                  Controller: passwordController,
+                                  obscureText: _passwordInVisible,
+                                  labelText: 'Password',
+                                  hintText: 'Passw0rd!',
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.always,
+                                  textInputAction: TextInputAction.next,
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      _passwordInVisible
+                                          ? FontAwesomeIcons.eye
+                                          : FontAwesomeIcons.eyeSlash,
+                                      //change icon based on boolean value
+                                      color: ColorPalette.grey,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _passwordInVisible =
+                                            !_passwordInVisible; //change boolean value
+                                      });
+                                    },
+                                  ),
+                                );
+                              },
+                            ),
+
+                            const SizedBox(
+                              height: 20,
+                            ),
+
+                            StatefulBuilder(
+                              builder: (context, setState) {
+                                return MyTextfield(
+                                  Controller: passwordController,
+                                  obscureText: _confirmPasswordInVisible,
+                                  labelText: 'Password',
+                                  hintText: 'Passw0rd!',
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.always,
+                                  textInputAction: TextInputAction.done,
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      _confirmPasswordInVisible
+                                          ? FontAwesomeIcons.eye
+                                          : FontAwesomeIcons.eyeSlash,
+                                      //change icon based on boolean value
+                                      color: ColorPalette.grey,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _confirmPasswordInVisible =
+                                            !_confirmPasswordInVisible; //change boolean value
+                                      });
+                                    },
+                                  ),
+                                );
+                              },
+                            ),
+
+                            const SizedBox(
+                              height: 30,
+                            ),
+
+                            //sign-in button
+                            MyButton(
+                              onTap: onPressedLogin,
+                              borderRadius: 66.5,
+                              height: 55,
+                              text: 'Sign up',
+                              color: ColorPalette.pink,
+                              widget: const Text(
+                                'Sign up',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                    color: ColorPalette.white),
+                              ),
+                            ),
+
+                            const SizedBox(
+                              height: 50,
+                            ),
+
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Already have an account? ",
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: ColorPalette.blueBold2,
+                                      color: ColorPalette.blueBold2
+                                          .withOpacity(0.65),
                                       fontSize: 16),
                                 ),
-                              ),
-                            ],
-                          ),
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context)
+                                        .pushNamed(Login.routeName);
+                                  },
+                                  child: const Text(
+                                    'Sign in',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: ColorPalette.blueBold2,
+                                        fontSize: 16),
+                                  ),
+                                ),
+                              ],
+                            ),
 
-                          const SizedBox(
-                            height: 15,
-                          ),
-                        ],
+                            const SizedBox(
+                              height: 15,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

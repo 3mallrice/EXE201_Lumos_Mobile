@@ -25,9 +25,10 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: ColorPalette.white,
       ),
       debugShowCheckedModeBanner: false,
-      //home: const HomePage(),
-      home: const SplashScreen(),
-      // home: LoginPage(),
+      home: const AspectRatio(
+        aspectRatio: 16 / 9,
+        child: SplashScreen(),
+      ),
       routes: routes,
     );
   }

@@ -67,193 +67,198 @@ class _LoginState extends State<Login> {
                 SafeArea(
                   child: Center(
                     child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const SizedBox(
-                            height: 20,
-                          ),
-
-                          //logo
-                          Transform.scale(
-                            scale: 1.2,
-                            child: Image.asset(AssetHelper.imglogo1),
-                          ),
-
-                          //welcome back, you've been missed!
-                          const Text(
-                            'Sign in',
-                            style: TextStyle(
-                              color: ColorPalette.blue,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 32,
+                      child: FractionallySizedBox(
+                        widthFactor: 0.9,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const SizedBox(
+                              height: 20,
                             ),
-                          ),
 
-                          const SizedBox(
-                            height: 30,
-                          ),
-
-                          //username textfield
-                          MyTextfield(
-                            Controller: emailController,
-                            labelText: 'Email',
-                            hintText: 'Your email',
-                            floatingLabelBehavior: FloatingLabelBehavior.always,
-                            obscureText: false,
-                            textInputAction: TextInputAction.next,
-                          ),
-
-                          const SizedBox(
-                            height: 20,
-                          ),
-
-                          //password textfield
-                          StatefulBuilder(
-                            builder: (context, setState) {
-                              return MyTextfield(
-                                Controller: passwordController,
-                                obscureText: _passwordInVisible,
-                                labelText: 'Password',
-                                hintText: 'Your password',
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.always,
-                                textInputAction: TextInputAction.done,
-                                suffixIcon: IconButton(
-                                  icon: Icon(
-                                    _passwordInVisible
-                                        ? FontAwesomeIcons.eye
-                                        : FontAwesomeIcons
-                                            .eyeSlash, //change icon based on boolean value
-                                    color: ColorPalette.grey,
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      _passwordInVisible =
-                                          !_passwordInVisible; //change boolean value
-                                    });
-                                  },
-                                ),
-                              );
-                            },
-                          ),
-
-                          const SizedBox(
-                            height: 10,
-                          ),
-
-                          //forgot password
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 40.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                GestureDetector(
-                                  onTap: onTap,
-                                  child: const Text(
-                                    'Forgot password?',
-                                    style: TextStyle(
-                                        color: ColorPalette.pink,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ],
+                            //logo
+                            Transform.scale(
+                              scale: 1.2,
+                              child: Image.asset(AssetHelper.imglogo1),
                             ),
-                          ),
 
-                          const SizedBox(
-                            height: 10,
-                          ),
-
-                          //sign-in button
-                          MyButton(
-                            onTap: onPressedLogin,
-                            borderRadius: 66.5,
-                            height: 55,
-                            text: 'Login',
-                            color: ColorPalette.pink,
-                            widget: const Text(
+                            //welcome back, you've been missed!
+                            const Text(
                               'Sign in',
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                  color: ColorPalette.white),
+                                color: ColorPalette.blue,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 32,
+                              ),
                             ),
-                          ),
 
-                          const SizedBox(
-                            height: 20,
-                          ),
+                            const SizedBox(
+                              height: 30,
+                            ),
 
-                          //Google + Facebook buttons
-                          MyButton(
-                            onTap: onPressedLogin,
-                            borderRadius: 66.5,
-                            height: 55,
-                            text: 'Login',
-                            color: ColorPalette.white,
-                            borderColor: ColorPalette.primaryText,
-                            widget: Row(
+                            //username textfield
+                            MyTextfield(
+                              Controller: emailController,
+                              labelText: 'Email',
+                              hintText: 'Your email',
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.always,
+                              obscureText: false,
+                              textInputAction: TextInputAction.next,
+                            ),
+
+                            const SizedBox(
+                              height: 20,
+                            ),
+
+                            //password textfield
+                            StatefulBuilder(
+                              builder: (context, setState) {
+                                return MyTextfield(
+                                  Controller: passwordController,
+                                  obscureText: _passwordInVisible,
+                                  labelText: 'Password',
+                                  hintText: 'Your password',
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.always,
+                                  textInputAction: TextInputAction.done,
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      _passwordInVisible
+                                          ? FontAwesomeIcons.eye
+                                          : FontAwesomeIcons.eyeSlash,
+                                      //change icon based on boolean value
+                                      color: ColorPalette.grey,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _passwordInVisible =
+                                            !_passwordInVisible; //change boolean value
+                                      });
+                                    },
+                                  ),
+                                );
+                              },
+                            ),
+
+                            const SizedBox(
+                              height: 10,
+                            ),
+
+                            //forgot password
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 40.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  GestureDetector(
+                                    onTap: onTap,
+                                    child: const Text(
+                                      'Forgot password?',
+                                      style: TextStyle(
+                                          color: ColorPalette.pink,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            const SizedBox(
+                              height: 10,
+                            ),
+
+                            //sign-in button
+                            MyButton(
+                              onTap: onPressedLogin,
+                              borderRadius: 66.5,
+                              height: 55,
+                              text: 'Login',
+                              color: ColorPalette.pink,
+                              widget: const Text(
+                                'Sign in',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                    color: ColorPalette.white),
+                              ),
+                            ),
+
+                            const SizedBox(
+                              height: 20,
+                            ),
+
+                            //Google + Facebook buttons
+                            MyButton(
+                              onTap: onPressedLogin,
+                              borderRadius: 66.5,
+                              height: 55,
+                              text: 'Login',
+                              color: ColorPalette.white,
+                              borderColor: ColorPalette.primaryText,
+                              widget: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  // Icon Google
+                                  // Thêm padding trái cho icon
+                                  Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 16.0),
+                                      child: Image.asset(
+                                        AssetHelper.googleLogo,
+                                        fit: BoxFit.fill,
+                                      )),
+
+                                  // Thêm SizedBox giữa icon và text
+                                  const SizedBox(width: 16),
+
+                                  // Thêm padding phải cho text
+                                  const Padding(
+                                      padding: EdgeInsets.only(right: 16.0),
+                                      child: Text(
+                                        'Continue with Google',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 18,
+                                            color: ColorPalette.primaryText),
+                                      )),
+                                ],
+                              ),
+                            ),
+
+                            const SizedBox(
+                              height: 100,
+                            ),
+
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                // Icon Google
-                                // Thêm padding trái cho icon
-                                Padding(
-                                    padding: const EdgeInsets.only(left: 16.0),
-                                    child: Image.asset(
-                                      AssetHelper.googleLogo,
-                                      fit: BoxFit.fill,
-                                    )),
-
-                                // Thêm SizedBox giữa icon và text
-                                const SizedBox(width: 16),
-
-                                // Thêm padding phải cho text
-                                const Padding(
-                                    padding: EdgeInsets.only(right: 16.0),
-                                    child: Text(
-                                      'Continue with Google',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 18,
-                                          color: ColorPalette.primaryText),
-                                    )),
-                              ],
-                            ),
-                          ),
-
-                          const SizedBox(
-                            height: 100,
-                          ),
-
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Don't have an account? ",
-                                style: TextStyle(
-                                    color: ColorPalette.blueBold2
-                                        .withOpacity(0.65),
-                                    fontSize: 16),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  print(context);
-                                  Navigator.of(context)
-                                      .pushNamed(SignUp.routeName);
-                                },
-                                child: const Text(
-                                  'Sign up',
+                                Text(
+                                  "Don't have an account? ",
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: ColorPalette.blueBold2,
+                                      color: ColorPalette.blueBold2
+                                          .withOpacity(0.65),
                                       fontSize: 16),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
+                                GestureDetector(
+                                  onTap: () {
+                                    print(context);
+                                    Navigator.of(context)
+                                        .pushNamed(SignUp.routeName);
+                                  },
+                                  child: const Text(
+                                    'Sign up',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: ColorPalette.blueBold2,
+                                        fontSize: 16),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

@@ -44,11 +44,11 @@ class MyButtonList extends StatelessWidget {
               width: 40,
             ),
             SizedBox(
-              width: 240,
+              width: 200,
               child: Text(text,
                   style: const TextStyle(
                     color: ColorPalette.blueBold2,
-                    fontSize: 20,
+                    fontSize: 16,
                     fontFamily: 'verdana',
                     fontWeight: FontWeight.w400,
                     height: 0.08,
