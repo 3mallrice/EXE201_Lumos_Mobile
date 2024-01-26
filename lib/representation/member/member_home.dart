@@ -62,7 +62,30 @@ class _MemberHomeState extends State<MemberHome> {
                 ),
                 Container(
                   margin: const EdgeInsets.only(bottom: 10),
-                  child: TextField(),
+                  child: TextField(
+                    readOnly: true,
+                    onTap: () {
+                      // Xử lý sự kiện khi nhấn vào TextField
+                    },
+                    decoration: const InputDecoration(
+                      hintText: 'Tìm kiếm',
+                      hintStyle: TextStyle(color: ColorPalette.pink),
+                      prefixIcon: Icon(Icons.search_rounded),
+                      prefixIconColor: ColorPalette.pink,
+                      filled: true,
+                      fillColor: ColorPalette.secondaryWhite,
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: ColorPalette.grey2, width: 2.0),
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: ColorPalette.grey2, width: 1.0),
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                      ),
+                    ),
+                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
