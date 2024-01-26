@@ -4,23 +4,38 @@ class Assets {
 
   static const String fontLumosIcons = 'assets/font/LumosIcons.ttf';
   static const String fontPoppinsBlack = 'assets/font/Poppins-Black.otf';
-  static const String fontPoppinsBlackItalic = 'assets/font/Poppins-BlackItalic.otf';
+  static const String fontPoppinsBlackItalic =
+      'assets/font/Poppins-BlackItalic.otf';
   static const String fontPoppinsBold = 'assets/font/Poppins-Bold.otf';
-  static const String fontPoppinsBoldItalic = 'assets/font/Poppins-BoldItalic.otf';
-  static const String fontPoppinsExtraBold = 'assets/font/Poppins-ExtraBold.otf';
-  static const String fontPoppinsExtraBoldItalic = 'assets/font/Poppins-ExtraBoldItalic.otf';
-  static const String fontPoppinsExtraLight = 'assets/font/Poppins-ExtraLight.otf';
-  static const String fontPoppinsExtraLightItalic = 'assets/font/Poppins-ExtraLightItalic.otf';
+  static const String fontPoppinsBoldItalic =
+      'assets/font/Poppins-BoldItalic.otf';
+  static const String fontPoppinsExtraBold =
+      'assets/font/Poppins-ExtraBold.otf';
+  static const String fontPoppinsExtraBoldItalic =
+      'assets/font/Poppins-ExtraBoldItalic.otf';
+  static const String fontPoppinsExtraLight =
+      'assets/font/Poppins-ExtraLight.otf';
+  static const String fontPoppinsExtraLightItalic =
+      'assets/font/Poppins-ExtraLightItalic.otf';
   static const String fontPoppinsItalic = 'assets/font/Poppins-Italic.otf';
   static const String fontPoppinsLight = 'assets/font/Poppins-Light.otf';
-  static const String fontPoppinsLightItalic = 'assets/font/Poppins-LightItalic.otf';
+  static const String fontPoppinsLightItalic =
+      'assets/font/Poppins-LightItalic.otf';
   static const String fontPoppinsMedium = 'assets/font/Poppins-Medium.otf';
-  static const String fontPoppinsMediumItalic = 'assets/font/Poppins-MediumItalic.otf';
+  static const String fontPoppinsMediumItalic =
+      'assets/font/Poppins-MediumItalic.otf';
   static const String fontPoppinsRegular = 'assets/font/Poppins-Regular.otf';
   static const String fontPoppinsSemiBold = 'assets/font/Poppins-SemiBold.otf';
-  static const String fontPoppinsSemiBoldItalic = 'assets/font/Poppins-SemiBoldItalic.otf';
+  static const String fontPoppinsSemiBoldItalic =
+      'assets/font/Poppins-SemiBoldItalic.otf';
   static const String fontPoppinsThin = 'assets/font/Poppins-Thin.otf';
-  static const String fontPoppinsThinItalic = 'assets/font/Poppins-ThinItalic.otf';
+  static const String fontPoppinsThinItalic =
+      'assets/font/Poppins-ThinItalic.otf';
+  static const String fontVerdana = 'assets/font/verdana.ttf';
+  static const String fontVerdanaBold = 'assets/font/verdana-bold.ttf';
+  static const String fontVerdanaBoldItalic =
+      'assets/font/verdana-bold-italic.ttf';
+  static const String fontZaloIcon = 'assets/font/ZaloIcon.ttf';
   static const String imgAccountImg = 'assets/img/accountImg.png';
   static const String imgBgIntro1 = 'assets/img/bgIntro1.png';
   static const String imgBgIntro2 = 'assets/img/bgIntro2.png';
@@ -37,5 +52,4 @@ class Assets {
   static const String imgLumos = 'assets/img/Lumos.png';
   static const String imgMemberBanner = 'assets/img/memberBanner.png';
   static const String imgSplashBg = 'assets/img/SplashBg.png';
-
 }
