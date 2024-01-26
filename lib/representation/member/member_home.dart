@@ -39,7 +39,7 @@ class _MemberHomeState extends State<MemberHome> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: 10),
+                  margin: const EdgeInsets.symmetric(vertical: 10),
                   child: GestureDetector(
                     onTap: () {
                       showDialog(
@@ -59,6 +59,10 @@ class _MemberHomeState extends State<MemberHome> {
                       ),
                     ),
                   ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  child: TextField(),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -40,7 +40,7 @@ class _MemberMainState extends State<MemberMain> {
         ],
       ),
       extendBody: true,
-      extendBodyBehindAppBar: true,
+      extendBodyBehindAppBar: false,
       bottomNavigationBar: DotNavigationBar(
         backgroundColor: ColorPalette.pink,
         currentIndex: _SelectedTab.values.indexOf(_selectedTab),

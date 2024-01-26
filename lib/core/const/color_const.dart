@@ -15,6 +15,7 @@ class ColorPalette {
   static const Color grey = Colors.grey;
   static const Color primaryText = Color(0xFF141414);
   static const Color secondaryText = Color(0xFF2C2E34);
+  static const Color grey2 = Color(0xFFE6E6E6);
 }
 
 class Gradients {
