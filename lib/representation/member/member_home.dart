@@ -31,7 +31,8 @@ class _MemberHomeState extends State<MemberHome> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: Center(
+      body: Align(
+        alignment: AlignmentDirectional.center,
         child: FractionallySizedBox(
           widthFactor: 0.9,
           child: Column(
@@ -42,7 +43,7 @@ class _MemberHomeState extends State<MemberHome> {
                 children: [
                   ElevatedButton.icon(
                     onPressed: () {
-                      //
+                      // Your logic here
                     },
                     icon: const Icon(
                       Icons.pregnant_woman,
@@ -62,11 +63,18 @@ class _MemberHomeState extends State<MemberHome> {
                     ),
                     style: ElevatedButton.styleFrom(
                       primary: ColorPalette.blue,
+                      minimumSize: Size(
+                        MediaQuery.of(context).size.width * 0.4,
+                        50,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(21),
+                      ),
                     ),
                   ),
                   ElevatedButton.icon(
                     onPressed: () {
-                      //
+                      // Your logic here
                     },
                     icon: const Icon(
                       Icons.child_friendly,
@@ -86,10 +94,47 @@ class _MemberHomeState extends State<MemberHome> {
                     ),
                     style: ElevatedButton.styleFrom(
                       primary: ColorPalette.blue,
+                      minimumSize: Size(
+                        MediaQuery.of(context).size.width * 0.4,
+                        50,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(21),
+                      ),
                     ),
                   ),
                 ],
               ),
+              Container(
+                decoration: BoxDecoration(
+                  color: ColorPalette.pinklight,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start, //ngang
+                  mainAxisAlignment: MainAxisAlignment.center, //dọc
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 14),
+                      child: Text(
+                        'Dịch vụ gần đây',
+                        style: TextStyle(
+                          color: Color(0xFF0A4F45),
+                          fontSize: 11,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w400,
+                          height: 0.18,
+                          letterSpacing: 0.10,
+                        ),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [],
+                    )
+                  ],
+                ),
+              )
             ],
           ),
         ),
