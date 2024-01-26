@@ -15,8 +15,8 @@ class MyButton extends StatelessWidget {
     super.key,
     required this.onTap,
     this.borderColor = ColorPalette.white,
-    this.height = 50,
-    this.width = 500,
+    this.height,
+    this.width,
     required this.borderRadius,
     required this.text,
     required this.color,
@@ -31,7 +31,6 @@ class MyButton extends StatelessWidget {
         width: width,
         height: height,
         padding: const EdgeInsets.all(8),
-        margin: const EdgeInsets.symmetric(horizontal: 40),
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(borderRadius),
