@@ -84,7 +84,7 @@ class _LoginState extends State<Login> {
 
                             //welcome back, you've been missed!
                             const Text(
-                              'Sign in',
+                              'Đăng nhập',
                               style: TextStyle(
                                 color: ColorPalette.blue,
                                 fontWeight: FontWeight.w700,
@@ -100,7 +100,7 @@ class _LoginState extends State<Login> {
                             MyTextfield(
                               Controller: emailController,
                               labelText: 'Email',
-                              hintText: 'Your email',
+                              hintText: 'abc@gmail.com',
                               floatingLabelBehavior:
                                   FloatingLabelBehavior.always,
                               obscureText: false,
@@ -117,8 +117,8 @@ class _LoginState extends State<Login> {
                                 return MyTextfield(
                                   Controller: passwordController,
                                   obscureText: _passwordInVisible,
-                                  labelText: 'Password',
-                                  hintText: 'Your password',
+                                  labelText: 'Mật khẩu',
+                                  hintText: 'Mật khẩu của bạn...',
                                   floatingLabelBehavior:
                                       FloatingLabelBehavior.always,
                                   textInputAction: TextInputAction.done,
@@ -155,7 +155,7 @@ class _LoginState extends State<Login> {
                                   GestureDetector(
                                     onTap: onTap,
                                     child: const Text(
-                                      'Forgot password?',
+                                      'Quên mật khẩu?',
                                       style: TextStyle(
                                           color: ColorPalette.pink,
                                           fontWeight: FontWeight.bold),
@@ -177,7 +177,7 @@ class _LoginState extends State<Login> {
                               text: 'Login',
                               color: ColorPalette.pink,
                               widget: const Text(
-                                'Sign in',
+                                'Đăng nhập',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
@@ -217,7 +217,7 @@ class _LoginState extends State<Login> {
                                   const Padding(
                                       padding: EdgeInsets.only(right: 16.0),
                                       child: Text(
-                                        'Continue with Google',
+                                        'Đăng nhập với Google',
                                         style: TextStyle(
                                             fontWeight: FontWeight.normal,
                                             fontSize: 18,
@@ -235,7 +235,7 @@ class _LoginState extends State<Login> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "Don't have an account? ",
+                                  "Chưa có tài khoản? ",
                                   style: TextStyle(
                                       color: ColorPalette.blueBold2
                                           .withOpacity(0.65),
@@ -248,7 +248,7 @@ class _LoginState extends State<Login> {
                                         .pushNamed(SignUp.routeName);
                                   },
                                   child: const Text(
-                                    'Sign up',
+                                    'Đăng ký',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: ColorPalette.blueBold2,

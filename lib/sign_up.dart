@@ -22,6 +22,9 @@ class _SignUpState extends State<SignUp> {
   //text controller
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPassWordController = TextEditingController();
+  final phoneController = TextEditingController();
+  final nameController = TextEditingController();
   bool _passwordInVisible = true;
   bool _confirmPasswordInVisible = true;
 
@@ -125,7 +128,7 @@ class _SignUpState extends State<SignUp> {
 
                             //phone textfield
                             MyTextfield(
-                              Controller: emailController,
+                              Controller: phoneController,
                               labelText: 'Số điện thoại',
                               hintText: '0912345678',
                               floatingLabelBehavior:
@@ -139,19 +142,19 @@ class _SignUpState extends State<SignUp> {
                             ),
 
                             //Address textfield
-                            MyTextfield(
-                              Controller: emailController,
-                              labelText: 'Địa chỉ',
-                              hintText: '68 abc, phường abc, ...',
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              obscureText: false,
-                              textInputAction: TextInputAction.next,
-                            ),
-
-                            const SizedBox(
-                              height: 20,
-                            ),
+                            // MyTextfield(
+                            //   Controller: emailController,
+                            //   labelText: 'Địa chỉ',
+                            //   hintText: '68 abc, phường abc, ...',
+                            //   floatingLabelBehavior:
+                            //       FloatingLabelBehavior.always,
+                            //   obscureText: false,
+                            //   textInputAction: TextInputAction.next,
+                            // ),
+                            //
+                            // const SizedBox(
+                            //   height: 20,
+                            // ),
 
                             //password textfield
                             StatefulBuilder(
@@ -159,8 +162,8 @@ class _SignUpState extends State<SignUp> {
                                 return MyTextfield(
                                   Controller: passwordController,
                                   obscureText: _passwordInVisible,
-                                  labelText: 'Password',
-                                  hintText: 'Passw0rd!',
+                                  labelText: 'Mật khẩu',
+                                  hintText: 'Nhập mật khẩu của bạn...',
                                   floatingLabelBehavior:
                                       FloatingLabelBehavior.always,
                                   textInputAction: TextInputAction.next,
@@ -190,10 +193,10 @@ class _SignUpState extends State<SignUp> {
                             StatefulBuilder(
                               builder: (context, setState) {
                                 return MyTextfield(
-                                  Controller: passwordController,
+                                  Controller: confirmPassWordController,
                                   obscureText: _confirmPasswordInVisible,
-                                  labelText: 'Password',
-                                  hintText: 'Passw0rd!',
+                                  labelText: 'Nhập lại mật khẩu',
+                                  hintText: 'Nhập lại mật khẩu...!',
                                   floatingLabelBehavior:
                                       FloatingLabelBehavior.always,
                                   textInputAction: TextInputAction.done,
@@ -225,10 +228,10 @@ class _SignUpState extends State<SignUp> {
                               onTap: onPressedLogin,
                               borderRadius: 66.5,
                               height: 55,
-                              text: 'Sign up',
+                              text: 'Đăng ký',
                               color: ColorPalette.pink,
                               widget: const Text(
-                                'Sign up',
+                                'Hoàn Thành',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
@@ -244,7 +247,7 @@ class _SignUpState extends State<SignUp> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "Already have an account? ",
+                                  "Đã có tài khoản? ",
                                   style: TextStyle(
                                       color: ColorPalette.blueBold2
                                           .withOpacity(0.65),
@@ -256,7 +259,7 @@ class _SignUpState extends State<SignUp> {
                                         .pushNamed(Login.routeName);
                                   },
                                   child: const Text(
-                                    'Sign in',
+                                    'Đăng nhập',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: ColorPalette.blueBold2,
