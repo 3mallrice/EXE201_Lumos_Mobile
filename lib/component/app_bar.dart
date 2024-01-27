@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../core/const/color_const.dart';
 
 class AppBarCom extends StatelessWidget implements PreferredSizeWidget {
-  final String appBarText;
+  final String? appBarText;
   final bool leading;
   final Widget? leftIcon;
   final Color? backgroundColor;
@@ -11,7 +12,7 @@ class AppBarCom extends StatelessWidget implements PreferredSizeWidget {
 
   const AppBarCom({
     super.key,
-    required this.appBarText,
+    this.appBarText,
     this.leading = false,
     this.leftIcon,
     this.backgroundColor,
@@ -27,18 +28,19 @@ class AppBarCom extends StatelessWidget implements PreferredSizeWidget {
     return SafeArea(
       child: AppBar(
         automaticallyImplyLeading: leading,
-        leading: leftIcon,
+        leading: leftIcon ?? const Icon(Icons.arrow_back_ios_rounded),
         iconTheme: const IconThemeData(color: ColorPalette.secondaryWhite),
         backgroundColor: backgroundColor ?? ColorPalette.blue,
         title: Text(
-          appBarText,
-          style: TextStyle(
-              color: textColor ?? ColorPalette.blueBold2,
-              fontSize: 24,
-              fontFamily: 'verdana',
-              fontWeight: FontWeight.bold),
+          appBarText ?? "",
+          style: GoogleFonts.raleway(
+            textStyle: TextStyle(
+                color: textColor ?? ColorPalette.blueBold2,
+                fontSize: 24,
+                fontWeight: FontWeight.bold),
+          ),
         ),
-        elevation: 3,
+        elevation: 4,
         actions: action,
       ),
     );

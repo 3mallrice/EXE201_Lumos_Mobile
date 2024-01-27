@@ -1,5 +1,7 @@
 import 'package:exe201_lumos_mobile/login.dart';
 import 'package:exe201_lumos_mobile/representation/intro_screen.dart';
+import 'package:exe201_lumos_mobile/representation/member/medical_report.dart';
+import 'package:exe201_lumos_mobile/representation/member/medical_report_detail.dart';
 import 'package:exe201_lumos_mobile/representation/member/member_booking.dart';
 import 'package:exe201_lumos_mobile/representation/member/member_home.dart';
 import 'package:exe201_lumos_mobile/representation/member/member_main_navbar.dart';
@@ -29,6 +31,6 @@ final Map<String, WidgetBuilder> routes = {
   MemberHome.routeName: (context) => const MemberHome(),
   PaymentMethod.routeName: (context) => const PaymentMethod(),
   MemberBooking.routeName: (context) => const MemberBooking(),
-
-  //Nurse
+  MedicalReport.routeName: (context) => const MedicalReport(),
+  MedicalReportDetail.routeName: (context) => const MedicalReportDetail(),
 };
