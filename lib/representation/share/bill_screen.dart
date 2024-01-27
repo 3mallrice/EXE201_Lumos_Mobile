@@ -1,12 +1,10 @@
 import 'package:exe201_lumos_mobile/component/app_bar.dart';
-import 'package:exe201_lumos_mobile/component/button_bill.dart';
 import 'package:exe201_lumos_mobile/core/const/color_const.dart';
-import 'package:exe201_lumos_mobile/core/const/lumos_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BillScreen extends StatefulWidget {
-  const BillScreen({Key? key}) : super(key: key);
+  const BillScreen({super.key});
 
   static String routeName = '/bill_screen';
 
@@ -15,6 +13,28 @@ class BillScreen extends StatefulWidget {
 }
 
 class _BillScreenState extends State<BillScreen> {
+  final List<Bill> bills = [
+    Bill(
+      service: "Tắm bé lớn hơn 3 tháng tuổi",
+      partner: "Bệnh viện sản nhi trung ương Tp.Hồ Chí Minh",
+      bookingDate:
+          "${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}",
+      from: "10:30",
+      to: "14:00",
+      totalPrice: "500.000",
+    ),
+    Bill(
+      service: "Chăm sóc mẹ bầu",
+      partner: "Phòng khám Hạnh Phúc",
+      bookingDate:
+          "${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}",
+      from: "8:00",
+      to: "9:30",
+      totalPrice: "500.000",
+    ),
+    // Add more Bill objects as needed
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,98 +42,131 @@ class _BillScreenState extends State<BillScreen> {
         appBarText: 'Hóa đơn',
         leading: true,
       ),
-      body: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            margin: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: ColorPalette.bluelight,
-            ),
-            child: ListView(
-              shrinkWrap: true,
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              children: [
-                Container(
-                    height: 50,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 13,
-                    ),
-                    decoration: const BoxDecoration(
-                      color: ColorPalette.bluelight,
-                      border: Border(
-                        bottom: BorderSide(
-                          color: ColorPalette.secondaryWhite,
-                          width: 2,
-                        ),
+      body: Container(
+        margin: const EdgeInsets.only(top: 20, bottom: 10, right: 20, left: 20),
+        child: ListView.builder(
+          itemCount: bills.length,
+          itemBuilder: (context, index) {
+            Bill bill = bills[index];
+            return Container(
+              margin: const EdgeInsets.only(bottom: 15),
+              padding: const EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                color: ColorPalette.bluelight,
+                borderRadius: BorderRadius.circular(12.0),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    bill.service,
+                    style: GoogleFonts.raleway(
+                      textStyle: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: ColorPalette.blueBold2,
+                        fontSize: 20,
                       ),
                     ),
+                  ),
+                  Text(
+                    bill.partner,
+                    style: const TextStyle(
+                      color: ColorPalette.blueBold2,
+                      fontSize: 18,
+                    ),
+                  ),
+                  const SizedBox(height: 3),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Ngày đặt: ${bill.bookingDate.toString()}',
+                        style: const TextStyle(
+                          color: ColorPalette.blueBold2,
+                          fontSize: 16,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.access_time,
+                            color: ColorPalette.blueBold2,
+                            size: 16,
+                          ),
+                          const SizedBox(width: 3),
+                          Icon(
+                            Icons.circle,
+                            color: ColorPalette.blueBold2.withOpacity(0.5),
+                            size: 5.5,
+                          ),
+                          const SizedBox(width: 3),
+                          Text(
+                            '${bill.from} - ${bill.to}',
+                            style: const TextStyle(
+                              color: ColorPalette.blueBold2,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 3,
+                  ),
+                  const Divider(
+                    color: ColorPalette.white,
+                    thickness: 1.5,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        const Expanded(
-                          child: SizedBox(
-                            width: 40,
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Icon(
-                                Icons.medical_services_outlined,
-                                size: 40,
+                        Text(
+                          bill.totalPrice.toString(),
+                          style: const TextStyle(
+                            color: ColorPalette.blueBold2,
+                            fontSize: 20,
+                          ),
+                          textAlign: TextAlign.right,
+                        ),
+                        Text(
+                          "đ",
+                          style: GoogleFonts.raleway(
+                            textStyle: const TextStyle(
                                 color: ColorPalette.blueBold2,
-                              ),
-                            ),
+                                fontWeight: FontWeight.normal,
+                                fontSize: 16),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                          child: SizedBox(
-                            width: 250,
-                            child: Text(
-                              'Thay băng',
-                              style: GoogleFonts.raleway(
-                                textStyle: const TextStyle(
-                                  color: ColorPalette.blueBold2,
-                                  fontSize: 16,
-                                  //fontFamily: 'verdana',
-                                  fontWeight: FontWeight.w400,
-                                  height: 0.08,
-                                  letterSpacing: 0.10,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        const Expanded(
-                          child: SizedBox(
-                            width: 50,
-                            child: Text(
-                              '500.000',
-                              style: TextStyle(
-                                color: ColorPalette.blueBold2,
-                                fontSize: 14,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w400,
-                                height: 0.10,
-                                letterSpacing: 0.10,
-                              ),
-                            ),
-                          ),
+                          textAlign: TextAlign.right,
                         ),
                       ],
-                    )),
-              ],
-            ),
-          ),
-        ],
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
+}
+
+class Bill {
+  String service;
+  String partner;
+  String bookingDate;
+  String from;
+  String to;
+  String totalPrice;
+
+  Bill({
+    required this.service,
+    required this.partner,
+    required this.bookingDate,
+    required this.from,
+    required this.to,
+    required this.totalPrice,
+  });
 }
