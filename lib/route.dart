@@ -27,7 +27,7 @@ final Map<String, WidgetBuilder> routes = {
   AboutUs.routeName: (context) => const AboutUs(),
 
   //Member
-  MemberMain.routName: (context) => const MemberMain(),
+  MemberMain.routeName: (context) => const MemberMain(),
   MemberHome.routeName: (context) => const MemberHome(),
   PaymentMethod.routeName: (context) => const PaymentMethod(),
   MemberBooking.routeName: (context) => const MemberBooking(),

@@ -8,9 +8,9 @@ class MedicalReportDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const AppBarCom(
-        leading: false,
+    return const Scaffold(
+      appBar: AppBarCom(
+        leading: true,
         appBarText: "Hồ sơ bệnh nhân",
       ),
     );

@@ -1,4 +1,3 @@
-import 'package:exe201_lumos_mobile/representation/member/member_home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../core/const/color_const.dart';
@@ -7,7 +6,6 @@ class AppBarCom extends StatelessWidget implements PreferredSizeWidget {
   final String? appBarText;
   final bool leading;
   final Widget? leftIcon;
-  final String? routeName;
   final Color? backgroundColor;
   final Color? textColor;
   final List<Widget>? action;
@@ -17,7 +15,6 @@ class AppBarCom extends StatelessWidget implements PreferredSizeWidget {
     this.appBarText,
     required this.leading,
     this.leftIcon,
-    this.routeName,
     this.backgroundColor,
     this.textColor,
     this.action,
@@ -35,8 +32,7 @@ class AppBarCom extends StatelessWidget implements PreferredSizeWidget {
             ? leftIcon ??
                 IconButton(
                     onPressed: () {
-                      Navigator.of(context)
-                          .pushNamed(routeName ?? MemberHome.routeName);
+                      Navigator.of(context).pop();
                     },
                     icon: const Icon(Icons.arrow_back_ios_rounded))
             : null,
