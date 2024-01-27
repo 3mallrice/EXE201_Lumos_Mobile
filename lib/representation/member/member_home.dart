@@ -115,7 +115,7 @@ class _MemberHomeState extends State<MemberHome> {
                           ),
                         ),
                         style: ElevatedButton.styleFrom(
-                          primary: ColorPalette.blue,
+                          backgroundColor: ColorPalette.blue,
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(16),
@@ -154,7 +154,7 @@ class _MemberHomeState extends State<MemberHome> {
                           ),
                         ),
                         style: ElevatedButton.styleFrom(
-                          primary: ColorPalette.blue,
+                          backgroundColor: ColorPalette.blue,
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.only(
                               topRight: Radius.circular(16),
@@ -205,7 +205,7 @@ class _MemberHomeState extends State<MemberHome> {
                                     //
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    primary: ColorPalette.pink,
+                                    backgroundColor: ColorPalette.pink,
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 10),
                                     shape: const CircleBorder(),
@@ -245,7 +245,7 @@ class _MemberHomeState extends State<MemberHome> {
                                     //
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    primary: ColorPalette.pink,
+                                    backgroundColor: ColorPalette.pink,
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 10),
                                     shape: const CircleBorder(),
@@ -285,7 +285,7 @@ class _MemberHomeState extends State<MemberHome> {
                                     //
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    primary: ColorPalette.pink,
+                                    backgroundColor: ColorPalette.pink,
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 10),
                                     shape: const CircleBorder(),
@@ -325,7 +325,7 @@ class _MemberHomeState extends State<MemberHome> {
                                     //
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    primary: ColorPalette.pink,
+                                    backgroundColor: ColorPalette.pink,
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 10),
                                     shape: const CircleBorder(),
@@ -365,7 +365,7 @@ class _MemberHomeState extends State<MemberHome> {
                                     //
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    primary: ColorPalette.pink,
+                                    backgroundColor: ColorPalette.pink,
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 10),
                                     shape: const CircleBorder(),
