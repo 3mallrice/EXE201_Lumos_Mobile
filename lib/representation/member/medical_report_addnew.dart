@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:exe201_lumos_mobile/component/app_bar.dart';
 import 'package:exe201_lumos_mobile/core/const/color_const.dart';
-import 'package:exe201_lumos_mobile/representation/member/medical_report_update.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:intl/intl.dart';
@@ -393,7 +392,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                     )
                   ],
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -406,7 +405,37 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                         color: ColorPalette.blueBold2,
                       ),
                     ),
-                    TextArea
+                    SingleChildScrollView(
+                      child: TextField(
+                        maxLines: 5,
+                        maxLength: 255,
+                        decoration: InputDecoration(
+                          hintText: 'Nhập ghi chú...',
+                          hintStyle: TextStyle(
+                            color: ColorPalette.blueBold2.withOpacity(0.65),
+                          ),
+                          filled: true,
+                          fillColor: ColorPalette.secondaryWhite,
+                          focusedBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: ColorPalette.grey2, width: 1.0),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(12),
+                            ),
+                          ),
+                          enabledBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: ColorPalette.grey2, width: 1.0),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(16),
+                            ),
+                          ),
+                        ),
+                        style: TextStyle(
+                          color: ColorPalette.blueBold2.withOpacity(0.65),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ],
