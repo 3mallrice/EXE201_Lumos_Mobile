@@ -1,7 +1,7 @@
-import 'dart:html';
-
 import 'package:exe201_lumos_mobile/component/app_bar.dart';
 import 'package:exe201_lumos_mobile/core/const/color_const.dart';
+import 'package:exe201_lumos_mobile/representation/member/medical_report_addnew.dart';
+import 'package:exe201_lumos_mobile/representation/member/medical_report_update.dart';
 import 'package:flutter/material.dart';
 
 class MedicalReportDetail extends StatelessWidget {
@@ -22,31 +22,25 @@ class MedicalReportDetail extends StatelessWidget {
         child: SingleChildScrollView(
           child: Container(
             width: screenWidth * 0.9,
+            margin: const EdgeInsets.only(top: 20),
             child: const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                Column(
                   children: [
                     Text(
-                      'Họ và tên: ',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: 'Raleway',
-                        color: ColorPalette.blueBold2,
-                      ),
-                    ),
-                    Text(
-                      'Nguyễn Văn A',
+                      'Nguyễn Đinh Phương Thảo Trang',
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w600,
                         fontFamily: 'Raleway',
-                        color: ColorPalette.blueBold2,
+                        color: ColorPalette.pinkBold,
                       ),
+                      softWrap: true,
                     )
                   ],
+                ),
+                SizedBox(
+                  height: 15,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -74,6 +68,9 @@ class MedicalReportDetail extends StatelessWidget {
                         ),
                       ],
                     ),
+                    SizedBox(
+                      height: 15,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -99,6 +96,9 @@ class MedicalReportDetail extends StatelessWidget {
                     ),
                   ],
                 ),
+                SizedBox(
+                  height: 15,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -122,6 +122,9 @@ class MedicalReportDetail extends StatelessWidget {
                     )
                   ],
                 ),
+                SizedBox(
+                  height: 15,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -135,7 +138,7 @@ class MedicalReportDetail extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'B',
+                      'B Rh+',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.normal,
@@ -144,6 +147,9 @@ class MedicalReportDetail extends StatelessWidget {
                       ),
                     )
                   ],
+                ),
+                SizedBox(
+                  height: 15,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -168,8 +174,12 @@ class MedicalReportDetail extends StatelessWidget {
                     )
                   ],
                 ),
-                Row(
+                SizedBox(
+                  height: 15,
+                ),
+                Column(
                   mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'Ghi chú: ',
@@ -180,18 +190,47 @@ class MedicalReportDetail extends StatelessWidget {
                         color: ColorPalette.blueBold2,
                       ),
                     ),
+                    SizedBox(height: 8),
                     Text(
-                      'Hoàn toàn bình thường, khoẻ mạnh',
+                      'Hoàn toàn bình thường, khoẻ mạnh Hoàn toàn bình thường, khoẻ mạnh Hoàn toàn bình thường, khoẻ mạnh Hoàn toàn bình thường, khoẻ mạnh',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.normal,
                         fontFamily: 'Raleway',
                         color: ColorPalette.blueBold2,
                       ),
-                    )
+                      softWrap: true,
+                      textAlign: TextAlign.justify,
+                    ),
                   ],
                 ),
               ],
+            ),
+          ),
+        ),
+      ),
+      bottomNavigationBar: FractionallySizedBox(
+        widthFactor: 0.9,
+        child: Container(
+          margin: const EdgeInsets.only(bottom: 12),
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(MedicalReportUpdate.routeName);
+              print('Button pressed');
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: ColorPalette.pink,
+              padding: const EdgeInsets.all(12),
+              minimumSize: Size(100, 40),
+            ),
+            child: const Text(
+              'Chỉnh sửa',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                fontFamily: 'Raleway',
+                color: ColorPalette.secondaryWhite,
+              ),
             ),
           ),
         ),

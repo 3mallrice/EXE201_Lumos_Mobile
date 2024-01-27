@@ -1,7 +1,9 @@
 import 'package:exe201_lumos_mobile/login.dart';
 import 'package:exe201_lumos_mobile/representation/intro_screen.dart';
 import 'package:exe201_lumos_mobile/representation/member/medical_report.dart';
+import 'package:exe201_lumos_mobile/representation/member/medical_report_addnew.dart';
 import 'package:exe201_lumos_mobile/representation/member/medical_report_detail.dart';
+import 'package:exe201_lumos_mobile/representation/member/medical_report_update.dart';
 import 'package:exe201_lumos_mobile/representation/member/member_booking.dart';
 import 'package:exe201_lumos_mobile/representation/member/member_home.dart';
 import 'package:exe201_lumos_mobile/representation/member/member_main_navbar.dart';
@@ -19,18 +21,16 @@ final Map<String, WidgetBuilder> routes = {
   IntroScreen.routeName: (context) => const IntroScreen(),
   Login.routeName: (context) => const Login(),
   SignUp.routeName: (context) => const SignUp(),
-
-  //share
   AccountScreen.routeName: (context) => const AccountScreen(),
   UpdateAccount.routeName: (context) => const UpdateAccount(),
   BillScreen.routeName: (context) => const BillScreen(),
   AboutUs.routeName: (context) => const AboutUs(),
-
-  //Member
   MemberMain.routeName: (context) => const MemberMain(),
   MemberHome.routeName: (context) => const MemberHome(),
   PaymentMethod.routeName: (context) => const PaymentMethod(),
   MemberBooking.routeName: (context) => const MemberBooking(),
   MedicalReport.routeName: (context) => const MedicalReport(),
   MedicalReportDetail.routeName: (context) => const MedicalReportDetail(),
+  MedicalReportUpdate.routeName: (context) => const MedicalReportUpdate(),
+  MedicalReportAdd.routeName: (context) => const MedicalReportAdd(),
 };
