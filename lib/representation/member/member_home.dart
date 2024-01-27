@@ -61,6 +61,7 @@ class _MemberHomeState extends State<MemberHome> {
                   ),
                 ),
                 Container(
+                  height: 50,
                   margin: const EdgeInsets.only(bottom: 10),
                   child: TextField(
                     readOnly: true,

@@ -24,6 +24,7 @@ class _AccountScreenState extends State<AccountScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const AppBarCom(
+        leading: false,
         appBarText: 'Tài khoản',
       ),
       body: SingleChildScrollView(
