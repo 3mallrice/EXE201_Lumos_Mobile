@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class MedicalReportDetail extends StatelessWidget {
   const MedicalReportDetail({super.key});
 
-  static String routeName = '/medical-report-detail';
+  static String routeName = '/medical_report_detail';
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +12,7 @@ class MedicalReportDetail extends StatelessWidget {
       appBar: AppBarCom(
         appBarText: "Hồ sơ bệnh nhân",
       ),
+      body: Column(),
     );
   }
 }

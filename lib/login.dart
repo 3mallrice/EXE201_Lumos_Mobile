@@ -210,19 +210,18 @@ class _LoginState extends State<Login> {
                                         fit: BoxFit.fill,
                                       )),
 
-                                  // Thêm SizedBox giữa icon và text
                                   const SizedBox(width: 16),
 
-                                  // Thêm padding phải cho text
                                   const Padding(
-                                      padding: EdgeInsets.only(right: 16.0),
-                                      child: Text(
-                                        'Đăng nhập với Google',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 18,
-                                            color: ColorPalette.primaryText),
-                                      )),
+                                    padding: EdgeInsets.only(right: 16.0),
+                                    child: Text(
+                                      'Đăng nhập với Google',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 18,
+                                          color: ColorPalette.primaryText),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
