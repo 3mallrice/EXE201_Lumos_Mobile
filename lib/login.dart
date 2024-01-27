@@ -38,7 +38,7 @@ class _LoginState extends State<Login> {
     String password = passwordController.text;
 
     //Navigator.of(context).pushNamed(MemberHome.routeName);
-    Navigator.of(context).pushNamed(MemberMain.routName);
+    Navigator.of(context).pushNamed(MemberMain.routeName);
   }
 
   //forget password

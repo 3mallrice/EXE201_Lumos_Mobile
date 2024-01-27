@@ -1,6 +1,7 @@
 import 'package:exe201_lumos_mobile/component/app_bar.dart';
 import 'package:exe201_lumos_mobile/core/const/color_const.dart';
 import 'package:exe201_lumos_mobile/representation/member/medical_report_detail.dart';
+import 'package:exe201_lumos_mobile/representation/share/account_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
