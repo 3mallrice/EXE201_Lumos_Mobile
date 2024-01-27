@@ -11,7 +11,7 @@ import '../share/account_screen.dart';
 class MemberMain extends StatefulWidget {
   const MemberMain({super.key});
 
-  static String routName = '/member_main';
+  static String routeName = '/member_main';
 
   @override
   State<MemberMain> createState() => _MemberMainState();

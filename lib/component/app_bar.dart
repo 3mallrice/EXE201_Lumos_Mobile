@@ -13,7 +13,7 @@ class AppBarCom extends StatelessWidget implements PreferredSizeWidget {
   const AppBarCom({
     super.key,
     this.appBarText,
-    this.leading = false,
+    required this.leading,
     this.leftIcon,
     this.backgroundColor,
     this.textColor,
@@ -28,17 +28,22 @@ class AppBarCom extends StatelessWidget implements PreferredSizeWidget {
     return SafeArea(
       child: AppBar(
         automaticallyImplyLeading: leading,
-        leading: leftIcon ?? const Icon(Icons.arrow_back_ios_rounded),
+        leading: leading
+            ? leftIcon ??
+                IconButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: const Icon(Icons.arrow_back_ios_rounded))
+            : null,
         iconTheme: const IconThemeData(color: ColorPalette.secondaryWhite),
         backgroundColor: backgroundColor ?? ColorPalette.blue,
-        title: Text(
-          appBarText ?? "",
-          style: GoogleFonts.raleway(
-            textStyle: TextStyle(
-                color: textColor ?? ColorPalette.blueBold2,
-                fontSize: 24,
-                fontWeight: FontWeight.bold),
-          ),
+        title: Text(appBarText ?? ""),
+        titleTextStyle: GoogleFonts.raleway(
+          textStyle: TextStyle(
+              color: textColor ?? ColorPalette.blueBold2,
+              fontSize: 24,
+              fontWeight: FontWeight.bold),
         ),
         elevation: 4,
         actions: action,
