@@ -1,5 +1,4 @@
 import 'package:exe201_lumos_mobile/representation/member/member_home.dart';
-import 'package:exe201_lumos_mobile/representation/share/account_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../core/const/color_const.dart';
