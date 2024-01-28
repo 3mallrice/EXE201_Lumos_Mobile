@@ -12,6 +12,7 @@ import 'package:exe201_lumos_mobile/representation/share/about_lumos.dart';
 import 'package:exe201_lumos_mobile/representation/share/account_screen.dart';
 import 'package:exe201_lumos_mobile/representation/share/account_update.dart';
 import 'package:exe201_lumos_mobile/representation/share/bill_screen.dart';
+import 'package:exe201_lumos_mobile/representation/share/notification_screen.dart';
 import 'package:exe201_lumos_mobile/representation/splash_screen.dart';
 import 'package:exe201_lumos_mobile/sign_up.dart';
 import 'package:flutter/material.dart';
@@ -33,4 +34,5 @@ final Map<String, WidgetBuilder> routes = {
   MedicalReportDetail.routeName: (context) => const MedicalReportDetail(),
   MedicalReportUpdate.routeName: (context) => const MedicalReportUpdate(),
   MedicalReportAdd.routeName: (context) => const MedicalReportAdd(),
+  NotificationScreen.routeName: (context) => const NotificationScreen(),
 };

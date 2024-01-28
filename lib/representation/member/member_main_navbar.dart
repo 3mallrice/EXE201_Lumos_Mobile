@@ -1,7 +1,7 @@
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:exe201_lumos_mobile/representation/member/member_booking.dart';
 import 'package:exe201_lumos_mobile/representation/member/member_home.dart';
-import 'package:exe201_lumos_mobile/representation/member/member_notification.dart';
+import 'package:exe201_lumos_mobile/representation/share/notification_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/const/color_const.dart';
@@ -35,7 +35,7 @@ class _MemberMainState extends State<MemberMain> {
         children: const [
           MemberHome(),
           MemberBooking(),
-          MemberNotification(),
+          NotificationScreen(),
           AccountScreen(),
         ],
       ),
