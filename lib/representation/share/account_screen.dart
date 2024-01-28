@@ -1,4 +1,5 @@
 import 'package:exe201_lumos_mobile/representation/member/medical_report.dart';
+import 'package:exe201_lumos_mobile/representation/member/member_address.dart';
 import 'package:flutter/material.dart';
 import 'package:exe201_lumos_mobile/component/app_bar.dart';
 import 'package:exe201_lumos_mobile/component/my_button.dart';
@@ -61,7 +62,7 @@ class _AccountScreenState extends State<AccountScreen> {
                           Navigator.of(context).pushNamed(BillScreen.routeName);
                         },
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 10),
                       _buildButtonList(
                         text: 'Đặt chỗ',
                         leftIcon: Icons.calendar_month_outlined,
@@ -70,7 +71,7 @@ class _AccountScreenState extends State<AccountScreen> {
                           // Navigate to reservation screen
                         },
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 10),
                       _buildButtonList(
                         text: 'Danh sách bệnh nhân',
                         leftIcon: Icons.paste_sharp,
@@ -80,7 +81,7 @@ class _AccountScreenState extends State<AccountScreen> {
                               .pushNamed(MedicalReport.routeName);
                         },
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 10),
                       _buildButtonList(
                         text: 'Về Lumos',
                         leftIcon: LumosIcons.hearticon,
@@ -89,13 +90,13 @@ class _AccountScreenState extends State<AccountScreen> {
                           Navigator.of(context).pushNamed(AboutUs.routeName);
                         },
                       ),
-                      const SizedBox(height: 35),
+                      const SizedBox(height: 30),
                       MyButton(
                         onTap: () {
                           //
                         },
                         text: 'Đăng xuất',
-                        color: ColorPalette.blueBold2,
+                        color: ColorPalette.blue,
                         borderRadius: 66.50,
                         widget: const Text(
                           'Đăng xuất',
@@ -109,7 +110,7 @@ class _AccountScreenState extends State<AccountScreen> {
                       ),
                       const SizedBox(height: 3),
                       const SizedBox(
-                        height: 55,
+                        height: 30,
                         child: Center(
                           child: Text(
                             '© All copyright of Lumos',

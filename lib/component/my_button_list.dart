@@ -30,41 +30,38 @@ class MyButtonList extends StatelessWidget {
           minimumSize: const Size(148, 63),
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Expanded(
-              flex: 1,
-              child: Icon(
-                leftIcon,
-                color: ColorPalette.blueBold2,
-                size: 41,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Icon(
+                  leftIcon,
+                  color: ColorPalette.blueBold2,
+                  size: 41,
+                ),
+                const SizedBox(width: 10),
+                SizedBox(
+                  width: 200,
+                  child: Text(
+                    text,
+                    style: const TextStyle(
+                      color: ColorPalette.blueBold2,
+                      fontSize: 16,
+                      fontFamily: 'Raleway',
+                      fontWeight: FontWeight.w400,
+                      height: 0.08,
+                      letterSpacing: 0.10,
+                    ),
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(
-              width: 40,
-            ),
-            SizedBox(
-              width: 200,
-              child: Text(text,
-                  style: const TextStyle(
-                    color: ColorPalette.blueBold2,
-                    fontSize: 16,
-                    fontFamily: 'verdana',
-                    fontWeight: FontWeight.w400,
-                    height: 0.08,
-                    letterSpacing: 0.10,
-                  )),
-            ),
-            Expanded(
-              flex: 1,
-              child: Icon(
-                rightIcon,
-                color: ColorPalette.pink,
-                size: 20,
-              ),
-            ),
-            const SizedBox(
-              width: 5,
+            const SizedBox(width: 10),
+            Icon(
+              rightIcon,
+              color: ColorPalette.pink,
+              size: 20,
             ),
           ],
         ),

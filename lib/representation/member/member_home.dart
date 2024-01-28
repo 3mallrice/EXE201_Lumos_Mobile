@@ -458,24 +458,29 @@ class _MemberHomeState extends State<MemberHome> {
                               letterSpacing: 0.10,
                             ),
                           ),
-                          MyButton(
-                            onTap: () {
+                          ElevatedButton(
+                            onPressed: () {
                               //
                             },
-                            borderRadius: 66.5,
-                            borderColor: ColorPalette.blue,
-                            text: 'Đặt lịch ngay',
-                            color: ColorPalette.blue,
-                            widget: const Text(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: ColorPalette.blue,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(66.5),
+                                side: const BorderSide(
+                                    color: ColorPalette.blue,
+                                    width: 2.0), // Border color and width
+                              ),
+                            ),
+                            child: const Text(
                               'Đặt lịch ngay',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: ColorPalette.secondaryWhite,
-                                fontSize: 15,
+                                fontSize: 14,
                                 fontFamily: 'Raleway',
                                 fontWeight: FontWeight.w700,
-                                height: 0.07,
-                                letterSpacing: -0.28,
                               ),
                             ),
                           ),

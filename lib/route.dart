@@ -4,6 +4,7 @@ import 'package:exe201_lumos_mobile/representation/member/medical_report.dart';
 import 'package:exe201_lumos_mobile/representation/member/medical_report_addnew.dart';
 import 'package:exe201_lumos_mobile/representation/member/medical_report_detail.dart';
 import 'package:exe201_lumos_mobile/representation/member/medical_report_update.dart';
+import 'package:exe201_lumos_mobile/representation/member/member_address.dart';
 import 'package:exe201_lumos_mobile/representation/member/member_booking.dart';
 import 'package:exe201_lumos_mobile/representation/member/member_home.dart';
 import 'package:exe201_lumos_mobile/representation/member/member_main_navbar.dart';
@@ -35,4 +36,5 @@ final Map<String, WidgetBuilder> routes = {
   MedicalReportUpdate.routeName: (context) => const MedicalReportUpdate(),
   MedicalReportAdd.routeName: (context) => const MedicalReportAdd(),
   NotificationScreen.routeName: (context) => const NotificationScreen(),
+  MemberAddress.routeName: (context) => const MemberAddress(),
 };

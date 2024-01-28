@@ -45,7 +45,7 @@ class MedicalReport extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         padding: const EdgeInsets.all(10),
         decoration: ShapeDecoration(
-          color: ColorPalette.bluelight,
+          color: ColorPalette.blue2,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(11),
           ),

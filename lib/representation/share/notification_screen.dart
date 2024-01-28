@@ -50,7 +50,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
       body: Container(
         margin: const EdgeInsets.symmetric(vertical: 10),
         padding: const EdgeInsets.all(10),
-        color: ColorPalette.bluelight,
+        color: ColorPalette.blue2,
         child: ListView.builder(
           clipBehavior: Clip.antiAlias,
           shrinkWrap: true,
