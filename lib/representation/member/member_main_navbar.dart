@@ -1,5 +1,5 @@
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
-import 'package:exe201_lumos_mobile/representation/member/member_booking.dart';
+import 'package:exe201_lumos_mobile/representation/member/member_coming_booking.dart';
 import 'package:exe201_lumos_mobile/representation/member/member_home.dart';
 import 'package:exe201_lumos_mobile/representation/share/notification_screen.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +34,7 @@ class _MemberMainState extends State<MemberMain> {
         index: _selectedTab.index,
         children: const [
           MemberHome(),
-          MemberBooking(),
+          MemberComingBooking(),
           NotificationScreen(),
           AccountScreen(),
         ],
@@ -47,9 +47,11 @@ class _MemberMainState extends State<MemberMain> {
         onTap: _handleIndexChanged,
         dotIndicatorColor: ColorPalette.pink,
         unselectedItemColor: ColorPalette.white,
-        splashBorderRadius: 20,
+        splashBorderRadius: 50,
         enableFloatingNavBar: true,
         enablePaddingAnimation: false,
+        splashColor: Colors.transparent,
+        //disable splash
         marginR: const EdgeInsets.symmetric(horizontal: 40),
         paddingR: const EdgeInsets.symmetric(vertical: 3),
         items: [

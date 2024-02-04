@@ -15,21 +15,19 @@ class BillScreen extends StatefulWidget {
 class _BillScreenState extends State<BillScreen> {
   final List<Bill> bills = [
     Bill(
-      service: "Tắm bé lớn hơn 3 tháng tuổi",
       partner: "Bệnh viện sản nhi trung ương Tp.Hồ Chí Minh",
+      bookingId: "Lumos.1.24.000001",
       bookingDate:
           "${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}",
-      from: "10:30",
-      to: "14:00",
+      note: "",
       totalPrice: "500.000",
     ),
     Bill(
-      service: "Chăm sóc mẹ bầu",
       partner: "Phòng khám Hạnh Phúc",
+      bookingId: "Lumos.1.24.000002",
       bookingDate:
           "${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}",
-      from: "8:00",
-      to: "9:30",
+      note: "",
       totalPrice: "500.000",
     ),
     // Add more Bill objects as needed
@@ -43,7 +41,12 @@ class _BillScreenState extends State<BillScreen> {
         leading: true,
       ),
       body: Container(
-        margin: const EdgeInsets.only(top: 20, bottom: 10, right: 20, left: 20),
+        margin: const EdgeInsets.only(
+          top: 20,
+          bottom: 10,
+          right: 20,
+          left: 20,
+        ),
         child: ListView.builder(
           itemCount: bills.length,
           itemBuilder: (context, index) {
@@ -59,59 +62,86 @@ class _BillScreenState extends State<BillScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    bill.service,
+                    bill.partner,
                     style: GoogleFonts.raleway(
                       textStyle: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: ColorPalette.blueBold2,
-                        fontSize: 20,
+                        fontSize: 21,
                       ),
                     ),
                   ),
-                  Text(
-                    bill.partner,
-                    style: const TextStyle(
-                      color: ColorPalette.blueBold2,
-                      fontSize: 18,
-                    ),
+                  const SizedBox(
+                    height: 5,
                   ),
-                  const SizedBox(height: 3),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      const Icon(
+                        Icons.bookmarks_sharp,
+                        color: ColorPalette.blueBold2,
+                        size: 15,
+                        weight: 1.4,
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
                       Text(
-                        'Ngày đặt: ${bill.bookingDate.toString()}',
+                        "#${bill.bookingId}",
                         style: const TextStyle(
                           color: ColorPalette.blueBold2,
-                          fontSize: 16,
+                          fontSize: 15,
+                          fontWeight: FontWeight.normal,
                         ),
                       ),
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.access_time,
-                            color: ColorPalette.blueBold2,
-                            size: 16,
-                          ),
-                          const SizedBox(width: 3),
-                          Icon(
-                            Icons.circle,
-                            color: ColorPalette.blueBold2.withOpacity(0.5),
-                            size: 5.5,
-                          ),
-                          const SizedBox(width: 3),
-                          Text(
-                            '${bill.from} - ${bill.to}',
-                            style: const TextStyle(
-                              color: ColorPalette.blueBold2,
-                            ),
-                          ),
-                        ],
-                      )
                     ],
                   ),
                   const SizedBox(
                     height: 3,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.calendar_month_sharp,
+                            color: ColorPalette.blueBold2,
+                            size: 15,
+                            weight: 1.4,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            bill.bookingDate.toString(),
+                            style: const TextStyle(
+                              color: ColorPalette.blueBold2,
+                              fontSize: 15,
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 3,
+                  ),
+                  const Text(
+                    "Ghi chú:",
+                    style: TextStyle(
+                      color: ColorPalette.blueBold2,
+                      fontSize: 15,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 1,
+                  ),
+                  Text(
+                    bill.note,
+                    style: const TextStyle(
+                      color: ColorPalette.blueBold2,
+                      fontSize: 15,
+                    ),
                   ),
                   const Divider(
                     color: ColorPalette.white,
@@ -135,7 +165,7 @@ class _BillScreenState extends State<BillScreen> {
                           style: GoogleFonts.raleway(
                             textStyle: const TextStyle(
                                 color: ColorPalette.blueBold2,
-                                fontWeight: FontWeight.normal,
+                                fontWeight: FontWeight.w600,
                                 fontSize: 16),
                           ),
                           textAlign: TextAlign.right,
@@ -154,19 +184,17 @@ class _BillScreenState extends State<BillScreen> {
 }
 
 class Bill {
-  String service;
   String partner;
+  String bookingId;
   String bookingDate;
-  String from;
-  String to;
+  String note;
   String totalPrice;
 
   Bill({
-    required this.service,
     required this.partner,
+    required this.bookingId,
     required this.bookingDate,
-    required this.from,
-    required this.to,
+    required this.note,
     required this.totalPrice,
   });
 }
