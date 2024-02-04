@@ -54,6 +54,7 @@ dependencies:
   intl:
   text_area: ^0.0.3
   group_radio_button: ^1.3.0
+  flutter_rating_stars: ^1.0.3+4
 
 flutter_launcher_icons:
   android: "launcher_icon"
