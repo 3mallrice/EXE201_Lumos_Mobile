@@ -69,7 +69,8 @@ class _MemberHomeState extends State<MemberHome> {
                     child: TextField(
                       readOnly: true,
                       onTap: () {
-                        //
+                        Navigator.of(context)
+                            .pushNamed(SearchBooking.routeName);
                       },
                       decoration: InputDecoration(
                           hintText: 'Tìm kiếm',
