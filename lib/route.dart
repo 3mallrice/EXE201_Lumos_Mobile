@@ -9,6 +9,7 @@ import 'package:exe201_lumos_mobile/representation/member/member_coming_booking.
 import 'package:exe201_lumos_mobile/representation/member/member_home.dart';
 import 'package:exe201_lumos_mobile/representation/member/member_main_navbar.dart';
 import 'package:exe201_lumos_mobile/representation/member/payment_method.dart';
+import 'package:exe201_lumos_mobile/representation/member/search_booking.dart';
 import 'package:exe201_lumos_mobile/representation/share/about_lumos.dart';
 import 'package:exe201_lumos_mobile/representation/share/account_screen.dart';
 import 'package:exe201_lumos_mobile/representation/share/account_update.dart';
@@ -37,4 +38,5 @@ final Map<String, WidgetBuilder> routes = {
   MedicalReportAdd.routeName: (context) => const MedicalReportAdd(),
   NotificationScreen.routeName: (context) => const NotificationScreen(),
   MemberAddress.routeName: (context) => const MemberAddress(),
+  SearchBooking.routeName: (context) => const SearchBooking(),
 };

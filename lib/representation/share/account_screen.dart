@@ -93,7 +93,8 @@ class _AccountScreenState extends State<AccountScreen> {
                       const SizedBox(height: 30),
                       MyButton(
                         onTap: () {
-                          //
+                          Navigator.of(context)
+                              .pushNamed(MemberAddress.routeName);
                         },
                         text: 'Đăng xuất',
                         color: ColorPalette.blue,

@@ -1,6 +1,6 @@
-import 'package:exe201_lumos_mobile/component/my_button.dart';
 import 'package:exe201_lumos_mobile/core/const/color_const.dart';
 import 'package:exe201_lumos_mobile/core/helper/asset_helper.dart';
+import 'package:exe201_lumos_mobile/representation/member/search_booking.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -69,7 +69,7 @@ class _MemberHomeState extends State<MemberHome> {
                     child: TextField(
                       readOnly: true,
                       onTap: () {
-                        // Xử lý sự kiện khi nhấn vào TextField
+                        //
                       },
                       decoration: InputDecoration(
                           hintText: 'Tìm kiếm',
@@ -118,8 +118,6 @@ class _MemberHomeState extends State<MemberHome> {
                               fontSize: 20,
                               fontFamily: 'Raleway',
                               fontWeight: FontWeight.w500,
-                              height: 0.06,
-                              letterSpacing: 0.10,
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
@@ -157,8 +155,6 @@ class _MemberHomeState extends State<MemberHome> {
                               fontSize: 20,
                               fontFamily: 'Raleway',
                               fontWeight: FontWeight.w500,
-                              height: 0.06,
-                              letterSpacing: 0.10,
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
@@ -194,8 +190,6 @@ class _MemberHomeState extends State<MemberHome> {
                               fontSize: 11,
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.w400,
-                              height: 0.18,
-                              letterSpacing: 0.10,
                             ),
                           ),
                         ),
@@ -238,8 +232,6 @@ class _MemberHomeState extends State<MemberHome> {
                                         overflow: TextOverflow.ellipsis,
                                         fontFamily: 'Raleway',
                                         fontWeight: FontWeight.w500,
-                                        height: 0.22,
-                                        letterSpacing: 0.10,
                                       ),
                                     ),
                                   ),
@@ -278,8 +270,6 @@ class _MemberHomeState extends State<MemberHome> {
                                         fontFamily: 'Raleway',
                                         overflow: TextOverflow.ellipsis,
                                         fontWeight: FontWeight.w500,
-                                        height: 0.22,
-                                        letterSpacing: 0.10,
                                       ),
                                     ),
                                   ),
@@ -318,8 +308,6 @@ class _MemberHomeState extends State<MemberHome> {
                                         overflow: TextOverflow.ellipsis,
                                         fontFamily: 'Raleway',
                                         fontWeight: FontWeight.w500,
-                                        height: 0.22,
-                                        letterSpacing: 0.10,
                                       ),
                                     ),
                                   ),
@@ -358,8 +346,6 @@ class _MemberHomeState extends State<MemberHome> {
                                         fontFamily: 'Raleway',
                                         overflow: TextOverflow.ellipsis,
                                         fontWeight: FontWeight.w500,
-                                        height: 0.22,
-                                        letterSpacing: 0.10,
                                       ),
                                     ),
                                   ),
@@ -398,8 +384,6 @@ class _MemberHomeState extends State<MemberHome> {
                                         overflow: TextOverflow.ellipsis,
                                         fontFamily: 'Raleway',
                                         fontWeight: FontWeight.w500,
-                                        height: 0.22,
-                                        letterSpacing: 0.10,
                                       ),
                                     ),
                                   ),
@@ -451,8 +435,6 @@ class _MemberHomeState extends State<MemberHome> {
                                 fontSize: 16,
                                 fontFamily: 'Raleway',
                                 fontWeight: FontWeight.w700,
-                                height: 1.2,
-                                letterSpacing: 0.10,
                               ),
                             ),
                             const Text(
@@ -462,8 +444,6 @@ class _MemberHomeState extends State<MemberHome> {
                                 fontSize: 13,
                                 fontFamily: 'Raleway',
                                 fontWeight: FontWeight.w500,
-                                height: 1.2,
-                                letterSpacing: 0.10,
                               ),
                             ),
                             ElevatedButton(

@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 class MedicalReport extends StatelessWidget {
   const MedicalReport({super.key});
 
-  static String routeName = '/medical-report';
+  static String routeName = '/medical_report';
 
   @override
   Widget build(BuildContext context) {

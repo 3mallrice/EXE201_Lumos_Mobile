@@ -5,6 +5,7 @@ class ColorPalette {
   static const Color blueBold = Color(0xFF4ec4c6);
   static const Color blueBold2 = Color(0xFF0A4F45);
   static const Color bluelight = Color(0xFFDEFDF9);
+  static const Color bluelight2 = Color(0xFF668E88);
   static const Color blue2 = Color(0xFFDEFFFA);
   static const Color pink = Color(0xFFFF9F9F);
   static const Color pinklight = Color(0xFFFFDEDE);
