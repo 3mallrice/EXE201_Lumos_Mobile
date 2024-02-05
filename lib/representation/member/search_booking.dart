@@ -112,7 +112,7 @@ class SearchList extends StatelessWidget {
                   children: [
                     Text(
                       item,
-                      style: GoogleFonts.raleway(
+                      style: GoogleFonts.almarai(
                         textStyle: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
@@ -121,7 +121,7 @@ class SearchList extends StatelessWidget {
                     ),
                     Text(
                       '20-22 Dương Quang Trung, Phường 12, Quận 10, TP.HCM',
-                      style: GoogleFonts.raleway(
+                      style: GoogleFonts.almarai(
                         textStyle: const TextStyle(
                           fontWeight: FontWeight.normal,
                           fontSize: 12,
@@ -151,7 +151,7 @@ class SearchList extends StatelessWidget {
                                     children: [
                                       Text(
                                         item2,
-                                        style: GoogleFonts.raleway(
+                                        style: GoogleFonts.almarai(
                                           textStyle: const TextStyle(
                                             fontWeight: FontWeight.normal,
                                             fontSize: 12,
@@ -180,7 +180,7 @@ class SearchList extends StatelessWidget {
                                           ),
                                           Text(
                                             '80 lượt đã đặt',
-                                            style: GoogleFonts.raleway(
+                                            style: GoogleFonts.almarai(
                                               fontSize: 10,
                                               color: ColorPalette.blueBold2,
                                             ),

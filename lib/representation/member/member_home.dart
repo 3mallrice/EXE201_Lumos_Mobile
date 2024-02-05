@@ -74,7 +74,7 @@ class _MemberHomeState extends State<MemberHome> {
                       },
                       decoration: InputDecoration(
                           hintText: 'Tìm kiếm',
-                          hintStyle: GoogleFonts.raleway(
+                          hintStyle: GoogleFonts.almarai(
                             color: ColorPalette.pink,
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
