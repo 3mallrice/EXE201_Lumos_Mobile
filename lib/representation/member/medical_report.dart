@@ -96,7 +96,6 @@ class MedicalReport extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () {
             Navigator.of(context).pushNamed(MedicalReportAdd.routeName);
-            print('Button pressed');
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: ColorPalette.pink,
