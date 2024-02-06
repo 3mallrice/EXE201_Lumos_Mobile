@@ -71,7 +71,7 @@ class MedicalReport extends StatelessWidget {
                     ),
                     title: Text(
                       item,
-                      style: GoogleFonts.raleway(
+                      style: GoogleFonts.almarai(
                         textStyle: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -96,7 +96,6 @@ class MedicalReport extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () {
             Navigator.of(context).pushNamed(MedicalReportAdd.routeName);
-            print('Button pressed');
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: ColorPalette.pink,

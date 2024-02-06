@@ -11,8 +11,10 @@
 ///      fonts:
 ///       - asset: fonts/ZaloIcon.ttf
 ///
-/// 
 ///
+///
+library;
+
 import 'package:flutter/widgets.dart';
 
 class ZaloIcon {
@@ -21,5 +23,6 @@ class ZaloIcon {
   static const _kFontFam = 'ZaloIcon';
   static const String? _kFontPkg = null;
 
-  static const IconData group_1000004349 = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData group_1000004349 =
+      IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

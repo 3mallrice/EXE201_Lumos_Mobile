@@ -53,7 +53,6 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
     if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
-        print('Selected date: $selectedDate');
       });
     }
 

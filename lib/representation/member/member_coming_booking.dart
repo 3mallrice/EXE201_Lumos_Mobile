@@ -1,6 +1,5 @@
 import 'package:exe201_lumos_mobile/component/app_bar.dart';
 import 'package:exe201_lumos_mobile/core/const/color_const.dart';
-import 'package:exe201_lumos_mobile/core/const/lumos_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -165,7 +164,7 @@ class _MemberBookingState extends State<MemberComingBooking> {
                               for (var service in booking.services)
                                 Text(
                                   service,
-                                  style: GoogleFonts.raleway(
+                                  style: GoogleFonts.almarai(
                                     textStyle: const TextStyle(
                                       color: ColorPalette.blueBold2,
                                       fontWeight: FontWeight.w600,
