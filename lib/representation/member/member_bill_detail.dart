@@ -2,6 +2,7 @@ import 'package:exe201_lumos_mobile/component/app_bar.dart';
 import 'package:exe201_lumos_mobile/core/const/color_const.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:fdottedline_nullsafety/fdottedline__nullsafety.dart';
 
 class BillDetail extends StatefulWidget {
   const BillDetail({super.key});
@@ -39,7 +40,7 @@ class _BillDetailState extends State<BillDetail> {
                   'Bệnh viện sản nhi trung ương TP Hồ Chí Minh',
                   style: GoogleFonts.almarai(
                     textStyle: const TextStyle(
-                      fontSize: 20,
+                      fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: ColorPalette.blueBold2,
                     ),
@@ -54,6 +55,12 @@ class _BillDetailState extends State<BillDetail> {
                       color: ColorPalette.blueBold2,
                     ),
                   ),
+                ),
+                const SizedBox(height: 10),
+                const Divider(
+                  thickness: 3,
+                  height: 2,
+                  color: ColorPalette.white,
                 ),
                 const SizedBox(height: 10),
                 Row(
@@ -89,7 +96,7 @@ class _BillDetailState extends State<BillDetail> {
                   textBaseline: TextBaseline.alphabetic,
                   children: [
                     Text(
-                      'Ngày tạo đặt chỗ: ',
+                      'Ngày lên lịch: ',
                       style: GoogleFonts.almarai(
                         textStyle: const TextStyle(
                           fontSize: 18,
@@ -136,9 +143,7 @@ class _BillDetailState extends State<BillDetail> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 10),
-                CustomerAndService(),
-                const SizedBox(height: 10),
+                const CustomerAndService(),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -164,6 +169,100 @@ class _BillDetailState extends State<BillDetail> {
                       ),
                       textAlign: TextAlign.justify,
                     ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 10),
+                      child: FDottedLine(
+                        color: Colors.black,
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        strokeWidth: 1.0,
+                        dottedLength: 5.0,
+                        space: 3.0,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        Text(
+                          'Tổng tiền dịch vụ: ',
+                          style: GoogleFonts.almarai(
+                            textStyle: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.normal,
+                              color: ColorPalette.bluelight2,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          '200.000 đ',
+                          style: GoogleFonts.almarai(
+                            textStyle: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.normal,
+                              color: ColorPalette.bluelight2,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        Text(
+                          'Phụ phí: ',
+                          style: GoogleFonts.almarai(
+                            textStyle: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.normal,
+                              color: ColorPalette.bluelight2,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          '30.000 đ',
+                          style: GoogleFonts.almarai(
+                            textStyle: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.normal,
+                              color: ColorPalette.bluelight2,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.alphabetic,
+                        children: [
+                          Text(
+                            'Thành tiền: ',
+                            style: GoogleFonts.almarai(
+                              textStyle: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: ColorPalette.blueBold2,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            '230.000 đ',
+                            style: GoogleFonts.almarai(
+                              textStyle: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: ColorPalette.blueBold2,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ],
@@ -175,19 +274,91 @@ class _BillDetailState extends State<BillDetail> {
   }
 }
 
-class CustomerAndService extends StatelessWidget {
+class CustomerAndService extends StatefulWidget {
   const CustomerAndService({super.key});
 
   @override
+  State<CustomerAndService> createState() => _CustomerAndServiceState();
+}
+
+class _CustomerAndServiceState extends State<CustomerAndService> {
+  final List<String> _customer = [
+    "Nguyễn Vũ Hồng Hoa",
+    "Bùi Hữu Phúc",
+  ];
+  final List<String> _service = [
+    "Tắm cho bé",
+    "Tắm cho mẹ",
+  ];
+  @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 5),
+      padding: const EdgeInsets.all(5),
       decoration: ShapeDecoration(
-        color: ColorPalette.blue2,
+        color: ColorPalette.bgColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(6),
         ),
+      ),
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: _service.length,
+        itemBuilder: (context, index) {
+          final item = _customer[index];
+          return Column(
+            children: [
+              ListTile(
+                title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item,
+                      style: GoogleFonts.almarai(
+                        textStyle: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: ColorPalette.blueBold2),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: ListView.builder(
+                        clipBehavior: Clip.antiAlias,
+                        shrinkWrap: true,
+                        itemCount: _service.length,
+                        itemBuilder: (context, index) {
+                          final item2 = _service[index];
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                item2,
+                                style: GoogleFonts.almarai(
+                                  textStyle: const TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 16,
+                                    color: ColorPalette.blueBold2,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              if (index < _customer.length - 1)
+                const Divider(
+                  thickness: 1,
+                  height: 2,
+                  color: ColorPalette.blue,
+                ),
+            ],
+          );
+        },
       ),
     );
   }
