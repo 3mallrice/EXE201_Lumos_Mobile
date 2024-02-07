@@ -1,5 +1,6 @@
 import 'package:exe201_lumos_mobile/component/app_bar.dart';
 import 'package:exe201_lumos_mobile/core/const/color_const.dart';
+import 'package:exe201_lumos_mobile/representation/member/member_bill_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -51,129 +52,134 @@ class _BillScreenState extends State<BillScreen> {
           itemCount: bills.length,
           itemBuilder: (context, index) {
             Bill bill = bills[index];
-            return Container(
-              margin: const EdgeInsets.only(bottom: 15),
-              padding: const EdgeInsets.all(16.0),
-              decoration: BoxDecoration(
-                color: ColorPalette.bluelight,
-                borderRadius: BorderRadius.circular(12.0),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    bill.partner,
-                    style: GoogleFonts.raleway(
-                      textStyle: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: ColorPalette.blueBold2,
-                        fontSize: 21,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.bookmarks_sharp,
-                        color: ColorPalette.blueBold2,
-                        size: 15,
-                        weight: 1.4,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        "#${bill.bookingId}",
-                        style: const TextStyle(
+            return InkWell(
+              onTap: () {
+                Navigator.of(context).pushNamed(BillDetail.routeName);
+              },
+              child: Container(
+                margin: const EdgeInsets.only(bottom: 15),
+                padding: const EdgeInsets.all(16.0),
+                decoration: BoxDecoration(
+                  color: ColorPalette.bluelight,
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      bill.partner,
+                      style: GoogleFonts.raleway(
+                        textStyle: const TextStyle(
+                          fontWeight: FontWeight.bold,
                           color: ColorPalette.blueBold2,
-                          fontSize: 15,
-                          fontWeight: FontWeight.normal,
+                          fontSize: 21,
                         ),
                       ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 3,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.calendar_month_sharp,
-                            color: ColorPalette.blueBold2,
-                            size: 15,
-                            weight: 1.4,
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            bill.bookingDate.toString(),
-                            style: const TextStyle(
-                              color: ColorPalette.blueBold2,
-                              fontSize: 15,
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 3,
-                  ),
-                  const Text(
-                    "Ghi chú:",
-                    style: TextStyle(
-                      color: ColorPalette.blueBold2,
-                      fontSize: 15,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 1,
-                  ),
-                  Text(
-                    bill.note,
-                    style: const TextStyle(
-                      color: ColorPalette.blueBold2,
-                      fontSize: 15,
+                    const SizedBox(
+                      height: 5,
                     ),
-                  ),
-                  const Divider(
-                    color: ColorPalette.white,
-                    thickness: 1.5,
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                    Row(
                       children: [
+                        const Icon(
+                          Icons.bookmarks_sharp,
+                          color: ColorPalette.blueBold2,
+                          size: 15,
+                          weight: 1.4,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
                         Text(
-                          bill.totalPrice.toString(),
+                          "#${bill.bookingId}",
                           style: const TextStyle(
                             color: ColorPalette.blueBold2,
-                            fontSize: 20,
+                            fontSize: 15,
+                            fontWeight: FontWeight.normal,
                           ),
-                          textAlign: TextAlign.right,
-                        ),
-                        Text(
-                          "đ",
-                          style: GoogleFonts.raleway(
-                            textStyle: const TextStyle(
-                                color: ColorPalette.blueBold2,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16),
-                          ),
-                          textAlign: TextAlign.right,
                         ),
                       ],
                     ),
-                  ),
-                ],
+                    const SizedBox(
+                      height: 3,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.calendar_month_sharp,
+                              color: ColorPalette.blueBold2,
+                              size: 15,
+                              weight: 1.4,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              bill.bookingDate.toString(),
+                              style: const TextStyle(
+                                color: ColorPalette.blueBold2,
+                                fontSize: 15,
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 3,
+                    ),
+                    const Text(
+                      "Ghi chú:",
+                      style: TextStyle(
+                        color: ColorPalette.blueBold2,
+                        fontSize: 15,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 1,
+                    ),
+                    Text(
+                      bill.note,
+                      style: const TextStyle(
+                        color: ColorPalette.blueBold2,
+                        fontSize: 15,
+                      ),
+                    ),
+                    const Divider(
+                      color: ColorPalette.white,
+                      thickness: 1.5,
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            bill.totalPrice.toString(),
+                            style: const TextStyle(
+                              color: ColorPalette.blueBold2,
+                              fontSize: 20,
+                            ),
+                            textAlign: TextAlign.right,
+                          ),
+                          Text(
+                            "đ",
+                            style: GoogleFonts.raleway(
+                              textStyle: const TextStyle(
+                                  color: ColorPalette.blueBold2,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16),
+                            ),
+                            textAlign: TextAlign.right,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             );
           },

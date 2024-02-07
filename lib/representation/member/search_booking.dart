@@ -124,7 +124,7 @@ class SearchList extends StatelessWidget {
                       style: GoogleFonts.raleway(
                         textStyle: const TextStyle(
                           fontWeight: FontWeight.normal,
-                          fontSize: 12,
+                          fontSize: 16,
                           color: ColorPalette.blueBold2,
                         ),
                       ),
@@ -166,16 +166,19 @@ class SearchList extends StatelessWidget {
                                           const RatingStars(
                                             value: 3.5,
                                             starColor: ColorPalette.star,
-                                            starSize: 10,
+                                            starSize: 12,
                                             valueLabelVisibility: false,
                                           ),
-                                          const VerticalDivider(
+                                          Container(
+                                            height: 12,
+                                            width: 1.2,
                                             color: ColorPalette.blueBold2,
-                                            thickness: 2,
+                                            margin: const EdgeInsets.only(
+                                                left: 10, right: 6),
                                           ),
                                           const Icon(
                                             Icons.event_note,
-                                            size: 10,
+                                            size: 12,
                                             color: ColorPalette.blueBold2,
                                           ),
                                           Text(
@@ -194,7 +197,7 @@ class SearchList extends StatelessWidget {
                               Text(
                                 '500.000 đ',
                                 style: GoogleFonts.aBeeZee(
-                                  fontSize: 13,
+                                  fontSize: 14,
                                   color: ColorPalette.blueBold2,
                                 ),
                               ),
