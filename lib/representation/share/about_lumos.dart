@@ -55,7 +55,7 @@ class _AboutUsState extends State<AboutUs> {
                     children: [
                       Text(
                         'Trở thành partner',
-                        style: GoogleFonts.raleway(
+                        style: GoogleFonts.almarai(
                           textStyle: const TextStyle(
                             color: ColorPalette.blueBold2,
                             fontSize: 16,
@@ -88,7 +88,7 @@ class _AboutUsState extends State<AboutUs> {
                     children: [
                       Text(
                         'Licence & Policy',
-                        style: GoogleFonts.raleway(
+                        style: GoogleFonts.almarai(
                           textStyle: const TextStyle(
                             color: ColorPalette.blueBold2,
                             fontSize: 16,
@@ -121,7 +121,7 @@ class _AboutUsState extends State<AboutUs> {
                     children: [
                       Text(
                         'Lumos.com.vn',
-                        style: GoogleFonts.raleway(
+                        style: GoogleFonts.almarai(
                           textStyle: const TextStyle(
                             color: ColorPalette.blueBold2,
                             fontSize: 16,
@@ -150,7 +150,7 @@ class _AboutUsState extends State<AboutUs> {
                         children: [
                           Text(
                             'Liên hệ với',
-                            style: GoogleFonts.raleway(
+                            style: GoogleFonts.almarai(
                               textStyle: const TextStyle(
                                 color: ColorPalette.blueBold2,
                                 fontSize: 16,
@@ -163,7 +163,7 @@ class _AboutUsState extends State<AboutUs> {
                           ),
                           Text(
                             ' Lumos',
-                            style: GoogleFonts.raleway(
+                            style: GoogleFonts.almarai(
                               textStyle: const TextStyle(
                                 color: ColorPalette.blueBold2,
                                 fontSize: 16,

@@ -9,13 +9,13 @@ class MyButtonBill extends StatelessWidget {
   final Function()? onPressed;
 
   const MyButtonBill({
-    Key? key,
+    super.key,
     required this.text,
     required this.leftIcon,
     required this.rightIcon,
     required this.onPressed,
     required this.money,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

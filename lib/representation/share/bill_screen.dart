@@ -97,6 +97,17 @@ class _BillScreenState extends State<BillScreen> {
                             fontSize: 15,
                             fontWeight: FontWeight.normal,
                           ),
+                          textAlign: TextAlign.right,
+                        ),
+                        Text(
+                          "đ",
+                          style: GoogleFonts.almarai(
+                            textStyle: const TextStyle(
+                                color: ColorPalette.blueBold2,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16),
+                          ),
+                          textAlign: TextAlign.right,
                         ),
                       ],
                     ),

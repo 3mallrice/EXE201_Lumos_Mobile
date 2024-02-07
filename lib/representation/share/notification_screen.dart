@@ -72,7 +72,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     ),
                     title: Text(
                       item,
-                      style: GoogleFonts.raleway(
+                      style: GoogleFonts.almarai(
                         textStyle: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,

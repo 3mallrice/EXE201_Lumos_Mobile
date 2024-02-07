@@ -9,6 +9,7 @@ import 'package:exe201_lumos_mobile/representation/member/member_bill_detail.dar
 import 'package:exe201_lumos_mobile/representation/member/member_coming_booking.dart';
 import 'package:exe201_lumos_mobile/representation/member/member_home.dart';
 import 'package:exe201_lumos_mobile/representation/member/member_main_navbar.dart';
+import 'package:exe201_lumos_mobile/representation/member/partner_service_list.dart';
 import 'package:exe201_lumos_mobile/representation/member/payment_method.dart';
 import 'package:exe201_lumos_mobile/representation/member/search_booking.dart';
 import 'package:exe201_lumos_mobile/representation/share/about_lumos.dart';
@@ -41,4 +42,5 @@ final Map<String, WidgetBuilder> routes = {
   MemberAddress.routeName: (context) => const MemberAddress(),
   SearchBooking.routeName: (context) => const SearchBooking(),
   BillDetail.routeName: (context) => const BillDetail(),
+  PartnerServiceList.routeName: (context) => const PartnerServiceList(),
 };

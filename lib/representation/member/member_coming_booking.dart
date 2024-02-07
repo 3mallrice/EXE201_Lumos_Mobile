@@ -164,7 +164,7 @@ class _MemberBookingState extends State<MemberComingBooking> {
                               for (var service in booking.services)
                                 Text(
                                   service,
-                                  style: GoogleFonts.raleway(
+                                  style: GoogleFonts.almarai(
                                     textStyle: const TextStyle(
                                       color: ColorPalette.blueBold2,
                                       fontWeight: FontWeight.w600,

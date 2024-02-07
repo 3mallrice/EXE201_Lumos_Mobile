@@ -1,5 +1,6 @@
 import 'package:exe201_lumos_mobile/component/app_bar.dart';
 import 'package:exe201_lumos_mobile/core/const/color_const.dart';
+import 'package:exe201_lumos_mobile/representation/member/partner_service_list.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
@@ -104,7 +105,7 @@ class SearchList extends StatelessWidget {
           children: [
             InkWell(
               onTap: () {
-                //Navigator.of(context).pushNamed(MedicalReportDetail.routeName);
+                Navigator.of(context).pushNamed(PartnerServiceList.routeName);
               },
               child: ListTile(
                 title: Column(
@@ -112,7 +113,7 @@ class SearchList extends StatelessWidget {
                   children: [
                     Text(
                       item,
-                      style: GoogleFonts.raleway(
+                      style: GoogleFonts.almarai(
                         textStyle: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
@@ -121,7 +122,7 @@ class SearchList extends StatelessWidget {
                     ),
                     Text(
                       '20-22 Dương Quang Trung, Phường 12, Quận 10, TP.HCM',
-                      style: GoogleFonts.raleway(
+                      style: GoogleFonts.almarai(
                         textStyle: const TextStyle(
                           fontWeight: FontWeight.normal,
                           fontSize: 16,
@@ -151,7 +152,7 @@ class SearchList extends StatelessWidget {
                                     children: [
                                       Text(
                                         item2,
-                                        style: GoogleFonts.raleway(
+                                        style: GoogleFonts.almarai(
                                           textStyle: const TextStyle(
                                             fontWeight: FontWeight.normal,
                                             fontSize: 12,
@@ -183,7 +184,7 @@ class SearchList extends StatelessWidget {
                                           ),
                                           Text(
                                             '80 lượt đã đặt',
-                                            style: GoogleFonts.raleway(
+                                            style: GoogleFonts.almarai(
                                               fontSize: 10,
                                               color: ColorPalette.blueBold2,
                                             ),
