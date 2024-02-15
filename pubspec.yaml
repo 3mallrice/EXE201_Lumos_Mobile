@@ -57,6 +57,7 @@ dependencies:
   flutter_rating_stars: ^1.0.3+4
   rich_readmore: ^1.1.1
   fdottedline_nullsafety: ^2.0.1
+  http: ^1.1.0
 
 flutter_launcher_icons:
   android: "launcher_icon"
