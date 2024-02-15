@@ -172,7 +172,6 @@ class _LoginState extends State<Login> {
                               onTap: onPressedLogin,
                               borderRadius: 66.5,
                               height: 55,
-                              text: 'Login',
                               color: ColorPalette.pink,
                               widget: const Text(
                                 'Đăng nhập',
@@ -192,7 +191,6 @@ class _LoginState extends State<Login> {
                               onTap: onPressedLogin,
                               borderRadius: 66.5,
                               height: 55,
-                              text: 'Login',
                               color: ColorPalette.white,
                               borderColor: ColorPalette.primaryText,
                               widget: Row(

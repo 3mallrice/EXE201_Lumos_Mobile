@@ -96,7 +96,6 @@ class _AccountScreenState extends State<AccountScreen> {
                           Navigator.of(context)
                               .pushNamed(MemberAddress.routeName);
                         },
-                        text: 'Đăng xuất',
                         color: ColorPalette.blue,
                         borderRadius: 66.50,
                         widget: const Text(

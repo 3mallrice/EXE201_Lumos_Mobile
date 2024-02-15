@@ -21,6 +21,8 @@ import 'package:exe201_lumos_mobile/representation/splash_screen.dart';
 import 'package:exe201_lumos_mobile/sign_up.dart';
 import 'package:flutter/material.dart';
 
+import 'representation/member/member_booking.dart';
+
 final Map<String, WidgetBuilder> routes = {
   SplashScreen.routeName: (context) => const SplashScreen(),
   IntroScreen.routeName: (context) => const IntroScreen(),
@@ -43,4 +45,5 @@ final Map<String, WidgetBuilder> routes = {
   SearchBooking.routeName: (context) => const SearchBooking(),
   BillDetail.routeName: (context) => const BillDetail(),
   PartnerServiceList.routeName: (context) => const PartnerServiceList(),
+  BookingPage.routeName: (context) => const BookingPage(),
 };

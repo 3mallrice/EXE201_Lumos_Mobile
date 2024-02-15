@@ -7,7 +7,6 @@ class MyButton extends StatelessWidget {
   final Color? borderColor;
   final double? height;
   final double? width;
-  final String text;
   final Color color;
   final Widget widget;
 
@@ -18,7 +17,6 @@ class MyButton extends StatelessWidget {
     this.height,
     this.width,
     required this.borderRadius,
-    required this.text,
     required this.color,
     required this.widget,
   });

@@ -1,3 +1,4 @@
+import 'package:exe201_lumos_mobile/representation/member/member_booking.dart';
 import 'package:flutter/material.dart';
 import 'package:exe201_lumos_mobile/component/app_bar.dart';
 import 'package:exe201_lumos_mobile/core/const/color_const.dart';
@@ -9,7 +10,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:rich_readmore/rich_readmore.dart';
 
 class PartnerServiceList extends StatefulWidget {
-  const PartnerServiceList({Key? key});
+  const PartnerServiceList({super.key});
 
   static String routeName = '/partner_service_list';
 
@@ -20,70 +21,173 @@ class PartnerServiceList extends StatefulWidget {
 class _PartnerServiceListState extends State<PartnerServiceList> {
   bool _isFavorited = false;
 
+  List<Service> services = [
+    Service(
+      name: 'Điều trị nha khoa',
+      executionTime: '60',
+      description: 'Dịch vụ chăm sóc và điều trị nha khoa chuyên sâu.',
+      price: 200.0,
+    ),
+    Service(
+      name: 'Kiểm tra mắt',
+      executionTime: '30',
+      description:
+          'Kiểm tra mắt chuyên sâu với các bước đo chính xác và hiện đại.',
+      price: 150.0,
+    ),
+    Service(
+      name: 'Masage thư giãn',
+      executionTime: '45',
+      description: 'Dịch vụ masage thư giãn giúp giảm căng thẳng và mệt mỏi.',
+      price: 120.0,
+    ),
+    Service(
+      name: 'Điều trị nha khoa',
+      executionTime: '60',
+      description: 'Dịch vụ chăm sóc và điều trị nha khoa chuyên sâu.',
+      price: 200.0,
+    ),
+    Service(
+      name: 'Kiểm tra mắt',
+      executionTime: '30',
+      description:
+          'Kiểm tra mắt chuyên sâu với các bước đo chính xác và hiện đại.',
+      price: 150.0,
+    ),
+    Service(
+      name: 'Masage thư giãn',
+      executionTime: '45',
+      description: 'Dịch vụ masage thư giãn giúp giảm căng thẳng và mệt mỏi.',
+      price: 120.0,
+    ),
+    Service(
+      name: 'Điều trị nha khoa',
+      executionTime: '60',
+      description:
+          'Dịch vụ chăm sóc và điều trị nha khoa chuyên sâu. Kiểm tra mắt chuyên sâu với các bước đo chính xác và hiện đại. Kiểm tra mắt chuyên sâu với các bước đo chính xác và hiện đại.',
+      price: 200.0,
+    ),
+    Service(
+      name: 'Kiểm tra mắt',
+      executionTime: '30',
+      description:
+          'Kiểm tra mắt chuyên sâu với các bước đo chính xác và hiện đại. Kiểm tra mắt chuyên sâu với các bước đo chính xác và hiện đại. Kiểm tra mắt chuyên sâu với các bước đo chính xác và hiện đại.',
+      price: 150.0,
+    ),
+    Service(
+      name: 'Masage thư giãn',
+      executionTime: '45',
+      description:
+          'Dịch vụ masage thư giãn giúp giảm căng thẳng và mệt mỏi. Kiểm tra mắt chuyên sâu với các bước đo chính xác và hiện đại. Kiểm tra mắt chuyên sâu với các bước đo chính xác và hiện đại.',
+      price: 120.0,
+    ),
+  ];
+
+  List<String> patientList = [
+    "Nguyễn Vũ Hồng Hoa",
+    "Bùi Hữu Phúc",
+    "Bùi Hữu Đức",
+    "Lê Thị Diễm Trinh",
+    "Bùi Thanh Tú",
+    "Nguyễn Văn Tiến",
+    "Lương Tuyết Trang"
+  ];
+
+  void Function()? onTap() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: ColorPalette.blue2,
+          alignment: Alignment.center,
+          title: Text(
+            'Chọn bệnh nhân',
+            style: GoogleFonts.almarai(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: ColorPalette.blueBold2,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          content: SizedBox(
+            width: double.maxFinite,
+            height: 300,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(22),
+                color: ColorPalette.thirdWhite,
+              ),
+              child: ListView.builder(
+                itemCount: patientList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Column(
+                    children: [
+                      ListTile(
+                        title: Text(
+                          patientList[index],
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
+                        contentPadding:
+                            const EdgeInsets.symmetric(horizontal: 20),
+                        leading: const Icon(
+                          Icons.medical_services,
+                          size: 20,
+                          color: ColorPalette.pink,
+                        ),
+                        titleTextStyle: GoogleFonts.almarai(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                          color: ColorPalette.blueBold2,
+                        ),
+                        onTap: () {
+                          Navigator.of(context).pop(patientList[index]);
+                        },
+                      ),
+                      if (index < patientList.length - 1)
+                        const Divider(
+                          thickness: 0.7,
+                          height: 2,
+                          color: ColorPalette.blue2,
+                        ),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ),
+          actions: [
+            Container(
+              width: 97,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: ColorPalette.pink,
+              ),
+              child: TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text(
+                  'HỦY',
+                  style: GoogleFonts.almarai(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: ColorPalette.white,
+                  ),
+                ),
+              ),
+            ),
+          ],
+          actionsAlignment: MainAxisAlignment.center,
+          elevation: 2,
+        );
+      },
+    );
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
-    List<Service> services = [
-      Service(
-        name: 'Điều trị nha khoa',
-        executionTime: '60',
-        description: 'Dịch vụ chăm sóc và điều trị nha khoa chuyên sâu.',
-        price: 200.0,
-      ),
-      Service(
-        name: 'Kiểm tra mắt',
-        executionTime: '30',
-        description:
-            'Kiểm tra mắt chuyên sâu với các bước đo chính xác và hiện đại.',
-        price: 150.0,
-      ),
-      Service(
-        name: 'Masage thư giãn',
-        executionTime: '45',
-        description: 'Dịch vụ masage thư giãn giúp giảm căng thẳng và mệt mỏi.',
-        price: 120.0,
-      ),
-      Service(
-        name: 'Điều trị nha khoa',
-        executionTime: '60',
-        description: 'Dịch vụ chăm sóc và điều trị nha khoa chuyên sâu.',
-        price: 200.0,
-      ),
-      Service(
-        name: 'Kiểm tra mắt',
-        executionTime: '30',
-        description:
-            'Kiểm tra mắt chuyên sâu với các bước đo chính xác và hiện đại.',
-        price: 150.0,
-      ),
-      Service(
-        name: 'Masage thư giãn',
-        executionTime: '45',
-        description: 'Dịch vụ masage thư giãn giúp giảm căng thẳng và mệt mỏi.',
-        price: 120.0,
-      ),
-      Service(
-        name: 'Điều trị nha khoa',
-        executionTime: '60',
-        description:
-            'Dịch vụ chăm sóc và điều trị nha khoa chuyên sâu. Kiểm tra mắt chuyên sâu với các bước đo chính xác và hiện đại. Kiểm tra mắt chuyên sâu với các bước đo chính xác và hiện đại.',
-        price: 200.0,
-      ),
-      Service(
-        name: 'Kiểm tra mắt',
-        executionTime: '30',
-        description:
-            'Kiểm tra mắt chuyên sâu với các bước đo chính xác và hiện đại. Kiểm tra mắt chuyên sâu với các bước đo chính xác và hiện đại. Kiểm tra mắt chuyên sâu với các bước đo chính xác và hiện đại.',
-        price: 150.0,
-      ),
-      Service(
-        name: 'Masage thư giãn',
-        executionTime: '45',
-        description:
-            'Dịch vụ masage thư giãn giúp giảm căng thẳng và mệt mỏi. Kiểm tra mắt chuyên sâu với các bước đo chính xác và hiện đại. Kiểm tra mắt chuyên sâu với các bước đo chính xác và hiện đại.',
-        price: 120.0,
-      ),
-    ];
-
     return Scaffold(
       appBar: AppBarCom(
         appBarText: 'Dịch vụ',
@@ -107,7 +211,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                 color: ColorPalette.blueBold2,
               ),
               onPressed: () {
-                print('Search');
+                Navigator.of(context).pushNamed(BookingPage.routeName);
               },
             ),
           ),
@@ -115,12 +219,10 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
       ),
       body: ListView(
         children: [
-          Container(
-            child: Image.asset(
-              AssetHelper.partnerImage,
-              fit: BoxFit.fill,
-              alignment: Alignment.center,
-            ),
+          Image.asset(
+            AssetHelper.partnerImage,
+            fit: BoxFit.fill,
+            alignment: Alignment.center,
           ),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -208,7 +310,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                 return Column(
                   children: [
                     InkWell(
-                      onTap: () {},
+                      onTap: onTap,
                       child: ListTile(
                         leading: const Icon(
                           Icons.medical_services,
@@ -254,10 +356,8 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                                       trimLines: 3,
                                       trimCollapsedText: 'Xem thêm',
                                       trimExpandedText: 'Rút gọn',
-                                      onPressReadMore: () {},
-                                      onPressReadLess: () {
-                                        /// specific method to be called on press to show less
-                                      },
+                                      // onPressReadMore: () {},
+                                      // onPressReadLess: () {},
                                       lessStyle: GoogleFonts.almarai(
                                         fontSize: 16,
                                         fontWeight: FontWeight.normal,
