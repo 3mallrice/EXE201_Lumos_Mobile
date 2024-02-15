@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MemberHome extends StatefulWidget {
-  const MemberHome({Key? key}) : super(key: key);
+  const MemberHome({super.key});
 
   static String routeName = '/member_home';
 
@@ -16,7 +16,7 @@ class MemberHome extends StatefulWidget {
 class _MemberHomeState extends State<MemberHome> {
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
+    // double screenWidth = MediaQuery.of(context).size.width;
     return PopScope(
       canPop: false,
       child: Scaffold(

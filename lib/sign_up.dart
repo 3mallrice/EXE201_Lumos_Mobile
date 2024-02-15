@@ -228,7 +228,6 @@ class _SignUpState extends State<SignUp> {
                               onTap: onPressedLogin,
                               borderRadius: 66.5,
                               height: 55,
-                              text: 'Đăng ký',
                               color: ColorPalette.pink,
                               widget: const Text(
                                 'Hoàn Thành',

@@ -4,6 +4,7 @@ import 'package:exe201_lumos_mobile/component/app_bar.dart';
 import 'package:exe201_lumos_mobile/core/const/color_const.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class MedicalReportAdd extends StatefulWidget {
@@ -45,16 +46,27 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
+      currentDate: DateTime.now(),
+      locale: const Locale("vi", "VN"),
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
       initialDate: selectedDate,
       firstDate: DateTime(1920),
       lastDate: DateTime.now(),
+      //theme
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            colorScheme: const ColorScheme.light(
+              primary: ColorPalette.pink, // Màu chính của DatePicker
+              onPrimary: ColorPalette.white, // Màu chữ trên nút xác nhận
+              surface: ColorPalette.blue2, // Màu nền của DatePicker
+              onSurface: ColorPalette.blueBold2, // Màu chữ trên nền DatePicker
+            ),
+          ),
+          child: child!,
+        );
+      },
     );
-
-    if (picked != null && picked != selectedDate) {
-      setState(() {
-        selectedDate = picked;
-      });
-    }
 
     if (picked != null && picked != selectedDate) {
       setState(() {
@@ -74,7 +86,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
       ),
       body: Align(
         alignment: Alignment.topCenter,
-        child: Container(
+        child: SizedBox(
           width: screenWidth * 0.9,
           height: double.infinity,
           child: SingleChildScrollView(
@@ -83,27 +95,27 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
               children: [
                 Container(
                   margin: const EdgeInsets.only(top: 20),
-                  child: const Text(
+                  child: Text(
                     'Tạo mới hồ sơ bệnh nhân',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: GoogleFonts.almarai(
                       fontWeight: FontWeight.w600,
                       fontSize: 24,
-                      fontFamily: 'Raleway',
                       color: ColorPalette.blueBold2,
                     ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
                   ),
                 ),
                 const SizedBox(height: 15),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'Họ và tên',
-                      style: TextStyle(
+                      style: GoogleFonts.almarai(
                         fontWeight: FontWeight.normal,
                         fontSize: 16,
-                        fontFamily: 'Raleway',
                         color: ColorPalette.blueBold2,
                       ),
                     ),
@@ -112,7 +124,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                       maxLength: 20,
                       decoration: InputDecoration(
                         hintText: 'Nguyễn Văn A',
-                        hintStyle: TextStyle(
+                        hintStyle: GoogleFonts.almarai(
                           color: ColorPalette.blueBold2.withOpacity(0.65),
                         ),
                         filled: true,
@@ -132,7 +144,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                           ),
                         ),
                       ),
-                      style: TextStyle(
+                      style: GoogleFonts.almarai(
                         color: ColorPalette.blueBold2.withOpacity(0.65),
                       ),
                     )
@@ -146,12 +158,11 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             'Danh xưng',
-                            style: TextStyle(
+                            style: GoogleFonts.almarai(
                               fontWeight: FontWeight.normal,
                               fontSize: 16,
-                              fontFamily: 'Raleway',
                               color: ColorPalette.blueBold2,
                             ),
                           ),
@@ -164,12 +175,12 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                               log('changing value to: $value');
                             },
                             decoration: CustomDropdownDecoration(
-                              headerStyle: TextStyle(
+                              headerStyle: GoogleFonts.almarai(
                                 color: ColorPalette.blueBold2.withOpacity(0.65),
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
                               ),
-                              hintStyle: TextStyle(
+                              hintStyle: GoogleFonts.almarai(
                                 color: ColorPalette.blueBold2.withOpacity(0.65),
                               ),
                               closedFillColor: ColorPalette.secondaryWhite,
@@ -196,12 +207,11 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             'Giới tính',
-                            style: TextStyle(
+                            style: GoogleFonts.almarai(
                               fontWeight: FontWeight.normal,
                               fontSize: 16,
-                              fontFamily: 'Raleway',
                               color: ColorPalette.blueBold2,
                             ),
                           ),
@@ -214,12 +224,12 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                               log('changing value to: $value');
                             },
                             decoration: CustomDropdownDecoration(
-                              headerStyle: TextStyle(
+                              headerStyle: GoogleFonts.almarai(
                                 color: ColorPalette.blueBold2.withOpacity(0.65),
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
                               ),
-                              hintStyle: TextStyle(
+                              hintStyle: GoogleFonts.almarai(
                                 color: ColorPalette.blueBold2.withOpacity(0.65),
                               ),
                               closedFillColor: ColorPalette.secondaryWhite,
@@ -251,12 +261,11 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             'Ngày sinh',
-                            style: TextStyle(
+                            style: GoogleFonts.almarai(
                               fontWeight: FontWeight.normal,
                               fontSize: 16,
-                              fontFamily: 'Raleway',
                               color: ColorPalette.blueBold2,
                             ),
                           ),
@@ -281,7 +290,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                                   const SizedBox(width: 8.0),
                                   Text(
                                     formattedDate,
-                                    style: TextStyle(
+                                    style: GoogleFonts.almarai(
                                       color: ColorPalette.blueBold2
                                           .withOpacity(0.65),
                                       fontSize: 16,
@@ -300,12 +309,11 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             'Nhóm máu',
-                            style: TextStyle(
+                            style: GoogleFonts.almarai(
                               fontWeight: FontWeight.normal,
                               fontSize: 16,
-                              fontFamily: 'Raleway',
                               color: ColorPalette.blueBold2,
                             ),
                           ),
@@ -318,12 +326,12 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                               log('changing value to: $value');
                             },
                             decoration: CustomDropdownDecoration(
-                              headerStyle: TextStyle(
+                              headerStyle: GoogleFonts.almarai(
                                 color: ColorPalette.blueBold2.withOpacity(0.65),
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
                               ),
-                              hintStyle: TextStyle(
+                              hintStyle: GoogleFonts.almarai(
                                 color: ColorPalette.blueBold2.withOpacity(0.65),
                               ),
                               closedFillColor: ColorPalette.secondaryWhite,
@@ -351,12 +359,11 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'Số điện thoại',
-                      style: TextStyle(
+                      style: GoogleFonts.almarai(
                         fontWeight: FontWeight.normal,
                         fontSize: 16,
-                        fontFamily: 'Raleway',
                         color: ColorPalette.blueBold2,
                       ),
                     ),
@@ -365,7 +372,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                       maxLength: 10,
                       decoration: InputDecoration(
                         hintText: '0912345678',
-                        hintStyle: TextStyle(
+                        hintStyle: GoogleFonts.almarai(
                           color: ColorPalette.blueBold2.withOpacity(0.65),
                         ),
                         filled: true,
@@ -385,7 +392,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                           ),
                         ),
                       ),
-                      style: TextStyle(
+                      style: GoogleFonts.almarai(
                         color: ColorPalette.blueBold2.withOpacity(0.65),
                       ),
                     )
@@ -395,12 +402,11 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'Ghi chú',
-                      style: TextStyle(
+                      style: GoogleFonts.almarai(
                         fontWeight: FontWeight.normal,
                         fontSize: 16,
-                        fontFamily: 'Raleway',
                         color: ColorPalette.blueBold2,
                       ),
                     ),
@@ -410,7 +416,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                         maxLength: 255,
                         decoration: InputDecoration(
                           hintText: 'Nhập ghi chú...',
-                          hintStyle: TextStyle(
+                          hintStyle: GoogleFonts.almarai(
                             color: ColorPalette.blueBold2.withOpacity(0.65),
                           ),
                           filled: true,
@@ -430,9 +436,10 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                             ),
                           ),
                         ),
-                        style: TextStyle(
+                        style: GoogleFonts.almarai(
                           color: ColorPalette.blueBold2.withOpacity(0.65),
                         ),
+                        textAlign: TextAlign.justify,
                       ),
                     ),
                   ],
@@ -455,12 +462,11 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
               padding: const EdgeInsets.all(12),
               minimumSize: const Size(100, 40),
             ),
-            child: const Text(
+            child: Text(
               'Lưu',
-              style: TextStyle(
+              style: GoogleFonts.almarai(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
-                fontFamily: 'Raleway',
                 color: ColorPalette.secondaryWhite,
               ),
             ),

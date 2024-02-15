@@ -140,7 +140,6 @@ class _UpdateAccountState extends State<UpdateAccount> {
               onTap: onPressedLogin,
               borderRadius: 66.5,
               height: 55,
-              text: 'Xong',
               color: ColorPalette.pink,
               widget: const Text(
                 'Xong',
