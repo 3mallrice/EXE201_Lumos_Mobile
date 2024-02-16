@@ -1,7 +1,6 @@
 import 'package:exe201_lumos_mobile/core/const/error_reponse.dart';
 import 'package:exe201_lumos_mobile/login.dart';
 import 'package:exe201_lumos_mobile/representation/member/medical_report.dart';
-import 'package:exe201_lumos_mobile/representation/member/member_address.dart';
 import 'package:flutter/material.dart';
 import 'package:exe201_lumos_mobile/component/app_bar.dart';
 import 'package:exe201_lumos_mobile/component/my_button.dart';
