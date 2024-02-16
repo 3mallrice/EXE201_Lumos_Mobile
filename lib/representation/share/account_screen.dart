@@ -1,3 +1,5 @@
+import 'package:exe201_lumos_mobile/core/const/error_reponse.dart';
+import 'package:exe201_lumos_mobile/login.dart';
 import 'package:exe201_lumos_mobile/representation/member/medical_report.dart';
 import 'package:exe201_lumos_mobile/representation/member/member_address.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,11 @@ import 'package:exe201_lumos_mobile/core/helper/asset_helper.dart';
 import 'package:exe201_lumos_mobile/representation/share/about_lumos.dart';
 import 'package:exe201_lumos_mobile/representation/share/account_update.dart';
 import 'package:exe201_lumos_mobile/representation/share/bill_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:logger/logger.dart';
+
+import '../../api_services/authentication_service.dart';
+import '../../component/alert_dialog.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -21,6 +28,63 @@ class AccountScreen extends StatefulWidget {
 }
 
 class _AccountScreenState extends State<AccountScreen> {
+  final CallAuthenticationApi _api = CallAuthenticationApi();
+  var log = Logger();
+
+  backToLoginPage() {
+    Navigator.of(context).pushNamed(Login.routeName);
+  }
+
+  void _showLogoutConfirmationDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return CustomAlertDialog(
+          title: Text(
+            OnSignOutMessage.signOutTitle,
+            style: GoogleFonts.almarai(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+              color: ColorPalette.blueBold2,
+            ),
+          ),
+          message: Text(
+            OnSignOutMessage.signOutMessage,
+            style: GoogleFonts.almarai(
+              fontSize: 16,
+              color: ColorPalette.primaryText,
+            ),
+          ),
+          onConfirm: () {
+            Navigator.of(context).pop();
+            onLogout();
+          },
+          confirmText: OnSignOutMessage.signOutConfirm,
+          action: TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text(
+              OnSignOutMessage.signOutCancel,
+              style: GoogleFonts.almarai(
+                color: ColorPalette.primaryText,
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  onLogout() async {
+    try {
+      await _api.signOut();
+      backToLoginPage();
+    } catch (e) {
+      log.e(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,10 +156,7 @@ class _AccountScreenState extends State<AccountScreen> {
                       ),
                       const SizedBox(height: 30),
                       MyButton(
-                        onTap: () {
-                          Navigator.of(context)
-                              .pushNamed(MemberAddress.routeName);
-                        },
+                        onTap: _showLogoutConfirmationDialog,
                         color: ColorPalette.blue,
                         borderRadius: 66.50,
                         widget: const Text(
