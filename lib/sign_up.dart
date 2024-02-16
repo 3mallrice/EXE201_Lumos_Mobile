@@ -39,7 +39,9 @@ class _SignUpState extends State<SignUp> {
 
   onPressedLogin() async {
     // Lấy email và password từ text field
+    // ignore: unused_local_variable
     String email = emailController.text;
+    // ignore: unused_local_variable
     String password = passwordController.text;
 
     Navigator.of(context).pushNamed(Login.routeName);
