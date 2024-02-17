@@ -21,6 +21,7 @@ class LoginResponse {
   final String accessTokenExpiration;
   final String refreshToken;
   final String refreshTokenExpiration;
+  final UserDetails userDetails;
 
   LoginResponse({
     required this.username,
@@ -28,6 +29,7 @@ class LoginResponse {
     required this.accessTokenExpiration,
     required this.refreshToken,
     required this.refreshTokenExpiration,
+    required this.userDetails,
   });
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) {
@@ -37,6 +39,45 @@ class LoginResponse {
       accessTokenExpiration: json['accessTokenExpiration'],
       refreshToken: json['refreshToken'],
       refreshTokenExpiration: json['refreshTokenExpiration'],
+      userDetails: UserDetails.fromJson(json['userdetails']),
+    );
+  }
+}
+
+class UserDetails {
+  final String email;
+  final String code;
+  final int role;
+  final int status;
+  final String createdDate;
+  final String? createdBy;
+  final String lastUpdate;
+  final String updatedBy;
+  final String imgUrl;
+
+  UserDetails({
+    required this.email,
+    required this.code,
+    required this.role,
+    required this.status,
+    required this.createdDate,
+    this.createdBy,
+    required this.lastUpdate,
+    required this.updatedBy,
+    required this.imgUrl,
+  });
+
+  factory UserDetails.fromJson(Map<String, dynamic> json) {
+    return UserDetails(
+      email: json['email'],
+      code: json['code'],
+      role: json['role'],
+      status: json['status'],
+      createdDate: json['createdDate'],
+      createdBy: json['createdBy'],
+      lastUpdate: json['lastUpdate'],
+      updatedBy: json['updatedBy'],
+      imgUrl: json['imgUrl'],
     );
   }
 }

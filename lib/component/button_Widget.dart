@@ -1,6 +1,7 @@
-import 'package:exe201_lumos_mobile/core/const/color_const.dart';
-import 'package:exe201_lumos_mobile/core/const/textstyle_const.dart';
 import 'package:flutter/material.dart';
+
+import '../core/const/front-end/color_const.dart';
+import '../core/const/front-end/textstyle_const.dart';
 
 class ButtonWidget extends StatelessWidget {
   const ButtonWidget({super.key, required this.title, this.ontap});

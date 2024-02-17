@@ -1,11 +1,11 @@
-import 'package:exe201_lumos_mobile/component/app_bar.dart';
-import 'package:exe201_lumos_mobile/component/my_button.dart';
+import '../../component/app_bar.dart';
+import '../../component/my_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
-import '../../core/const/color_const.dart';
+import '../../core/const/front-end/color_const.dart';
 
 class BookingPage extends StatefulWidget {
   const BookingPage({super.key});

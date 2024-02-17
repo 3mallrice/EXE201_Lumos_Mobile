@@ -1,8 +1,8 @@
-import 'package:exe201_lumos_mobile/representation/member/member_booking.dart';
+import 'member_booking.dart';
 import 'package:flutter/material.dart';
-import 'package:exe201_lumos_mobile/component/app_bar.dart';
-import 'package:exe201_lumos_mobile/core/const/color_const.dart';
-import 'package:exe201_lumos_mobile/core/helper/asset_helper.dart';
+import '../../component/app_bar.dart';
+import '../../core/const/front-end/color_const.dart';
+import '../../core/helper/asset_helper.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
 import 'package:google_fonts/google_fonts.dart';

@@ -1,12 +1,14 @@
-import 'package:exe201_lumos_mobile/api_model/authentication/login.dart';
+import 'package:exe201_lumos_mobile/core/const/back-end/role.dart';
+
+import 'api_model/authentication/login.dart';
 import 'package:flutter/material.dart';
-import 'package:exe201_lumos_mobile/sign_up.dart';
-import 'package:exe201_lumos_mobile/core/const/color_const.dart';
-import 'package:exe201_lumos_mobile/api_services/authentication_service.dart';
-import 'package:exe201_lumos_mobile/component/my_button.dart';
-import 'package:exe201_lumos_mobile/component/my_textfield.dart';
-import 'package:exe201_lumos_mobile/core/const/error_reponse.dart';
-import 'package:exe201_lumos_mobile/core/helper/image_helper.dart';
+import 'sign_up.dart';
+import 'core/const/front-end/color_const.dart';
+import 'api_services/authentication_service.dart';
+import 'component/my_button.dart';
+import 'component/my_textfield.dart';
+import 'core/const/back-end/error_reponse.dart';
+import 'core/helper/image_helper.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:logger/logger.dart';
@@ -25,7 +27,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  bool isLoading = false;
+  bool isLoggingIn = false;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final CallAuthenticationApi authApi = CallAuthenticationApi();
@@ -94,8 +96,7 @@ class _LoginState extends State<Login> {
 
   onPressedLogin() async {
     setState(() {
-      isLoading =
-          true; // Đặt isLoading thành true để hiển thị circular loading trên nút đăng nhập
+      isLoggingIn = true;
     });
 
     String email = emailController.text.toLowerCase();
@@ -108,15 +109,20 @@ class _LoginState extends State<Login> {
       }
 
       LoginResponse response = await authApi.login(email, password);
-      onSuccess(response.username);
+      UserDetails userDetails = response.userDetails;
+      if (userDetails.role == Role.customer) {
+        logger.i('Login success: ${response.username}');
+        onSuccess(response.username);
+      } else {
+        throw Exception('Invalid role');
+      }
     } catch (e) {
+      setState(() {
+        isLoggingIn = false;
+      });
+
       logger.e('Login error: $e');
       _showFailDialog();
-    } finally {
-      setState(() {
-        isLoading =
-            false; // Đặt isLoading thành false sau khi kết thúc quá trình xử lý
-      });
     }
   }
 
@@ -252,7 +258,7 @@ class _LoginState extends State<Login> {
                             borderRadius: 66.5,
                             height: 55,
                             color: ColorPalette.pink,
-                            widget: isLoading
+                            widget: isLoggingIn
                                 ? const Center(
                                     child: CircularProgressIndicator(
                                       semanticsLabel: 'Đang đăng nhập',

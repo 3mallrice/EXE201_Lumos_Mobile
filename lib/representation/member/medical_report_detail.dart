@@ -1,6 +1,6 @@
-import 'package:exe201_lumos_mobile/component/app_bar.dart';
-import 'package:exe201_lumos_mobile/core/const/color_const.dart';
-import 'package:exe201_lumos_mobile/representation/member/medical_report_update.dart';
+import '../../component/app_bar.dart';
+import '../../core/const/front-end/color_const.dart';
+import 'medical_report_update.dart';
 import 'package:flutter/material.dart';
 
 class MedicalReportDetail extends StatelessWidget {

@@ -1,6 +1,6 @@
-import 'package:exe201_lumos_mobile/core/const/color_const.dart';
-import 'package:exe201_lumos_mobile/representation/splash_screen.dart';
-import 'package:exe201_lumos_mobile/route.dart';
+import 'core/const/front-end/color_const.dart';
+import 'representation/splash_screen.dart';
+import 'route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';

@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:exe201_lumos_mobile/api_model/authentication/login.dart';
+import '../api_model/authentication/login.dart';
 import 'api_service.dart';
 import 'package:http/http.dart' as http;
 
@@ -15,31 +15,50 @@ class CallAuthenticationApi {
   //request: email, password
   //response: LoginResponse (token, accessTokenExpiration, refreshToken, refreshTokenExpiration)
   Future<LoginResponse> login(String email, String password) async {
-    LoginRequest request = LoginRequest(email: email, password: password);
+    try {
+      LoginRequest request = LoginRequest(email: email, password: password);
 
-    var url = Uri.parse('$api/login');
-    var body = jsonEncode(request.toJson());
+      var url = Uri.parse('$api/login');
+      var body = jsonEncode(request.toJson());
 
-    http.Response response = await http.post(
-      url,
-      headers: {'Content-Type': 'application/json'},
-      body: body,
-    );
+      http.Response response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        body: body,
+      );
 
-    if (response.statusCode == 200) {
-      final responseData = json.decode(response.body);
-      final loginData = responseData['data'];
-      LoginResponse loginResponse = LoginResponse(
+      if (response.statusCode == 200) {
+        final responseData = json.decode(response.body);
+        final loginData = responseData['data'];
+        final userdetailData = loginData['userdetails'];
+        UserDetails userDetails = UserDetails(
+          code: userdetailData['code'],
+          email: userdetailData['email'],
+          role: userdetailData['role'],
+          status: userdetailData['status'],
+          createdDate: userdetailData['createdDate'],
+          createdBy: userdetailData['createdBy'],
+          lastUpdate: userdetailData['lastUpdate'],
+          updatedBy: userdetailData['updatedBy'],
+          imgUrl: userdetailData['imgUrl'],
+        );
+        LoginResponse loginResponse = LoginResponse(
           username: loginData['username'],
           accessTokenExpiration: loginData['accessTokenExpiration'],
           refreshToken: loginData['refreshToken'],
           refreshTokenExpiration: loginData['refreshTokenExpiration'],
-          token: loginData['token']);
-      token = loginResponse.token;
-      return loginResponse;
-    } else {
-      throw Exception(
-          'Failed to login: $response.statusCode - ${response.reasonPhrase}');
+          token: loginData['token'],
+          userDetails: userDetails,
+        );
+        // save login userdetail to
+        token = loginResponse.token;
+        return loginResponse;
+      } else {
+        throw Exception(
+            'Failed to login: ${response.statusCode} - ${response.reasonPhrase}');
+      }
+    } catch (e) {
+      throw Exception('Failed to login: $e');
     }
   }
 

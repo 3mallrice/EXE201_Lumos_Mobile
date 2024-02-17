@@ -1,5 +1,5 @@
-import 'package:exe201_lumos_mobile/core/const/color_const.dart';
 import 'package:flutter/material.dart';
+import '../core/const/front-end/color_const.dart';
 
 class MyButtonBill extends StatelessWidget {
   final String text;
