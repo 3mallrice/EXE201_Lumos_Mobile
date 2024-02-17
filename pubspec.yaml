@@ -60,6 +60,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   http: ^1.1.0
+  typethis: ^1.0.0
 
 flutter_launcher_icons:
   android: "launcher_icon"

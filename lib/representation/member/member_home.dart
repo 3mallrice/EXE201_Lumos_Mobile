@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:exe201_lumos_mobile/core/const/color_const.dart';
 import 'package:exe201_lumos_mobile/core/helper/asset_helper.dart';
 import 'package:exe201_lumos_mobile/representation/member/search_booking.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:typethis/typethis.dart';
 
 class MemberHome extends StatefulWidget {
   const MemberHome({super.key});
@@ -14,6 +17,24 @@ class MemberHome extends StatefulWidget {
 }
 
 class _MemberHomeState extends State<MemberHome> {
+  final TextEditingController _textEditingController = TextEditingController();
+  final List<String> _hintSearch = [
+    "Tìm kiếm",
+    "Bệnh viện Đa khoa Quốc tế Vinmec",
+    "Tắm cho bé"
+  ];
+  int _hintIndex = 0;
+  late Timer _timer;
+  @override
+  void initState() {
+    super.initState();
+
+    // Start a timer to update the hint text every 5 seconds (adjust as needed)
+    _timer = Timer.periodic(const Duration(seconds: 3), (Timer timer) {
+      updateHintText();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // double screenWidth = MediaQuery.of(context).size.width;
@@ -72,29 +93,37 @@ class _MemberHomeState extends State<MemberHome> {
                         Navigator.of(context)
                             .pushNamed(SearchBooking.routeName);
                       },
+                      controller: _textEditingController,
                       decoration: InputDecoration(
-                          hintText: 'Tìm kiếm',
-                          hintStyle: GoogleFonts.almarai(
-                            color: ColorPalette.pink,
+                        hintText: _hintSearch[_hintIndex],
+                        hintStyle: GoogleFonts.almarai(
+                          textStyle: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
+                            color: ColorPalette.pink,
                           ),
-                          prefixIcon: const Icon(Icons.search_rounded),
-                          prefixIconColor: ColorPalette.pink,
-                          filled: true,
-                          fillColor: ColorPalette.secondaryWhite,
-                          focusedBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: ColorPalette.grey2, width: 2.0),
-                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                        ),
+                        prefixIcon: const Icon(Icons.search_rounded),
+                        prefixIconColor: ColorPalette.pink,
+                        filled: true,
+                        fillColor: ColorPalette.secondaryWhite,
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: ColorPalette.grey2, width: 2.0),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(16),
                           ),
-                          enabledBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: ColorPalette.grey2, width: 1.0),
-                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                        ),
+                        enabledBorder: const OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: ColorPalette.grey2, width: 1.0),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(16),
                           ),
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 10)),
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 10),
+                      ),
                     ),
                   ),
                   Row(
@@ -544,6 +573,22 @@ class _MemberHomeState extends State<MemberHome> {
         ),
       ),
     );
+  }
+
+  void updateHintText() {
+    setState(
+      () {
+        _hintIndex = (_hintIndex + 1) % _hintSearch.length;
+        _textEditingController.clear(); // Clear the text when updating the hint
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    // Cancel the timer when the widget is disposed
+    _timer.cancel();
+    super.dispose();
   }
 }
 
