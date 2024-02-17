@@ -23,128 +23,64 @@ class _AboutUsState extends State<AboutUs> {
         appBarText: 'Về chúng tôi',
         leading: true,
       ),
-      body: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
+      body: IntrinsicHeight(
+        child: Container(
+          margin: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            color: ColorPalette.bluelight,
+          ),
+          child: Container(
             margin: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: ColorPalette.bluelight,
-            ),
-            child: ListView(
-              shrinkWrap: true,
-              padding: const EdgeInsets.symmetric(vertical: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
-                  height: 70,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
-                  decoration: const BoxDecoration(
-                    color: ColorPalette.bluelight,
-                    border: Border(
-                      bottom: BorderSide(
-                        color: ColorPalette.secondaryWhite,
-                        width: 2,
+                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  child: Text(
+                    'Trở thành partner',
+                    style: GoogleFonts.almarai(
+                      textStyle: const TextStyle(
+                        color: ColorPalette.blueBold2,
+                        fontSize: 16,
+                        fontWeight: FontWeight.normal,
                       ),
                     ),
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Trở thành partner',
-                        style: GoogleFonts.almarai(
-                          textStyle: const TextStyle(
-                            color: ColorPalette.blueBold2,
-                            fontSize: 16,
-                            // fontFamily: 'verdana',
-                            fontWeight: FontWeight.normal,
-                            height: 0.08,
-                            letterSpacing: 0.10,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
+                const Divider(color: ColorPalette.white),
                 Container(
-                  height: 70,
-                  decoration: const BoxDecoration(
-                    color: ColorPalette.bluelight,
-                    border: Border(
-                      bottom: BorderSide(
-                        color: ColorPalette.secondaryWhite,
-                        width: 2,
+                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  child: Text(
+                    'Licence & Policy',
+                    style: GoogleFonts.almarai(
+                      textStyle: const TextStyle(
+                        color: ColorPalette.blueBold2,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
                   ),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Licence & Policy',
-                        style: GoogleFonts.almarai(
-                          textStyle: const TextStyle(
-                            color: ColorPalette.blueBold2,
-                            fontSize: 16,
-                            // fontFamily: 'verdana',
-                            fontWeight: FontWeight.w400,
-                            height: 0.08,
-                            letterSpacing: 0.10,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
+                const Divider(color: ColorPalette.white),
                 Container(
-                  height: 70,
-                  decoration: const BoxDecoration(
-                    color: ColorPalette.bluelight,
-                    border: Border(
-                      bottom: BorderSide(
-                        color: ColorPalette.secondaryWhite,
-                        width: 2,
+                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  child: Text(
+                    'Lumos.com.vn',
+                    style: GoogleFonts.almarai(
+                      textStyle: const TextStyle(
+                        color: ColorPalette.blueBold2,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Lumos.com.vn',
-                        style: GoogleFonts.almarai(
-                          textStyle: const TextStyle(
-                            color: ColorPalette.blueBold2,
-                            fontSize: 16,
-                            fontFamily: 'verdana',
-                            fontWeight: FontWeight.w700,
-                            height: 0.08,
-                            letterSpacing: 0.10,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
+                const Divider(color: ColorPalette.white),
                 Container(
-                  height: 150,
-                  decoration: const BoxDecoration(
-                    color: ColorPalette.bluelight,
-                  ),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  margin: const EdgeInsets.symmetric(vertical: 10),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Row(
                         children: [
@@ -154,10 +90,7 @@ class _AboutUsState extends State<AboutUs> {
                               textStyle: const TextStyle(
                                 color: ColorPalette.blueBold2,
                                 fontSize: 16,
-                                // fontFamily: 'verdana',
                                 fontWeight: FontWeight.w400,
-                                height: 0.08,
-                                letterSpacing: 0.10,
                               ),
                             ),
                           ),
@@ -167,112 +100,99 @@ class _AboutUsState extends State<AboutUs> {
                               textStyle: const TextStyle(
                                 color: ColorPalette.blueBold2,
                                 fontSize: 16,
-                                // fontFamily: 'verdana',
                                 fontWeight: FontWeight.w700,
-                                height: 0.08,
-                                letterSpacing: 0.10,
                               ),
                             ),
                           ),
                         ],
                       ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 20),
-                        child: Row(
-                          children: [
-                            Container(
-                              height: 52,
-                              width: 52,
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 14, vertical: 8),
-                              decoration: const ShapeDecoration(
-                                color: ColorPalette.blueBold2,
-                                shape: CircleBorder(),
-                              ),
-                              child: IconButton(
-                                onPressed: () {
-                                  // Navigator.of(context).pushNamed(UpdateAccount.routeName);
-                                },
-                                icon: const Icon(
-                                  EvaIcons.facebook,
-                                  size: 35,
-                                ),
-                                color: Colors.white,
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            alignment: Alignment.center,
+                            margin: const EdgeInsets.all(14),
+                            decoration: const ShapeDecoration(
+                              color: ColorPalette.blueBold2,
+                              shape: CircleBorder(),
+                            ),
+                            child: IconButton(
+                              onPressed: () {
+                                // Navigator.of(context).pushNamed(UpdateAccount.routeName);
+                              },
+                              icon: const Icon(
+                                EvaIcons.facebook,
+                                size: 35,
+                                color: ColorPalette.white,
                               ),
                             ),
-                            Container(
-                              height: 52,
-                              width: 52,
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 14, vertical: 8),
-                              decoration: const ShapeDecoration(
-                                color: ColorPalette.blueBold2,
-                                shape: CircleBorder(),
-                              ),
-                              child: IconButton(
-                                padding: const EdgeInsets.only(bottom: 3),
-                                onPressed: () {
-                                  // Navigator.of(context).pushNamed(UpdateAccount.routeName);
-                                },
-                                icon: const Icon(
-                                  Ionicons.logo_youtube,
-                                  size: 35,
-                                ),
-                                color: Colors.white,
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            margin: const EdgeInsets.all(14),
+                            decoration: const ShapeDecoration(
+                              color: ColorPalette.blueBold2,
+                              shape: CircleBorder(),
+                            ),
+                            child: IconButton(
+                              onPressed: () {
+                                // Navigator.of(context).pushNamed(UpdateAccount.routeName);
+                              },
+                              icon: const Icon(
+                                Ionicons.logo_youtube,
+                                size: 35,
+                                color: ColorPalette.white,
                               ),
                             ),
-                            Container(
-                              height: 52,
-                              width: 52,
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 14, vertical: 8),
-                              decoration: const ShapeDecoration(
-                                color: ColorPalette.blueBold2,
-                                shape: CircleBorder(),
-                              ),
-                              child: IconButton(
-                                padding: const EdgeInsets.only(bottom: 2),
-                                onPressed: () {
-                                  // Navigator.of(context).pushNamed(UpdateAccount.routeName);
-                                },
-                                icon: const Icon(
-                                  Ionicons.logo_tiktok,
-                                  size: 30,
-                                  fill: 1,
-                                ),
-                                color: Colors.white,
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            margin: const EdgeInsets.all(14),
+                            decoration: const ShapeDecoration(
+                              color: ColorPalette.blueBold2,
+                              shape: CircleBorder(),
+                            ),
+                            child: IconButton(
+                              onPressed: () {
+                                // Navigator.of(context).pushNamed(UpdateAccount.routeName);
+                              },
+                              icon: const Icon(
+                                Ionicons.logo_tiktok,
+                                size: 35,
+                                color: ColorPalette.white,
                               ),
                             ),
-                            Container(
-                              height: 52,
-                              width: 52,
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 14, vertical: 8),
-                              decoration: const ShapeDecoration(
-                                color: ColorPalette.blueBold2,
-                                shape: CircleBorder(),
-                              ),
-                              child: IconButton(
-                                onPressed: () {
-                                  // Navigator.of(context).pushNamed(UpdateAccount.routeName);
-                                },
-                                icon: const Icon(
-                                  ZaloIcon.group_1000004349,
-                                  size: 30,
-                                ),
-                                color: Colors.white,
+                          ),
+                          Container(
+                            margin: const EdgeInsets.all(14),
+                            alignment: Alignment.center,
+                            decoration: const ShapeDecoration(
+                              color: ColorPalette.blueBold2,
+                              shape: CircleBorder(),
+                            ),
+                            child: IconButton(
+                              onPressed: () {
+                                // Navigator.of(context).pushNamed(UpdateAccount.routeName);
+                              },
+                              icon: const Icon(
+                                ZaloIcon.group_1000004349,
+                                size: 35,
+                                color: ColorPalette.white,
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ),
+                )
               ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }
