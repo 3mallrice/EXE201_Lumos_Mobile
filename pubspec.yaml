@@ -36,9 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   firebase_core: ^2.24.2
   flutter_carousel_intro: ^1.0.3
-  hive: ^2.0.4
   fan_carousel_image_slider: ^0.1.2
-  hive_flutter: ^1.1.0
   pull_to_refresh_flutter3: ^2.0.2
   flutter_scrolling_fab_animated: ^0.1.4
   logger: ^2.0.2+1
@@ -61,6 +59,8 @@ dependencies:
     sdk: flutter
   http: ^1.1.0
   typethis: ^1.0.0
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
 
 flutter_launcher_icons:
   android: "launcher_icon"
@@ -71,7 +71,8 @@ flutter_launcher_icons:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  hive_generator: ^2.0.1
+  build_runner: ^2.4.8
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your

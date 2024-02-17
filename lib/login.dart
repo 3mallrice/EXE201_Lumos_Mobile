@@ -2,6 +2,7 @@ import 'package:exe201_lumos_mobile/core/const/back-end/role.dart';
 
 import 'api_model/authentication/login.dart';
 import 'package:flutter/material.dart';
+import 'core/helper/local_storage_helper.dart';
 import 'sign_up.dart';
 import 'core/const/front-end/color_const.dart';
 import 'api_services/authentication_service.dart';
@@ -62,7 +63,7 @@ class _LoginState extends State<Login> {
 
     Future.delayed(const Duration(seconds: 3));
     //delay 3s to navigate to main screen
-    Navigator.of(context).pushNamed(MemberMain.routeName);
+    Navigator.of(context).pushReplacementNamed(MemberMain.routeName);
   }
 
   void _onEmptyField() {
@@ -111,6 +112,9 @@ class _LoginState extends State<Login> {
       LoginResponse response = await authApi.login(email, password);
       UserDetails userDetails = response.userDetails;
       if (userDetails.role == Role.customer) {
+        //save userDetail in local storage
+        await LocalStorageHelper.setValue("loginedUser", userDetails);
+
         logger.i('Login success: ${response.username}');
         onSuccess(response.username);
       } else {
@@ -157,198 +161,204 @@ class _LoginState extends State<Login> {
       future: _loadImage(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          return Scaffold(
-            backgroundColor: ColorPalette.white,
-            body: Stack(children: [
-              Positioned.fill(
-                child: ImageHelper.loadFormAsset(
-                  AssetHelper.imgSplashBg,
-                  fit: BoxFit.fitWidth,
+          return PopScope(
+            canPop: false,
+            child: Scaffold(
+              backgroundColor: ColorPalette.white,
+              body: Stack(children: [
+                Positioned.fill(
+                  child: ImageHelper.loadFormAsset(
+                    AssetHelper.imgSplashBg,
+                    fit: BoxFit.fitWidth,
+                  ),
                 ),
-              ),
-              SafeArea(
-                child: Center(
-                  child: SingleChildScrollView(
-                    child: FractionallySizedBox(
-                      widthFactor: 0.9,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Transform.scale(
-                            scale: 1.2,
-                            child: Image.asset(AssetHelper.imglogo1),
-                          ),
-                          const Text(
-                            'Đăng nhập',
-                            style: TextStyle(
-                              color: ColorPalette.blue,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 32,
+                SafeArea(
+                  child: Center(
+                    child: SingleChildScrollView(
+                      child: FractionallySizedBox(
+                        widthFactor: 0.9,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const SizedBox(
+                              height: 20,
                             ),
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          MyTextfield(
-                            Controller: emailController,
-                            labelText: 'Email',
-                            hintText: 'a@gmail.com',
-                            floatingLabelBehavior: FloatingLabelBehavior.always,
-                            obscureText: false,
-                            textInputAction: TextInputAction.next,
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          StatefulBuilder(
-                            builder: (context, setState) {
-                              return MyTextfield(
-                                Controller: passwordController,
-                                obscureText: _passwordInVisible,
-                                labelText: 'Mật khẩu',
-                                hintText: 'Mật khẩu của bạn...',
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.always,
-                                textInputAction: TextInputAction.done,
-                                suffixIcon: IconButton(
-                                  icon: Icon(
-                                    _passwordInVisible
-                                        ? Icons.visibility
-                                        : Icons.visibility_off,
-                                    color: ColorPalette.grey,
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      _passwordInVisible = !_passwordInVisible;
-                                    });
-                                  },
-                                ),
-                              );
-                            },
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 40.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                GestureDetector(
-                                  onTap: onTap,
-                                  child: const Text(
-                                    'Quên mật khẩu?',
-                                    style: TextStyle(
-                                        color: ColorPalette.pink,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ],
+                            Transform.scale(
+                              scale: 1.2,
+                              child: Image.asset(AssetHelper.imglogo1),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          MyButton(
-                            onTap: onPressedLogin,
-                            borderRadius: 66.5,
-                            height: 55,
-                            color: ColorPalette.pink,
-                            widget: isLoggingIn
-                                ? const Center(
-                                    child: CircularProgressIndicator(
-                                      semanticsLabel: 'Đang đăng nhập',
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                        ColorPalette.pinkBold,
-                                      ),
+                            const Text(
+                              'Đăng nhập',
+                              style: TextStyle(
+                                color: ColorPalette.blue,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 32,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            MyTextfield(
+                              Controller: emailController,
+                              labelText: 'Email',
+                              hintText: 'a@gmail.com',
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.always,
+                              obscureText: false,
+                              textInputAction: TextInputAction.next,
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            StatefulBuilder(
+                              builder: (context, setState) {
+                                return MyTextfield(
+                                  Controller: passwordController,
+                                  obscureText: _passwordInVisible,
+                                  labelText: 'Mật khẩu',
+                                  hintText: 'Mật khẩu của bạn...',
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.always,
+                                  textInputAction: TextInputAction.done,
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      _passwordInVisible
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
+                                      color: ColorPalette.grey,
                                     ),
-                                  )
-                                : const Text(
-                                    'Đăng nhập',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20,
-                                        color: ColorPalette.white),
+                                    onPressed: () {
+                                      setState(() {
+                                        _passwordInVisible =
+                                            !_passwordInVisible;
+                                      });
+                                    },
                                   ),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          MyButton(
-                            onTap: onGoogleLogin,
-                            borderRadius: 66.5,
-                            height: 55,
-                            color: ColorPalette.white,
-                            borderColor: ColorPalette.primaryText,
-                            widget: Row(
+                                );
+                              },
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 40.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  GestureDetector(
+                                    onTap: onTap,
+                                    child: const Text(
+                                      'Quên mật khẩu?',
+                                      style: TextStyle(
+                                          color: ColorPalette.pink,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            MyButton(
+                              onTap: onPressedLogin,
+                              borderRadius: 66.5,
+                              height: 55,
+                              color: ColorPalette.pink,
+                              widget: isLoggingIn
+                                  ? const Center(
+                                      child: CircularProgressIndicator(
+                                        semanticsLabel: 'Đang đăng nhập',
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                          ColorPalette.pinkBold,
+                                        ),
+                                      ),
+                                    )
+                                  : const Text(
+                                      'Đăng nhập',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                          color: ColorPalette.white),
+                                    ),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            MyButton(
+                              onTap: onGoogleLogin,
+                              borderRadius: 66.5,
+                              height: 55,
+                              color: ColorPalette.white,
+                              borderColor: ColorPalette.primaryText,
+                              widget: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 16.0),
+                                    child: Image.asset(
+                                      AssetHelper.googleLogo,
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 16),
+                                  const Padding(
+                                    padding: EdgeInsets.only(right: 16.0),
+                                    child: Text(
+                                      'Đăng nhập với Google',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 18,
+                                          color: ColorPalette.primaryText),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 100,
+                            ),
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 16.0),
-                                  child: Image.asset(
-                                    AssetHelper.googleLogo,
-                                    fit: BoxFit.fill,
-                                  ),
+                                Text(
+                                  "Chưa có tài khoản? ",
+                                  style: TextStyle(
+                                      color: ColorPalette.blueBold2
+                                          .withOpacity(0.65),
+                                      fontSize: 16),
                                 ),
-                                const SizedBox(width: 16),
-                                const Padding(
-                                  padding: EdgeInsets.only(right: 16.0),
-                                  child: Text(
-                                    'Đăng nhập với Google',
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context)
+                                        .pushNamed(SignUp.routeName);
+                                  },
+                                  child: const Text(
+                                    'Đăng ký',
                                     style: TextStyle(
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 18,
-                                        color: ColorPalette.primaryText),
+                                        fontWeight: FontWeight.bold,
+                                        color: ColorPalette.blueBold2,
+                                        fontSize: 16),
                                   ),
                                 ),
                               ],
                             ),
-                          ),
-                          const SizedBox(
-                            height: 100,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Chưa có tài khoản? ",
-                                style: TextStyle(
-                                    color: ColorPalette.blueBold2
-                                        .withOpacity(0.65),
-                                    fontSize: 16),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context)
-                                      .pushNamed(SignUp.routeName);
-                                },
-                                child: const Text(
-                                  'Đăng ký',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: ColorPalette.blueBold2,
-                                      fontSize: 16),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ]),
+              ]),
+            ),
           );
         } else {
           return Scaffold(
             body: Center(
               child: LoadingAnimationWidget.fourRotatingDots(
-                color: Colors.white,
+                color: ColorPalette.pinkBold,
                 size: 200,
               ),
             ),

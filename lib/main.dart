@@ -9,6 +9,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'core/helper/local_storage_helper.dart';
 
 void main() async {
+  //initiate hive
   await Hive.initFlutter();
   await LocalStorageHelper.initLocalStorageHelper();
 
