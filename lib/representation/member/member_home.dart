@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:exe201_lumos_mobile/core/const/color_const.dart';
-import 'package:exe201_lumos_mobile/core/helper/asset_helper.dart';
-import 'package:exe201_lumos_mobile/representation/member/search_booking.dart';
+import '../../core/const/front-end/color_const.dart';
+import '../../core/helper/asset_helper.dart';
+import 'search_booking.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:typethis/typethis.dart';
 
 class MemberHome extends StatefulWidget {
   const MemberHome({super.key});

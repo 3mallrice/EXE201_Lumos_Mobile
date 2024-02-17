@@ -1,11 +1,11 @@
-import 'package:exe201_lumos_mobile/login.dart';
+import 'login.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import 'component/my_button.dart';
 import 'component/my_textfield.dart';
-import 'core/const/color_const.dart';
+import 'core/const/front-end/color_const.dart';
 import 'core/helper/asset_helper.dart';
 import 'core/helper/image_helper.dart';
 

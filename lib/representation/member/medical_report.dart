@@ -1,40 +1,41 @@
-import 'package:exe201_lumos_mobile/component/app_bar.dart';
-import 'package:exe201_lumos_mobile/core/const/color_const.dart';
-import 'package:exe201_lumos_mobile/representation/member/medical_report_addnew.dart';
-import 'package:exe201_lumos_mobile/representation/member/medical_report_detail.dart';
+import '../../api_model/customer/medical_report.dart';
+import '../../component/app_bar.dart';
+import '../../core/const/front-end/color_const.dart';
+import 'medical_report_addnew.dart';
+import 'medical_report_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class MedicalReport extends StatelessWidget {
-  const MedicalReport({super.key});
+import '../../api_services/customer_service.dart';
+
+class MedicalReportPage extends StatefulWidget {
+  const MedicalReportPage({super.key});
 
   static String routeName = '/medical_report';
 
   @override
+  State<MedicalReportPage> createState() => _MedicalReportPageState();
+}
+
+class _MedicalReportPageState extends State<MedicalReportPage> {
+  @override
   Widget build(BuildContext context) {
-    List<String> _reports = [
-      "Nguyễn Vũ Hồng Hoa",
-      "Bùi Hữu Phúc",
-      "Bùi Hữu Đức",
-      "Lê Thị Diễm Trinh",
-      "Bùi Thanh Tú",
-      "Nguyễn Văn Tiến",
-      "Lương Tuyết Trang",
-      "Nguyễn Vũ Hồng Hoa",
-      "Bùi Hữu Phúc",
-      "Bùi Hữu Đức",
-      "Lê Thị Diễm Trinh",
-      "Bùi Thanh Tú",
-      "Nguyễn Văn Tiến",
-      "Lương Tuyết Trang",
-      "Nguyễn Vũ Hồng Hoa",
-      "Bùi Hữu Phúc",
-      "Bùi Hữu Đức",
-      "Lê Thị Diễm Trinh",
-      "Bùi Thanh Tú",
-      "Nguyễn Văn Tiến",
-      "Lương Tuyết Trang"
-    ];
+    List<String> _reports = [];
+
+    CallCustomerApi api = CallCustomerApi();
+
+    void _fetchMedicalReports() async {
+      try {
+        // Gọi API để lấy danh sách bệnh nhân
+        List<MedicalReport> reports = await api.getMedicalReport(1);
+        List<String> reportNames = reports.map((e) => e.fullname).toList();
+        setState(() {
+          _reports = reportNames; // Cập nhật danh sách bệnh nhân vào State
+        });
+      } catch (e) {
+        // Xử lý lỗi, dont print
+      }
+    }
 
     return Scaffold(
       appBar: const AppBarCom(

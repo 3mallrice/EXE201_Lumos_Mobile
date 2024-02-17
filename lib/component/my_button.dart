@@ -1,4 +1,4 @@
-import 'package:exe201_lumos_mobile/core/const/color_const.dart';
+import '../core/const/front-end/color_const.dart';
 import 'package:flutter/cupertino.dart';
 
 class MyButton extends StatelessWidget {

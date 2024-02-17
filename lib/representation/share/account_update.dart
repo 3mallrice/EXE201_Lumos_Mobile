@@ -1,6 +1,6 @@
-import 'package:exe201_lumos_mobile/component/app_bar.dart';
-import 'package:exe201_lumos_mobile/core/const/color_const.dart';
-import 'package:exe201_lumos_mobile/core/helper/asset_helper.dart';
+import '../../component/app_bar.dart';
+import '../../core/const/front-end/color_const.dart';
+import '../../core/helper/asset_helper.dart';
 import 'package:flutter/material.dart';
 
 import '../../component/my_button.dart';

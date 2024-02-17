@@ -1,16 +1,16 @@
-import 'package:exe201_lumos_mobile/core/const/error_reponse.dart';
-import 'package:exe201_lumos_mobile/login.dart';
-import 'package:exe201_lumos_mobile/representation/member/medical_report.dart';
+import '../../core/const/back-end/error_reponse.dart';
+import '../../login.dart';
+import '../member/medical_report.dart';
 import 'package:flutter/material.dart';
-import 'package:exe201_lumos_mobile/component/app_bar.dart';
-import 'package:exe201_lumos_mobile/component/my_button.dart';
-import 'package:exe201_lumos_mobile/component/my_button_list.dart';
-import 'package:exe201_lumos_mobile/core/const/color_const.dart';
-import 'package:exe201_lumos_mobile/core/const/lumos_icons.dart';
-import 'package:exe201_lumos_mobile/core/helper/asset_helper.dart';
-import 'package:exe201_lumos_mobile/representation/share/about_lumos.dart';
-import 'package:exe201_lumos_mobile/representation/share/account_update.dart';
-import 'package:exe201_lumos_mobile/representation/share/bill_screen.dart';
+import '../../component/app_bar.dart';
+import '../../component/my_button.dart';
+import '../../component/my_button_list.dart';
+import '../../core/const/front-end/color_const.dart';
+import '../../core/const/front-end/lumos_icons.dart';
+import '../../core/helper/asset_helper.dart';
+import 'about_lumos.dart';
+import 'account_update.dart';
+import 'bill_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 
@@ -141,7 +141,7 @@ class _AccountScreenState extends State<AccountScreen> {
                         rightIcon: Icons.arrow_forward_ios,
                         onPressed: () {
                           Navigator.of(context)
-                              .pushNamed(MedicalReport.routeName);
+                              .pushNamed(MedicalReportPage.routeName);
                         },
                       ),
                       const SizedBox(height: 10),
