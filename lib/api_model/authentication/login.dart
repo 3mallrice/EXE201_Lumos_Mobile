@@ -45,6 +45,7 @@ class LoginResponse {
 }
 
 class UserDetails {
+  final int? id;
   final String email;
   final String code;
   final int role;
@@ -56,6 +57,7 @@ class UserDetails {
   final String imgUrl;
 
   UserDetails({
+    this.id,
     required this.email,
     required this.code,
     required this.role,
@@ -69,6 +71,7 @@ class UserDetails {
 
   factory UserDetails.fromJson(Map<String, dynamic> json) {
     return UserDetails(
+      id: json['id'],
       email: json['email'],
       code: json['code'],
       role: json['role'],

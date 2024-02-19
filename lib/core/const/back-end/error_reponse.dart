@@ -64,6 +64,19 @@ class OnInvalidInputMessage {
   static const String invalidInputTitle = "Dữ liệu không hợp lệ";
   static const String invalidInput =
       "Dữ liệu bạn nhập không hợp lệ. Vui lòng kiểm tra lại.";
+  static const String invalidEmail =
+      "Email không hợp lệ. Vui lòng kiểm tra lại.";
+  static const String invalidPassword =
+      "Mật khẩu không hợp lệ. Vui lòng kiểm tra lại.";
+  static const String passwordGuide =
+      "Mật khẩu phải chứa ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt.";
+  static const String invalidPhoneNumber =
+      "Số điện thoại không hợp lệ. Vui lòng kiểm tra lại.";
+  static const String phoneGuide =
+      "Số điện thoại phải bắt đầu bằng số 0, và có 10 chữ số.";
+  static const String invalidName = "Tên không hợp lệ. Vui lòng kiểm tra lại.";
+  static const String nameGuide =
+      "Tên không được chứa ký tự đặc biệt và phải viết hoa chữ cái đầu của mỗi từ.";
 }
 
 class OnSignOutMessage {

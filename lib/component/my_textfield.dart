@@ -3,7 +3,8 @@ import '../core/const/front-end/color_const.dart';
 
 class MyTextfield extends StatelessWidget {
   // ignore: prefer_typing_uninitialized_variables, non_constant_identifier_names
-  final TextEditingController Controller;
+  final TextEditingController controller;
+  final String? Function(String?)? validator;
   final String labelText;
   final String? hintText;
   final bool obscureText;
@@ -15,8 +16,8 @@ class MyTextfield extends StatelessWidget {
 
   const MyTextfield(
       {super.key,
-      // ignore: non_constant_identifier_names
-      required this.Controller,
+      required this.controller,
+      this.validator,
       required this.obscureText,
       required this.labelText,
       this.bgColor,
@@ -31,13 +32,15 @@ class MyTextfield extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 40.0),
       child: SizedBox(
-        height: 50,
-        child: TextField(
+        height: 70,
+        child: TextFormField(
+          validator: validator,
           style: TextStyle(
             color: textColor ?? ColorPalette.blueBold2.withOpacity(0.65),
             fontFamily: 'Raleway',
           ),
-          controller: Controller,
+          maxLines: 1,
+          controller: controller,
           //require?
           obscureText: obscureText,
           //True or False, when type hide or not... (password)
