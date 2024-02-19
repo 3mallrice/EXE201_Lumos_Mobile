@@ -93,7 +93,7 @@ class _UpdateAccountState extends State<UpdateAccount> {
               height: 40,
             ),
             MyTextfield(
-              Controller: nameController,
+              controller: nameController,
               labelText: 'Name',
               hintText: 'Your name',
               floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -104,7 +104,7 @@ class _UpdateAccountState extends State<UpdateAccount> {
               height: 30,
             ),
             MyTextfield(
-              Controller: emailController,
+              controller: emailController,
               labelText: 'Email',
               hintText: 'Your email',
               floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -115,7 +115,7 @@ class _UpdateAccountState extends State<UpdateAccount> {
               height: 30,
             ),
             MyTextfield(
-              Controller: addressController,
+              controller: addressController,
               labelText: 'Address',
               hintText: 'Your address',
               floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -126,7 +126,7 @@ class _UpdateAccountState extends State<UpdateAccount> {
               height: 30,
             ),
             MyTextfield(
-              Controller: phoneController,
+              controller: phoneController,
               labelText: 'Phone',
               hintText: 'Your phone',
               floatingLabelBehavior: FloatingLabelBehavior.always,

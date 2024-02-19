@@ -100,7 +100,7 @@ class _SignUpState extends State<SignUp> {
 
                             //name textfield
                             MyTextfield(
-                              Controller: emailController,
+                              controller: emailController,
                               labelText: 'Họ và Tên',
                               hintText: 'Nguyễn Văn A',
                               floatingLabelBehavior:
@@ -115,7 +115,7 @@ class _SignUpState extends State<SignUp> {
 
                             //email textfield
                             MyTextfield(
-                              Controller: emailController,
+                              controller: emailController,
                               labelText: 'Email',
                               hintText: 'a@gmail.com',
                               floatingLabelBehavior:
@@ -130,7 +130,7 @@ class _SignUpState extends State<SignUp> {
 
                             //phone textfield
                             MyTextfield(
-                              Controller: phoneController,
+                              controller: phoneController,
                               labelText: 'Số điện thoại',
                               hintText: '0912345678',
                               floatingLabelBehavior:
@@ -162,7 +162,7 @@ class _SignUpState extends State<SignUp> {
                             StatefulBuilder(
                               builder: (context, setState) {
                                 return MyTextfield(
-                                  Controller: passwordController,
+                                  controller: passwordController,
                                   obscureText: _passwordInVisible,
                                   labelText: 'Mật khẩu',
                                   hintText: 'Nhập mật khẩu của bạn...',
@@ -195,7 +195,7 @@ class _SignUpState extends State<SignUp> {
                             StatefulBuilder(
                               builder: (context, setState) {
                                 return MyTextfield(
-                                  Controller: confirmPassWordController,
+                                  controller: confirmPassWordController,
                                   obscureText: _confirmPasswordInVisible,
                                   labelText: 'Nhập lại mật khẩu',
                                   hintText: 'Nhập lại mật khẩu...!',
