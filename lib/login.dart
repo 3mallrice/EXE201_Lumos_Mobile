@@ -1,4 +1,4 @@
-import 'package:exe201_lumos_mobile/core/const/back-end/role.dart';
+import 'core/const/back-end/role.dart';
 
 import 'api_model/authentication/login.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +34,32 @@ class _LoginState extends State<Login> {
   final CallAuthenticationApi authApi = CallAuthenticationApi();
   var logger = Logger();
   bool _passwordInVisible = true;
+
+  String? Function(String?)? emailValidator = (value) {
+    if (value == null || value.isEmpty) {
+      return OnInvalidInputMessage.emptyInput;
+    }
+
+    if (!value.contains('@') || !value.contains('.com')) {
+      return OnInvalidInputMessage.invalidEmail;
+    }
+    return null;
+  };
+
+  String? Function(String?)? passwordValidator = (value) {
+    if (value == null || value.isEmpty) {
+      return OnInvalidInputMessage.emptyInput;
+    }
+
+    if (value.length < 8 ||
+        !value.contains(RegExp(r'[A-Z]')) ||
+        !value.contains(RegExp(r'[a-z]')) ||
+        !value.contains(RegExp(r'[0-9]')) ||
+        !value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+      return OnInvalidInputMessage.invalidPassword;
+    }
+    return null;
+  };
 
   void _showOKDialog(BuildContext context,
       {Text title = const Text("Tiêu đề"), message = const Text('Thông báo')}) {
@@ -113,7 +139,7 @@ class _LoginState extends State<Login> {
       UserDetails userDetails = response.userDetails;
       if (userDetails.role == Role.customer) {
         //save userDetail in local storage
-        await LocalStorageHelper.setValue("loginedUser", userDetails);
+        await LoginAccount.saveLoginAccount(userDetails);
 
         logger.i('Login success: ${response.username}');
         onSuccess(response.username);
@@ -199,7 +225,8 @@ class _LoginState extends State<Login> {
                               height: 30,
                             ),
                             MyTextfield(
-                              Controller: emailController,
+                              validator: emailValidator,
+                              controller: emailController,
                               labelText: 'Email',
                               hintText: 'a@gmail.com',
                               floatingLabelBehavior:
@@ -213,7 +240,8 @@ class _LoginState extends State<Login> {
                             StatefulBuilder(
                               builder: (context, setState) {
                                 return MyTextfield(
-                                  Controller: passwordController,
+                                  validator: passwordValidator,
+                                  controller: passwordController,
                                   obscureText: _passwordInVisible,
                                   labelText: 'Mật khẩu',
                                   hintText: 'Mật khẩu của bạn...',

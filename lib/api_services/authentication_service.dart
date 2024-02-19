@@ -1,5 +1,6 @@
 import 'dart:convert';
 import '../api_model/authentication/login.dart';
+import '../core/helper/local_storage_helper.dart';
 import 'api_service.dart';
 import 'package:http/http.dart' as http;
 
@@ -32,6 +33,7 @@ class CallAuthenticationApi {
         final loginData = responseData['data'];
         final userdetailData = loginData['userdetails'];
         UserDetails userDetails = UserDetails(
+          id: userdetailData['id'],
           code: userdetailData['code'],
           email: userdetailData['email'],
           role: userdetailData['role'],
@@ -52,6 +54,7 @@ class CallAuthenticationApi {
         );
         // save login userdetail to
         token = loginResponse.token;
+        LocalStorageHelper.setValue("token", token);
         return loginResponse;
       } else {
         throw Exception(
@@ -71,6 +74,7 @@ class CallAuthenticationApi {
     );
 
     if (response.statusCode == 200) {
+      token = "";
       return true;
     } else {
       throw Exception(
