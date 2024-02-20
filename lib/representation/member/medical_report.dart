@@ -38,9 +38,12 @@ class _MedicalReportPageState extends State<MedicalReportPage> {
   void _fetchUserData() async {
     userDetails = await loadAccount();
     if (userDetails == null) {
-      Future.delayed(Duration.zero, () {
-        Navigator.of(context).pushReplacementNamed(Login.routeName);
-      });
+      Future.delayed(
+        Duration.zero,
+        () {
+          Navigator.of(context).pushReplacementNamed(Login.routeName);
+        },
+      );
     } else {
       _fetchMedicalReports();
     }
