@@ -1,4 +1,6 @@
+import '../../api_model/authentication/login.dart';
 import '../../core/const/back-end/error_reponse.dart';
+import '../../core/helper/local_storage_helper.dart';
 import '../../login.dart';
 import '../member/medical_report.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +11,6 @@ import '../../core/const/front-end/color_const.dart';
 import '../../core/const/front-end/lumos_icons.dart';
 import '../../core/helper/asset_helper.dart';
 import 'about_lumos.dart';
-import 'account_update.dart';
 import 'bill_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
@@ -29,6 +30,31 @@ class AccountScreen extends StatefulWidget {
 class _AccountScreenState extends State<AccountScreen> {
   final CallAuthenticationApi _api = CallAuthenticationApi();
   var log = Logger();
+  UserDetails? userDetails;
+
+  Future<UserDetails>? loadAccount() async {
+    return await LoginAccount.loadAccount();
+  }
+
+  void fetchUserData() async {
+    userDetails = await loadAccount();
+    if (userDetails == null) {
+      Future.delayed(
+        Duration.zero,
+        () {
+          Navigator.of(context).pushReplacementNamed(Login.routeName);
+        },
+      );
+    } else {
+      //
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserData();
+  }
 
   backToLoginPage() {
     Navigator.of(context).pushNamed(Login.routeName);
@@ -86,6 +112,9 @@ class _AccountScreenState extends State<AccountScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (userDetails == null) {
+      loadAccount();
+    }
     return Scaffold(
       appBar: const AppBarCom(
         leading: false,
@@ -196,18 +225,17 @@ class _AccountScreenState extends State<AccountScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text(
-          'Leslie Alexander',
-          style: TextStyle(
+        Text(
+          userDetails!.username,
+          style: const TextStyle(
             color: ColorPalette.blueBold2,
             fontSize: 16,
             fontWeight: FontWeight.w500,
           ),
         ),
-        const SizedBox(width: 3),
         IconButton(
           onPressed: () {
-            Navigator.of(context).pushNamed(UpdateAccount.routeName);
+            // Navigator.of(context).pushNamed(UpdateAccount.routeName);
           },
           icon: const Icon(
             LumosIcons.edit_2icon,

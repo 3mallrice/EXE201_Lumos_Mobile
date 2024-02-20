@@ -4,6 +4,7 @@ import 'package:logger/logger.dart';
 
 import '../../api_model/customer/cart_model.dart';
 import '../../api_model/customer/medical_report.dart';
+import '../../core/const/back-end/error_reponse.dart';
 import '../../core/helper/local_storage_helper.dart';
 import '../../login.dart';
 import 'member_booking.dart';
@@ -30,8 +31,6 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
   final CallCustomerApi api = CallCustomerApi();
   bool _isFavorited = false;
   UserDetails? userDetails;
-  // ignore: constant_identifier_names
-  static const int INVALID_ID = -1;
 
   var log = Logger();
 
@@ -81,28 +80,46 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
     }
   }
 
-  // Hàm onAddToCart
   CartModel onAddToCart(int reportId, Service service) {
     // Kiểm tra xem đã có cart cho bệnh nhân này chưa
-    var existingCart =
-        carts.firstWhere((cart) => cart.medicalReportId == reportId,
-            orElse: () => CartModel(
-                  medicalReportId: INVALID_ID,
-                  services: [],
-                ));
+    var existingCartIndex =
+        carts.indexWhere((cart) => cart.medicalReportId == reportId);
 
-    if (existingCart.medicalReportId != INVALID_ID) {
-      // Nếu đã có, thêm service vào danh sách của cart đó
-      existingCart.services.add(service);
+    if (existingCartIndex != -1) {
+      // Nếu đã có, kiểm tra xem service đã tồn tại trong danh sách không
+      if (carts[existingCartIndex].services.contains(service)) {
+        // Nếu service đã tồn tại, hiển thị AlertDialog thông báo
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              content: const Text(OnInvalidInputMessage.serviceExisted),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+      } else {
+        // Nếu service chưa tồn tại, thêm vào danh sách của cart đó
+        carts[existingCartIndex].services.add(service);
+      }
     } else {
       // Nếu chưa có, tạo mới cart
-      existingCart = CartModel(
+      carts.add(CartModel(
         medicalReportId: reportId,
         services: [service],
-      );
+      ));
     }
 
-    return existingCart;
+    // Trả về giỏ hàng đã được cập nhật
+    return carts[
+        existingCartIndex != -1 ? existingCartIndex : carts.length - 1];
   }
 
   @override
@@ -232,8 +249,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                         onTap: () {
                           var cart =
                               onAddToCart(_reports[index].reportId, service);
-                          carts.add(cart);
-                          log.i("Cart: $carts");
+                          log.i("Cart: $cart");
                           Navigator.of(context).pop();
                         },
                       ),

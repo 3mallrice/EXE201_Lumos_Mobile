@@ -1,3 +1,4 @@
+import '../../api_model/authentication/login.dart';
 import '../../component/app_bar.dart';
 import '../../core/const/front-end/color_const.dart';
 import '../../core/helper/asset_helper.dart';
@@ -5,6 +6,8 @@ import 'package:flutter/material.dart';
 
 import '../../component/my_button.dart';
 import '../../component/my_textfield.dart';
+import '../../core/helper/local_storage_helper.dart';
+import '../../login.dart';
 
 class UpdateAccount extends StatefulWidget {
   const UpdateAccount({super.key});
@@ -27,14 +30,30 @@ class _UpdateAccountState extends State<UpdateAccount> {
     //Xong
   }
 
+  UserDetails? userDetails;
+
+  Future<UserDetails>? loadAccount() async {
+    return await LoginAccount.loadAccount();
+  }
+
+  void fetchUserData() async {
+    userDetails = await loadAccount();
+    if (userDetails == null) {
+      Future.delayed(
+        Duration.zero,
+        () {
+          Navigator.of(context).pushReplacementNamed(Login.routeName);
+        },
+      );
+    } else {
+      //
+    }
+  }
+
   @override
   void initState() {
     super.initState();
-    // Assign default values to text controllers
-    nameController.text = 'Default Name';
-    emailController.text = 'Default Email';
-    addressController.text = 'Default Address';
-    phoneController.text = 'Default Phone';
+    fetchUserData();
   }
 
   @override

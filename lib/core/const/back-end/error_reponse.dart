@@ -8,6 +8,14 @@ class LoginErrorMessage {
       "Đã xảy ra lỗi hệ thống. Vui lòng thử lại sau.";
 }
 
+class DiaLogMessage {
+  static const String title = "Thông báo";
+  static const String confirm = "Xác nhận";
+  static const String cancel = "Hủy";
+  static const String ok = "OK";
+  static const String close = "Đóng";
+}
+
 class LoginSuccessMessage {
   static String loginSuccess(String username) =>
       "Thành công, chào mừng $username trở lại!";
@@ -46,6 +54,7 @@ class BookingErrorMessage {
       "Thời gian bạn chọn không khả dụng. Vui lòng chọn thời gian khác.";
   static const String bookingConflict =
       "Đã có lịch đặt khác cho thời gian bạn chọn. Vui lòng chọn thời gian khác.";
+  static const String emptyList = "Danh sách trống, vui lòng thử lại sau.";
 }
 
 class BookingSuccessMessage {
@@ -77,6 +86,10 @@ class OnInvalidInputMessage {
   static const String invalidName = "Tên không hợp lệ. Vui lòng kiểm tra lại.";
   static const String nameGuide =
       "Tên không được chứa ký tự đặc biệt và phải viết hoa chữ cái đầu của mỗi từ.";
+  static const String alreadyExist =
+      "Dữ liệu đã tồn tại. Vui lòng kiểm tra lại.";
+  static const String serviceExisted =
+      "Dịch vụ đã tồn tại. Vui lòng kiểm tra lại.";
 }
 
 class OnSignOutMessage {
