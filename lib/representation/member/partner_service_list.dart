@@ -1,5 +1,13 @@
 import 'package:flutter/foundation.dart';
 
+import '../../api_model/authentication/login.dart';
+import '../../api_services/customer_service.dart';
+import 'package:logger/logger.dart';
+
+import '../../api_model/customer/cart_model.dart';
+import '../../api_model/customer/medical_report.dart';
+import '../../core/helper/local_storage_helper.dart';
+import '../../login.dart';
 import 'member_booking.dart';
 import 'package:flutter/material.dart';
 import '../../component/app_bar.dart';
@@ -21,16 +29,100 @@ class PartnerServiceList extends StatefulWidget {
 }
 
 class _PartnerServiceListState extends State<PartnerServiceList> {
+  final CallCustomerApi api = CallCustomerApi();
   bool _isFavorited = false;
+  UserDetails? userDetails;
+  // ignore: constant_identifier_names
+  static const int INVALID_ID = -1;
+
+  var log = Logger();
+
+  List<MedicalReport> _reports = [];
+  List<CartModel> carts = [];
+  bool isEmptyList = true;
+
+  Future<UserDetails>? loadAccount() async {
+    return await LoginAccount.loadAccount();
+  }
+
+  void _fetchUserData() async {
+    userDetails = await loadAccount();
+    if (userDetails == null) {
+      Future.delayed(Duration.zero, () {
+        Navigator.of(context).pushReplacementNamed(Login.routeName);
+      });
+    } else {
+      _fetchMedicalReports();
+    }
+  }
+
+  void _fetchMedicalReports() async {
+    try {
+      if (userDetails != null && userDetails!.id != null) {
+        List<MedicalReport>? reports =
+            await api.getMedicalReport(userDetails!.id!);
+        setState(
+          () {
+            _reports = reports;
+            isEmptyList = _reports.isEmpty;
+          },
+        );
+      } else {
+        setState(() {
+          log.e("User details or user id is null.");
+          _reports = [];
+          isEmptyList = true;
+        });
+      }
+    } catch (e) {
+      setState(() {
+        log.e("Error when fetching medical reports: $e");
+        _reports = [];
+        isEmptyList = true;
+      });
+    }
+  }
+
+  // Hàm onAddToCart
+  CartModel onAddToCart(int reportId, Service service) {
+    // Kiểm tra xem đã có cart cho bệnh nhân này chưa
+    var existingCart =
+        carts.firstWhere((cart) => cart.medicalReportId == reportId,
+            orElse: () => CartModel(
+                  medicalReportId: INVALID_ID,
+                  services: [],
+                ));
+
+    if (existingCart.medicalReportId != INVALID_ID) {
+      // Nếu đã có, thêm service vào danh sách của cart đó
+      existingCart.services.add(service);
+    } else {
+      // Nếu chưa có, tạo mới cart
+      existingCart = CartModel(
+        medicalReportId: reportId,
+        services: [service],
+      );
+    }
+
+    return existingCart;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchUserData();
+  }
 
   List<Service> services = [
     Service(
+      id: 1,
       name: 'Điều trị nha khoa',
       executionTime: '60',
       description: 'Dịch vụ chăm sóc và điều trị nha khoa chuyên sâu.',
       price: 200.0,
     ),
     Service(
+      id: 2,
       name: 'Kiểm tra mắt',
       executionTime: '30',
       description:
@@ -38,18 +130,21 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
       price: 150.0,
     ),
     Service(
+      id: 3,
       name: 'Masage thư giãn',
       executionTime: '45',
       description: 'Dịch vụ masage thư giãn giúp giảm căng thẳng và mệt mỏi.',
       price: 120.0,
     ),
     Service(
+      id: 4,
       name: 'Điều trị nha khoa',
       executionTime: '60',
       description: 'Dịch vụ chăm sóc và điều trị nha khoa chuyên sâu.',
       price: 200.0,
     ),
     Service(
+      id: 5,
       name: 'Kiểm tra mắt',
       executionTime: '30',
       description:
@@ -57,12 +152,14 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
       price: 150.0,
     ),
     Service(
+      id: 6,
       name: 'Masage thư giãn',
       executionTime: '45',
       description: 'Dịch vụ masage thư giãn giúp giảm căng thẳng và mệt mỏi.',
       price: 120.0,
     ),
     Service(
+      id: 7,
       name: 'Điều trị nha khoa',
       executionTime: '60',
       description:
@@ -70,6 +167,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
       price: 200.0,
     ),
     Service(
+      id: 8,
       name: 'Kiểm tra mắt',
       executionTime: '30',
       description:
@@ -77,6 +175,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
       price: 150.0,
     ),
     Service(
+      id: 9,
       name: 'Masage thư giãn',
       executionTime: '45',
       description:
@@ -85,17 +184,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
     ),
   ];
 
-  List<String> patientList = [
-    "Nguyễn Vũ Hồng Hoa",
-    "Bùi Hữu Phúc",
-    "Bùi Hữu Đức",
-    "Lê Thị Diễm Trinh",
-    "Bùi Thanh Tú",
-    "Nguyễn Văn Tiến",
-    "Lương Tuyết Trang"
-  ];
-
-  void Function()? onTap() {
+  void Function(Service service)? onTap(Service service) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -120,13 +209,13 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                 color: ColorPalette.thirdWhite,
               ),
               child: ListView.builder(
-                itemCount: patientList.length,
+                itemCount: _reports.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Column(
                     children: [
                       ListTile(
                         title: Text(
-                          patientList[index],
+                          _reports[index].fullname,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                         ),
@@ -143,10 +232,14 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                           color: ColorPalette.blueBold2,
                         ),
                         onTap: () {
-                          Navigator.of(context).pop(patientList[index]);
+                          var cart =
+                              onAddToCart(_reports[index].reportId, service);
+                          carts.add(cart);
+                          log.i("Cart: $carts");
+                          Navigator.of(context).pop();
                         },
                       ),
-                      if (index < patientList.length - 1)
+                      if (index < _reports.length - 1)
                         const Divider(
                           thickness: 0.7,
                           height: 2,
@@ -218,7 +311,14 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                 color: ColorPalette.blueBold2,
               ),
               onPressed: () {
-                Navigator.of(context).pushNamed(BookingPage.routeName);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BookingPage(
+                      cart: carts,
+                    ),
+                  ),
+                );
               },
             ),
           ),
@@ -244,65 +344,63 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                 fontWeight: FontWeight.bold,
                 color: ColorPalette.blueBold2,
               ),
-              subtitle: Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        const RatingStars(
-                          starColor: ColorPalette.star,
-                          starOffColor: ColorPalette.grey2,
-                          value: 1.5,
-                          valueLabelVisibility: false,
-                          starSize: 16,
-                        ),
-                        Container(
-                          height: 20,
-                          width: 1.2,
-                          color: ColorPalette.blueBold2,
-                          margin: const EdgeInsets.symmetric(horizontal: 10),
-                        ),
-                        const Icon(
-                          FontAwesomeIcons.calendarCheck,
-                          size: 16,
-                          color: ColorPalette.blueBold2,
-                        ),
-                        const SizedBox(
-                          width: 7,
-                        ),
-                        Text(
-                          "30 lượt đã đặt",
-                          style: GoogleFonts.almarai(
-                            fontSize: 16,
-                            fontWeight: FontWeight.normal,
-                            color: ColorPalette.blueBold2,
-                          ),
-                          textAlign: TextAlign.start,
-                        ),
-                      ],
-                    ),
-                    Container(
-                      alignment: Alignment.centerRight,
-                      child: IconButton(
-                        icon: Icon(
-                          _isFavorited
-                              ? Icons.favorite
-                              : Icons.favorite_border_outlined,
-                          size: 25,
-                          color: _isFavorited
-                              ? ColorPalette.pink
-                              : ColorPalette.blueBold2,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _isFavorited = !_isFavorited;
-                          });
-                        },
+              subtitle: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      const RatingStars(
+                        starColor: ColorPalette.star,
+                        starOffColor: ColorPalette.grey2,
+                        value: 1.5,
+                        valueLabelVisibility: false,
+                        starSize: 16,
                       ),
-                    )
-                  ],
-                ),
+                      Container(
+                        height: 20,
+                        width: 1.2,
+                        color: ColorPalette.blueBold2,
+                        margin: const EdgeInsets.symmetric(horizontal: 10),
+                      ),
+                      const Icon(
+                        FontAwesomeIcons.calendarCheck,
+                        size: 16,
+                        color: ColorPalette.blueBold2,
+                      ),
+                      const SizedBox(
+                        width: 7,
+                      ),
+                      Text(
+                        "30 lượt đã đặt",
+                        style: GoogleFonts.almarai(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                          color: ColorPalette.blueBold2,
+                        ),
+                        textAlign: TextAlign.start,
+                      ),
+                    ],
+                  ),
+                  Container(
+                    alignment: Alignment.centerRight,
+                    child: IconButton(
+                      icon: Icon(
+                        _isFavorited
+                            ? Icons.favorite
+                            : Icons.favorite_border_outlined,
+                        size: 25,
+                        color: _isFavorited
+                            ? ColorPalette.pink
+                            : ColorPalette.blueBold2,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _isFavorited = !_isFavorited;
+                        });
+                      },
+                    ),
+                  )
+                ],
               ),
             ),
           ),
@@ -317,7 +415,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                 return Column(
                   children: [
                     InkWell(
-                      onTap: onTap,
+                      onTap: () => onTap(service),
                       child: ListTile(
                         leading: const Icon(
                           Icons.medical_services,
@@ -418,15 +516,22 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
 }
 
 class Service {
+  int id;
   String name;
   String executionTime;
   String description;
   double price;
 
   Service({
+    required this.id,
     required this.name,
     required this.executionTime,
     required this.description,
     required this.price,
   });
+
+  @override
+  String toString() {
+    return 'Service{id: $id, name: $name, executionTime: $executionTime, description: $description, price: $price}';
+  }
 }

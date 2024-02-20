@@ -1,3 +1,9 @@
+import 'package:logger/logger.dart';
+
+import '../../api_model/authentication/login.dart';
+import '../../api_model/customer/cart_model.dart';
+import '../../api_services/customer_service.dart';
+
 import '../../component/app_bar.dart';
 import '../../component/my_button.dart';
 import 'package:flutter/material.dart';
@@ -6,9 +12,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 import '../../core/const/front-end/color_const.dart';
+import '../../core/helper/local_storage_helper.dart';
+import '../../login.dart';
 
 class BookingPage extends StatefulWidget {
-  const BookingPage({super.key});
+  final List<CartModel>? cart;
+
+  const BookingPage({super.key, this.cart});
 
   static String routeName = '/booking';
 
@@ -19,6 +29,8 @@ class BookingPage extends StatefulWidget {
 class _BookingPageState extends State<BookingPage> {
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = TimeOfDay.now();
+
+  var log = Logger();
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -36,10 +48,10 @@ class _BookingPageState extends State<BookingPage> {
         return Theme(
           data: ThemeData.light().copyWith(
             colorScheme: const ColorScheme.light(
-              primary: ColorPalette.pink, // Màu chính của DatePicker
-              onPrimary: ColorPalette.white, // Màu chữ trên nút xác nhận
-              surface: ColorPalette.blue2, // Màu nền của DatePicker
-              onSurface: ColorPalette.blueBold2, // Màu chữ trên nền DatePicker
+              primary: ColorPalette.pink,
+              onPrimary: ColorPalette.white,
+              surface: ColorPalette.blue2,
+              onSurface: ColorPalette.blueBold2,
             ),
           ),
           child: child!,
@@ -63,10 +75,10 @@ class _BookingPageState extends State<BookingPage> {
         return Theme(
           data: ThemeData.light().copyWith(
             colorScheme: const ColorScheme.light(
-              primary: ColorPalette.pink, // Màu chính của DatePicker
-              onPrimary: ColorPalette.white, // Màu chữ trên nút xác nhận
-              surface: ColorPalette.blue2, // Màu nền của DatePicker
-              onSurface: ColorPalette.blueBold2, // Màu chữ trên nền DatePicker
+              primary: ColorPalette.pink,
+              onPrimary: ColorPalette.white,
+              surface: ColorPalette.blue2,
+              onSurface: ColorPalette.blueBold2,
             ),
           ),
           child: child!,
@@ -79,6 +91,33 @@ class _BookingPageState extends State<BookingPage> {
         selectedTime = picked;
       });
     }
+  }
+
+  CallCustomerApi callApi = CallCustomerApi();
+  UserDetails? userDetails;
+
+  Future<UserDetails>? loadAccount() async {
+    return await LoginAccount.loadAccount();
+  }
+
+  void fetchUserData() async {
+    userDetails = await loadAccount();
+    if (userDetails == null) {
+      Future.delayed(
+        Duration.zero,
+        () {
+          Navigator.of(context).pushReplacementNamed(Login.routeName);
+        },
+      );
+    } else {
+      //
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserData();
   }
 
   dynamic Function() onTap() {
@@ -196,6 +235,10 @@ class _BookingPageState extends State<BookingPage> {
     String formattedDate = DateFormat('dd-MM-yyyy').format(selectedDate);
     String formattedTime = selectedTime.format(context);
 
+    final carts = widget.cart;
+
+    log.i(carts.toString());
+
     return Scaffold(
       appBar: const AppBarCom(
         leading: true,
@@ -227,10 +270,8 @@ class _BookingPageState extends State<BookingPage> {
                 ),
                 //note
                 Container(
-                  height: 20,
+                  height: 5,
                 ),
-                //
-
                 Container(
                   margin:
                       const EdgeInsets.symmetric(vertical: 15, horizontal: 5),
@@ -302,7 +343,9 @@ class _BookingPageState extends State<BookingPage> {
                     },
                   ),
                 ),
-
+                Container(
+                  height: 5,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
