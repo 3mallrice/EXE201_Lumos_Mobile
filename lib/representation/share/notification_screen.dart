@@ -75,7 +75,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       style: GoogleFonts.almarai(
                         textStyle: const TextStyle(
                             fontSize: 16,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.normal,
                             color: ColorPalette.blueBold2),
                       ),
                     ),

@@ -1,7 +1,7 @@
 // ignore: unused_import
 import 'dart:convert';
 
-import 'package:exe201_lumos_mobile/api_model/customer/partner.dart';
+import 'package:exe201_lumos_mobile/api_model/partner/partner.dart';
 import 'package:exe201_lumos_mobile/core/helper/local_storage_helper.dart';
 import 'package:http/http.dart' as http;
 
@@ -17,7 +17,7 @@ class CallPartnerApi {
   String token = LocalStorageHelper.getValue("token");
 
   //GET: Get partner service, partner by keyword
-  Future<List<Partner>> GetPartnerPartnerServiceByKeyword(
+  Future<List<Partner>> getPartnerPartnerServiceByKeyword(
       String keyword) async {
     var url = Uri.parse('$api?keyword=$keyword');
     token = LocalStorageHelper.getValue("token");
