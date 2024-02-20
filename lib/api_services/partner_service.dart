@@ -31,8 +31,8 @@ class CallPartnerApi {
       if (response.statusCode == 200) {
         final responseBody = json.decode(response.body);
         final responseData = responseBody['data'];
-        List<Partner> partners = responseData
-            .map<Partner>((item) => Partner.fromJson(item))
+        List<Partner> partners = (responseData as List)
+            .map((item) => Partner.fromJson(item))
             .toList();
         return partners;
       } else {
@@ -41,6 +41,33 @@ class CallPartnerApi {
       }
     } catch (e) {
       throw Exception('Failed to get partner by keyword: $e');
+    }
+  }
+
+  //GET: Get partner by id
+  Future<Partner> getPartnerById(int id) async {
+    var url = Uri.parse('$api/$id');
+    token = LocalStorageHelper.getValue("token");
+
+    try {
+      http.Response response = await http.get(url, headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json'
+      });
+
+      if (response.statusCode == 200) {
+        final responseBody = json.decode(response.body);
+        final responseData = responseBody['data'];
+
+        Partner partner = Partner.fromJson(responseData);
+
+        return partner;
+      } else {
+        throw Exception(
+            'Failed to get partner by Id: ${response.statusCode} - ${response.reasonPhrase}');
+      }
+    } catch (e) {
+      throw Exception('Failed to get partner by Id: $e');
     }
   }
 }

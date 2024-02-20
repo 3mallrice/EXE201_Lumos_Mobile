@@ -20,7 +20,9 @@ import 'package:ionicons/ionicons.dart';
 import 'package:rich_readmore/rich_readmore.dart';
 
 class PartnerServiceList extends StatefulWidget {
-  const PartnerServiceList({super.key});
+  final int? partnerId;
+
+  const PartnerServiceList({super.key, this.partnerId});
 
   static String routeName = '/partner_service_list';
 
@@ -32,6 +34,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
   final CallCustomerApi api = CallCustomerApi();
   bool _isFavorited = false;
   UserDetails? userDetails;
+
   // ignore: constant_identifier_names
   static const int INVALID_ID = -1;
 

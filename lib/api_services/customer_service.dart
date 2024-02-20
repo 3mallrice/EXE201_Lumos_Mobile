@@ -10,6 +10,7 @@ class CallCustomerApi {
   static const apiName = '/customer';
   static const rootApi = ApiService.rootApi;
   final String api = rootApi + apiName;
+
   // ignore: unused_field
   final String _imgUrl = '';
   String token = LocalStorageHelper.getValue("token");
@@ -18,7 +19,7 @@ class CallCustomerApi {
   //request: customerId
   //response: List<MedicalReport>
   Future<List<MedicalReport>> getMedicalReport(int customerId) async {
-    var url = Uri.parse('$api/$customerId/medical-report');
+    var url = Uri.parse('$api/medical-report');
     token = LocalStorageHelper.getValue("token");
 
     try {
@@ -40,6 +41,43 @@ class CallCustomerApi {
       }
     } catch (e) {
       throw Exception('Failed to get medical report: $e');
+    }
+  }
+
+  //POST: medical-report
+  Future<MedicalReport> addNewMedicalReport(
+      int customerId, MedicalReport newReport) async {
+    var url = Uri.parse('$api/$customerId/medical-report');
+    token = LocalStorageHelper.getValue("token");
+
+    try {
+      http.Response response = await http.post(
+        url,
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json'
+        },
+        body: json.encode({
+          'fullName': newReport.fullname,
+          'phone': newReport.phone,
+          'dob': newReport.dob,
+          'gender': newReport.gender,
+          'pronounce': newReport.pronounce,
+          'bloodType': newReport.bloodType,
+          'note': newReport.note,
+        }),
+      );
+
+      if (response.statusCode == 201) {
+        final responseBody = json.decode(response.body);
+        final responseData = responseBody['data'];
+        return MedicalReport.fromJson(responseData);
+      } else {
+        throw Exception(
+            'Failed to add new medical report: ${response.statusCode} - ${response.reasonPhrase}');
+      }
+    } catch (e) {
+      throw Exception('Failed to add new medical report: $e');
     }
   }
 }

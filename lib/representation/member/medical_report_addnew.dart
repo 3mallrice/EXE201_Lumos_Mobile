@@ -1,5 +1,12 @@
 import 'dart:developer';
 
+import 'package:exe201_lumos_mobile/api_model/authentication/login.dart';
+import 'package:exe201_lumos_mobile/api_model/customer/medical_report.dart';
+import 'package:exe201_lumos_mobile/api_services/customer_service.dart';
+import 'package:exe201_lumos_mobile/core/helper/local_storage_helper.dart';
+import 'package:exe201_lumos_mobile/login.dart';
+import 'package:logger/logger.dart';
+
 import '../../component/app_bar.dart';
 import '../../core/const/front-end/color_const.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +49,72 @@ const List<String> _listBlood = [
 
 class _MedicalReportAddState extends State<MedicalReportAdd> {
   DateTime selectedDate = DateTime.now();
+  CallCustomerApi api = CallCustomerApi();
+  var log = Logger();
+
+  List<String> _reports = [];
+  bool isEmptyList = true;
+
+  UserDetails? userDetails;
+
+  Future<UserDetails>? loadAccount() async {
+    return await LoginAccount.loadAccount();
+  }
+
+  void _fetchUserData() async {
+    userDetails = await loadAccount();
+    if (userDetails == null) {
+      Future.delayed(
+        Duration.zero,
+        () {
+          Navigator.of(context).pushReplacementNamed(Login.routeName);
+        },
+      );
+    } else {
+      _saveData();
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchUserData();
+  }
+
+  void _saveData() async {
+    // Gather data from TextField widgets
+    String name = _nameController.text;
+    int pronoun = _selectedPronoun;
+    bool gender = _selectedGender;
+    DateTime birthDate = selectedDate;
+    int bloodType = _selectedBloodType;
+    String phoneNumber = _phoneNumberController.text;
+    String note = _noteController.text;
+
+    // Create an instance of the API service
+    CallCustomerApi api = CallCustomerApi();
+
+    // Create an instance of your API request model with the gathered data
+    MedicalReport newMedicalReport = MedicalReport(
+      fullname: name,
+      pronounce: pronoun,
+      gender: gender,
+      dob: birthDate,
+      bloodType: bloodType,
+      phone: phoneNumber,
+      note: note,
+    );
+
+    try {
+      await api.addNewMedicalReport(newMedicalReport);
+
+      // Optionally, you can handle success or show a success message
+      print('Medical report added successfully');
+    } catch (error) {
+      // Handle errors - display an error message or log the error
+      print('Error adding medical report: $error');
+    }
+  }
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -75,13 +148,20 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
     }
   }
 
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _phoneNumberController = TextEditingController();
+  TextEditingController _noteController = TextEditingController();
+  int _selectedPronoun = 0;
+  bool _selectedGender = true;
+  int _selectedBloodType = 0;
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     String formattedDate = DateFormat('dd-MM-yyyy').format(selectedDate);
     return Scaffold(
       appBar: const AppBarCom(
-        appBarText: "Danh sách bệnh nhân",
+        appBarText: "Tạo mới danh sách bệnh nhân",
         leading: true,
       ),
       body: Align(
@@ -93,20 +173,6 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  margin: const EdgeInsets.only(top: 20),
-                  child: Text(
-                    'Tạo mới hồ sơ bệnh nhân',
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.almarai(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 24,
-                      color: ColorPalette.blueBold2,
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                  ),
-                ),
                 const SizedBox(height: 15),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,6 +186,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                       ),
                     ),
                     TextField(
+                      controller: _nameController,
                       textAlign: TextAlign.start,
                       maxLength: 20,
                       decoration: InputDecoration(
@@ -172,7 +239,9 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                             items: _listPro,
                             initialItem: _listPro[0],
                             onChanged: (value) {
-                              log('changing value to: $value');
+                              setState(() {
+                                _selectedBloodType = value;
+                              });
                             },
                             decoration: CustomDropdownDecoration(
                               headerStyle: GoogleFonts.almarai(
@@ -221,7 +290,9 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                             items: _listSex,
                             initialItem: _listSex[0],
                             onChanged: (value) {
-                              log('changing value to: $value');
+                              setState(() {
+                                _selectedBloodType = value;
+                              });
                             },
                             decoration: CustomDropdownDecoration(
                               headerStyle: GoogleFonts.almarai(
@@ -323,7 +394,9 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                             items: _listBlood,
                             initialItem: _listBlood[0],
                             onChanged: (value) {
-                              log('changing value to: $value');
+                              setState(() {
+                                _selectedBloodType = value;
+                              });
                             },
                             decoration: CustomDropdownDecoration(
                               headerStyle: GoogleFonts.almarai(
@@ -368,6 +441,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                       ),
                     ),
                     TextField(
+                      controller: _phoneNumberController,
                       textAlign: TextAlign.start,
                       maxLength: 10,
                       decoration: InputDecoration(
@@ -412,6 +486,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                     ),
                     SingleChildScrollView(
                       child: TextField(
+                        controller: _noteController,
                         maxLines: 5,
                         maxLength: 255,
                         decoration: InputDecoration(

@@ -5,6 +5,7 @@ import 'package:exe201_lumos_mobile/api_model/partner/partner.dart';
 import 'package:exe201_lumos_mobile/api_services/partner_service.dart';
 import 'package:exe201_lumos_mobile/core/helper/local_storage_helper.dart';
 import 'package:exe201_lumos_mobile/login.dart';
+import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 
@@ -83,8 +84,12 @@ class _SearchBookingState extends State<SearchBooking> {
             await api.getPartnerPartnerServiceByKeyword(keyword);
         if (mounted) {
           setState(() {
-            _partner = partner;
-            isEmptyList = _partner.isEmpty;
+            if (partner != null) {
+              setState(() {
+                _partner = partner;
+                isEmptyList = _partner.isEmpty;
+              });
+            }
           });
         }
       } else {
@@ -166,12 +171,14 @@ class _SearchBookingState extends State<SearchBooking> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              if (context != null) {
-                                Navigator.of(context).pushNamed(
-                                  PartnerServiceList.routeName,
-                                  arguments: item.partnerId,
-                                );
-                              }
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PartnerServiceList(
+                                    partnerId: item.partnerId,
+                                  ),
+                                ),
+                              );
                             },
                             child: ListTile(
                               title: Column(
@@ -265,7 +272,8 @@ class _SearchBookingState extends State<SearchBooking> {
                                                                   right: 6),
                                                         ),
                                                         const Icon(
-                                                          Icons.event_note,
+                                                          FontAwesomeIcons
+                                                              .calendarCheck,
                                                           size: 20,
                                                           color: ColorPalette
                                                               .blueBold2,

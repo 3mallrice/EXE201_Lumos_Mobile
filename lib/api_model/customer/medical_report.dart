@@ -1,28 +1,28 @@
 class MedicalReport {
-  final int reportId;
-  final int customerId;
-  final String code;
+  final int? reportId;
+  final int? customerId;
+  final String? code;
   final String fullname;
   final String phone;
   final DateTime dob;
   final bool gender;
   final int pronounce;
   final int bloodType;
-  final String note;
-  final int status;
+  final String? note;
+  final int? status;
 
   MedicalReport({
-    required this.reportId,
-    required this.customerId,
-    required this.code,
+    this.reportId,
+    this.customerId,
+    this.code,
     required this.fullname,
     required this.phone,
     required this.dob,
     required this.gender,
     required this.pronounce,
     required this.bloodType,
-    required this.note,
-    required this.status,
+    this.note,
+    this.status,
   });
 
   factory MedicalReport.fromJson(Map<String, dynamic> json) {
