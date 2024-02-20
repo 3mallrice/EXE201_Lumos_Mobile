@@ -48,10 +48,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
         appBarText: 'Thông báo',
       ),
       body: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10),
-        padding: const EdgeInsets.all(10),
         color: ColorPalette.blue2,
+        margin: const EdgeInsets.only(bottom: 75),
         child: ListView.builder(
+          padding: const EdgeInsets.all(10),
           clipBehavior: Clip.antiAlias,
           shrinkWrap: true,
           itemCount: _notis.length,

@@ -25,6 +25,7 @@ class _MemberHomeState extends State<MemberHome> {
   ];
   int _hintIndex = 0;
   late Timer _timer;
+
   @override
   void initState() {
     super.initState();
@@ -68,6 +69,7 @@ class _MemberHomeState extends State<MemberHome> {
               elevation: 0,
             ),
             body: SingleChildScrollView(
+              padding: EdgeInsets.only(bottom: 75),
               child: Align(
                 alignment: AlignmentDirectional.center,
                 child: FractionallySizedBox(
