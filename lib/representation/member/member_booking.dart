@@ -113,7 +113,9 @@ class _BookingPageState extends State<BookingPage> {
                     color: ColorPalette.blueBold2,
                   ),
                 ),
-                onTap: () => {/* Xử lý khi chọn 'Music' */},
+                onTap: () => {
+                  /* Xử lý khi chọn 'Music' */
+                },
               ),
               ListTile(
                 leading: const Icon(
@@ -130,7 +132,9 @@ class _BookingPageState extends State<BookingPage> {
                   'Đang phát triển ...',
                   style: TextStyle(color: ColorPalette.grey),
                 ),
-                onTap: () => {/* Xử lý khi chọn 'Photos' */},
+                onTap: () => {
+                  /* Xử lý khi chọn 'Photos' */
+                },
               ),
               ListTile(
                 leading: const Icon(
@@ -147,7 +151,9 @@ class _BookingPageState extends State<BookingPage> {
                   'Đang phát triển ...',
                   style: TextStyle(color: ColorPalette.grey),
                 ),
-                onTap: () => {/* Xử lý khi chọn 'Video' */},
+                onTap: () => {
+                  /* Xử lý khi chọn 'Video' */
+                },
               ),
               ListTile(
                 leading: const Icon(
@@ -164,7 +170,9 @@ class _BookingPageState extends State<BookingPage> {
                   'Đang phát triển ...',
                   style: TextStyle(color: ColorPalette.grey),
                 ),
-                onTap: () => {/* Xử lý khi chọn 'Video' */},
+                onTap: () => {
+                  /* Xử lý khi chọn 'Video' */
+                },
               ),
             ],
           );
@@ -172,6 +180,15 @@ class _BookingPageState extends State<BookingPage> {
       );
     };
   }
+
+  final List<String> _customer = [
+    "Nguyễn Vũ Hồng Hoa",
+    "Bùi Hữu Phúc",
+  ];
+  final List<String> _service = [
+    "Tắm cho bé",
+    "Tắm cho mẹ",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -210,9 +227,82 @@ class _BookingPageState extends State<BookingPage> {
                 ),
                 //note
                 Container(
-                  height: 50,
+                  height: 20,
                 ),
                 //
+
+                Container(
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 5),
+                  padding: const EdgeInsets.all(5),
+                  decoration: ShapeDecoration(
+                    color: ColorPalette.blue2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                  ),
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: _service.length,
+                    itemBuilder: (context, index) {
+                      final item = _customer[index];
+                      return Column(
+                        children: [
+                          ListTile(
+                            title: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  item,
+                                  style: GoogleFonts.almarai(
+                                    textStyle: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: ColorPalette.blueBold2),
+                                  ),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: ListView.builder(
+                                    clipBehavior: Clip.antiAlias,
+                                    shrinkWrap: true,
+                                    itemCount: _service.length,
+                                    itemBuilder: (context, index) {
+                                      final item2 = _service[index];
+                                      return Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            item2,
+                                            style: GoogleFonts.almarai(
+                                              textStyle: const TextStyle(
+                                                fontWeight: FontWeight.normal,
+                                                fontSize: 16,
+                                                color: ColorPalette.blueBold2,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          if (index < _customer.length - 1)
+                            const Divider(
+                              thickness: 1,
+                              height: 2,
+                              color: ColorPalette.blue,
+                            ),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
