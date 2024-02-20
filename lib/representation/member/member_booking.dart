@@ -1,7 +1,9 @@
+import 'package:exe201_lumos_mobile/core/const/back-end/error_reponse.dart';
 import 'package:logger/logger.dart';
 
 import '../../api_model/authentication/login.dart';
 import '../../api_model/customer/cart_model.dart';
+import '../../api_model/customer/medical_report.dart';
 import '../../api_services/customer_service.dart';
 
 import '../../component/app_bar.dart';
@@ -14,6 +16,7 @@ import 'package:intl/intl.dart';
 import '../../core/const/front-end/color_const.dart';
 import '../../core/helper/local_storage_helper.dart';
 import '../../login.dart';
+import 'partner_service_list.dart';
 
 class BookingPage extends StatefulWidget {
   final List<CartModel>? cart;
@@ -30,7 +33,10 @@ class _BookingPageState extends State<BookingPage> {
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = TimeOfDay.now();
 
+  double totalPrice = 0;
+
   var log = Logger();
+  List<MedicalReportService?> medicalReportServices = [];
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -93,7 +99,7 @@ class _BookingPageState extends State<BookingPage> {
     }
   }
 
-  CallCustomerApi callApi = CallCustomerApi();
+  CallCustomerApi calCustomerlApi = CallCustomerApi();
   UserDetails? userDetails;
 
   Future<UserDetails>? loadAccount() async {
@@ -118,9 +124,71 @@ class _BookingPageState extends State<BookingPage> {
   void initState() {
     super.initState();
     fetchUserData();
+    fetchMedicalReports();
+  }
+
+  Future<void> fetchMedicalReports() async {
+    for (int i = 0; i < widget.cart!.length; i++) {
+      int medicalReportId = widget.cart![i].medicalReportId;
+      MedicalReport report = await fetchMedicalReport(medicalReportId);
+      MedicalReportService medicalReportService = MedicalReportService(
+          report, widget.cart![i].services.cast<Service>());
+      setState(
+        () {
+          medicalReportServices.add(medicalReportService);
+        },
+      );
+      for (int j = 0; j < medicalReportService.services.length; j++) {
+        totalPrice += medicalReportService.services[j].price;
+      }
+    }
+  }
+
+  Future<MedicalReport> fetchMedicalReport(int reportId) async {
+    return await calCustomerlApi.getMedicalReportById(reportId);
   }
 
   dynamic Function() onTap() {
+    if (medicalReportServices.isEmpty) {
+      return () {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              backgroundColor: ColorPalette.blue2,
+              title: const Text(
+                DiaLogMessage.title,
+                style: TextStyle(
+                  color: ColorPalette.pinkBold,
+                ),
+              ),
+              content: const Text(
+                BookingErrorMessage.emptyList,
+                style: TextStyle(
+                  color: ColorPalette.blueBold2,
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text(
+                    DiaLogMessage.ok,
+                    style: TextStyle(
+                      color: ColorPalette.blueBold2,
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+      };
+    }
     return () {
       showModalBottomSheet(
         backgroundColor: ColorPalette.blue2,
@@ -140,6 +208,21 @@ class _BookingPageState extends State<BookingPage> {
                     color: ColorPalette.blueBold2,
                   ),
                 ),
+              ),
+              ListTile(
+                leading: const Icon(
+                  Icons.payments_rounded,
+                  color: ColorPalette.blueBold2,
+                ),
+                title: const Text(
+                  'Thanh toán COD',
+                  style: TextStyle(
+                    color: ColorPalette.blueBold2,
+                  ),
+                ),
+                onTap: () => {
+                  /* Xử lý khi chọn 'Music' */
+                },
               ),
               ListTile(
                 leading: const Icon(
@@ -220,24 +303,11 @@ class _BookingPageState extends State<BookingPage> {
     };
   }
 
-  final List<String> _customer = [
-    "Nguyễn Vũ Hồng Hoa",
-    "Bùi Hữu Phúc",
-  ];
-  final List<String> _service = [
-    "Tắm cho bé",
-    "Tắm cho mẹ",
-  ];
-
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     String formattedDate = DateFormat('dd-MM-yyyy').format(selectedDate);
     String formattedTime = selectedTime.format(context);
-
-    final carts = widget.cart;
-
-    log.i(carts.toString());
 
     return Scaffold(
       appBar: const AppBarCom(
@@ -270,81 +340,150 @@ class _BookingPageState extends State<BookingPage> {
                 ),
                 //note
                 Container(
-                  height: 5,
+                  height: 10,
                 ),
-                Container(
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 15, horizontal: 5),
-                  padding: const EdgeInsets.all(5),
-                  decoration: ShapeDecoration(
-                    color: ColorPalette.blue2,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6),
+                if (medicalReportServices.isEmpty)
+                  const Text(
+                    SearchErrorMessage.noResultsFound,
+                    style: TextStyle(
+                      color: ColorPalette.pinkBold,
                     ),
-                  ),
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: _service.length,
-                    itemBuilder: (context, index) {
-                      final item = _customer[index];
-                      return Column(
-                        children: [
-                          ListTile(
-                            title: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                  )
+                else
+                  Container(
+                    margin:
+                        const EdgeInsets.symmetric(vertical: 15, horizontal: 5),
+                    padding: const EdgeInsets.all(5),
+                    decoration: ShapeDecoration(
+                      color: ColorPalette.blue2,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                    ),
+                    child: Column(
+                      children: [
+                        ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: medicalReportServices.length,
+                          itemBuilder: (context, index) {
+                            final item = medicalReportServices[index];
+                            return Column(
                               children: [
-                                Text(
-                                  item,
-                                  style: GoogleFonts.almarai(
-                                    textStyle: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: ColorPalette.blueBold2),
+                                ListTile(
+                                  title: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        item!.medicalReport.fullname,
+                                        style: GoogleFonts.almarai(
+                                          textStyle: const TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                              color: ColorPalette.blueBold2),
+                                        ),
+                                      ),
+                                      Container(
+                                        padding:
+                                            const EdgeInsets.only(left: 10),
+                                        child: ListView.builder(
+                                          clipBehavior: Clip.antiAlias,
+                                          shrinkWrap: true,
+                                          itemCount: item.services.length,
+                                          itemBuilder: (context, index) {
+                                            Service item2 =
+                                                item.services[index];
+                                            totalPrice += item2.price;
+                                            log.i(totalPrice);
+                                            return Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  item2.name,
+                                                  style: GoogleFonts.almarai(
+                                                    textStyle: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                      fontSize: 16,
+                                                      color: ColorPalette
+                                                          .blueBold2,
+                                                    ),
+                                                  ),
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                ),
+                                                Text(
+                                                  item2.price.toString(),
+                                                  style: GoogleFonts.almarai(
+                                                    textStyle: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                      fontSize: 16,
+                                                      color: ColorPalette
+                                                          .blueBold2,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                Container(
-                                  padding: const EdgeInsets.only(left: 10),
-                                  child: ListView.builder(
-                                    clipBehavior: Clip.antiAlias,
-                                    shrinkWrap: true,
-                                    itemCount: _service.length,
-                                    itemBuilder: (context, index) {
-                                      final item2 = _service[index];
-                                      return Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            item2,
-                                            style: GoogleFonts.almarai(
-                                              textStyle: const TextStyle(
-                                                fontWeight: FontWeight.normal,
-                                                fontSize: 16,
-                                                color: ColorPalette.blueBold2,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  ),
-                                )
+                                // if (index < medicalReportServices.length - 1)
+                                const Divider(
+                                  thickness: 1,
+                                  height: 2,
+                                  color: ColorPalette.blue,
+                                ),
                               ],
-                            ),
+                            );
+                          },
+                        ),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 5,
+                            horizontal: 23,
                           ),
-                          if (index < _customer.length - 1)
-                            const Divider(
-                              thickness: 1,
-                              height: 2,
-                              color: ColorPalette.blue,
-                            ),
-                        ],
-                      );
-                    },
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text(
+                                "Tổng cộng: ",
+                                style: GoogleFonts.almarai(
+                                  textStyle: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                    color: ColorPalette.pinkBold,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                "$totalPrice",
+                                style: GoogleFonts.almarai(
+                                  textStyle: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    color: ColorPalette.pinkBold,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
                 Container(
-                  height: 5,
+                  height: 10,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -500,7 +639,7 @@ class _BookingPageState extends State<BookingPage> {
                     ),
                     SingleChildScrollView(
                       child: TextField(
-                        maxLines: 5,
+                        maxLines: 3,
                         maxLength: 255,
                         decoration: InputDecoration(
                           hintText: 'Nhập ghi chú...',
@@ -559,7 +698,10 @@ class _BookingPageState extends State<BookingPage> {
                       fontSize: 16,
                     ),
                   ),
-                )
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
               ],
             ),
           ),
@@ -567,4 +709,14 @@ class _BookingPageState extends State<BookingPage> {
       ),
     );
   }
+}
+
+class MedicalReportService {
+  final MedicalReport medicalReport;
+  final List<Service> services;
+
+  MedicalReportService(
+    this.medicalReport,
+    this.services,
+  );
 }

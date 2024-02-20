@@ -37,6 +37,7 @@ class LoginAccount {
   static Future<UserDetails> loadAccount() async {
     UserDetails userDetails = UserDetails(
         id: await LocalStorageHelper.getValue('id'),
+        username: await LocalStorageHelper.getValue('username'),
         email: await LocalStorageHelper.getValue('email'),
         code: await LocalStorageHelper.getValue('code'),
         role: await LocalStorageHelper.getValue('role'),
@@ -51,6 +52,7 @@ class LoginAccount {
 
   static saveLoginAccount(UserDetails userDetails) async {
     await LocalStorageHelper.setValue('id', userDetails.id);
+    await LocalStorageHelper.setValue('username', userDetails.username);
     await LocalStorageHelper.setValue('email', userDetails.email);
     await LocalStorageHelper.setValue('code', userDetails.code);
     await LocalStorageHelper.setValue('role', userDetails.role);
@@ -63,6 +65,7 @@ class LoginAccount {
 
   static clearLoginAccount() async {
     await LocalStorageHelper.setValue('id', null);
+    await LocalStorageHelper.setValue('username', null);
     await LocalStorageHelper.setValue('email', null);
     await LocalStorageHelper.setValue('code', null);
     await LocalStorageHelper.setValue('role', null);
