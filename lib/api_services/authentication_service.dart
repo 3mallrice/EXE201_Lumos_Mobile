@@ -34,6 +34,7 @@ class CallAuthenticationApi {
         final userdetailData = loginData['userdetails'];
         UserDetails userDetails = UserDetails(
           id: userdetailData['id'],
+          username: loginData['username'],
           code: userdetailData['code'],
           email: userdetailData['email'],
           role: userdetailData['role'],

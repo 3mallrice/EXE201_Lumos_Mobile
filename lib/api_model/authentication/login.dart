@@ -46,6 +46,7 @@ class LoginResponse {
 
 class UserDetails {
   final int? id;
+  final String username;
   final String email;
   final String code;
   final int role;
@@ -58,6 +59,7 @@ class UserDetails {
 
   UserDetails({
     this.id,
+    required this.username,
     required this.email,
     required this.code,
     required this.role,
@@ -72,6 +74,7 @@ class UserDetails {
   factory UserDetails.fromJson(Map<String, dynamic> json) {
     return UserDetails(
       id: json['id'],
+      username: json['username'],
       email: json['email'],
       code: json['code'],
       role: json['role'],
