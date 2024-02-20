@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import 'member_booking.dart';
 import 'package:flutter/material.dart';
 import '../../component/app_bar.dart';
@@ -188,6 +190,11 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
 
   @override
   Widget build(BuildContext context) {
+    final partnerId = ModalRoute.of(context)?.settings.arguments;
+    if (kDebugMode) {
+      print(partnerId);
+    }
+
     return Scaffold(
       appBar: AppBarCom(
         appBarText: 'Dịch vụ',

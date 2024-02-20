@@ -1,4 +1,5 @@
 class Partner {
+  final int partnerId;
   final String partnerName;
   final String address;
   final String description;
@@ -6,6 +7,7 @@ class Partner {
   final List<PartnerService> partnerServices;
 
   Partner({
+    required this.partnerId,
     required this.partnerName,
     required this.address,
     required this.description,
@@ -19,6 +21,7 @@ class Partner {
         servicesJson.map((json) => PartnerService.fromJson(json)).toList();
 
     return Partner(
+      partnerId: json['partnerId'],
       partnerName: json['partnerName'],
       address: json['address'],
       description: json['description'],

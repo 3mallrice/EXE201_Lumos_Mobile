@@ -164,10 +164,14 @@ class _SearchBookingState extends State<SearchBooking> {
                       final item = _partner[index];
                       return Column(
                         children: [
-                          InkWell(
+                          GestureDetector(
                             onTap: () {
-                              Navigator.of(context)
-                                  .pushNamed(PartnerServiceList.routeName);
+                              if (context != null) {
+                                Navigator.of(context).pushNamed(
+                                  PartnerServiceList.routeName,
+                                  arguments: item.partnerId,
+                                );
+                              }
                             },
                             child: ListTile(
                               title: Column(
