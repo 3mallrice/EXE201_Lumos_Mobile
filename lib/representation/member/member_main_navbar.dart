@@ -29,7 +29,6 @@ class _MemberMainState extends State<MemberMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorPalette.white,
       body: IndexedStack(
         index: _selectedTab.index,
         children: const [
@@ -40,7 +39,7 @@ class _MemberMainState extends State<MemberMain> {
         ],
       ),
       extendBody: true,
-      extendBodyBehindAppBar: false,
+      extendBodyBehindAppBar: true,
       bottomNavigationBar: DotNavigationBar(
         backgroundColor: ColorPalette.pink,
         currentIndex: _SelectedTab.values.indexOf(_selectedTab),
