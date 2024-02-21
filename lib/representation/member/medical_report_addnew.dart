@@ -1,10 +1,8 @@
-import 'dart:developer';
-
-import 'package:exe201_lumos_mobile/api_model/authentication/login.dart';
-import 'package:exe201_lumos_mobile/api_model/customer/medical_report.dart';
-import 'package:exe201_lumos_mobile/api_services/customer_service.dart';
-import 'package:exe201_lumos_mobile/core/helper/local_storage_helper.dart';
-import 'package:exe201_lumos_mobile/login.dart';
+import '../../api_model/authentication/login.dart';
+import '../../api_model/customer/medical_report.dart';
+import '../../api_services/customer_service.dart';
+import '../../core/helper/local_storage_helper.dart';
+import '../../login.dart';
 import 'package:logger/logger.dart';
 
 import '../../component/app_bar.dart';
@@ -52,7 +50,6 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
   CallCustomerApi api = CallCustomerApi();
   var log = Logger();
 
-  List<String> _reports = [];
   bool isEmptyList = true;
 
   UserDetails? userDetails;

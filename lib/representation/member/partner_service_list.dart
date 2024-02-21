@@ -1,6 +1,9 @@
-import 'package:flutter/foundation.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+
+import '../../api_services/partner_service.dart';
 
 import '../../api_model/authentication/login.dart';
+import '../../api_model/partner/partner.dart';
 import '../../api_services/customer_service.dart';
 import 'package:logger/logger.dart';
 
@@ -32,9 +35,11 @@ class PartnerServiceList extends StatefulWidget {
 }
 
 class _PartnerServiceListState extends State<PartnerServiceList> {
-  final CallCustomerApi api = CallCustomerApi();
+  final CallCustomerApi customerApi = CallCustomerApi();
+  final CallPartnerApi partnerApi = CallPartnerApi();
   bool _isFavorited = false;
   UserDetails? userDetails;
+  Partner? partner;
 
   var log = Logger();
 
@@ -54,6 +59,28 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
       });
     } else {
       _fetchMedicalReports();
+      _fetchPartnerData(widget.partnerId);
+    }
+  }
+
+  void _fetchPartnerData(int? partnerId) async {
+    try {
+      if (partnerId != null) {
+        Partner? partner = await partnerApi.getPartnerById(partnerId);
+        setState(() {
+          this.partner = partner;
+        });
+      } else {
+        setState(() {
+          log.e("Partner id is null.");
+          partner = null;
+        });
+      }
+    } catch (e) {
+      setState(() {
+        log.e("Error when fetching partner data: $e");
+        partner = null;
+      });
     }
   }
 
@@ -61,7 +88,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
     try {
       if (userDetails != null && userDetails!.id != null) {
         List<MedicalReport>? reports =
-            await api.getMedicalReport(userDetails!.id!);
+            await customerApi.getMedicalReport(userDetails!.id!);
         setState(
           () {
             _reports = reports;
@@ -232,41 +259,52 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
               child: ListView.builder(
                 itemCount: _reports.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Column(
-                    children: [
-                      ListTile(
-                        title: Text(
-                          _reports[index].fullname,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                        ),
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 20),
-                        leading: const Icon(
-                          Icons.medical_services,
-                          size: 20,
-                          color: ColorPalette.pink,
-                        ),
-                        titleTextStyle: GoogleFonts.almarai(
-                          fontSize: 16,
-                          fontWeight: FontWeight.normal,
-                          color: ColorPalette.blueBold2,
-                        ),
-                        onTap: () {
-                          var cart =
-                              onAddToCart(_reports[index].reportId, service);
-                          log.i("Cart: $cart");
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      if (index < _reports.length - 1)
-                        const Divider(
-                          thickness: 0.7,
-                          height: 2,
-                          color: ColorPalette.blue2,
-                        ),
-                    ],
-                  );
+                  return (_reports.isNotEmpty)
+                      ? Column(
+                          children: [
+                            ListTile(
+                              title: Text(
+                                _reports[index].fullname,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                              ),
+                              contentPadding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              leading: const Icon(
+                                Icons.medical_services,
+                                size: 20,
+                                color: ColorPalette.pink,
+                              ),
+                              titleTextStyle: GoogleFonts.almarai(
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal,
+                                color: ColorPalette.blueBold2,
+                              ),
+                              onTap: () {
+                                var cart = onAddToCart(
+                                    _reports[index].reportId!, service);
+                                log.i("Cart: $cart");
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                            if (index < _reports.length - 1)
+                              const Divider(
+                                thickness: 0.7,
+                                height: 2,
+                                color: ColorPalette.blue2,
+                              ),
+                          ],
+                        )
+                      : const Center(
+                          child: Text(
+                            SearchErrorMessage.noResultsFound,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.normal,
+                              color: ColorPalette.blueBold2,
+                            ),
+                          ),
+                        );
                 },
               ),
             ),
@@ -303,9 +341,16 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
 
   @override
   Widget build(BuildContext context) {
-    final partnerId = ModalRoute.of(context)?.settings.arguments;
-    if (kDebugMode) {
-      print(partnerId);
+    if (partner == null) {
+      // Hiển thị một tiến trình tải hoặc một thông báo cho người dùng
+      return Scaffold(
+        body: Center(
+          child: LoadingAnimationWidget.fourRotatingDots(
+            color: ColorPalette.pinkBold,
+            size: 80,
+          ),
+        ),
+      );
     }
 
     return Scaffold(
@@ -354,8 +399,8 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 10),
             child: ListTile(
-              title: const Text(
-                'Bệnh viện Đại Học Y Dược TPHCM',
+              title: Text(
+                partner!.partnerName,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),

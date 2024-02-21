@@ -6,7 +6,6 @@ import '../../api_model/authentication/login.dart';
 import '../../api_model/customer/medical_report.dart';
 import '../../component/app_bar.dart';
 import '../../core/const/front-end/color_const.dart';
-import 'medical_report_addnew.dart';
 import 'medical_report_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -159,7 +158,7 @@ class _MedicalReportPageState extends State<MedicalReportPage> {
         margin: const EdgeInsets.only(bottom: 12),
         child: ElevatedButton(
           onPressed: () {
-            Navigator.of(context).pushNamed(MedicalReportAdd.routeName);
+            // Navigator.of(context).pushNamed(MedicalReportAdd.routeName);
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: ColorPalette.pink,

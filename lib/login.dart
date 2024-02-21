@@ -387,7 +387,7 @@ class _LoginState extends State<Login> {
             body: Center(
               child: LoadingAnimationWidget.fourRotatingDots(
                 color: ColorPalette.pinkBold,
-                size: 200,
+                size: 80,
               ),
             ),
           );
