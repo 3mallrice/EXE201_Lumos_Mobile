@@ -1,4 +1,5 @@
 import 'package:exe201_lumos_mobile/core/const/back-end/error_reponse.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:logger/logger.dart';
 
 import '../../api_model/authentication/login.dart';
@@ -308,6 +309,18 @@ class _BookingPageState extends State<BookingPage> {
     double screenWidth = MediaQuery.of(context).size.width;
     String formattedDate = DateFormat('dd-MM-yyyy').format(selectedDate);
     String formattedTime = selectedTime.format(context);
+
+    if (widget.cart == null) {
+      // Hiển thị một tiến trình tải hoặc một thông báo cho người dùng
+      return Scaffold(
+        body: Center(
+          child: LoadingAnimationWidget.fourRotatingDots(
+            color: ColorPalette.pinkBold,
+            size: 80,
+          ),
+        ),
+      );
+    }
 
     return Scaffold(
       appBar: const AppBarCom(

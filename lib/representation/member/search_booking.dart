@@ -69,7 +69,7 @@ class _SearchBookingState extends State<SearchBooking> {
   void _onSearchChanged() {
     if (_debounce?.isActive ?? false) _debounce?.cancel();
     _debounce = Timer(
-      const Duration(milliseconds: 1),
+      const Duration(milliseconds: 0),
       () {
         _fetchPartners();
       },
@@ -84,12 +84,10 @@ class _SearchBookingState extends State<SearchBooking> {
             await api.getPartnerPartnerServiceByKeyword(keyword);
         if (mounted) {
           setState(() {
-            if (partner != null) {
-              setState(() {
-                _partner = partner;
-                isEmptyList = _partner.isEmpty;
-              });
-            }
+            setState(() {
+              _partner = partner;
+              isEmptyList = _partner.isEmpty;
+            });
           });
         }
       } else {
