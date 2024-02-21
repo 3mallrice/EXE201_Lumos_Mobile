@@ -84,7 +84,9 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
     }
   }
 
-  CartModel onAddToCart(int reportId, Service service) {
+  CartModel onAddToCart(int? reportId, Service service) {
+    if (reportId == null) return carts.first;
+
     // Kiểm tra xem đã có cart cho bệnh nhân này chưa
     var existingCartIndex =
         carts.indexWhere((cart) => cart.medicalReportId == reportId);

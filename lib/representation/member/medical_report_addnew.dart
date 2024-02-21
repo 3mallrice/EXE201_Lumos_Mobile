@@ -82,6 +82,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
   }
 
   void _saveData() async {
+    int? customerId = userDetails!.id;
     // Gather data from TextField widgets
     String name = _nameController.text;
     int pronoun = _selectedPronoun;
@@ -106,12 +107,9 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
     );
 
     try {
-      await api.addNewMedicalReport(newMedicalReport);
-
-      // Optionally, you can handle success or show a success message
+      await api.addNewMedicalReport(customerId!, newMedicalReport);
       print('Medical report added successfully');
     } catch (error) {
-      // Handle errors - display an error message or log the error
       print('Error adding medical report: $error');
     }
   }
@@ -240,7 +238,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                             initialItem: _listPro[0],
                             onChanged: (value) {
                               setState(() {
-                                _selectedBloodType = value;
+                                _selectedPronoun = _listPro.indexOf(value);
                               });
                             },
                             decoration: CustomDropdownDecoration(
@@ -291,7 +289,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                             initialItem: _listSex[0],
                             onChanged: (value) {
                               setState(() {
-                                _selectedBloodType = value;
+                                _selectedGender = value == 'Nam';
                               });
                             },
                             decoration: CustomDropdownDecoration(
@@ -395,7 +393,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                             initialItem: _listBlood[0],
                             onChanged: (value) {
                               setState(() {
-                                _selectedBloodType = value;
+                                _selectedBloodType = _listBlood.indexOf(value);
                               });
                             },
                             decoration: CustomDropdownDecoration(
@@ -531,6 +529,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
           child: ElevatedButton(
             onPressed: () {
               print('Button pressed');
+              _saveData();
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: ColorPalette.pink,

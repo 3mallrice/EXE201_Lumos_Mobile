@@ -78,6 +78,9 @@ class CallCustomerApi {
       }
     } catch (e) {
       throw Exception('Failed to add new medical report: $e');
+    }
+  }
+
   Future<MedicalReport> getMedicalReportById(int reportId) async {
     var url = Uri.parse('$api/medical-report/$reportId');
     token = LocalStorageHelper.getValue("token");
