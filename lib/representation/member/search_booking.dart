@@ -163,7 +163,11 @@ class _SearchBookingState extends State<SearchBooking> {
                     shrinkWrap: true,
                     itemCount: _partner.length,
                     itemBuilder: (context, index) {
-                      _service = _partner[index].partnerServices;
+                      _service =
+                          _partner[index].partnerServices?.isEmpty ?? true
+                              ? []
+                              : _partner[index].partnerServices
+                                  as List<PartnerService>;
                       final item = _partner[index];
                       return Column(
                         children: [
@@ -183,7 +187,7 @@ class _SearchBookingState extends State<SearchBooking> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    item.partnerName,
+                                    item.partnerName ?? '',
                                     style: GoogleFonts.almarai(
                                       textStyle: const TextStyle(
                                           fontSize: 18,
@@ -192,7 +196,7 @@ class _SearchBookingState extends State<SearchBooking> {
                                     ),
                                   ),
                                   Text(
-                                    item.address,
+                                    item.address ?? "",
                                     style: GoogleFonts.almarai(
                                       textStyle: const TextStyle(
                                         fontWeight: FontWeight.normal,
@@ -226,7 +230,7 @@ class _SearchBookingState extends State<SearchBooking> {
                                                     SizedBox(
                                                       width: 200,
                                                       child: Text(
-                                                        item2.name,
+                                                        item2.name ?? " ",
                                                         style:
                                                             GoogleFonts.almarai(
                                                           textStyle:
@@ -277,7 +281,7 @@ class _SearchBookingState extends State<SearchBooking> {
                                                               .blueBold2,
                                                         ),
                                                         Text(
-                                                          "${item2.bookedQuantity} lượt",
+                                                          "100 lượt",
                                                           style: GoogleFonts
                                                               .almarai(
                                                             fontSize: 16,
@@ -292,7 +296,7 @@ class _SearchBookingState extends State<SearchBooking> {
                                               ),
                                             ),
                                             Text(
-                                              '${formatCurrency(item2.price)} đ',
+                                              '${formatCurrency(item2.price ?? 0)} đ',
                                               style: GoogleFonts.aBeeZee(
                                                 fontSize: 18,
                                                 color: ColorPalette.blueBold2,

@@ -1,3 +1,4 @@
+import 'package:exe201_lumos_mobile/api_model/partner/partner.dart';
 import 'package:exe201_lumos_mobile/core/const/back-end/error_reponse.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:logger/logger.dart';
@@ -17,7 +18,6 @@ import 'package:intl/intl.dart';
 import '../../core/const/front-end/color_const.dart';
 import '../../core/helper/local_storage_helper.dart';
 import '../../login.dart';
-import 'partner_service_list.dart';
 
 class BookingPage extends StatefulWidget {
   final List<CartModel>? cart;
@@ -34,7 +34,7 @@ class _BookingPageState extends State<BookingPage> {
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = TimeOfDay.now();
 
-  double totalPrice = 0;
+  int totalPrice = 0;
 
   var log = Logger();
   List<MedicalReportService?> medicalReportServices = [];
@@ -133,14 +133,14 @@ class _BookingPageState extends State<BookingPage> {
       int medicalReportId = widget.cart![i].medicalReportId;
       MedicalReport report = await fetchMedicalReport(medicalReportId);
       MedicalReportService medicalReportService = MedicalReportService(
-          report, widget.cart![i].services.cast<Service>());
+          report, widget.cart![i].services.cast<PartnerService>());
       setState(
         () {
           medicalReportServices.add(medicalReportService);
         },
       );
       for (int j = 0; j < medicalReportService.services.length; j++) {
-        totalPrice += medicalReportService.services[j].price;
+        totalPrice += medicalReportService.services[j].price!;
       }
     }
   }
@@ -404,9 +404,9 @@ class _BookingPageState extends State<BookingPage> {
                                           shrinkWrap: true,
                                           itemCount: item.services.length,
                                           itemBuilder: (context, index) {
-                                            Service item2 =
+                                            PartnerService item2 =
                                                 item.services[index];
-                                            totalPrice += item2.price;
+                                            totalPrice += item2.price!;
                                             log.i(totalPrice);
                                             return Row(
                                               mainAxisAlignment:
@@ -415,20 +415,25 @@ class _BookingPageState extends State<BookingPage> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                Text(
-                                                  item2.name,
-                                                  style: GoogleFonts.almarai(
-                                                    textStyle: const TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                      fontSize: 16,
-                                                      color: ColorPalette
-                                                          .blueBold2,
+                                                SizedBox(
+                                                  width: screenWidth * 0.6,
+                                                  child: Text(
+                                                    item2.name ?? "",
+                                                    style: GoogleFonts.almarai(
+                                                      textStyle:
+                                                          const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        fontSize: 16,
+                                                        color: ColorPalette
+                                                            .blueBold2,
+                                                      ),
                                                     ),
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    maxLines: 2,
+                                                    softWrap: true,
                                                   ),
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  maxLines: 1,
                                                 ),
                                                 Text(
                                                   item2.price.toString(),
@@ -726,7 +731,7 @@ class _BookingPageState extends State<BookingPage> {
 
 class MedicalReportService {
   final MedicalReport medicalReport;
-  final List<Service> services;
+  final List<PartnerService> services;
 
   MedicalReportService(
     this.medicalReport,

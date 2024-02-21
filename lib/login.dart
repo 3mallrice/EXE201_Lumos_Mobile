@@ -319,6 +319,7 @@ class _LoginState extends State<Login> {
                               onTap: onGoogleLogin,
                               borderRadius: 66.5,
                               height: 55,
+                              width: 300,
                               color: ColorPalette.white,
                               borderColor: ColorPalette.primaryText,
                               widget: Row(

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:exe201_lumos_mobile/api_model/customer/medical_report.dart';
 import 'package:exe201_lumos_mobile/core/helper/local_storage_helper.dart';
 import 'package:http/http.dart' as http;
+import 'package:logger/logger.dart';
 
 import 'api_service.dart';
 
@@ -10,6 +11,7 @@ class CallCustomerApi {
   static const apiName = '/customer';
   static const rootApi = ApiService.rootApi;
   final String api = rootApi + apiName;
+  var log = Logger();
 
   // ignore: unused_field
   final String _imgUrl = '';
@@ -45,9 +47,9 @@ class CallCustomerApi {
   }
 
   //POST: medical-report
-  Future<MedicalReport> addNewMedicalReport(
+  Future<bool> addNewMedicalReport(
       int customerId, MedicalReport newReport) async {
-    var url = Uri.parse('$api/$customerId/medical-report');
+    var url = Uri.parse('$api/medical-report');
     token = LocalStorageHelper.getValue("token");
 
     try {
@@ -60,7 +62,7 @@ class CallCustomerApi {
         body: json.encode({
           'fullName': newReport.fullname,
           'phone': newReport.phone,
-          'dob': newReport.dob,
+          'dob': newReport.dob.toIso8601String(),
           'gender': newReport.gender,
           'pronounce': newReport.pronounce,
           'bloodType': newReport.bloodType,
@@ -68,15 +70,16 @@ class CallCustomerApi {
         }),
       );
 
-      if (response.statusCode == 201) {
+      if (response.statusCode == 200) {
         final responseBody = json.decode(response.body);
         final responseData = responseBody['data'];
-        return MedicalReport.fromJson(responseData);
+        return responseData['statusCode'] == 'success' ? true : false;
       } else {
         throw Exception(
             'Failed to add new medical report: ${response.statusCode} - ${response.reasonPhrase}');
       }
     } catch (e) {
+      log.i("Failed to add new medical report: $e");
       throw Exception('Failed to add new medical report: $e');
     }
   }
