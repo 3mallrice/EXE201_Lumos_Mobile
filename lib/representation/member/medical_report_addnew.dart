@@ -1,3 +1,5 @@
+import 'package:exe201_lumos_mobile/representation/member/medical_report.dart';
+
 import '../../api_model/authentication/login.dart';
 import '../../api_model/customer/medical_report.dart';
 import '../../api_services/customer_service.dart';
@@ -30,7 +32,7 @@ const List<String> _listPro = [
 ];
 
 const List<String> _listSex = [
-  'Nam',
+  'Nam', //true
   'Nữ',
 ];
 
@@ -46,7 +48,7 @@ const List<String> _listBlood = [
 ];
 
 class _MedicalReportAddState extends State<MedicalReportAdd> {
-  DateTime selectedDate = DateTime.now();
+  DateTime _selectedDate = DateTime.now();
   CallCustomerApi api = CallCustomerApi();
   var log = Logger();
 
@@ -78,50 +80,96 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
     _fetchUserData();
   }
 
-  void _saveData() async {
-    int? customerId = userDetails!.id;
-    // Gather data from TextField widgets
-    String name = _nameController.text;
-    int pronoun = _selectedPronoun;
-    bool gender = _selectedGender;
-    DateTime birthDate = selectedDate;
-    int bloodType = _selectedBloodType;
-    String phoneNumber = _phoneNumberController.text;
-    String note = _noteController.text;
+  Future<void> _saveData() async {
+    if (userDetails != null) {
+      final customerId = userDetails!.id;
+      final name = _nameController.text;
+      final pronoun = _selectedPronoun;
+      final gender = _selectedGender;
+      final dob = _selectedDate;
+      final bloodType = _selectedBloodType;
+      final phoneNumber = _phoneNumberController.text;
+      final note = _noteController.text;
 
-    // Create an instance of the API service
-    CallCustomerApi api = CallCustomerApi();
+      final newMedicalReport = MedicalReport(
+        fullname: name,
+        pronounce: pronoun,
+        gender: gender,
+        dob: dob,
+        bloodType: bloodType,
+        phone: phoneNumber,
+        note: note,
+      );
 
-    // Create an instance of your API request model with the gathered data
-    MedicalReport newMedicalReport = MedicalReport(
-      fullname: name,
-      pronounce: pronoun,
-      gender: gender,
-      dob: birthDate,
-      bloodType: bloodType,
-      phone: phoneNumber,
-      note: note,
-    );
+      try {
+        bool isSuccess =
+            await api.addNewMedicalReport(customerId!, newMedicalReport);
 
-    try {
-      await api.addNewMedicalReport(customerId!, newMedicalReport);
-      print('Medical report added successfully');
+        if (isSuccess) {
+          //show dialog
+          _showSuccessDialog();
+        } else {
+          _showFailDialog();
+        }
 
-      // Clear text controllers
-      _nameController.clear();
-      _phoneNumberController.clear();
-      _noteController.clear();
+        // Clear text controllers
+        _nameController.clear();
+        _phoneNumberController.clear();
+        _noteController.clear();
 
-      // Reset state variables for dropdowns and date selection
-      setState(() {
-        _selectedPronoun = 0;
-        _selectedGender = true;
-        _selectedBloodType = 0;
-        selectedDate = DateTime.now();
-      });
-    } catch (error) {
-      print('Error adding medical report: $error');
+        // Reset state variables for dropdowns and date selection
+        setState(() {
+          _selectedPronoun = 0;
+          _selectedGender = true;
+          _selectedBloodType = 0;
+          _selectedDate = DateTime.now();
+          Navigator.of(context).pushNamed(MedicalReportPage.routeName);
+        });
+      } catch (error) {
+        log.e('Error adding new medical report: $error');
+      }
     }
+  }
+
+  //show success dialog
+  void _showSuccessDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Thành công'),
+          content: const Text('Thêm mới bệnh nhân thành công!'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showFailDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Thất bại'),
+          content: const Text('Thêm mới bệnh nhân thất bại!'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   Future<void> _selectDate(BuildContext context) async {
@@ -130,7 +178,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
       currentDate: DateTime.now(),
       locale: const Locale("vi", "VN"),
       initialEntryMode: DatePickerEntryMode.calendarOnly,
-      initialDate: selectedDate,
+      initialDate: _selectedDate,
       firstDate: DateTime(1920),
       lastDate: DateTime.now(),
       //theme
@@ -149,16 +197,16 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
       },
     );
 
-    if (picked != null && picked != selectedDate) {
+    if (picked != null && picked != _selectedDate) {
       setState(() {
-        selectedDate = picked;
+        _selectedDate = picked;
       });
     }
   }
 
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _phoneNumberController = TextEditingController();
-  TextEditingController _noteController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _noteController = TextEditingController();
   int _selectedPronoun = 0;
   bool _selectedGender = true;
   int _selectedBloodType = 0;
@@ -166,7 +214,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    String formattedDate = DateFormat('dd-MM-yyyy').format(selectedDate);
+    String formattedDate = DateFormat('dd-MM-yyyy').format(_selectedDate);
     return Scaffold(
       appBar: const AppBarCom(
         appBarText: "Tạo mới danh sách bệnh nhân",
@@ -538,7 +586,6 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
           margin: const EdgeInsets.only(bottom: 12),
           child: ElevatedButton(
             onPressed: () {
-              print('Button pressed');
               _saveData();
             },
             style: ElevatedButton.styleFrom(

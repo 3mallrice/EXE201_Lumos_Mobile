@@ -1,100 +1,82 @@
 class Partner {
-  final int partnerId;
-  final String partnerName;
-  final String address;
-  final String description;
+  final int? partnerId;
+  final String? code;
+  final String? email;
+  final String? partnerName;
+  final String? displayName;
+  final String? address;
+  final String? phone;
+  final String? description;
   final String? imgUrl;
-  final List<PartnerService> partnerServices;
+  final String? businessLicenseNumber;
+  final List<PartnerService>? partnerServices;
 
   Partner({
-    required this.partnerId,
-    required this.partnerName,
-    required this.address,
-    required this.description,
+    this.code,
+    this.email,
+    this.displayName,
+    this.phone,
+    this.partnerId,
+    this.partnerName,
+    this.address,
+    this.description,
+    this.businessLicenseNumber,
     this.imgUrl,
-    required this.partnerServices,
+    this.partnerServices,
   });
 
   factory Partner.fromJson(Map<String, dynamic> json) {
-    List<dynamic> servicesJson = json['partnerServices'];
-    List<PartnerService> services =
-        servicesJson.map((json) => PartnerService.fromJson(json)).toList();
+    List<dynamic>? servicesJson = json['partnerServices'];
+    List<PartnerService>? services;
+    if (servicesJson != null) {
+      services =
+          servicesJson.map((json) => PartnerService.fromJson(json)).toList();
+    }
 
     return Partner(
+      code: json['code'],
+      email: json['email'],
+      displayName: json['displayName'],
+      phone: json['phone'],
       partnerId: json['partnerId'],
       partnerName: json['partnerName'],
       address: json['address'],
       description: json['description'],
       imgUrl: json['imgUrl'],
+      businessLicenseNumber: json['businessLicenseNumber'],
       partnerServices: services,
     );
   }
 }
 
 class PartnerService {
-  final String name;
-  final int duration;
-  final int status;
-  final String description;
-  final int price;
-  final int bookedQuantity;
-  final List<Category> categories;
+  final int? serviceId;
+  final String? code;
+  final String? name;
+  final int? duration;
+  final int? status;
+  final String? description;
+  final int? price;
 
   PartnerService({
-    required this.name,
-    required this.duration,
-    required this.status,
-    required this.description,
-    required this.price,
-    required this.bookedQuantity,
-    required this.categories,
+    this.serviceId,
+    this.code,
+    this.name,
+    this.duration,
+    this.status,
+    this.description,
+    this.price,
   });
 
   factory PartnerService.fromJson(Map<String, dynamic> json) {
-    List<dynamic> categoriesJson = json['categories'];
-    List<Category> categories =
-        categoriesJson.map((json) => Category.fromJson(json)).toList();
-
     return PartnerService(
+      serviceId: json['serviceId'],
+      code: json['code'],
       name: json['name'],
       duration: json['duration'],
       status: json['status'],
       description: json['description'],
       price: json['price'],
-      bookedQuantity: json['bookedQuantity'],
-      categories: categories,
-    );
-  }
-}
-
-class Category {
-  final int categoryId;
-  final String category;
-  final String code;
-  final String createdBy;
-  final String createdDate;
-  final String lastUpdate;
-  final String updatedBy;
-
-  Category({
-    required this.categoryId,
-    required this.category,
-    required this.code,
-    required this.createdBy,
-    required this.createdDate,
-    required this.lastUpdate,
-    required this.updatedBy,
-  });
-
-  factory Category.fromJson(Map<String, dynamic> json) {
-    return Category(
-      categoryId: json['categoryId'],
-      category: json['category'],
-      code: json['code'],
-      createdBy: json['createdBy'],
-      createdDate: json['createdDate'],
-      lastUpdate: json['lastUpdate'],
-      updatedBy: json['updatedBy'],
     );
   }
 }

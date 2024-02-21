@@ -15,7 +15,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../api_services/customer_service.dart';
 
 class MedicalReportPage extends StatefulWidget {
-  const MedicalReportPage({Key? key}) : super(key: key);
+  const MedicalReportPage({super.key});
 
   static String routeName = '/medical_report';
 
@@ -28,6 +28,7 @@ class _MedicalReportPageState extends State<MedicalReportPage> {
   var log = Logger();
 
   List<MedicalReport> _reports = [];
+  List<MedicalReport>? reports;
   bool _isEmptyList = true;
 
   UserDetails? userDetails;
@@ -59,10 +60,9 @@ class _MedicalReportPageState extends State<MedicalReportPage> {
   void _fetchMedicalReports() async {
     try {
       if (userDetails != null && userDetails!.id != null) {
-        List<MedicalReport>? reports =
-            await api.getMedicalReport(userDetails!.id!);
+        reports = await api.getMedicalReport(userDetails!.id!);
         setState(() {
-          _reports = reports;
+          _reports = reports!;
           _isEmptyList = _reports.isEmpty;
         });
       } else {
@@ -123,8 +123,7 @@ class _MedicalReportPageState extends State<MedicalReportPage> {
                         onTap: () {
                           Navigator.of(context).pushNamed(
                             MedicalReportDetail.routeName,
-                            arguments:
-                                item, // Pass medical report object to detail screen
+                            arguments: reports![index],
                           );
                         },
                         child: ListTile(

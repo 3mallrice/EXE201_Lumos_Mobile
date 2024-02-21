@@ -111,7 +111,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
     }
   }
 
-  CartModel onAddToCart(int? reportId, Service service) {
+  CartModel onAddToCart(int? reportId, PartnerService service) {
     if (reportId == null) return carts.first;
 
     // Kiểm tra xem đã có cart cho bệnh nhân này chưa
@@ -161,78 +161,9 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
     _fetchUserData();
   }
 
-  List<Service> services = [
-    Service(
-      id: 1,
-      name: 'Điều trị nha khoa',
-      executionTime: '60',
-      description: 'Dịch vụ chăm sóc và điều trị nha khoa chuyên sâu.',
-      price: 200.0,
-    ),
-    Service(
-      id: 2,
-      name: 'Kiểm tra mắt',
-      executionTime: '30',
-      description:
-          'Kiểm tra mắt chuyên sâu với các bước đo chính xác và hiện đại.',
-      price: 150.0,
-    ),
-    Service(
-      id: 3,
-      name: 'Masage thư giãn',
-      executionTime: '45',
-      description: 'Dịch vụ masage thư giãn giúp giảm căng thẳng và mệt mỏi.',
-      price: 120.0,
-    ),
-    Service(
-      id: 4,
-      name: 'Điều trị nha khoa',
-      executionTime: '60',
-      description: 'Dịch vụ chăm sóc và điều trị nha khoa chuyên sâu.',
-      price: 200.0,
-    ),
-    Service(
-      id: 5,
-      name: 'Kiểm tra mắt',
-      executionTime: '30',
-      description:
-          'Kiểm tra mắt chuyên sâu với các bước đo chính xác và hiện đại.',
-      price: 150.0,
-    ),
-    Service(
-      id: 6,
-      name: 'Masage thư giãn',
-      executionTime: '45',
-      description: 'Dịch vụ masage thư giãn giúp giảm căng thẳng và mệt mỏi.',
-      price: 120.0,
-    ),
-    Service(
-      id: 7,
-      name: 'Điều trị nha khoa',
-      executionTime: '60',
-      description:
-          'Dịch vụ chăm sóc và điều trị nha khoa chuyên sâu. Kiểm tra mắt chuyên sâu với các bước đo chính xác và hiện đại. Kiểm tra mắt chuyên sâu với các bước đo chính xác và hiện đại.',
-      price: 200.0,
-    ),
-    Service(
-      id: 8,
-      name: 'Kiểm tra mắt',
-      executionTime: '30',
-      description:
-          'Kiểm tra mắt chuyên sâu với các bước đo chính xác và hiện đại. Kiểm tra mắt chuyên sâu với các bước đo chính xác và hiện đại. Kiểm tra mắt chuyên sâu với các bước đo chính xác và hiện đại.',
-      price: 150.0,
-    ),
-    Service(
-      id: 9,
-      name: 'Masage thư giãn',
-      executionTime: '45',
-      description:
-          'Dịch vụ masage thư giãn giúp giảm căng thẳng và mệt mỏi. Kiểm tra mắt chuyên sâu với các bước đo chính xác và hiện đại. Kiểm tra mắt chuyên sâu với các bước đo chính xác và hiện đại.',
-      price: 120.0,
-    ),
-  ];
+  List<PartnerService> services = [];
 
-  void Function(Service service)? onTap(Service service) {
+  void Function(PartnerService service)? onTap(PartnerService service) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -342,7 +273,6 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
   @override
   Widget build(BuildContext context) {
     if (partner == null) {
-      // Hiển thị một tiến trình tải hoặc một thông báo cho người dùng
       return Scaffold(
         body: Center(
           child: LoadingAnimationWidget.fourRotatingDots(
@@ -400,7 +330,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
             margin: const EdgeInsets.symmetric(horizontal: 10),
             child: ListTile(
               title: Text(
-                partner!.partnerName,
+                partner!.partnerName ?? "Tên cơ sở y tế",
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -417,7 +347,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                       const RatingStars(
                         starColor: ColorPalette.star,
                         starOffColor: ColorPalette.grey2,
-                        value: 1.5,
+                        value: 4.5,
                         valueLabelVisibility: false,
                         starSize: 16,
                       ),
@@ -470,13 +400,13 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
             ),
           ),
           Container(
-            height: 12,
+            height: 10,
             color: ColorPalette.grey2,
           ),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
-              children: services.map((service) {
+              children: partner!.partnerServices!.map((service) {
                 return Column(
                   children: [
                     InkWell(
@@ -488,7 +418,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                           color: ColorPalette.pink,
                         ),
                         title: Text(
-                          service.name,
+                          service.name ?? "Tên dịch vụ",
                           style: GoogleFonts.almarai(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -504,7 +434,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    '${service.executionTime} phút',
+                                    '${service.duration} phút',
                                     style: GoogleFonts.almarai(
                                       fontSize: 16,
                                       fontWeight: FontWeight.normal,
@@ -512,33 +442,22 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                                     ),
                                   ),
                                   RichReadMoreText.fromString(
-                                    text: service.description,
+                                    text:
+                                        service.description ?? "Mô tả dịch vụ",
                                     textStyle: GoogleFonts.almarai(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.normal,
-                                        color: ColorPalette.bluelight2,
-                                        decorationStyle:
-                                            TextDecorationStyle.solid,
-                                        textStyle: const TextStyle(
-                                          textBaseline: TextBaseline.alphabetic,
-                                        )),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.normal,
+                                      color: ColorPalette.bluelight2,
+                                      decorationStyle:
+                                          TextDecorationStyle.solid,
+                                      textStyle: const TextStyle(
+                                        textBaseline: TextBaseline.alphabetic,
+                                      ),
+                                    ),
                                     settings: LineModeSettings(
                                       trimLines: 3,
                                       trimCollapsedText: 'Xem thêm',
                                       trimExpandedText: 'Rút gọn',
-                                      // onPressReadMore: () {},
-                                      // onPressReadLess: () {},
-                                      lessStyle: GoogleFonts.almarai(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.normal,
-                                        color: ColorPalette.bluelight2,
-                                      ),
-                                      moreStyle: GoogleFonts.almarai(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.normal,
-                                        color: ColorPalette.bluelight2,
-                                      ),
-                                      textAlign: TextAlign.justify,
                                     ),
                                   ),
                                   Container(
@@ -559,7 +478,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                         ),
                       ),
                     ),
-                    if (service != services.last)
+                    if (service != partner!.partnerServices!.last)
                       const Divider(
                         thickness: 0.7,
                         height: 2,
@@ -571,32 +490,10 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
             ),
           ),
           Container(
-            height: 20,
-            color: ColorPalette.grey2,
+            height: 10,
           ),
         ],
       ),
     );
-  }
-}
-
-class Service {
-  int id;
-  String name;
-  String executionTime;
-  String description;
-  double price;
-
-  Service({
-    required this.id,
-    required this.name,
-    required this.executionTime,
-    required this.description,
-    required this.price,
-  });
-
-  @override
-  String toString() {
-    return 'Service{id: $id, name: $name, executionTime: $executionTime, description: $description, price: $price}';
   }
 }

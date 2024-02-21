@@ -1,6 +1,11 @@
+import 'package:exe201_lumos_mobile/api_model/customer/medical_report.dart';
+import 'package:exe201_lumos_mobile/core/const/back-end/error_reponse.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:rich_readmore/rich_readmore.dart';
+
 import '../../component/app_bar.dart';
 import '../../core/const/front-end/color_const.dart';
-import 'medical_report_update.dart';
 import 'package:flutter/material.dart';
 
 class MedicalReportDetail extends StatelessWidget {
@@ -11,6 +16,14 @@ class MedicalReportDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+
+    final MedicalReport? medicalReport =
+        ModalRoute.of(context)?.settings.arguments as MedicalReport?;
+
+    if (medicalReport == null) {
+      Navigator.of(context).pop();
+    }
+
     return Scaffold(
       appBar: const AppBarCom(
         leading: true,
@@ -22,23 +35,22 @@ class MedicalReportDetail extends StatelessWidget {
           child: Container(
             width: screenWidth * 0.9,
             margin: const EdgeInsets.only(top: 20),
-            child: const Column(
+            child: Column(
               children: [
                 Column(
                   children: [
                     Text(
-                      'Nguyễn Đinh Phương Thảo Trang',
-                      style: TextStyle(
+                      medicalReport!.fullname,
+                      style: GoogleFonts.almarai(
                         fontSize: 24,
                         fontWeight: FontWeight.w600,
-                        fontFamily: 'Raleway',
                         color: ColorPalette.pinkBold,
                       ),
                       softWrap: true,
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 Row(
@@ -49,25 +61,23 @@ class MedicalReportDetail extends StatelessWidget {
                       children: [
                         Text(
                           'Danh xưng: ',
-                          style: TextStyle(
+                          style: GoogleFonts.almarai(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
-                            fontFamily: 'Raleway',
                             color: ColorPalette.blueBold2,
                           ),
                         ),
                         Text(
-                          'Anh',
-                          style: TextStyle(
+                          Constansts._listPro[medicalReport.pronounce],
+                          style: GoogleFonts.almarai(
                             fontSize: 16,
                             fontWeight: FontWeight.normal,
-                            fontFamily: 'Raleway',
                             color: ColorPalette.blueBold2,
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Row(
@@ -75,19 +85,17 @@ class MedicalReportDetail extends StatelessWidget {
                       children: [
                         Text(
                           'Giới tính: ',
-                          style: TextStyle(
+                          style: GoogleFonts.almarai(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
-                            fontFamily: 'Raleway',
                             color: ColorPalette.blueBold2,
                           ),
                         ),
                         Text(
-                          'Nam',
-                          style: TextStyle(
+                          (medicalReport.gender) ? 'Nam' : 'Nữ',
+                          style: GoogleFonts.almarai(
                             fontSize: 16,
                             fontWeight: FontWeight.normal,
-                            fontFamily: 'Raleway',
                             color: ColorPalette.blueBold2,
                           ),
                         ),
@@ -95,7 +103,7 @@ class MedicalReportDetail extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 Row(
@@ -103,25 +111,23 @@ class MedicalReportDetail extends StatelessWidget {
                   children: [
                     Text(
                       'Ngày sinh: ',
-                      style: TextStyle(
+                      style: GoogleFonts.almarai(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        fontFamily: 'Raleway',
                         color: ColorPalette.blueBold2,
                       ),
                     ),
                     Text(
-                      '19/05/1989',
-                      style: TextStyle(
+                      DateFormat('dd/MM/yyyy').format(medicalReport.dob),
+                      style: GoogleFonts.almarai(
                         fontSize: 16,
                         fontWeight: FontWeight.normal,
-                        fontFamily: 'Poppins',
                         color: ColorPalette.blueBold2,
                       ),
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 Row(
@@ -129,25 +135,23 @@ class MedicalReportDetail extends StatelessWidget {
                   children: [
                     Text(
                       'Nhóm máu: ',
-                      style: TextStyle(
+                      style: GoogleFonts.almarai(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        fontFamily: 'Raleway',
                         color: ColorPalette.blueBold2,
                       ),
                     ),
                     Text(
-                      'B Rh+',
-                      style: TextStyle(
+                      Constansts._listBlood[medicalReport.bloodType],
+                      style: GoogleFonts.almarai(
                         fontSize: 16,
                         fontWeight: FontWeight.normal,
-                        fontFamily: 'Raleway',
                         color: ColorPalette.blueBold2,
                       ),
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 Row(
@@ -155,51 +159,67 @@ class MedicalReportDetail extends StatelessWidget {
                   children: [
                     Text(
                       'Số điện thoại: ',
-                      style: TextStyle(
+                      style: GoogleFonts.almarai(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        fontFamily: 'Raleway',
                         color: ColorPalette.blueBold2,
                       ),
                     ),
                     Text(
-                      '0934853348',
-                      style: TextStyle(
+                      medicalReport.phone.toString(),
+                      style: GoogleFonts.almarai(
                         fontSize: 16,
                         fontWeight: FontWeight.normal,
-                        fontFamily: 'Poppins',
                         color: ColorPalette.blueBold2,
                       ),
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  textBaseline: TextBaseline.alphabetic,
                   children: [
                     Text(
                       'Ghi chú: ',
-                      style: TextStyle(
+                      style: GoogleFonts.almarai(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        fontFamily: 'Raleway',
                         color: ColorPalette.blueBold2,
                       ),
+                      textAlign: TextAlign.start,
                     ),
-                    SizedBox(height: 8),
-                    Text(
-                      'Hoàn toàn bình thường, khoẻ mạnh Hoàn toàn bình thường, khoẻ mạnh Hoàn toàn bình thường, khoẻ mạnh Hoàn toàn bình thường, khoẻ mạnh',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.normal,
-                        fontFamily: 'Raleway',
-                        color: ColorPalette.blueBold2,
+                    RichReadMoreText.fromString(
+                      text: medicalReport.note!,
+                      textStyle: GoogleFonts.almarai(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                          color: ColorPalette.bluelight2,
+                          decorationStyle: TextDecorationStyle.solid,
+                          textStyle: const TextStyle(
+                            textBaseline: TextBaseline.alphabetic,
+                          )),
+                      settings: LineModeSettings(
+                        trimLines: 5,
+                        trimCollapsedText: 'Xem thêm',
+                        trimExpandedText: 'Rút gọn',
+                        // onPressReadMore: () {},
+                        // onPressReadLess: () {},
+                        lessStyle: GoogleFonts.almarai(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                          color: ColorPalette.bluelight2,
+                        ),
+                        moreStyle: GoogleFonts.almarai(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                          color: ColorPalette.bluelight2,
+                        ),
+                        textAlign: TextAlign.justify,
                       ),
-                      softWrap: true,
-                      textAlign: TextAlign.justify,
                     ),
                   ],
                 ),
@@ -214,21 +234,58 @@ class MedicalReportDetail extends StatelessWidget {
           margin: const EdgeInsets.only(bottom: 12),
           child: ElevatedButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(MedicalReportUpdate.routeName);
-              print('Button pressed');
+              // Navigator.of(context).pushNamed(MedicalReportUpdate.routeName);
+              //show dialog said in development
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text(
+                      OnDevelopmentMessage.fearureOnDevelopmentTitle,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: ColorPalette.blueBold2,
+                      ),
+                    ),
+                    content: const Text(
+                      OnDevelopmentMessage.featureOnDevelopment,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: ColorPalette.blueBold2,
+                      ),
+                    ),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text(
+                          'OK',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w600,
+                            color: ColorPalette.blueBold2,
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              );
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: ColorPalette.pink,
               padding: const EdgeInsets.all(12),
-              minimumSize: Size(100, 40),
+              minimumSize: const Size(100, 40),
             ),
-            child: const Text(
+            child: Text(
               'Chỉnh sửa',
-              style: TextStyle(
-                fontSize: 20,
+              style: GoogleFonts.almarai(
+                fontSize: 24,
                 fontWeight: FontWeight.w600,
-                fontFamily: 'Raleway',
-                color: ColorPalette.secondaryWhite,
+                color: ColorPalette.blueBold2,
               ),
             ),
           ),
@@ -236,4 +293,25 @@ class MedicalReportDetail extends StatelessWidget {
       ),
     );
   }
+}
+
+class Constansts {
+  static const List<String> _listPro = [
+    'Ông',
+    'Bà',
+    'Bé',
+    'Anh',
+    'Chị',
+  ];
+
+  static const List<String> _listBlood = [
+    'Nhóm A Rh+',
+    'Nhóm A Rh-',
+    'Nhóm B Rh-',
+    'Nhóm B Rh-',
+    'Nhóm O Rh+',
+    'Nhóm O Rh-',
+    'Nhóm AB Rh+',
+    'Nhóm AB Rh-',
+  ];
 }

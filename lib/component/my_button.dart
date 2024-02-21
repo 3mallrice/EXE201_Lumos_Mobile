@@ -7,6 +7,7 @@ class MyButton extends StatelessWidget {
   final Color? borderColor;
   final double? height;
   final double? width;
+  final double? horizontalPadding;
   final Color color;
   final Widget widget;
 
@@ -16,6 +17,7 @@ class MyButton extends StatelessWidget {
     this.borderColor = ColorPalette.white,
     this.height,
     this.width,
+    this.horizontalPadding,
     required this.borderRadius,
     required this.color,
     required this.widget,
@@ -25,16 +27,19 @@ class MyButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        width: 324,
-        height: 58,
-        padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(borderRadius),
-          border: Border.all(color: borderColor as Color, width: 1),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: horizontalPadding ?? 40.0),
+        child: Container(
+          width: width ?? 324,
+          height: height ?? 58,
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(borderRadius),
+            border: Border.all(color: borderColor as Color, width: 1),
+          ),
+          child: Center(child: widget),
         ),
-        child: Center(child: widget),
       ),
     );
   }
