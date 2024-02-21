@@ -19,7 +19,7 @@ class CallCustomerApi {
   //request: customerId
   //response: List<MedicalReport>
   Future<List<MedicalReport>> getMedicalReport(int customerId) async {
-    var url = Uri.parse('$api/medical-report');
+    var url = Uri.parse('$api/$customerId/medical-report');
     token = LocalStorageHelper.getValue("token");
 
     try {
