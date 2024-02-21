@@ -30,14 +30,13 @@ class AccountScreen extends StatefulWidget {
 class _AccountScreenState extends State<AccountScreen> {
   final CallAuthenticationApi _api = CallAuthenticationApi();
   var log = Logger();
-  UserDetails? userDetails;
+  Future<UserDetails>? userDetails;
 
   Future<UserDetails>? loadAccount() async {
     return await LoginAccount.loadAccount();
   }
 
   void fetchUserData() async {
-    userDetails = await loadAccount();
     if (userDetails == null) {
       Future.delayed(
         Duration.zero,
@@ -52,6 +51,7 @@ class _AccountScreenState extends State<AccountScreen> {
 
   @override
   void initState() {
+    userDetails = loadAccount();
     super.initState();
     fetchUserData();
   }
@@ -112,121 +112,141 @@ class _AccountScreenState extends State<AccountScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (userDetails == null) {
-      loadAccount();
-    }
+    // if (userDetails == null) {
+    //   return Scaffold(
+    //     body: Center(
+    //       child: LoadingAnimationWidget.fourRotatingDots(
+    //         color: ColorPalette.pinkBold,
+    //         size: 80,
+    //       ),
+    //     ),
+    //   );
+    // }
     return Scaffold(
-      appBar: const AppBarCom(
-        leading: false,
-        appBarText: 'Tài khoản',
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const SizedBox(height: 5),
-            Center(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.only(bottom: 75),
-                child: Column(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(top: 10),
-                      width: 130,
-                      height: 130,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image: AssetImage(AssetHelper.accountImg),
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    _buildAccountInfo(), // Extracted account info section
-                    const SizedBox(height: 10),
-                    _buildButtonList(
-                      text: 'Hóa đơn',
-                      leftIcon: Icons.credit_card,
-                      rightIcon: Icons.arrow_forward_ios,
-                      onPressed: () {
-                        Navigator.of(context).pushNamed(BillScreen.routeName);
-                      },
-                    ),
-                    const SizedBox(height: 10),
-                    _buildButtonList(
-                      text: 'Đặt chỗ',
-                      leftIcon: Icons.calendar_month_outlined,
-                      rightIcon: Icons.arrow_forward_ios,
-                      onPressed: () {
-                        // Navigate to reservation screen
-                      },
-                    ),
-                    const SizedBox(height: 10),
-                    _buildButtonList(
-                      text: 'Danh sách bệnh nhân',
-                      leftIcon: Icons.paste_sharp,
-                      rightIcon: Icons.arrow_forward_ios,
-                      onPressed: () {
-                        Navigator.of(context)
-                            .pushNamed(MedicalReportPage.routeName);
-                      },
-                    ),
-                    const SizedBox(height: 10),
-                    _buildButtonList(
-                      text: 'Về Lumos',
-                      leftIcon: LumosIcons.hearticon,
-                      rightIcon: Icons.arrow_forward_ios,
-                      onPressed: () {
-                        Navigator.of(context).pushNamed(AboutUs.routeName);
-                      },
-                    ),
-                    const SizedBox(height: 30),
-                    MyButton(
-                      onTap: _showLogoutConfirmationDialog,
-                      color: ColorPalette.blue,
-                      borderRadius: 66.50,
-                      widget: const Text(
-                        'Đăng xuất',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: ColorPalette.secondaryWhite,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 3),
-                    const SizedBox(
-                      height: 30,
-                      child: Center(
-                        child: Text(
-                          '© All copyright of Lumos',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: ColorPalette.blueBold2,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
+        appBar: const AppBarCom(
+          leading: false,
+          appBarText: 'Tài khoản',
         ),
-      ),
-    );
+        body: FutureBuilder(
+          future: userDetails,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            final user = snapshot.data!;
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 5),
+                  Center(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.only(bottom: 75),
+                      child: Column(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(top: 10),
+                            width: 130,
+                            height: 130,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                image: AssetImage(AssetHelper.accountImg),
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          _buildAccountInfo(
+                              user), // Extracted account info section
+                          const SizedBox(height: 10),
+                          _buildButtonList(
+                            text: 'Hóa đơn',
+                            leftIcon: Icons.credit_card,
+                            rightIcon: Icons.arrow_forward_ios,
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .pushNamed(BillScreen.routeName);
+                            },
+                          ),
+                          const SizedBox(height: 10),
+                          _buildButtonList(
+                            text: 'Đặt chỗ',
+                            leftIcon: Icons.calendar_month_outlined,
+                            rightIcon: Icons.arrow_forward_ios,
+                            onPressed: () {
+                              // Navigate to reservation screen
+                            },
+                          ),
+                          const SizedBox(height: 10),
+                          _buildButtonList(
+                            text: 'Danh sách bệnh nhân',
+                            leftIcon: Icons.paste_sharp,
+                            rightIcon: Icons.arrow_forward_ios,
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .pushNamed(MedicalReportPage.routeName);
+                            },
+                          ),
+                          const SizedBox(height: 10),
+                          _buildButtonList(
+                            text: 'Về Lumos',
+                            leftIcon: LumosIcons.hearticon,
+                            rightIcon: Icons.arrow_forward_ios,
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .pushNamed(AboutUs.routeName);
+                            },
+                          ),
+                          const SizedBox(height: 30),
+                          MyButton(
+                            onTap: _showLogoutConfirmationDialog,
+                            color: ColorPalette.blue,
+                            borderRadius: 66.50,
+                            widget: const Text(
+                              'Đăng xuất',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: ColorPalette.secondaryWhite,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 3),
+                          const SizedBox(
+                            height: 30,
+                            child: Center(
+                              child: Text(
+                                '© All copyright of Lumos',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: ColorPalette.blueBold2,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ));
   }
 
-  Widget _buildAccountInfo() {
+  Widget _buildAccountInfo(UserDetails user) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          userDetails!.username,
+          user.username.toString(),
           style: const TextStyle(
             color: ColorPalette.blueBold2,
             fontSize: 16,
