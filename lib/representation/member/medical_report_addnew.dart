@@ -106,6 +106,19 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
     try {
       await api.addNewMedicalReport(customerId!, newMedicalReport);
       print('Medical report added successfully');
+
+      // Clear text controllers
+      _nameController.clear();
+      _phoneNumberController.clear();
+      _noteController.clear();
+
+      // Reset state variables for dropdowns and date selection
+      setState(() {
+        _selectedPronoun = 0;
+        _selectedGender = true;
+        _selectedBloodType = 0;
+        selectedDate = DateTime.now();
+      });
     } catch (error) {
       print('Error adding medical report: $error');
     }

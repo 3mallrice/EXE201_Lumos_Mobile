@@ -1,3 +1,5 @@
+import 'package:exe201_lumos_mobile/representation/member/medical_report_addnew.dart';
+
 import '../../core/helper/local_storage_helper.dart';
 import '../../login.dart';
 import 'package:logger/logger.dart';
@@ -158,7 +160,7 @@ class _MedicalReportPageState extends State<MedicalReportPage> {
         margin: const EdgeInsets.only(bottom: 12),
         child: ElevatedButton(
           onPressed: () {
-            // Navigator.of(context).pushNamed(MedicalReportAdd.routeName);
+            Navigator.of(context).pushNamed(MedicalReportAdd.routeName);
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: ColorPalette.pink,
