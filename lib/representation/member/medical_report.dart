@@ -13,7 +13,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../api_services/customer_service.dart';
 
 class MedicalReportPage extends StatefulWidget {
-  const MedicalReportPage({super.key});
+  const MedicalReportPage({Key? key}) : super(key: key);
 
   static String routeName = '/medical_report';
 
@@ -25,8 +25,8 @@ class _MedicalReportPageState extends State<MedicalReportPage> {
   CallCustomerApi api = CallCustomerApi();
   var log = Logger();
 
-  List<String> _reports = [];
-  bool isEmptyList = true;
+  List<MedicalReport> _reports = [];
+  bool _isEmptyList = true;
 
   UserDetails? userDetails;
 
@@ -59,25 +59,22 @@ class _MedicalReportPageState extends State<MedicalReportPage> {
       if (userDetails != null && userDetails!.id != null) {
         List<MedicalReport>? reports =
             await api.getMedicalReport(userDetails!.id!);
-        List<String> reportNames = reports.map((e) => e.fullname).toList();
-        setState(
-          () {
-            _reports = reportNames;
-            isEmptyList = _reports.isEmpty;
-          },
-        );
+        setState(() {
+          _reports = reports;
+          _isEmptyList = _reports.isEmpty;
+        });
       } else {
         setState(() {
           log.e("User details or user id is null.");
           _reports = [];
-          isEmptyList = true;
+          _isEmptyList = true;
         });
       }
     } catch (e) {
       setState(() {
         log.e("Error when fetching medical reports: $e");
         _reports = [];
-        isEmptyList = true;
+        _isEmptyList = true;
       });
     }
   }
@@ -89,7 +86,7 @@ class _MedicalReportPageState extends State<MedicalReportPage> {
         appBarText: "Danh sách bệnh nhân",
         leading: true,
       ),
-      body: (isEmptyList)
+      body: _isEmptyList
           ? Center(
               child: Text(
                 "Không tìm thấy dữ liệu nào!",
@@ -122,8 +119,11 @@ class _MedicalReportPageState extends State<MedicalReportPage> {
                     children: [
                       InkWell(
                         onTap: () {
-                          Navigator.of(context)
-                              .pushNamed(MedicalReportDetail.routeName);
+                          Navigator.of(context).pushNamed(
+                            MedicalReportDetail.routeName,
+                            arguments:
+                                item, // Pass medical report object to detail screen
+                          );
                         },
                         child: ListTile(
                           leading: const Icon(
@@ -132,7 +132,7 @@ class _MedicalReportPageState extends State<MedicalReportPage> {
                             color: ColorPalette.pink,
                           ),
                           title: Text(
-                            item,
+                            item.fullname,
                             style: GoogleFonts.almarai(
                               textStyle: const TextStyle(
                                 fontSize: 16,
