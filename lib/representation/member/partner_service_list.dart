@@ -455,8 +455,14 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                                     ),
                                     settings: LineModeSettings(
                                       trimLines: 3,
-                                      trimCollapsedText: 'Xem thêm',
-                                      trimExpandedText: 'Rút gọn',
+                                      trimCollapsedText: '... Xem thêm',
+                                      trimExpandedText: ' Rút gọn',
+                                      moreStyle: const TextStyle(
+                                        color: ColorPalette.blueBold2,
+                                      ),
+                                      lessStyle: const TextStyle(
+                                        color: ColorPalette.blueBold2,
+                                      ),
                                     ),
                                   ),
                                   Container(
