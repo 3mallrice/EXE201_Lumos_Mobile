@@ -68,7 +68,7 @@ class _BillScreenState extends State<BillScreen> {
                   children: [
                     Text(
                       bill.partner,
-                      style: GoogleFonts.raleway(
+                      style: GoogleFonts.roboto(
                         textStyle: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: ColorPalette.blueBold2,
@@ -178,7 +178,7 @@ class _BillScreenState extends State<BillScreen> {
                           ),
                           Text(
                             "đ",
-                            style: GoogleFonts.raleway(
+                            style: GoogleFonts.roboto(
                               textStyle: const TextStyle(
                                   color: ColorPalette.blueBold2,
                                   fontWeight: FontWeight.w600,

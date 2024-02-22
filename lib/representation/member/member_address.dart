@@ -151,7 +151,7 @@ class _MemberAddressState extends State<MemberAddress> {
                             style: TextStyle(
                               color: ColorPalette.pink,
                               fontSize: 16,
-                              fontFamily: 'Raleway',
+                              fontFamily: 'roboto',
                               fontWeight: FontWeight.w400,
                             ),
                           ),
@@ -175,7 +175,7 @@ class _MemberAddressState extends State<MemberAddress> {
         child: ElevatedButton(
           onPressed: () {
             //Navigator.of(context).pushNamed(MedicalReportAdd.routeName);
-            print('Button pressed');
+            log.i('Button pressed');
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: ColorPalette.pink,

@@ -37,7 +37,7 @@ class MyTextfield extends StatelessWidget {
           validator: validator,
           style: TextStyle(
             color: textColor ?? ColorPalette.blueBold2.withOpacity(0.65),
-            fontFamily: 'Raleway',
+            fontFamily: 'roboto',
           ),
           maxLines: 1,
           controller: controller,
@@ -60,7 +60,7 @@ class MyTextfield extends StatelessWidget {
             labelStyle: const TextStyle(
               color: ColorPalette.blueBold,
               fontWeight: FontWeight.bold,
-              fontFamily: 'Raleway',
+              fontFamily: 'roboto',
               fontSize: 18,
             ),
             floatingLabelBehavior: floatingLabelBehavior,
@@ -71,7 +71,7 @@ class MyTextfield extends StatelessWidget {
             hintStyle: const TextStyle(
               color: ColorPalette.grey,
               fontWeight: FontWeight.normal,
-              fontFamily: 'Raleway',
+              fontFamily: 'roboto',
               fontSize: 15,
             ),
             suffixIcon: suffixIcon,

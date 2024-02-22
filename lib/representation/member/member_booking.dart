@@ -447,7 +447,6 @@ class _BookingPageState extends State<BookingPage> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 SizedBox(
-                                                  width: screenWidth * 0.55,
                                                   child: Text(
                                                     item2.name ?? "",
                                                     style: GoogleFonts.roboto(
