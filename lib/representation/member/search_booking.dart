@@ -256,13 +256,13 @@ class _SearchBookingState extends State<SearchBooking> {
                                                         const RatingStars(
                                                           value: 3.5,
                                                           starColor:
-                                                              ColorPalette.star,
-                                                          starSize: 16,
+                                                              ColorPalette.pink,
+                                                          starSize: 13,
                                                           valueLabelVisibility:
                                                               false,
                                                         ),
                                                         Container(
-                                                          height: 16,
+                                                          height: 13,
                                                           width: 1.2,
                                                           color: ColorPalette
                                                               .blueBold2,
@@ -275,17 +275,23 @@ class _SearchBookingState extends State<SearchBooking> {
                                                         const Icon(
                                                           FontAwesomeIcons
                                                               .calendarCheck,
-                                                          size: 20,
+                                                          size: 13,
                                                           color: ColorPalette
                                                               .blueBold2,
                                                         ),
-                                                        Text(
-                                                          ' ${item2.quantity.toString()} lượt',
-                                                          style: GoogleFonts
-                                                              .roboto(
-                                                            fontSize: 16,
-                                                            color: ColorPalette
-                                                                .blueBold2,
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  top: 3.5),
+                                                          child: Text(
+                                                            ' ${item2.quantity.toString()} lượt',
+                                                            style: GoogleFonts
+                                                                .roboto(
+                                                              fontSize: 13,
+                                                              color: ColorPalette
+                                                                  .blueBold2,
+                                                            ),
                                                           ),
                                                         )
                                                       ],
@@ -297,7 +303,7 @@ class _SearchBookingState extends State<SearchBooking> {
                                             Text(
                                               '₫ ${formatCurrency(item2.price ?? 0)}',
                                               style: GoogleFonts.aBeeZee(
-                                                fontSize: 14,
+                                                fontSize: 13,
                                                 color: ColorPalette.blueBold2,
                                               ),
                                             ),
