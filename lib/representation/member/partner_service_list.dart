@@ -173,7 +173,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
           alignment: Alignment.center,
           title: Text(
             'Chọn bệnh nhân',
-            style: GoogleFonts.almarai(
+            style: GoogleFonts.roboto(
               fontSize: 24,
               fontWeight: FontWeight.bold,
               color: ColorPalette.blueBold2,
@@ -207,7 +207,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                                 size: 20,
                                 color: ColorPalette.pink,
                               ),
-                              titleTextStyle: GoogleFonts.almarai(
+                              titleTextStyle: GoogleFonts.roboto(
                                 fontSize: 16,
                                 fontWeight: FontWeight.normal,
                                 color: ColorPalette.blueBold2,
@@ -254,7 +254,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                 },
                 child: Text(
                   'HỦY',
-                  style: GoogleFonts.almarai(
+                  style: GoogleFonts.roboto(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: ColorPalette.white,
@@ -335,7 +335,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
-              titleTextStyle: GoogleFonts.almarai(
+              titleTextStyle: GoogleFonts.roboto(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
                 color: ColorPalette.blueBold2,
@@ -368,7 +368,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                       ),
                       Text(
                         "30 lượt đã đặt",
-                        style: GoogleFonts.almarai(
+                        style: GoogleFonts.roboto(
                           fontSize: 16,
                           fontWeight: FontWeight.normal,
                           color: ColorPalette.blueBold2,
@@ -420,7 +420,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                         ),
                         title: Text(
                           service.name ?? "Tên dịch vụ",
-                          style: GoogleFonts.almarai(
+                          style: GoogleFonts.roboto(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: ColorPalette.blueBold2,
@@ -436,7 +436,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                                 children: [
                                   Text(
                                     '${service.duration} phút',
-                                    style: GoogleFonts.almarai(
+                                    style: GoogleFonts.roboto(
                                       fontSize: 16,
                                       fontWeight: FontWeight.normal,
                                       color: ColorPalette.blueBold2,
@@ -445,7 +445,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                                   RichReadMoreText.fromString(
                                     text:
                                         service.description ?? "Mô tả dịch vụ",
-                                    textStyle: GoogleFonts.almarai(
+                                    textStyle: GoogleFonts.roboto(
                                       fontSize: 16,
                                       fontWeight: FontWeight.normal,
                                       color: ColorPalette.bluelight2,
@@ -469,7 +469,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                                     alignment: Alignment.centerRight,
                                     child: Text(
                                       '₫ ${formatCurrency(service.price!)}',
-                                      style: GoogleFonts.almarai(
+                                      style: GoogleFonts.roboto(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                         color: ColorPalette.pink,

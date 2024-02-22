@@ -26,7 +26,6 @@ class _MemberAddressState extends State<MemberAddress> {
   var log = Logger();
 
   List<Address> _address = [];
-  bool _isEmptyList = true;
 
   UserDetails? userDetails;
 
@@ -60,20 +59,17 @@ class _MemberAddressState extends State<MemberAddress> {
         List<Address>? address = await api.getCustomerAddress(userDetails!.id!);
         setState(() {
           _address = address;
-          _isEmptyList = _address.isEmpty;
         });
       } else {
         setState(() {
           log.e("User details or user id is null.");
           _address = [];
-          _isEmptyList = true;
         });
       }
     } catch (e) {
       setState(() {
         log.e("Error when fetching address: $e");
         _address = [];
-        _isEmptyList = true;
       });
     }
   }
@@ -115,7 +111,7 @@ class _MemberAddressState extends State<MemberAddress> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => BookingPage(
-                                  address: item.address1,
+                                  address: item.address,
                                 ),
                               ),
                             ),
@@ -130,13 +126,13 @@ class _MemberAddressState extends State<MemberAddress> {
                                   fontWeight: FontWeight.bold,
                                   color: ColorPalette.blueBold2,
                                   fontSize: 16,
-                                  fontFamily: 'almarai',
+                                  fontFamily: 'roboto',
                                 ),
                               ),
                               Text(
-                                item.address1,
+                                item.address,
                                 style: const TextStyle(
-                                  fontFamily: 'almarai',
+                                  fontFamily: 'roboto',
                                   color: ColorPalette.bluelight2,
                                   fontSize: 14,
                                   fontWeight: FontWeight.normal,

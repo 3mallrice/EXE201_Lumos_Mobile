@@ -1,4 +1,3 @@
-import '../../representation/member/partner_service_list.dart';
 import '../partner/partner.dart';
 
 class CartModel {

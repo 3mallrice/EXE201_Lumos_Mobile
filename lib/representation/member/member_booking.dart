@@ -1,7 +1,6 @@
 import 'package:exe201_lumos_mobile/api_model/customer/address.dart';
 import 'package:exe201_lumos_mobile/api_model/partner/partner.dart';
 import 'package:exe201_lumos_mobile/core/const/back-end/error_reponse.dart';
-import 'package:exe201_lumos_mobile/representation/member/member_address.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:logger/logger.dart';
 
@@ -46,7 +45,6 @@ class _BookingPageState extends State<BookingPage> {
   List<MedicalReportService?> medicalReportServices = [];
 
   List<Address> address = [];
-  bool _isEmptyList = true;
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -146,22 +144,19 @@ class _BookingPageState extends State<BookingPage> {
         setState(
           () {
             address = addressList;
-            _isEmptyList = address!.isEmpty;
-            log.i(address!.length);
+            log.i(address.length);
           },
         );
       } else {
         setState(() {
           log.e("User details or user id is null.");
           address = [];
-          _isEmptyList = true;
         });
       }
     } catch (e) {
       setState(() {
         log.e("Error when fetching address: $e");
         address = [];
-        _isEmptyList = true;
       });
     }
   }
@@ -241,7 +236,7 @@ class _BookingPageState extends State<BookingPage> {
                 alignment: Alignment.center,
                 child: Text(
                   'Chọn phương thức thanh toán',
-                  style: GoogleFonts.almarai(
+                  style: GoogleFonts.roboto(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
                     color: ColorPalette.blueBold2,
@@ -378,7 +373,7 @@ class _BookingPageState extends State<BookingPage> {
                   child: Text(
                     'Bệnh viện đại học Y Dược Hà Nội',
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.almarai(
+                    style: GoogleFonts.roboto(
                       fontWeight: FontWeight.w600,
                       fontSize: 24,
                       color: ColorPalette.blueBold2,
@@ -425,7 +420,7 @@ class _BookingPageState extends State<BookingPage> {
                                     children: [
                                       Text(
                                         item!.medicalReport.fullname,
-                                        style: GoogleFonts.almarai(
+                                        style: GoogleFonts.roboto(
                                           textStyle: const TextStyle(
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold,
@@ -455,7 +450,7 @@ class _BookingPageState extends State<BookingPage> {
                                                   width: screenWidth * 0.55,
                                                   child: Text(
                                                     item2.name ?? "",
-                                                    style: GoogleFonts.almarai(
+                                                    style: GoogleFonts.roboto(
                                                       textStyle:
                                                           const TextStyle(
                                                         fontWeight:
@@ -473,7 +468,7 @@ class _BookingPageState extends State<BookingPage> {
                                                 ),
                                                 Text(
                                                   '₫ ${formatCurrency(item2.price!)}',
-                                                  style: GoogleFonts.almarai(
+                                                  style: GoogleFonts.roboto(
                                                     textStyle: const TextStyle(
                                                       fontWeight:
                                                           FontWeight.normal,
@@ -512,7 +507,7 @@ class _BookingPageState extends State<BookingPage> {
                             children: [
                               Text(
                                 "Tổng cộng",
-                                style: GoogleFonts.almarai(
+                                style: GoogleFonts.roboto(
                                   textStyle: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,
@@ -521,8 +516,8 @@ class _BookingPageState extends State<BookingPage> {
                                 ),
                               ),
                               Text(
-                                '₫ ${formatCurrency(totalPrice ?? 0)}',
-                                style: GoogleFonts.almarai(
+                                '₫ ${formatCurrency(totalPrice)}',
+                                style: GoogleFonts.roboto(
                                   textStyle: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,
@@ -564,7 +559,7 @@ class _BookingPageState extends State<BookingPage> {
                             children: [
                               Text(
                                 'Ngày',
-                                style: GoogleFonts.almarai(
+                                style: GoogleFonts.roboto(
                                   fontWeight: FontWeight.normal,
                                   fontSize: 13,
                                   color: ColorPalette.blue3,
@@ -572,7 +567,7 @@ class _BookingPageState extends State<BookingPage> {
                               ),
                               Text(
                                 formattedDate,
-                                style: GoogleFonts.almarai(
+                                style: GoogleFonts.roboto(
                                   color: ColorPalette.blueBold2,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -606,7 +601,7 @@ class _BookingPageState extends State<BookingPage> {
                             children: [
                               Text(
                                 'Giờ',
-                                style: GoogleFonts.almarai(
+                                style: GoogleFonts.roboto(
                                   fontWeight: FontWeight.normal,
                                   fontSize: 13,
                                   color: ColorPalette.blue3,
@@ -614,7 +609,7 @@ class _BookingPageState extends State<BookingPage> {
                               ),
                               Text(
                                 formattedTime,
-                                style: GoogleFonts.almarai(
+                                style: GoogleFonts.roboto(
                                   color: ColorPalette.blueBold2,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -635,7 +630,7 @@ class _BookingPageState extends State<BookingPage> {
                   children: [
                     Text(
                       'Địa chỉ',
-                      style: GoogleFonts.almarai(
+                      style: GoogleFonts.roboto(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                         color: ColorPalette.blueBold2,
@@ -655,7 +650,7 @@ class _BookingPageState extends State<BookingPage> {
                       textAlign: TextAlign.start,
                       decoration: InputDecoration(
                         hintText: 'Chọn địa chỉ của bạn',
-                        hintStyle: GoogleFonts.almarai(
+                        hintStyle: GoogleFonts.roboto(
                           color: ColorPalette.blueBold2.withOpacity(0.65),
                         ),
                         filled: true,
@@ -675,7 +670,7 @@ class _BookingPageState extends State<BookingPage> {
                           ),
                         ),
                       ),
-                      style: GoogleFonts.almarai(
+                      style: GoogleFonts.roboto(
                         color: ColorPalette.blueBold2.withOpacity(0.65),
                       ),
                     )
@@ -689,7 +684,7 @@ class _BookingPageState extends State<BookingPage> {
                   children: [
                     Text(
                       'Ghi chú',
-                      style: GoogleFonts.almarai(
+                      style: GoogleFonts.roboto(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                         color: ColorPalette.blueBold2,
@@ -704,7 +699,7 @@ class _BookingPageState extends State<BookingPage> {
                         maxLength: 255,
                         decoration: InputDecoration(
                           hintText: 'Nhập ghi chú...',
-                          hintStyle: GoogleFonts.almarai(
+                          hintStyle: GoogleFonts.roboto(
                             color: ColorPalette.blueBold2.withOpacity(0.65),
                           ),
                           filled: true,
@@ -724,7 +719,7 @@ class _BookingPageState extends State<BookingPage> {
                             ),
                           ),
                         ),
-                        style: GoogleFonts.almarai(
+                        style: GoogleFonts.roboto(
                           color: ColorPalette.blueBold2.withOpacity(0.65),
                         ),
                         textAlign: TextAlign.justify,
@@ -737,12 +732,12 @@ class _BookingPageState extends State<BookingPage> {
                 ),
                 Text(
                   "Bằng việc bấm nút \"Đặt hẹn\", tôi đã xác nhận rằng những thông tin tôi cung cấp là chính xác.",
-                  style: GoogleFonts.almarai(
+                  style: GoogleFonts.roboto(
                     color: ColorPalette.blueBold2.withOpacity(0.42),
                     fontWeight: FontWeight.normal,
                     fontSize: 14,
                   ),
-                  textAlign: TextAlign.justify,
+                  textAlign: TextAlign.center,
                 ),
                 const SizedBox(
                   height: 20,
@@ -753,7 +748,7 @@ class _BookingPageState extends State<BookingPage> {
                   color: ColorPalette.pinkBold,
                   widget: Text(
                     "Đặt hẹn",
-                    style: GoogleFonts.almarai(
+                    style: GoogleFonts.roboto(
                       color: ColorPalette.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
@@ -821,15 +816,15 @@ class _BookingPageState extends State<BookingPage> {
                 return ListTile(
                   title: Text(
                     item.displayName,
-                    style: GoogleFonts.almarai(
+                    style: GoogleFonts.roboto(
                       fontWeight: FontWeight.bold,
                       color: ColorPalette.blueBold2,
                       fontSize: 16,
                     ),
                   ),
                   subtitle: Text(
-                    item.address1,
-                    style: GoogleFonts.almarai(
+                    item.address,
+                    style: GoogleFonts.roboto(
                       color: ColorPalette.bluelight2,
                       fontSize: 14,
                       fontWeight: FontWeight.normal,
@@ -838,7 +833,7 @@ class _BookingPageState extends State<BookingPage> {
                   onTap: () {
                     _addController.text = item.displayName;
                     Navigator.of(context).pop();
-                    log.e(item.displayAddress);
+                    log.e(item.displayName);
                   },
                 );
               },

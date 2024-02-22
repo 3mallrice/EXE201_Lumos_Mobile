@@ -44,7 +44,7 @@ class CustomAlertDialog extends StatelessWidget {
           ),
           child: Text(
             confirmText ?? 'OK',
-            style: GoogleFonts.almarai(
+            style: GoogleFonts.roboto(
               color: ColorPalette.primaryText,
             ),
           ),

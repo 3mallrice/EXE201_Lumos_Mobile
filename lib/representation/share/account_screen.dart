@@ -67,7 +67,7 @@ class _AccountScreenState extends State<AccountScreen> {
         return CustomAlertDialog(
           title: Text(
             OnSignOutMessage.signOutTitle,
-            style: GoogleFonts.almarai(
+            style: GoogleFonts.roboto(
               fontWeight: FontWeight.bold,
               fontSize: 18,
               color: ColorPalette.blueBold2,
@@ -75,7 +75,7 @@ class _AccountScreenState extends State<AccountScreen> {
           ),
           message: Text(
             OnSignOutMessage.signOutMessage,
-            style: GoogleFonts.almarai(
+            style: GoogleFonts.roboto(
               fontSize: 16,
               color: ColorPalette.primaryText,
             ),
@@ -91,7 +91,7 @@ class _AccountScreenState extends State<AccountScreen> {
             },
             child: Text(
               OnSignOutMessage.signOutCancel,
-              style: GoogleFonts.almarai(
+              style: GoogleFonts.roboto(
                 color: ColorPalette.primaryText,
               ),
             ),

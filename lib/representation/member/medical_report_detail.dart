@@ -41,7 +41,7 @@ class MedicalReportDetail extends StatelessWidget {
                   children: [
                     Text(
                       medicalReport!.fullname,
-                      style: GoogleFonts.almarai(
+                      style: GoogleFonts.roboto(
                         fontSize: 24,
                         fontWeight: FontWeight.w600,
                         color: ColorPalette.pinkBold,
@@ -61,7 +61,7 @@ class MedicalReportDetail extends StatelessWidget {
                       children: [
                         Text(
                           'Danh xưng: ',
-                          style: GoogleFonts.almarai(
+                          style: GoogleFonts.roboto(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                             color: ColorPalette.blueBold2,
@@ -69,7 +69,7 @@ class MedicalReportDetail extends StatelessWidget {
                         ),
                         Text(
                           Constansts._listPro[medicalReport.pronounce],
-                          style: GoogleFonts.almarai(
+                          style: GoogleFonts.roboto(
                             fontSize: 16,
                             fontWeight: FontWeight.normal,
                             color: ColorPalette.blueBold2,
@@ -85,7 +85,7 @@ class MedicalReportDetail extends StatelessWidget {
                       children: [
                         Text(
                           'Giới tính: ',
-                          style: GoogleFonts.almarai(
+                          style: GoogleFonts.roboto(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                             color: ColorPalette.blueBold2,
@@ -93,7 +93,7 @@ class MedicalReportDetail extends StatelessWidget {
                         ),
                         Text(
                           (medicalReport.gender) ? 'Nam' : 'Nữ',
-                          style: GoogleFonts.almarai(
+                          style: GoogleFonts.roboto(
                             fontSize: 16,
                             fontWeight: FontWeight.normal,
                             color: ColorPalette.blueBold2,
@@ -111,7 +111,7 @@ class MedicalReportDetail extends StatelessWidget {
                   children: [
                     Text(
                       'Ngày sinh: ',
-                      style: GoogleFonts.almarai(
+                      style: GoogleFonts.roboto(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                         color: ColorPalette.blueBold2,
@@ -119,7 +119,7 @@ class MedicalReportDetail extends StatelessWidget {
                     ),
                     Text(
                       DateFormat('dd/MM/yyyy').format(medicalReport.dob),
-                      style: GoogleFonts.almarai(
+                      style: GoogleFonts.roboto(
                         fontSize: 16,
                         fontWeight: FontWeight.normal,
                         color: ColorPalette.blueBold2,
@@ -135,7 +135,7 @@ class MedicalReportDetail extends StatelessWidget {
                   children: [
                     Text(
                       'Nhóm máu: ',
-                      style: GoogleFonts.almarai(
+                      style: GoogleFonts.roboto(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                         color: ColorPalette.blueBold2,
@@ -143,7 +143,7 @@ class MedicalReportDetail extends StatelessWidget {
                     ),
                     Text(
                       Constansts._listBlood[medicalReport.bloodType],
-                      style: GoogleFonts.almarai(
+                      style: GoogleFonts.roboto(
                         fontSize: 16,
                         fontWeight: FontWeight.normal,
                         color: ColorPalette.blueBold2,
@@ -159,7 +159,7 @@ class MedicalReportDetail extends StatelessWidget {
                   children: [
                     Text(
                       'Số điện thoại: ',
-                      style: GoogleFonts.almarai(
+                      style: GoogleFonts.roboto(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                         color: ColorPalette.blueBold2,
@@ -167,7 +167,7 @@ class MedicalReportDetail extends StatelessWidget {
                     ),
                     Text(
                       medicalReport.phone.toString(),
-                      style: GoogleFonts.almarai(
+                      style: GoogleFonts.roboto(
                         fontSize: 16,
                         fontWeight: FontWeight.normal,
                         color: ColorPalette.blueBold2,
@@ -185,7 +185,7 @@ class MedicalReportDetail extends StatelessWidget {
                   children: [
                     Text(
                       'Ghi chú: ',
-                      style: GoogleFonts.almarai(
+                      style: GoogleFonts.roboto(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                         color: ColorPalette.blueBold2,
@@ -194,7 +194,7 @@ class MedicalReportDetail extends StatelessWidget {
                     ),
                     RichReadMoreText.fromString(
                       text: medicalReport.note!,
-                      textStyle: GoogleFonts.almarai(
+                      textStyle: GoogleFonts.roboto(
                           fontSize: 16,
                           fontWeight: FontWeight.normal,
                           color: ColorPalette.bluelight2,
@@ -208,12 +208,12 @@ class MedicalReportDetail extends StatelessWidget {
                         trimExpandedText: 'Rút gọn',
                         // onPressReadMore: () {},
                         // onPressReadLess: () {},
-                        lessStyle: GoogleFonts.almarai(
+                        lessStyle: GoogleFonts.roboto(
                           fontSize: 16,
                           fontWeight: FontWeight.normal,
                           color: ColorPalette.bluelight2,
                         ),
-                        moreStyle: GoogleFonts.almarai(
+                        moreStyle: GoogleFonts.roboto(
                           fontSize: 16,
                           fontWeight: FontWeight.normal,
                           color: ColorPalette.bluelight2,
@@ -282,7 +282,7 @@ class MedicalReportDetail extends StatelessWidget {
             ),
             child: Text(
               'Chỉnh sửa',
-              style: GoogleFonts.almarai(
+              style: GoogleFonts.roboto(
                 fontSize: 24,
                 fontWeight: FontWeight.w600,
                 color: ColorPalette.blueBold2,

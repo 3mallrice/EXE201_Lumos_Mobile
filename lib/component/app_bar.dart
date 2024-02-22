@@ -39,7 +39,7 @@ class AppBarCom extends StatelessWidget implements PreferredSizeWidget {
         iconTheme: const IconThemeData(color: ColorPalette.secondaryWhite),
         backgroundColor: backgroundColor ?? ColorPalette.blue,
         title: Text(appBarText ?? ""),
-        titleTextStyle: GoogleFonts.almarai(
+        titleTextStyle: GoogleFonts.roboto(
           textStyle: TextStyle(
               color: textColor ?? ColorPalette.blueBold2,
               fontSize: 24,

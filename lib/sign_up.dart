@@ -1,3 +1,6 @@
+import 'package:exe201_lumos_mobile/api_services/authentication_service.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 import 'login.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
@@ -27,6 +30,8 @@ class _SignUpState extends State<SignUp> {
   final nameController = TextEditingController();
   bool _passwordInVisible = true;
   bool _confirmPasswordInVisible = true;
+
+  final CallAuthenticationApi callAuthenticationApi = CallAuthenticationApi();
 
   @override
   void initState() {
@@ -95,7 +100,7 @@ class _SignUpState extends State<SignUp> {
                             ),
 
                             const SizedBox(
-                              height: 20,
+                              height: 15,
                             ),
 
                             //name textfield
@@ -110,7 +115,7 @@ class _SignUpState extends State<SignUp> {
                             ),
 
                             const SizedBox(
-                              height: 20,
+                              height: 15,
                             ),
 
                             //email textfield
@@ -125,7 +130,7 @@ class _SignUpState extends State<SignUp> {
                             ),
 
                             const SizedBox(
-                              height: 20,
+                              height: 15,
                             ),
 
                             //phone textfield
@@ -140,23 +145,8 @@ class _SignUpState extends State<SignUp> {
                             ),
 
                             const SizedBox(
-                              height: 20,
+                              height: 15,
                             ),
-
-                            //Address textfield
-                            // MyTextfield(
-                            //   Controller: emailController,
-                            //   labelText: 'Địa chỉ',
-                            //   hintText: '68 abc, phường abc, ...',
-                            //   floatingLabelBehavior:
-                            //       FloatingLabelBehavior.always,
-                            //   obscureText: false,
-                            //   textInputAction: TextInputAction.next,
-                            // ),
-                            //
-                            // const SizedBox(
-                            //   height: 20,
-                            // ),
 
                             //password textfield
                             StatefulBuilder(
@@ -189,7 +179,7 @@ class _SignUpState extends State<SignUp> {
                             ),
 
                             const SizedBox(
-                              height: 20,
+                              height: 15,
                             ),
 
                             StatefulBuilder(
@@ -222,7 +212,21 @@ class _SignUpState extends State<SignUp> {
                             ),
 
                             const SizedBox(
-                              height: 30,
+                              height: 8,
+                            ),
+
+                            Text(
+                              "Bằng việc đồng ý tạo tài khoản, bạn đã đồng ý với các điều khoản và chính sách của chúng tôi.",
+                              style: GoogleFonts.roboto(
+                                color: ColorPalette.blueBold2.withOpacity(0.42),
+                                fontWeight: FontWeight.normal,
+                                fontSize: 14,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+
+                            const SizedBox(
+                              height: 12,
                             ),
 
                             //sign-in button
@@ -241,7 +245,7 @@ class _SignUpState extends State<SignUp> {
                             ),
 
                             const SizedBox(
-                              height: 50,
+                              height: 30,
                             ),
 
                             Row(

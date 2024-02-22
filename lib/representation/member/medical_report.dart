@@ -92,7 +92,7 @@ class _MedicalReportPageState extends State<MedicalReportPage> {
           ? Center(
               child: Text(
                 "Không tìm thấy dữ liệu nào!",
-                style: GoogleFonts.almarai(
+                style: GoogleFonts.roboto(
                   textStyle: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.normal,
@@ -134,7 +134,7 @@ class _MedicalReportPageState extends State<MedicalReportPage> {
                           ),
                           title: Text(
                             item.fullname,
-                            style: GoogleFonts.almarai(
+                            style: GoogleFonts.roboto(
                               textStyle: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.normal,
