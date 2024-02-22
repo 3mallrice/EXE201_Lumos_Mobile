@@ -495,7 +495,8 @@ class _MemberHomeState extends State<MemberHome> {
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
-                                    //
+                                    Navigator.of(context)
+                                        .pushNamed(SearchBooking.routeName);
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: ColorPalette.blue,

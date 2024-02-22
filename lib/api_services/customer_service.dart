@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:exe201_lumos_mobile/api_model/customer/address.dart';
 import 'package:exe201_lumos_mobile/api_model/customer/medical_report.dart';
 import 'package:exe201_lumos_mobile/core/helper/local_storage_helper.dart';
 import 'package:http/http.dart' as http;
@@ -105,6 +106,32 @@ class CallCustomerApi {
       }
     } catch (e) {
       throw Exception('Failed to get medical report: $e');
+    }
+  }
+
+  Future<List<Address>> getCustomerAddress(int customerId) async {
+    var url = Uri.parse('$api/$customerId/address');
+    token = LocalStorageHelper.getValue("token");
+
+    try {
+      http.Response response = await http.get(url, headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json'
+      });
+
+      if (response.statusCode == 200) {
+        final responseBody = json.decode(response.body);
+        final responseData = responseBody['data'];
+        List<Address> addressList = responseData
+            .map<Address>((item) => Address.fromJson(item))
+            .toList();
+        return addressList;
+      } else {
+        throw Exception(
+            'Failed to get address: ${response.statusCode} - ${response.reasonPhrase}');
+      }
+    } catch (e) {
+      throw Exception('Failed to get address: $e');
     }
   }
 }

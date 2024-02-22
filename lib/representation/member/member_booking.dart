@@ -1,5 +1,7 @@
+import 'package:exe201_lumos_mobile/api_model/customer/address.dart';
 import 'package:exe201_lumos_mobile/api_model/partner/partner.dart';
 import 'package:exe201_lumos_mobile/core/const/back-end/error_reponse.dart';
+import 'package:exe201_lumos_mobile/representation/member/member_address.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:logger/logger.dart';
 
@@ -21,8 +23,9 @@ import '../../login.dart';
 
 class BookingPage extends StatefulWidget {
   final List<CartModel>? cart;
+  final String? address;
 
-  const BookingPage({super.key, this.cart});
+  const BookingPage({super.key, this.cart, this.address});
 
   static String routeName = '/booking';
 
@@ -33,11 +36,17 @@ class BookingPage extends StatefulWidget {
 class _BookingPageState extends State<BookingPage> {
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = TimeOfDay.now();
+  final TextEditingController _addController = TextEditingController();
 
   int totalPrice = 0;
 
+  BuildContext? dialogContext;
+
   var log = Logger();
   List<MedicalReportService?> medicalReportServices = [];
+
+  List<Address> address = [];
+  bool _isEmptyList = true;
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -117,7 +126,7 @@ class _BookingPageState extends State<BookingPage> {
         },
       );
     } else {
-      //
+      // _fetchAddress();
     }
   }
 
@@ -126,6 +135,35 @@ class _BookingPageState extends State<BookingPage> {
     super.initState();
     fetchUserData();
     fetchMedicalReports();
+    _fetchAddress();
+  }
+
+  Future<void> _fetchAddress() async {
+    try {
+      if (userDetails != null && userDetails!.id != null) {
+        List<Address>? addressList =
+            await calCustomerlApi.getCustomerAddress(userDetails!.id!);
+        setState(
+          () {
+            address = addressList;
+            _isEmptyList = address!.isEmpty;
+            log.i(address!.length);
+          },
+        );
+      } else {
+        setState(() {
+          log.e("User details or user id is null.");
+          address = [];
+          _isEmptyList = true;
+        });
+      }
+    } catch (e) {
+      setState(() {
+        log.e("Error when fetching address: $e");
+        address = [];
+        _isEmptyList = true;
+      });
+    }
   }
 
   Future<void> fetchMedicalReports() async {
@@ -311,7 +349,6 @@ class _BookingPageState extends State<BookingPage> {
     String formattedTime = selectedTime.format(context);
 
     if (widget.cart == null) {
-      // Hiển thị một tiến trình tải hoặc một thông báo cho người dùng
       return Scaffold(
         body: Center(
           child: LoadingAnimationWidget.fourRotatingDots(
@@ -321,7 +358,6 @@ class _BookingPageState extends State<BookingPage> {
         ),
       );
     }
-
     return Scaffold(
       appBar: const AppBarCom(
         leading: true,
@@ -472,7 +508,7 @@ class _BookingPageState extends State<BookingPage> {
                           ),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 "Tổng cộng: ",
@@ -609,9 +645,16 @@ class _BookingPageState extends State<BookingPage> {
                       height: 5,
                     ),
                     TextField(
+                      readOnly: true,
+                      onTap: () {
+                        //Navigator.of(context).pushNamed(MemberAddress.routeName);
+                        _showPopUp();
+                        log.e('address: ${address.length}');
+                      },
+                      controller: _addController,
                       textAlign: TextAlign.start,
                       decoration: InputDecoration(
-                        hintText: 'Nhập địa chỉ của bạn',
+                        hintText: 'Chọn địa chỉ của bạn',
                         hintStyle: GoogleFonts.almarai(
                           color: ColorPalette.blueBold2.withOpacity(0.65),
                         ),
@@ -725,6 +768,84 @@ class _BookingPageState extends State<BookingPage> {
           ),
         ),
       ),
+    );
+  }
+
+  void _showPopUp() async {
+    dialogContext = context;
+    await _fetchAddress();
+    showDialog(
+      context: dialogContext!,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: ColorPalette.blue2,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                'Chọn địa chỉ của bạn:',
+                style: GoogleFonts.roboto(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: ColorPalette.pinkBold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: ColorPalette.pink,
+                  shape: const CircleBorder(),
+                  padding: const EdgeInsets.only(
+                      left: 10, right: 8, top: 8, bottom: 8),
+                ),
+                onPressed: () {
+                  // Navigator.of(context).pop();
+                  // Navigator.of(context).pushNamed(MemberAddress.routeName);
+                },
+                child: const Icon(
+                  Icons.add_business,
+                  color: ColorPalette.white,
+                ),
+              ),
+            ],
+          ),
+          content: SizedBox(
+            width: double.maxFinite,
+            child: ListView.builder(
+              clipBehavior: Clip.antiAlias,
+              shrinkWrap: true,
+              itemCount: address.length,
+              itemBuilder: (context, index) {
+                final item = address[index];
+                return ListTile(
+                  title: Text(
+                    item.displayName,
+                    style: GoogleFonts.almarai(
+                      fontWeight: FontWeight.bold,
+                      color: ColorPalette.blueBold2,
+                      fontSize: 16,
+                    ),
+                  ),
+                  subtitle: Text(
+                    item.address1,
+                    style: GoogleFonts.almarai(
+                      color: ColorPalette.bluelight2,
+                      fontSize: 14,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                  onTap: () {
+                    _addController.text = item.displayName;
+                    Navigator.of(context).pop();
+                    log.e(item.displayAddress);
+                  },
+                );
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 }
