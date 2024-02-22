@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../api_services/partner_service.dart';
@@ -450,9 +451,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                                       color: ColorPalette.bluelight2,
                                       decorationStyle:
                                           TextDecorationStyle.solid,
-                                      textStyle: const TextStyle(
-                                        textBaseline: TextBaseline.alphabetic,
-                                      ),
+                                      textBaseline: TextBaseline.alphabetic,
                                     ),
                                     settings: LineModeSettings(
                                       trimLines: 3,
@@ -463,11 +462,11 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                                   Container(
                                     alignment: Alignment.centerRight,
                                     child: Text(
-                                      '${service.price} VNĐ',
+                                      '₫ ${formatCurrency(service.price!)}',
                                       style: GoogleFonts.almarai(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
-                                        color: ColorPalette.blueBold2,
+                                        color: ColorPalette.pink,
                                       ),
                                     ),
                                   )
@@ -495,5 +494,10 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
         ],
       ),
     );
+  }
+
+  String formatCurrency(int amount) {
+    final formatCurrency = NumberFormat("#,##0", "vi_VN");
+    return formatCurrency.format(amount);
   }
 }

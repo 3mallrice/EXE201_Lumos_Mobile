@@ -296,7 +296,7 @@ class _SearchBookingState extends State<SearchBooking> {
                                               ),
                                             ),
                                             Text(
-                                              '${formatCurrency(item2.price ?? 0)} đ',
+                                              '₫ ${formatCurrency(item2.price ?? 0)}',
                                               style: GoogleFonts.aBeeZee(
                                                 fontSize: 18,
                                                 color: ColorPalette.blueBold2,

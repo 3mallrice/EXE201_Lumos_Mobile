@@ -452,7 +452,7 @@ class _BookingPageState extends State<BookingPage> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 SizedBox(
-                                                  width: screenWidth * 0.6,
+                                                  width: screenWidth * 0.55,
                                                   child: Text(
                                                     item2.name ?? "",
                                                     style: GoogleFonts.almarai(
@@ -472,7 +472,7 @@ class _BookingPageState extends State<BookingPage> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  item2.price.toString(),
+                                                  '₫ ${formatCurrency(item2.price!)}',
                                                   style: GoogleFonts.almarai(
                                                     textStyle: const TextStyle(
                                                       fontWeight:
@@ -511,17 +511,17 @@ class _BookingPageState extends State<BookingPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Tổng cộng: ",
+                                "Tổng cộng",
                                 style: GoogleFonts.almarai(
                                   textStyle: const TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 16,
+                                    fontSize: 18,
                                     color: ColorPalette.pinkBold,
                                   ),
                                 ),
                               ),
                               Text(
-                                "$totalPrice",
+                                '₫ ${formatCurrency(totalPrice ?? 0)}',
                                 style: GoogleFonts.almarai(
                                   textStyle: const TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -847,6 +847,11 @@ class _BookingPageState extends State<BookingPage> {
         );
       },
     );
+  }
+
+  String formatCurrency(int amount) {
+    final formatCurrency = NumberFormat("#,##0", "vi_VN");
+    return formatCurrency.format(amount);
   }
 }
 
