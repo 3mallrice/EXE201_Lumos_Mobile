@@ -101,7 +101,7 @@ class _BillScreenState extends State<BillScreen> {
                         ),
                         Text(
                           "đ",
-                          style: GoogleFonts.almarai(
+                          style: GoogleFonts.roboto(
                             textStyle: const TextStyle(
                                 color: ColorPalette.blueBold2,
                                 fontWeight: FontWeight.w600,

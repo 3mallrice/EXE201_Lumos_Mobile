@@ -40,7 +40,7 @@ class _AboutUsState extends State<AboutUs> {
                   margin: const EdgeInsets.symmetric(vertical: 10),
                   child: Text(
                     'Trở thành partner',
-                    style: GoogleFonts.almarai(
+                    style: GoogleFonts.roboto(
                       textStyle: const TextStyle(
                         color: ColorPalette.blueBold2,
                         fontSize: 16,
@@ -54,7 +54,7 @@ class _AboutUsState extends State<AboutUs> {
                   margin: const EdgeInsets.symmetric(vertical: 10),
                   child: Text(
                     'Licence & Policy',
-                    style: GoogleFonts.almarai(
+                    style: GoogleFonts.roboto(
                       textStyle: const TextStyle(
                         color: ColorPalette.blueBold2,
                         fontSize: 16,
@@ -68,7 +68,7 @@ class _AboutUsState extends State<AboutUs> {
                   margin: const EdgeInsets.symmetric(vertical: 10),
                   child: Text(
                     'Lumos.com.vn',
-                    style: GoogleFonts.almarai(
+                    style: GoogleFonts.roboto(
                       textStyle: const TextStyle(
                         color: ColorPalette.blueBold2,
                         fontSize: 16,
@@ -86,7 +86,7 @@ class _AboutUsState extends State<AboutUs> {
                         children: [
                           Text(
                             'Liên hệ với',
-                            style: GoogleFonts.almarai(
+                            style: GoogleFonts.roboto(
                               textStyle: const TextStyle(
                                 color: ColorPalette.blueBold2,
                                 fontSize: 16,
@@ -96,7 +96,7 @@ class _AboutUsState extends State<AboutUs> {
                           ),
                           Text(
                             ' Lumos',
-                            style: GoogleFonts.almarai(
+                            style: GoogleFonts.roboto(
                               textStyle: const TextStyle(
                                 color: ColorPalette.blueBold2,
                                 fontSize: 16,

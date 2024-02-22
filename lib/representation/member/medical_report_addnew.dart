@@ -235,7 +235,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                   children: [
                     Text(
                       'Họ và tên',
-                      style: GoogleFonts.almarai(
+                      style: GoogleFonts.roboto(
                         fontWeight: FontWeight.normal,
                         fontSize: 16,
                         color: ColorPalette.blueBold2,
@@ -247,7 +247,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                       maxLength: 20,
                       decoration: InputDecoration(
                         hintText: 'Nguyễn Văn A',
-                        hintStyle: GoogleFonts.almarai(
+                        hintStyle: GoogleFonts.roboto(
                           color: ColorPalette.blueBold2.withOpacity(0.65),
                         ),
                         filled: true,
@@ -267,7 +267,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                           ),
                         ),
                       ),
-                      style: GoogleFonts.almarai(
+                      style: GoogleFonts.roboto(
                         color: ColorPalette.blueBold2.withOpacity(0.65),
                       ),
                     )
@@ -283,7 +283,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                         children: [
                           Text(
                             'Danh xưng',
-                            style: GoogleFonts.almarai(
+                            style: GoogleFonts.roboto(
                               fontWeight: FontWeight.normal,
                               fontSize: 16,
                               color: ColorPalette.blueBold2,
@@ -300,12 +300,12 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                               });
                             },
                             decoration: CustomDropdownDecoration(
-                              headerStyle: GoogleFonts.almarai(
+                              headerStyle: GoogleFonts.roboto(
                                 color: ColorPalette.blueBold2.withOpacity(0.65),
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
                               ),
-                              hintStyle: GoogleFonts.almarai(
+                              hintStyle: GoogleFonts.roboto(
                                 color: ColorPalette.blueBold2.withOpacity(0.65),
                               ),
                               closedFillColor: ColorPalette.secondaryWhite,
@@ -334,7 +334,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                         children: [
                           Text(
                             'Giới tính',
-                            style: GoogleFonts.almarai(
+                            style: GoogleFonts.roboto(
                               fontWeight: FontWeight.normal,
                               fontSize: 16,
                               color: ColorPalette.blueBold2,
@@ -351,12 +351,12 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                               });
                             },
                             decoration: CustomDropdownDecoration(
-                              headerStyle: GoogleFonts.almarai(
+                              headerStyle: GoogleFonts.roboto(
                                 color: ColorPalette.blueBold2.withOpacity(0.65),
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
                               ),
-                              hintStyle: GoogleFonts.almarai(
+                              hintStyle: GoogleFonts.roboto(
                                 color: ColorPalette.blueBold2.withOpacity(0.65),
                               ),
                               closedFillColor: ColorPalette.secondaryWhite,
@@ -390,7 +390,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                         children: [
                           Text(
                             'Ngày sinh',
-                            style: GoogleFonts.almarai(
+                            style: GoogleFonts.roboto(
                               fontWeight: FontWeight.normal,
                               fontSize: 16,
                               color: ColorPalette.blueBold2,
@@ -417,7 +417,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                                   const SizedBox(width: 8.0),
                                   Text(
                                     formattedDate,
-                                    style: GoogleFonts.almarai(
+                                    style: GoogleFonts.roboto(
                                       color: ColorPalette.blueBold2
                                           .withOpacity(0.65),
                                       fontSize: 16,
@@ -438,7 +438,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                         children: [
                           Text(
                             'Nhóm máu',
-                            style: GoogleFonts.almarai(
+                            style: GoogleFonts.roboto(
                               fontWeight: FontWeight.normal,
                               fontSize: 16,
                               color: ColorPalette.blueBold2,
@@ -455,12 +455,12 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                               });
                             },
                             decoration: CustomDropdownDecoration(
-                              headerStyle: GoogleFonts.almarai(
+                              headerStyle: GoogleFonts.roboto(
                                 color: ColorPalette.blueBold2.withOpacity(0.65),
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
                               ),
-                              hintStyle: GoogleFonts.almarai(
+                              hintStyle: GoogleFonts.roboto(
                                 color: ColorPalette.blueBold2.withOpacity(0.65),
                               ),
                               closedFillColor: ColorPalette.secondaryWhite,
@@ -490,7 +490,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                   children: [
                     Text(
                       'Số điện thoại',
-                      style: GoogleFonts.almarai(
+                      style: GoogleFonts.roboto(
                         fontWeight: FontWeight.normal,
                         fontSize: 16,
                         color: ColorPalette.blueBold2,
@@ -502,7 +502,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                       maxLength: 10,
                       decoration: InputDecoration(
                         hintText: '0912345678',
-                        hintStyle: GoogleFonts.almarai(
+                        hintStyle: GoogleFonts.roboto(
                           color: ColorPalette.blueBold2.withOpacity(0.65),
                         ),
                         filled: true,
@@ -522,7 +522,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                           ),
                         ),
                       ),
-                      style: GoogleFonts.almarai(
+                      style: GoogleFonts.roboto(
                         color: ColorPalette.blueBold2.withOpacity(0.65),
                       ),
                     )
@@ -534,7 +534,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                   children: [
                     Text(
                       'Ghi chú',
-                      style: GoogleFonts.almarai(
+                      style: GoogleFonts.roboto(
                         fontWeight: FontWeight.normal,
                         fontSize: 16,
                         color: ColorPalette.blueBold2,
@@ -547,7 +547,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                         maxLength: 255,
                         decoration: InputDecoration(
                           hintText: 'Nhập ghi chú...',
-                          hintStyle: GoogleFonts.almarai(
+                          hintStyle: GoogleFonts.roboto(
                             color: ColorPalette.blueBold2.withOpacity(0.65),
                           ),
                           filled: true,
@@ -567,7 +567,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                             ),
                           ),
                         ),
-                        style: GoogleFonts.almarai(
+                        style: GoogleFonts.roboto(
                           color: ColorPalette.blueBold2.withOpacity(0.65),
                         ),
                         textAlign: TextAlign.justify,
@@ -595,7 +595,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
             ),
             child: Text(
               'Lưu',
-              style: GoogleFonts.almarai(
+              style: GoogleFonts.roboto(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
                 color: ColorPalette.secondaryWhite,

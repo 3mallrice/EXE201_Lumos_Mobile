@@ -78,7 +78,7 @@ class _LoginState extends State<Login> {
       SnackBar(
         content: Text(
           LoginSuccessMessage.loginSuccess(username),
-          style: GoogleFonts.almarai(
+          style: GoogleFonts.roboto(
             color: ColorPalette.pinkBold,
             fontWeight: FontWeight.bold,
           ),
@@ -100,7 +100,7 @@ class _LoginState extends State<Login> {
         style: TextStyle(color: ColorPalette.pinkBold),
       ),
       message: Text(OnInvalidInputMessage.emptyInput,
-          style: GoogleFonts.almarai(color: ColorPalette.primaryText),
+          style: GoogleFonts.roboto(color: ColorPalette.primaryText),
           overflow: TextOverflow.ellipsis,
           maxLines: 2),
     );
@@ -115,7 +115,7 @@ class _LoginState extends State<Login> {
         style: TextStyle(color: ColorPalette.pinkBold),
       ),
       message: Text(LoginErrorMessage.wrongCredentials,
-          style: GoogleFonts.almarai(color: ColorPalette.primaryText),
+          style: GoogleFonts.roboto(color: ColorPalette.primaryText),
           overflow: TextOverflow.ellipsis,
           maxLines: 2),
     );

@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
       ],
       title: 'Lumos - Health and Trust',
       theme: ThemeData(
-        fontFamily: GoogleFonts.almarai().fontFamily,
+        fontFamily: GoogleFonts.roboto().fontFamily,
         useMaterial3: true,
         primaryColor: ColorPalette.white,
         scaffoldBackgroundColor: ColorPalette.white,

@@ -111,7 +111,7 @@ class _MemberHomeState extends State<MemberHome> {
                           controller: _textEditingController,
                           decoration: InputDecoration(
                             hintText: _hintSearch[_hintIndex],
-                            hintStyle: GoogleFonts.almarai(
+                            hintStyle: GoogleFonts.roboto(
                               textStyle: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
@@ -233,7 +233,7 @@ class _MemberHomeState extends State<MemberHome> {
                                 style: TextStyle(
                                   color: ColorPalette.blueBold2,
                                   fontSize: 11,
-                                  fontFamily: 'Poppins',
+                                  fontFamily: 'roboto',
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),

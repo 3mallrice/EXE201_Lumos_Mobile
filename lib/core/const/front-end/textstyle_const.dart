@@ -13,7 +13,7 @@ class TextStyles {
       color: ColorPalette.primaryText,
       fontWeight: FontWeight.w400,
       height: 16 / 14,
-      fontFamily: 'poppins');
+      fontFamily: 'roboto');
 }
 
 extension ExtendedTextStyle on TextStyle {

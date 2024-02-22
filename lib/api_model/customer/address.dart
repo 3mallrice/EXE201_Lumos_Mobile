@@ -1,11 +1,8 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-
 class Address {
   final int? addressId;
   final String? code;
   final String displayName;
-  final String address1;
+  final String address;
   final int? status;
   final String? createdDate;
   final String? createdBy;
@@ -17,7 +14,7 @@ class Address {
     this.addressId,
     this.code,
     required this.displayName,
-    required this.address1,
+    required this.address,
     this.status,
     this.createdDate,
     this.createdBy,
@@ -31,7 +28,7 @@ class Address {
       addressId: json['addressId'],
       code: json['code'],
       displayName: json['displayName'],
-      address1: json['address1'],
+      address: json['address1'],
       status: json['status'],
       createdDate: json['createdDate'],
       createdBy: json['createdBy'],
@@ -39,9 +36,5 @@ class Address {
       updatedBy: json['updatedBy'],
       customerId: json['customerId'],
     );
-  }
-
-  String get displayAddress {
-    return '$address1';
   }
 }

@@ -38,7 +38,7 @@ class _BillDetailState extends State<BillDetail> {
               children: [
                 Text(
                   'Bệnh viện sản nhi trung ương TP Hồ Chí Minh',
-                  style: GoogleFonts.almarai(
+                  style: GoogleFonts.roboto(
                     textStyle: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -48,7 +48,7 @@ class _BillDetailState extends State<BillDetail> {
                 ),
                 Text(
                   '28/10/2023 - 10:21',
-                  style: GoogleFonts.almarai(
+                  style: GoogleFonts.roboto(
                     textStyle: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -70,7 +70,7 @@ class _BillDetailState extends State<BillDetail> {
                   children: [
                     Text(
                       'Mã đặt chỗ: ',
-                      style: GoogleFonts.almarai(
+                      style: GoogleFonts.roboto(
                         textStyle: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.normal,
@@ -80,7 +80,7 @@ class _BillDetailState extends State<BillDetail> {
                     ),
                     Text(
                       '#BOKVN2412345',
-                      style: GoogleFonts.almarai(
+                      style: GoogleFonts.roboto(
                         textStyle: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
@@ -97,7 +97,7 @@ class _BillDetailState extends State<BillDetail> {
                   children: [
                     Text(
                       'Ngày lên lịch: ',
-                      style: GoogleFonts.almarai(
+                      style: GoogleFonts.roboto(
                         textStyle: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.normal,
@@ -107,7 +107,7 @@ class _BillDetailState extends State<BillDetail> {
                     ),
                     Text(
                       '26/10/2023 - 09:45',
-                      style: GoogleFonts.almarai(
+                      style: GoogleFonts.roboto(
                         textStyle: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
@@ -123,7 +123,7 @@ class _BillDetailState extends State<BillDetail> {
                   children: [
                     Text(
                       'Địa chỉ: ',
-                      style: GoogleFonts.almarai(
+                      style: GoogleFonts.roboto(
                         textStyle: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.normal,
@@ -133,7 +133,7 @@ class _BillDetailState extends State<BillDetail> {
                     ),
                     Text(
                       '10 Bùi Viện, Quận 1, TP. Hồ Chí Minh',
-                      style: GoogleFonts.almarai(
+                      style: GoogleFonts.roboto(
                         textStyle: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
@@ -150,7 +150,7 @@ class _BillDetailState extends State<BillDetail> {
                   children: [
                     Text(
                       'Ghi chú: ',
-                      style: GoogleFonts.almarai(
+                      style: GoogleFonts.roboto(
                         textStyle: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.normal,
@@ -160,7 +160,7 @@ class _BillDetailState extends State<BillDetail> {
                     ),
                     Text(
                       'Khỏe mạnh, khỏe mạnh khỏe mạnh Khỏe mạnh, khỏe mạnh khỏe mạnh Khỏe mạnh, khỏe mạnh khỏe mạnh Khỏe mạnh, khỏe mạnh khỏe mạnh',
-                      style: GoogleFonts.almarai(
+                      style: GoogleFonts.roboto(
                         textStyle: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.normal,
@@ -186,7 +186,7 @@ class _BillDetailState extends State<BillDetail> {
                       children: [
                         Text(
                           'Tổng tiền dịch vụ: ',
-                          style: GoogleFonts.almarai(
+                          style: GoogleFonts.roboto(
                             textStyle: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.normal,
@@ -196,7 +196,7 @@ class _BillDetailState extends State<BillDetail> {
                         ),
                         Text(
                           '200.000 đ',
-                          style: GoogleFonts.almarai(
+                          style: GoogleFonts.roboto(
                             textStyle: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.normal,
@@ -213,7 +213,7 @@ class _BillDetailState extends State<BillDetail> {
                       children: [
                         Text(
                           'Phụ phí: ',
-                          style: GoogleFonts.almarai(
+                          style: GoogleFonts.roboto(
                             textStyle: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.normal,
@@ -223,7 +223,7 @@ class _BillDetailState extends State<BillDetail> {
                         ),
                         Text(
                           '30.000 đ',
-                          style: GoogleFonts.almarai(
+                          style: GoogleFonts.roboto(
                             textStyle: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.normal,
@@ -242,7 +242,7 @@ class _BillDetailState extends State<BillDetail> {
                         children: [
                           Text(
                             'Thành tiền: ',
-                            style: GoogleFonts.almarai(
+                            style: GoogleFonts.roboto(
                               textStyle: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -252,7 +252,7 @@ class _BillDetailState extends State<BillDetail> {
                           ),
                           Text(
                             '230.000 đ',
-                            style: GoogleFonts.almarai(
+                            style: GoogleFonts.roboto(
                               textStyle: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -314,7 +314,7 @@ class _CustomerAndServiceState extends State<CustomerAndService> {
                   children: [
                     Text(
                       item,
-                      style: GoogleFonts.almarai(
+                      style: GoogleFonts.roboto(
                         textStyle: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -334,7 +334,7 @@ class _CustomerAndServiceState extends State<CustomerAndService> {
                             children: [
                               Text(
                                 item2,
-                                style: GoogleFonts.almarai(
+                                style: GoogleFonts.roboto(
                                   textStyle: const TextStyle(
                                     fontWeight: FontWeight.normal,
                                     fontSize: 16,

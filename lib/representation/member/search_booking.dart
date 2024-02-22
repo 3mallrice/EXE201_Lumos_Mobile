@@ -188,7 +188,7 @@ class _SearchBookingState extends State<SearchBooking> {
                                 children: [
                                   Text(
                                     item.partnerName ?? '',
-                                    style: GoogleFonts.almarai(
+                                    style: GoogleFonts.roboto(
                                       textStyle: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.w600,
@@ -197,7 +197,7 @@ class _SearchBookingState extends State<SearchBooking> {
                                   ),
                                   Text(
                                     item.address ?? "",
-                                    style: GoogleFonts.almarai(
+                                    style: GoogleFonts.roboto(
                                       textStyle: const TextStyle(
                                         fontWeight: FontWeight.normal,
                                         fontSize: 16,
@@ -232,7 +232,7 @@ class _SearchBookingState extends State<SearchBooking> {
                                                       child: Text(
                                                         item2.name ?? " ",
                                                         style:
-                                                            GoogleFonts.almarai(
+                                                            GoogleFonts.roboto(
                                                           textStyle:
                                                               const TextStyle(
                                                             fontWeight:
@@ -283,7 +283,7 @@ class _SearchBookingState extends State<SearchBooking> {
                                                         Text(
                                                           "100 lượt",
                                                           style: GoogleFonts
-                                                              .almarai(
+                                                              .roboto(
                                                             fontSize: 16,
                                                             color: ColorPalette
                                                                 .blueBold2,

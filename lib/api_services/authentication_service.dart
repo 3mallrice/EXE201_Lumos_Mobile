@@ -8,6 +8,7 @@ class CallAuthenticationApi {
   static const apiName = 'auth';
   static const rootApi = ApiService.rootApi;
   final String api = "$rootApi/$apiName";
+
   // ignore: unused_field
   final String _imgUrl = '';
   String token = "";
@@ -80,6 +81,39 @@ class CallAuthenticationApi {
     } else {
       throw Exception(
           'Failed to sign out: $response.statusCode - ${response.reasonPhrase}');
+    }
+  }
+
+  //POST: /register
+  //request: SingUp(email, fullname, password, rePassword, phone)
+  //response: true or false
+  Future<bool> register(String email, String fullname, String password,
+      String rePassword, String phone) async {
+    try {
+      var url = Uri.parse('$api/register');
+      // SignUp request = SignUp(
+      //   email: email,
+      //   fullname: fullname,
+      //   password: password,
+      //   rePassword: rePassword,
+      //   phone: phone,
+      // );
+      // var body = jsonEncode(request.toJson());
+
+      http.Response response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        // body: body,
+      );
+
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        throw Exception(
+            'Failed to register: ${response.statusCode} - ${response.reasonPhrase}');
+      }
+    } catch (e) {
+      throw Exception('Failed to register: $e');
     }
   }
 }
