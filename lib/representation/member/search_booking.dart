@@ -190,7 +190,7 @@ class _SearchBookingState extends State<SearchBooking> {
                                     item.partnerName ?? '',
                                     style: GoogleFonts.roboto(
                                       textStyle: const TextStyle(
-                                          fontSize: 18,
+                                          fontSize: 20,
                                           fontWeight: FontWeight.w600,
                                           color: ColorPalette.blueBold2),
                                     ),
@@ -205,7 +205,6 @@ class _SearchBookingState extends State<SearchBooking> {
                                       ),
                                     ),
                                   ),
-                                  // Replace the existing code for the second ListView.builder
                                   Container(
                                     padding: const EdgeInsets.only(left: 15),
                                     child: Column(
@@ -281,7 +280,7 @@ class _SearchBookingState extends State<SearchBooking> {
                                                               .blueBold2,
                                                         ),
                                                         Text(
-                                                          "100 lượt",
+                                                          ' ${item2.quantity.toString()} lượt',
                                                           style: GoogleFonts
                                                               .roboto(
                                                             fontSize: 16,
@@ -298,7 +297,7 @@ class _SearchBookingState extends State<SearchBooking> {
                                             Text(
                                               '₫ ${formatCurrency(item2.price ?? 0)}',
                                               style: GoogleFonts.aBeeZee(
-                                                fontSize: 18,
+                                                fontSize: 14,
                                                 color: ColorPalette.blueBold2,
                                               ),
                                             ),

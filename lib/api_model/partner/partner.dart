@@ -57,6 +57,7 @@ class PartnerService {
   final int? status;
   final String? description;
   final int? price;
+  final int? quantity;
 
   PartnerService({
     this.serviceId,
@@ -66,6 +67,7 @@ class PartnerService {
     this.status,
     this.description,
     this.price,
+    this.quantity,
   });
 
   factory PartnerService.fromJson(Map<String, dynamic> json) {
@@ -77,6 +79,7 @@ class PartnerService {
       status: json['status'],
       description: json['description'],
       price: json['price'],
+      quantity: json['bookedQuantity'],
     );
   }
 }
