@@ -1,8 +1,12 @@
+import 'package:exe201_lumos_mobile/core/const/back-end/validation.dart';
 import 'package:exe201_lumos_mobile/representation/member/medical_report.dart';
+
+import '../../core/const/back-end/error_reponse.dart';
 
 import '../../api_model/authentication/login.dart';
 import '../../api_model/customer/medical_report.dart';
 import '../../api_services/customer_service.dart';
+import '../../component/alert_dialog.dart';
 import '../../core/helper/local_storage_helper.dart';
 import '../../login.dart';
 import 'package:logger/logger.dart';
@@ -70,7 +74,9 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
         },
       );
     } else {
-      _saveData();
+      setState(() {
+        userDetails = userDetails;
+      });
     }
   }
 
@@ -80,16 +86,79 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
     _fetchUserData();
   }
 
+  bool isEmpty(String name, String phoneNumber) {
+    return name.isEmpty || phoneNumber.isEmpty;
+  }
+
   Future<void> _saveData() async {
     if (userDetails != null) {
       final customerId = userDetails!.id;
-      final name = _nameController.text;
-      final pronoun = _selectedPronoun;
-      final gender = _selectedGender;
-      final dob = _selectedDate;
-      final bloodType = _selectedBloodType;
-      final phoneNumber = _phoneNumberController.text;
-      final note = _noteController.text;
+
+      String name = _nameController.text;
+      int pronoun = _selectedPronoun;
+      bool gender = _selectedGender;
+      DateTime dob = _selectedDate;
+      int bloodType = _selectedBloodType;
+      String phoneNumber = _phoneNumberController.text;
+      String note = _noteController.text;
+
+      if (isEmpty(name, phoneNumber)) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return CustomAlertDialog(
+              title: Text(DiaLogMessage.title,
+                  style: GoogleFonts.roboto(
+                    color: ColorPalette.blueBold2,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  )),
+              message: Text(
+                OnInvalidInputMessage.emptyInput,
+                style: GoogleFonts.roboto(
+                  color: ColorPalette.blueBold2,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              confirmText: "OK",
+              onConfirm: () {
+                Navigator.of(context).pop();
+              },
+            );
+          },
+        );
+        return;
+      }
+
+      if (!Validation.isVietnamesePhoneNumber(phoneNumber)) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return CustomAlertDialog(
+              message: Text(
+                "Số điện thoại không hợp lệ",
+                style: GoogleFonts.roboto(
+                  color: ColorPalette.blueBold2,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              confirmText: "OK",
+              onConfirm: () {
+                Navigator.of(context).pop();
+              },
+            );
+          },
+        );
+        return;
+      }
+
+      name = Validation.capitalizeFirstLetter(name) ?? name;
+
+      if (note.isEmpty) {
+        note = "Hoàn toàn khỏe mạnh, bình thường.";
+      }
 
       final newMedicalReport = MedicalReport(
         fullname: name,
@@ -116,15 +185,6 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
         _nameController.clear();
         _phoneNumberController.clear();
         _noteController.clear();
-
-        // Reset state variables for dropdowns and date selection
-        setState(() {
-          _selectedPronoun = 0;
-          _selectedGender = true;
-          _selectedBloodType = 0;
-          _selectedDate = DateTime.now();
-          Navigator.of(context).pushNamed(MedicalReportPage.routeName);
-        });
       } catch (error) {
         log.e('Error adding new medical report: $error');
       }
@@ -136,17 +196,21 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
+        return CustomAlertDialog(
           title: const Text('Thành công'),
-          content: const Text('Thêm mới bệnh nhân thành công!'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('OK'),
+          confirmText: "OK",
+          message: Text(
+            OperationSuccessMessage.createSuccess("hồ sơ"),
+            style: GoogleFonts.roboto(
+              color: ColorPalette.blueBold2,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
             ),
-          ],
+          ),
+          onConfirm: () {
+            Navigator.of(context)
+                .pushReplacementNamed(MedicalReportPage.routeName);
+          },
         );
       },
     );
@@ -217,7 +281,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
     String formattedDate = DateFormat('dd-MM-yyyy').format(_selectedDate);
     return Scaffold(
       appBar: const AppBarCom(
-        appBarText: "Tạo mới danh sách bệnh nhân",
+        appBarText: "Tạo mới hồ sơ",
         leading: true,
       ),
       body: Align(
@@ -273,7 +337,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                     )
                   ],
                 ),
-                const SizedBox(height: 15),
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -528,7 +592,9 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                     )
                   ],
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(
+                  height: 7,
+                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -543,10 +609,10 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                     SingleChildScrollView(
                       child: TextField(
                         controller: _noteController,
-                        maxLines: 5,
+                        maxLines: 3,
                         maxLength: 255,
                         decoration: InputDecoration(
-                          hintText: 'Nhập ghi chú...',
+                          hintText: 'Hoàn toàn khỏe mạnh, bình thường...',
                           hintStyle: GoogleFonts.roboto(
                             color: ColorPalette.blueBold2.withOpacity(0.65),
                           ),
@@ -575,6 +641,18 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                     ),
                   ],
                 ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Text(
+                    "Bằng việc tạo mới hồ sơ, tôi đã xác nhận rằng những thông tin trên là chính xác.",
+                    style: GoogleFonts.roboto(
+                      color: ColorPalette.blueBold2.withOpacity(0.42),
+                      fontWeight: FontWeight.normal,
+                      fontSize: 14,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
               ],
             ),
           ),
@@ -594,7 +672,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
               minimumSize: const Size(100, 40),
             ),
             child: Text(
-              'Lưu',
+              'Tạo ',
               style: GoogleFonts.roboto(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,

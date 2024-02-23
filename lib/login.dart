@@ -151,8 +151,8 @@ class _LoginState extends State<Login> {
   }
 
   onPressedLogin() async {
-    String email = emailController.text.toLowerCase();
-    String password = passwordController.text;
+    String email = emailController.text.toLowerCase().trim();
+    String password = passwordController.text.trim();
 
     try {
       if (email.isEmpty || password.isEmpty) {

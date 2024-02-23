@@ -410,7 +410,7 @@ class _SignUpState extends State<SignUp> {
                                           'Bằng việc đăng ký tài khoản tại Lumos, tôi đã đọc và đồng ý với các ',
                                       style: GoogleFonts.roboto(
                                         color: ColorPalette.blueBold2
-                                            .withOpacity(0.65),
+                                            .withOpacity(0.42),
                                         fontSize: 14,
                                       ),
                                     ),
@@ -421,7 +421,7 @@ class _SignUpState extends State<SignUp> {
                                       },
                                       style: GoogleFonts.roboto(
                                         color: ColorPalette.pinkBold
-                                            .withOpacity(0.65),
+                                            .withOpacity(0.42),
                                         fontWeight: FontWeight.bold,
                                         fontSize: 14,
                                       ),
@@ -430,7 +430,7 @@ class _SignUpState extends State<SignUp> {
                                       text: ' của Lumos.',
                                       style: GoogleFonts.roboto(
                                         color: ColorPalette.blueBold2
-                                            .withOpacity(0.65),
+                                            .withOpacity(0.42),
                                         fontSize: 14,
                                       ),
                                     ),
