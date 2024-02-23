@@ -1,5 +1,6 @@
 import 'dart:convert';
 import '../api_model/authentication/login.dart';
+import '../api_model/authentication/signup.dart';
 import '../core/helper/local_storage_helper.dart';
 import 'api_service.dart';
 import 'package:http/http.dart' as http;
@@ -49,8 +50,6 @@ class CallAuthenticationApi {
         LoginResponse loginResponse = LoginResponse(
           username: loginData['username'],
           accessTokenExpiration: loginData['accessTokenExpiration'],
-          refreshToken: loginData['refreshToken'],
-          refreshTokenExpiration: loginData['refreshTokenExpiration'],
           token: loginData['token'],
           userDetails: userDetails,
         );
@@ -87,27 +86,27 @@ class CallAuthenticationApi {
   //POST: /register
   //request: SingUp(email, fullname, password, rePassword, phone)
   //response: true or false
-  Future<bool> register(String email, String fullname, String password,
+  Future<int> register(String email, String fullname, String password,
       String rePassword, String phone) async {
     try {
       var url = Uri.parse('$api/register');
-      // SignUp request = SignUp(
-      //   email: email,
-      //   fullname: fullname,
-      //   password: password,
-      //   rePassword: rePassword,
-      //   phone: phone,
-      // );
-      // var body = jsonEncode(request.toJson());
+      SignUp request = SignUp(
+        email: email,
+        fullname: fullname,
+        password: password,
+        confirmPassword: rePassword,
+        phone: phone,
+      );
+      var body = jsonEncode(request.toJson());
 
       http.Response response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},
-        // body: body,
+        body: body,
       );
 
-      if (response.statusCode == 200) {
-        return true;
+      if (response.statusCode == 200 || response.statusCode == 409) {
+        return response.statusCode;
       } else {
         throw Exception(
             'Failed to register: ${response.statusCode} - ${response.reasonPhrase}');
