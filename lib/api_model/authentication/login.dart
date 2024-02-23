@@ -19,16 +19,12 @@ class LoginResponse {
   final String username;
   final String token;
   final String accessTokenExpiration;
-  final String refreshToken;
-  final String refreshTokenExpiration;
   final UserDetails userDetails;
 
   LoginResponse({
     required this.username,
     required this.token,
     required this.accessTokenExpiration,
-    required this.refreshToken,
-    required this.refreshTokenExpiration,
     required this.userDetails,
   });
 
@@ -37,8 +33,6 @@ class LoginResponse {
       username: json['username'],
       token: json['token'],
       accessTokenExpiration: json['accessTokenExpiration'],
-      refreshToken: json['refreshToken'],
-      refreshTokenExpiration: json['refreshTokenExpiration'],
       userDetails: UserDetails.fromJson(json['userdetails']),
     );
   }
