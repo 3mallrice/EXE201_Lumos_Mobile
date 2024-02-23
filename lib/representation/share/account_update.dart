@@ -1,4 +1,8 @@
+import 'package:exe201_lumos_mobile/core/const/back-end/error_reponse.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 import '../../api_model/authentication/login.dart';
+import '../../component/alert_dialog.dart';
 import '../../component/app_bar.dart';
 import '../../core/const/front-end/color_const.dart';
 import '../../core/helper/asset_helper.dart';
@@ -8,6 +12,7 @@ import '../../component/my_button.dart';
 import '../../component/my_textfield.dart';
 import '../../core/helper/local_storage_helper.dart';
 import '../../login.dart';
+import 'account_screen.dart';
 
 class UpdateAccount extends StatefulWidget {
   const UpdateAccount({super.key});
@@ -22,12 +27,47 @@ class _UpdateAccountState extends State<UpdateAccount> {
   //text controller
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
-  final TextEditingController addressController = TextEditingController();
+  // final TextEditingController addressController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
 
   //"Xong" button
-  onPressedLogin() async {
-    //Xong
+  onPressedUpdate() {
+    //show custom alert dialog to tell developing feature
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return CustomAlertDialog(
+          title: Text(OnDevelopmentMessage.fearureOnDevelopmentTitle,
+              style: GoogleFonts.roboto(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: ColorPalette.blueBold2,
+              )),
+          message: Text(
+            OnDevelopmentMessage.featureOnDevelopment,
+            style: GoogleFonts.roboto(
+              fontSize: 16,
+              fontWeight: FontWeight.normal,
+              color: ColorPalette.blueBold2,
+            ),
+          ),
+          action: GestureDetector(
+            onTap: () {
+              Navigator.of(context)
+                  .pushReplacementNamed(AccountScreen.routeName);
+            },
+            child: Text(
+              "Về trang Tài khoản",
+              style: GoogleFonts.roboto(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: ColorPalette.pinkBold,
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 
   UserDetails? userDetails;
@@ -38,6 +78,8 @@ class _UpdateAccountState extends State<UpdateAccount> {
 
   void fetchUserData() async {
     userDetails = await loadAccount();
+    nameController.text = userDetails!.username;
+    emailController.text = userDetails!.email;
     if (userDetails == null) {
       Future.delayed(
         Duration.zero,
@@ -94,7 +136,7 @@ class _UpdateAccountState extends State<UpdateAccount> {
                       ),
                       child: Center(
                         child: IconButton(
-                          onPressed: () {},
+                          onPressed: onPressedUpdate,
                           color: ColorPalette.secondaryWhite,
                           icon: const Icon(
                             Icons.camera_alt_outlined,
@@ -113,8 +155,8 @@ class _UpdateAccountState extends State<UpdateAccount> {
             ),
             MyTextfield(
               controller: nameController,
-              labelText: 'Name',
-              hintText: 'Your name',
+              labelText: 'Họ và tên',
+              hintText: 'Tên của bạn',
               floatingLabelBehavior: FloatingLabelBehavior.always,
               obscureText: false,
               textInputAction: TextInputAction.next,
@@ -125,38 +167,40 @@ class _UpdateAccountState extends State<UpdateAccount> {
             MyTextfield(
               controller: emailController,
               labelText: 'Email',
-              hintText: 'Your email',
+              hintText: 'Email',
               floatingLabelBehavior: FloatingLabelBehavior.always,
               obscureText: false,
               textInputAction: TextInputAction.next,
             ),
-            const SizedBox(
-              height: 30,
-            ),
-            MyTextfield(
-              controller: addressController,
-              labelText: 'Address',
-              hintText: 'Your address',
-              floatingLabelBehavior: FloatingLabelBehavior.always,
-              obscureText: false,
-              textInputAction: TextInputAction.next,
-            ),
+            // const SizedBox(
+            //   height: 30,
+            // ),
+            // MyTextfield(
+            //   controller: addressController,
+            //   labelText: 'Address',
+            //   hintText: 'Your address',
+            //   floatingLabelBehavior: FloatingLabelBehavior.always,
+            //   obscureText: false,
+            //   textInputAction: TextInputAction.next,
+            // ),
             const SizedBox(
               height: 30,
             ),
             MyTextfield(
               controller: phoneController,
-              labelText: 'Phone',
-              hintText: 'Your phone',
+              labelText: 'Điện thoại',
+              hintText: 'Điện thoại của bạn',
               floatingLabelBehavior: FloatingLabelBehavior.always,
               obscureText: false,
               textInputAction: TextInputAction.done,
+              maxLength: 10,
+              keyboardType: TextInputType.number,
             ),
             const SizedBox(
               height: 45,
             ),
             MyButton(
-              onTap: onPressedLogin,
+              onTap: onPressedUpdate,
               borderRadius: 66.5,
               height: 55,
               color: ColorPalette.pink,

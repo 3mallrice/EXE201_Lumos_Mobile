@@ -1,5 +1,5 @@
-import 'package:exe201_lumos_mobile/core/const/back-end/validation.dart';
-import 'package:exe201_lumos_mobile/representation/member/medical_report.dart';
+import '../../core/const/back-end/validation.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../core/const/back-end/error_reponse.dart';
 
@@ -59,6 +59,35 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
   bool isEmptyList = true;
 
   UserDetails? userDetails;
+
+  OverlayEntry? _overlayEntry;
+
+  // Hàm để hiển thị vòng loading
+  void _showLoadingOverlay(BuildContext context) {
+    _overlayEntry = OverlayEntry(
+      builder: (context) => Stack(
+        children: [
+          Positioned.fill(
+            child: Container(
+              color: Colors.black.withOpacity(0.5),
+            ),
+          ),
+          Center(
+              child: LoadingAnimationWidget.fourRotatingDots(
+            color: ColorPalette.pinkBold,
+            size: 80,
+          )),
+        ],
+      ),
+    );
+    Overlay.of(context).insert(_overlayEntry!);
+  }
+
+  // Hàm để ẩn vòng loading
+  void _hideLoadingOverlay() {
+    _overlayEntry?.remove();
+    _overlayEntry = null;
+  }
 
   Future<UserDetails>? loadAccount() async {
     return await LoginAccount.loadAccount();
@@ -171,6 +200,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
       );
 
       try {
+        _showLoadingOverlay(context);
         bool isSuccess =
             await api.addNewMedicalReport(customerId!, newMedicalReport);
 
@@ -187,6 +217,9 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
         _noteController.clear();
       } catch (error) {
         log.e('Error adding new medical report: $error');
+      } finally {
+        // Ẩn vòng loading khi quá trình đăng nhập hoàn thành
+        _hideLoadingOverlay();
       }
     }
   }
@@ -208,8 +241,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
             ),
           ),
           onConfirm: () {
-            Navigator.of(context)
-                .pushReplacementNamed(MedicalReportPage.routeName);
+            Navigator.of(context).pop();
           },
         );
       },
@@ -564,6 +596,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                       controller: _phoneNumberController,
                       textAlign: TextAlign.start,
                       maxLength: 10,
+                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         hintText: '0912345678',
                         hintStyle: GoogleFonts.roboto(
