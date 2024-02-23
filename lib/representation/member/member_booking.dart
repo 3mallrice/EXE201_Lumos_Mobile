@@ -1,6 +1,6 @@
-import 'package:exe201_lumos_mobile/api_model/customer/address.dart';
-import 'package:exe201_lumos_mobile/api_model/partner/partner.dart';
-import 'package:exe201_lumos_mobile/core/const/back-end/error_reponse.dart';
+import '../../api_model/customer/address.dart';
+import '../../api_model/partner/partner.dart';
+import '../../core/const/back-end/error_reponse.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:logger/logger.dart';
 
@@ -36,8 +36,6 @@ class _BookingPageState extends State<BookingPage> {
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = TimeOfDay.now();
   final TextEditingController _addController = TextEditingController();
-
-  int totalPrice = 0;
 
   BuildContext? dialogContext;
 
@@ -172,9 +170,6 @@ class _BookingPageState extends State<BookingPage> {
           medicalReportServices.add(medicalReportService);
         },
       );
-      for (int j = 0; j < medicalReportService.services.length; j++) {
-        totalPrice += medicalReportService.services[j].price!;
-      }
     }
   }
 
@@ -342,6 +337,13 @@ class _BookingPageState extends State<BookingPage> {
     double screenWidth = MediaQuery.of(context).size.width;
     String formattedDate = DateFormat('dd-MM-yyyy').format(selectedDate);
     String formattedTime = selectedTime.format(context);
+    int totalPrice = 0;
+
+    for (var ser in medicalReportServices) {
+      for (var item in ser!.services) {
+        totalPrice += item.price!;
+      }
+    }
 
     if (widget.cart == null) {
       return Scaffold(
@@ -437,8 +439,7 @@ class _BookingPageState extends State<BookingPage> {
                                           itemBuilder: (context, index) {
                                             PartnerService item2 =
                                                 item.services[index];
-                                            totalPrice += item2.price!;
-                                            log.i(totalPrice);
+                                            totalPrice;
                                             return Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
@@ -447,6 +448,7 @@ class _BookingPageState extends State<BookingPage> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 SizedBox(
+                                                  width: screenWidth * 0.5,
                                                   child: Text(
                                                     item2.name ?? "",
                                                     style: GoogleFonts.roboto(
@@ -732,7 +734,7 @@ class _BookingPageState extends State<BookingPage> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    "Khi \"Đặt hẹn\", tôi đã xác nhận rằng những thông tin tôi cung cấp là chính xác.",
+                    "Bằng đặt hẹn, tôi đã xác nhận rằng những thông tin trên là chính xác.",
                     style: GoogleFonts.roboto(
                       color: ColorPalette.blueBold2.withOpacity(0.42),
                       fontWeight: FontWeight.normal,

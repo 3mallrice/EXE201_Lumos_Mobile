@@ -59,12 +59,11 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
         Navigator.of(context).pushReplacementNamed(Login.routeName);
       });
     } else {
-      _fetchMedicalReports();
-      _fetchPartnerData(widget.partnerId);
+      await _fetchPartnerData(widget.partnerId);
     }
   }
 
-  void _fetchPartnerData(int? partnerId) async {
+  Future<void> _fetchPartnerData(int? partnerId) async {
     try {
       if (partnerId != null) {
         Partner? partner = await partnerApi.getPartnerById(partnerId);
@@ -85,7 +84,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
     }
   }
 
-  void _fetchMedicalReports() async {
+  Future<void> _fetchMedicalReports() async {
     try {
       if (userDetails != null && userDetails!.id != null) {
         List<MedicalReport>? reports =
@@ -164,7 +163,14 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
 
   List<PartnerService> services = [];
 
-  void Function(PartnerService service)? onTap(PartnerService service) {
+  Future<void Function(PartnerService service)?> onTap(
+      PartnerService service) async {
+    await _fetchMedicalReports();
+    showMedicalReportDialog(service);
+    return null;
+  }
+
+  void showMedicalReportDialog(PartnerService service) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -268,7 +274,6 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
         );
       },
     );
-    return null;
   }
 
   @override
@@ -322,11 +327,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
       ),
       body: ListView(
         children: [
-          Image.asset(
-            AssetHelper.partnerImage,
-            fit: BoxFit.fill,
-            alignment: Alignment.center,
-          ),
+          loadImage(),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 10),
             child: ListTile(
@@ -454,7 +455,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                                       textBaseline: TextBaseline.alphabetic,
                                     ),
                                     settings: LineModeSettings(
-                                      trimLines: 3,
+                                      trimLines: 2,
                                       trimCollapsedText: '... Xem thêm',
                                       trimExpandedText: ' Rút gọn',
                                       moreStyle: const TextStyle(
@@ -463,6 +464,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                                       lessStyle: const TextStyle(
                                         color: ColorPalette.blueBold2,
                                       ),
+                                      textAlign: TextAlign.justify,
                                     ),
                                   ),
                                   Container(
@@ -499,6 +501,14 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
           ),
         ],
       ),
+    );
+  }
+
+  loadImage() {
+    return Image.asset(
+      AssetHelper.partnerImage,
+      fit: BoxFit.fill,
+      alignment: Alignment.center,
     );
   }
 
