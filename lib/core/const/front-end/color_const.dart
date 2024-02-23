@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 class ColorPalette {
   static const Color blue = Color(0xFF6DDDCD);
+  //error red
+  static Color red = const Color(0xFFE53E3E).withOpacity(0.7);
   static const Color blueBold = Color(0xFF4ec4c6);
   static const Color blueBold2 = Color(0xFF0A4F45);
   static const Color bluelight = Color(0xFFDEFDF9);

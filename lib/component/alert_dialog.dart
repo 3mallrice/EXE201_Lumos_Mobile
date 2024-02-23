@@ -27,28 +27,34 @@ class CustomAlertDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
+      elevation: 2,
       actions: [
-        if (action != null) action!,
-        TextButton(
-          onPressed: onConfirm != null
-              ? () => onConfirm!()
-              : () => Navigator.of(context).pop(),
-          style: ButtonStyle(
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
+        (action != null)
+            ? action!
+            : TextButton(
+                onPressed: onConfirm != null
+                    ? () => onConfirm!()
+                    : () => Navigator.of(context).pop(),
+                style: ButtonStyle(
+                  enableFeedback: true,
+                  overlayColor: MaterialStateColor.resolveWith(
+                      (states) => ColorPalette.pink.withOpacity(0.2)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                  ),
+                  elevation: MaterialStateProperty.all<double>(1.0),
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(ColorPalette.pinkBold),
+                ),
+                child: Text(
+                  confirmText ?? 'OK',
+                  style: GoogleFonts.roboto(
+                    color: ColorPalette.primaryText,
+                  ),
+                ),
               ),
-            ),
-            backgroundColor:
-                MaterialStateProperty.all<Color>(Colors.transparent),
-          ),
-          child: Text(
-            confirmText ?? 'OK',
-            style: GoogleFonts.roboto(
-              color: ColorPalette.primaryText,
-            ),
-          ),
-        ),
       ],
     );
   }

@@ -56,7 +56,7 @@ class _IntroScreenState extends State<IntroScreen> {
                 child: ButtonWidget(
                   title: 'Get Started',
                   ontap: () {
-                    Navigator.of(context).pushNamed(Login.routeName);
+                    Navigator.of(context).pushReplacementNamed(Login.routeName);
                     //Navigator.of(context).pushNamed(MemberHome.routeName);
                   },
                 ),
