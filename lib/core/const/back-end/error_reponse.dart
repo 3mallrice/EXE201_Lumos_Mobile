@@ -34,6 +34,10 @@ class SearchSuccessMessage {
 }
 
 class OperationErrorMessage {
+  static const String systemError =
+      "Đã xảy ra lỗi hệ thống. Vui lòng thử lại sau.";
+  static const String createError =
+      "Không thể thêm mới mục này. Vui lòng thử lại sau hoặc liên hệ với quản trị viên.";
   static const String accessDenied =
       "Bạn không có quyền truy cập vào tài nguyên này.";
   static const String deleteError =
@@ -41,6 +45,10 @@ class OperationErrorMessage {
 }
 
 class OperationSuccessMessage {
+  static String changePasswordSuccess(String username) =>
+      "Mật khẩu của $username đã được thay đổi thành công.";
+  static String signUpSuccess(String username) =>
+      "Đã tạo tài khoản $username thành công! Đăng nhập để bắt đầu sử dụng dịch vụ của Lumos.";
   static String createSuccess(String itemName) =>
       "Đã thêm mới $itemName thành công.";
   static String updateSuccess(String itemName) =>
@@ -90,6 +98,12 @@ class OnInvalidInputMessage {
       "Dữ liệu đã tồn tại. Vui lòng kiểm tra lại.";
   static const String serviceExisted =
       "Dịch vụ đã tồn tại. Vui lòng kiểm tra lại.";
+
+  static const String signUpGuide =
+      "- Tên: Tên không được chứa ký tự đặc biệt và phải viết hoa chữ cái đầu của mỗi từ.\n"
+      "- Email: email hợp lệ là email có chứa @ và .com, .vn, .org, .edu,...\n"
+      "- Số điện thoại: Số điện thoại phải bắt đầu bằng số 0, và có 10 chữ số.\n"
+      "- Mật khẩu: Mật khẩu phải chứa ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt.";
 }
 
 class OnSignOutMessage {

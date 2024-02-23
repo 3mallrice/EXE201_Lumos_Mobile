@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../core/const/front-end/color_const.dart';
 
 class MyTextfield extends StatelessWidget {
@@ -12,20 +13,25 @@ class MyTextfield extends StatelessWidget {
   final TextInputAction? textInputAction;
   final Color? bgColor;
   final Color? textColor;
+  final TextInputType? keyboardType;
   final FloatingLabelBehavior? floatingLabelBehavior;
+  final int? maxLength;
 
-  const MyTextfield(
-      {super.key,
-      required this.controller,
-      this.validator,
-      required this.obscureText,
-      required this.labelText,
-      this.bgColor,
-      this.textColor,
-      this.hintText,
-      this.suffixIcon,
-      this.textInputAction,
-      this.floatingLabelBehavior});
+  const MyTextfield({
+    super.key,
+    required this.controller,
+    this.validator,
+    required this.obscureText,
+    required this.labelText,
+    this.bgColor,
+    this.textColor,
+    this.hintText,
+    this.suffixIcon,
+    this.textInputAction,
+    this.keyboardType,
+    this.floatingLabelBehavior,
+    this.maxLength,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -34,18 +40,21 @@ class MyTextfield extends StatelessWidget {
       child: SizedBox(
         height: 70,
         child: TextFormField(
+          minLines: 1,
           validator: validator,
-          style: TextStyle(
+          style: GoogleFonts.roboto(
             color: textColor ?? ColorPalette.blueBold2.withOpacity(0.65),
-            fontFamily: 'roboto',
           ),
           maxLines: 1,
+          keyboardType: keyboardType ?? TextInputType.text,
           controller: controller,
           //require?
           obscureText: obscureText,
+          maxLength: maxLength,
           //True or False, when type hide or not... (password)
           // maxLength: 30,
           textInputAction: textInputAction,
+
           decoration: InputDecoration(
             enabled: true,
             enabledBorder: OutlineInputBorder(
@@ -56,14 +65,25 @@ class MyTextfield extends StatelessWidget {
               borderRadius: BorderRadius.circular(12.0),
               borderSide: const BorderSide(color: ColorPalette.pink),
             ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12.0),
+              borderSide: BorderSide(color: ColorPalette.red),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12.0),
+              borderSide: BorderSide(color: ColorPalette.red),
+            ),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
+            errorMaxLines: 1,
             labelText: labelText,
-            labelStyle: const TextStyle(
+            labelStyle: GoogleFonts.roboto(
               color: ColorPalette.blueBold,
               fontWeight: FontWeight.bold,
-              fontFamily: 'roboto',
               fontSize: 18,
             ),
-            floatingLabelBehavior: floatingLabelBehavior,
+            floatingLabelBehavior:
+                floatingLabelBehavior ?? FloatingLabelBehavior.auto,
             fillColor: bgColor ?? ColorPalette.white,
             filled: true,
             isDense: true,

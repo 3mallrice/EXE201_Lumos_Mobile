@@ -28,12 +28,41 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  bool isLoggingIn = false;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final CallAuthenticationApi authApi = CallAuthenticationApi();
   var logger = Logger();
+
   bool _passwordInVisible = true;
+
+  OverlayEntry? _overlayEntry;
+
+  // Hàm để hiển thị vòng loading
+  void _showLoadingOverlay(BuildContext context) {
+    _overlayEntry = OverlayEntry(
+      builder: (context) => Stack(
+        children: [
+          Positioned.fill(
+            child: Container(
+              color: Colors.black.withOpacity(0.5),
+            ),
+          ),
+          Center(
+              child: LoadingAnimationWidget.fourRotatingDots(
+            color: ColorPalette.pinkBold,
+            size: 80,
+          )),
+        ],
+      ),
+    );
+    Overlay.of(context).insert(_overlayEntry!);
+  }
+
+  // Hàm để ẩn vòng loading
+  void _hideLoadingOverlay() {
+    _overlayEntry?.remove();
+    _overlayEntry = null;
+  }
 
   String? Function(String?)? emailValidator = (value) {
     if (value == null || value.isEmpty) {
@@ -122,10 +151,6 @@ class _LoginState extends State<Login> {
   }
 
   onPressedLogin() async {
-    setState(() {
-      isLoggingIn = true;
-    });
-
     String email = emailController.text.toLowerCase();
     String password = passwordController.text;
 
@@ -134,8 +159,9 @@ class _LoginState extends State<Login> {
         _onEmptyField();
         return;
       }
-
+      _showLoadingOverlay(context);
       LoginResponse response = await authApi.login(email, password);
+
       UserDetails userDetails = response.userDetails;
       if (userDetails.role == Role.customer) {
         //save userDetail in local storage
@@ -147,12 +173,11 @@ class _LoginState extends State<Login> {
         throw Exception('Invalid role');
       }
     } catch (e) {
-      setState(() {
-        isLoggingIn = false;
-      });
-
       logger.e('Login error: $e');
       _showFailDialog();
+    } finally {
+      // Ẩn vòng loading khi quá trình đăng nhập hoàn thành
+      _hideLoadingOverlay();
     }
   }
 
@@ -177,15 +202,25 @@ class _LoginState extends State<Login> {
     onGoogleLogin();
   }
 
-  Future<void> _loadImage() async {
+  Future<void> _load() async {
     await precacheImage(const AssetImage(AssetHelper.imglogo1), context);
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: _loadImage(),
+      future: _load(),
       builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Scaffold(
+            body: Center(
+              child: LoadingAnimationWidget.fourRotatingDots(
+                color: ColorPalette.pinkBold,
+                size: 80,
+              ),
+            ),
+          );
+        }
         if (snapshot.connectionState == ConnectionState.done) {
           return PopScope(
             canPop: false,
@@ -294,23 +329,13 @@ class _LoginState extends State<Login> {
                               borderRadius: 66.5,
                               height: 55,
                               color: ColorPalette.pink,
-                              widget: isLoggingIn
-                                  ? const Center(
-                                      child: CircularProgressIndicator(
-                                        semanticsLabel: 'Đang đăng nhập',
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                          ColorPalette.pinkBold,
-                                        ),
-                                      ),
-                                    )
-                                  : const Text(
-                                      'Đăng nhập',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20,
-                                          color: ColorPalette.white),
-                                    ),
+                              widget: const Text(
+                                'Đăng nhập',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                    color: ColorPalette.white),
+                              ),
                             ),
                             const SizedBox(
                               height: 20,
@@ -394,6 +419,46 @@ class _LoginState extends State<Login> {
           );
         }
       },
+    );
+  }
+}
+
+class LoginWithGoogleButton extends StatelessWidget {
+  final VoidCallback onTap;
+  const LoginWithGoogleButton({super.key, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return MyButton(
+      onTap: () {},
+      borderRadius: 66.5,
+      height: 55,
+      width: 300,
+      color: ColorPalette.white,
+      borderColor: ColorPalette.primaryText,
+      widget: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0),
+            child: Image.asset(
+              AssetHelper.googleLogo,
+              fit: BoxFit.fill,
+            ),
+          ),
+          const SizedBox(width: 16),
+          const Padding(
+            padding: EdgeInsets.only(right: 16.0),
+            child: Text(
+              'Đăng nhập với Google',
+              style: TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 18,
+                  color: ColorPalette.primaryText),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

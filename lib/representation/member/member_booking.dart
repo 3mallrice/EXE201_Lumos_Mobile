@@ -729,14 +729,17 @@ class _BookingPageState extends State<BookingPage> {
                 const SizedBox(
                   height: 15,
                 ),
-                Text(
-                  "Bằng việc bấm nút \"Đặt hẹn\", tôi đã xác nhận rằng những thông tin tôi cung cấp là chính xác.",
-                  style: GoogleFonts.roboto(
-                    color: ColorPalette.blueBold2.withOpacity(0.42),
-                    fontWeight: FontWeight.normal,
-                    fontSize: 14,
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Text(
+                    "Khi \"Đặt hẹn\", tôi đã xác nhận rằng những thông tin tôi cung cấp là chính xác.",
+                    style: GoogleFonts.roboto(
+                      color: ColorPalette.blueBold2.withOpacity(0.42),
+                      fontWeight: FontWeight.normal,
+                      fontSize: 14,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
                 ),
                 const SizedBox(
                   height: 20,

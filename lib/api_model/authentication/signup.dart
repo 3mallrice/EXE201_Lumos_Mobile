@@ -2,15 +2,14 @@ class SignUp {
   final String email;
   final String fullname;
   final String password;
-  final String rePassword;
-  final int pronounce = 0;
+  final String confirmPassword;
   final String phone;
 
   SignUp({
     required this.email,
     required this.fullname,
     required this.password,
-    required this.rePassword,
+    required this.confirmPassword,
     required this.phone,
   });
 
@@ -18,9 +17,8 @@ class SignUp {
     return {
       'email': email,
       'fullname': fullname,
-      'pronounce': pronounce,
       'password': password,
-      'rePassword': rePassword,
+      'confirmPassword': confirmPassword,
       'phone': phone,
     };
   }
