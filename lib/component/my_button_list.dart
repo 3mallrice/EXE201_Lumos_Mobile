@@ -47,7 +47,7 @@ class MyButtonList extends StatelessWidget {
                     text,
                     style: const TextStyle(
                       color: ColorPalette.blueBold2,
-                      fontSize: 16,
+                      fontSize: 18,
                       fontFamily: 'roboto',
                       fontWeight: FontWeight.w400,
                       height: 0.08,

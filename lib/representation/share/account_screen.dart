@@ -1,19 +1,21 @@
-import 'package:exe201_lumos_mobile/representation/member/member_address.dart';
+import '../../core/const/front-end/lumos_icons.dart';
+import '../member/medical_report.dart';
+import '../member/member_address.dart';
+import 'about_lumos.dart';
+import 'bill_screen.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../api_model/authentication/login.dart';
 import '../../core/const/back-end/error_reponse.dart';
 import '../../core/helper/local_storage_helper.dart';
 import '../../login.dart';
-import '../member/medical_report.dart';
 import 'package:flutter/material.dart';
 import '../../component/app_bar.dart';
 import '../../component/my_button.dart';
 import '../../component/my_button_list.dart';
 import '../../core/const/front-end/color_const.dart';
-import '../../core/const/front-end/lumos_icons.dart';
 import '../../core/helper/asset_helper.dart';
-import 'about_lumos.dart';
-import 'bill_screen.dart';
+import 'account_update.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 
@@ -41,10 +43,7 @@ class _AccountScreenState extends State<AccountScreen> {
   void fetchUserData() async {
     if (userDetails == null) {
       Future.delayed(
-        Duration.zero,
-        () {
-          Navigator.of(context).pushReplacementNamed(Login.routeName);
-        },
+        backToLoginPage(),
       );
     } else {
       //
@@ -59,7 +58,7 @@ class _AccountScreenState extends State<AccountScreen> {
   }
 
   backToLoginPage() {
-    Navigator.of(context).pushNamed(Login.routeName);
+    Navigator.of(context).pushReplacementNamed(Login.routeName);
   }
 
   void _showLogoutConfirmationDialog() {
@@ -71,7 +70,7 @@ class _AccountScreenState extends State<AccountScreen> {
             OnSignOutMessage.signOutTitle,
             style: GoogleFonts.roboto(
               fontWeight: FontWeight.bold,
-              fontSize: 18,
+              fontSize: 20,
               color: ColorPalette.blueBold2,
             ),
           ),
@@ -79,24 +78,41 @@ class _AccountScreenState extends State<AccountScreen> {
             OnSignOutMessage.signOutMessage,
             style: GoogleFonts.roboto(
               fontSize: 16,
-              color: ColorPalette.primaryText,
+              color: ColorPalette.blueBold2,
             ),
           ),
-          onConfirm: () {
-            Navigator.of(context).pop();
-            onLogout();
-          },
           confirmText: OnSignOutMessage.signOutConfirm,
-          action: TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text(
-              OnSignOutMessage.signOutCancel,
-              style: GoogleFonts.roboto(
-                color: ColorPalette.primaryText,
+          action: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pushReplacementNamed(Login.routeName);
+                },
+                child: Text(
+                  OnSignOutMessage.signOutConfirm,
+                  style: GoogleFonts.roboto(
+                    color: ColorPalette.blueBold2,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
-            ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text(
+                  OnSignOutMessage.signOutCancel,
+                  style: GoogleFonts.roboto(
+                    color: ColorPalette.blueBold2,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
           ),
         );
       },
@@ -123,8 +139,11 @@ class _AccountScreenState extends State<AccountScreen> {
           future: userDetails,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(),
+              return Center(
+                child: LoadingAnimationWidget.fourRotatingDots(
+                  color: ColorPalette.pinkBold,
+                  size: 80,
+                ),
               );
             }
             final user = snapshot.data!;
@@ -156,8 +175,8 @@ class _AccountScreenState extends State<AccountScreen> {
                               user), // Extracted account info section
                           const SizedBox(height: 10),
                           _buildButtonList(
-                            text: 'Hóa đơn',
-                            leftIcon: Icons.receipt_long_rounded,
+                            text: 'Quản lý hóa đơn',
+                            leftIcon: Icons.credit_card,
                             rightIcon: Icons.arrow_forward_ios,
                             onPressed: () {
                               Navigator.of(context)
@@ -166,8 +185,8 @@ class _AccountScreenState extends State<AccountScreen> {
                           ),
                           const SizedBox(height: 10),
                           _buildButtonList(
-                            text: 'Đặt chỗ',
-                            leftIcon: Icons.calendar_month_rounded,
+                            text: 'Quản lý lịch đặt hẹn',
+                            leftIcon: Icons.calendar_month_outlined,
                             rightIcon: Icons.arrow_forward_ios,
                             onPressed: () {
                               // Navigate to reservation screen
@@ -175,8 +194,8 @@ class _AccountScreenState extends State<AccountScreen> {
                           ),
                           const SizedBox(height: 10),
                           _buildButtonList(
-                            text: 'Danh sách bệnh nhân',
-                            leftIcon: Icons.person_rounded,
+                            text: 'Quản lý danh sách hồ sơ',
+                            leftIcon: Icons.paste_sharp,
                             rightIcon: Icons.arrow_forward_ios,
                             onPressed: () {
                               Navigator.of(context)
@@ -251,16 +270,16 @@ class _AccountScreenState extends State<AccountScreen> {
           user.username.toString(),
           style: const TextStyle(
             color: ColorPalette.blueBold2,
-            fontSize: 16,
+            fontSize: 23,
             fontWeight: FontWeight.w500,
           ),
         ),
         IconButton(
           onPressed: () {
-            // Navigator.of(context).pushNamed(UpdateAccount.routeName);
+            Navigator.of(context).pushNamed(UpdateAccount.routeName);
           },
           icon: const Icon(
-            LumosIcons.edit_2icon,
+            Icons.edit_rounded,
             color: ColorPalette.blueBold2,
           ),
         ),

@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void redirectTo(String redirectTo) {
-    Navigator.of(context).pushNamed(redirectTo);
+    Navigator.of(context).pushReplacementNamed(redirectTo);
   }
 
   void redirectIntro() async {
@@ -41,17 +41,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-        canPop: false,
-        child: Stack(
-          // widget nào được viết trước sẽ nằm phía dưới còn widget nào viết sau sẽ nằm phía trên
-          children: [
-            Positioned.fill(
-                child: ImageHelper.loadFormAsset(AssetHelper.imgSplashBg,
-                    fit: BoxFit.fitWidth)),
-            Positioned.fill(
-                child: ImageHelper.loadFormAsset(AssetHelper.imglogo1)),
-          ],
-        ));
+    return Stack(
+      // widget nào được viết trước sẽ nằm phía dưới còn widget nào viết sau sẽ nằm phía trên
+      children: [
+        Positioned.fill(
+            child: ImageHelper.loadFormAsset(AssetHelper.imgSplashBg,
+                fit: BoxFit.fitWidth)),
+        Positioned.fill(child: ImageHelper.loadFormAsset(AssetHelper.imglogo1)),
+      ],
+    );
   }
 }

@@ -1,6 +1,12 @@
-import 'package:exe201_lumos_mobile/api_services/authentication_service.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'dart:async';
 
+import 'package:exe201_lumos_mobile/api_services/authentication_service.dart';
+import 'package:exe201_lumos_mobile/core/const/back-end/validation.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:logger/logger.dart';
+
+import 'component/alert_dialog.dart';
+import 'core/const/back-end/error_reponse.dart';
 import 'login.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
@@ -31,7 +37,62 @@ class _SignUpState extends State<SignUp> {
   bool _passwordInVisible = true;
   bool _confirmPasswordInVisible = true;
 
+  var log = Logger();
+
+  OverlayEntry? _overlayEntry;
+
+  // Hàm để hiển thị vòng loading
+  void _showLoadingOverlay(BuildContext context) {
+    _overlayEntry = OverlayEntry(
+      builder: (context) => Stack(
+        children: [
+          Positioned.fill(
+            child: Container(
+              color: Colors.black.withOpacity(0.5),
+            ),
+          ),
+          Center(
+              child: LoadingAnimationWidget.fourRotatingDots(
+            color: ColorPalette.pinkBold,
+            size: 80,
+          )),
+        ],
+      ),
+    );
+    Overlay.of(context).insert(_overlayEntry!);
+  }
+
+  // Hàm để ẩn vòng loading
+  void _hideLoadingOverlay() {
+    _overlayEntry?.remove();
+    _overlayEntry = null;
+  }
+
   final CallAuthenticationApi callAuthenticationApi = CallAuthenticationApi();
+
+  int isValidated(String email, String password, String confirmPassword,
+      String phone, String name) {
+    if (email.isEmpty ||
+        password.isEmpty ||
+        confirmPassword.isEmpty ||
+        phone.isEmpty ||
+        name.isEmpty) {
+      return 1;
+    }
+    if (!Validation.isValidEmail(email)) {
+      return 2;
+    }
+    if (!Validation.isVietnamesePhoneNumber(phone)) {
+      return 3;
+    }
+    if (!Validation.isValidPassword(password)) {
+      return 4;
+    }
+    if (password != confirmPassword) {
+      return 5;
+    }
+    return 0;
+  }
 
   @override
   void initState() {
@@ -42,19 +103,100 @@ class _SignUpState extends State<SignUp> {
     await precacheImage(const AssetImage(AssetHelper.imglogo1), context);
   }
 
-  onPressedLogin() async {
-    // Lấy email và password từ text field
-    // ignore: unused_local_variable
-    String email = emailController.text;
-    // ignore: unused_local_variable
-    String password = passwordController.text;
-
-    Navigator.of(context).pushNamed(Login.routeName);
+  void navigationReplacement(String? name) {
+    if (name != null) {
+      Navigator.of(context).pushReplacementNamed(name);
+    }
   }
 
-  //forget password
-  Function()? onTap() {
-    return null;
+  void showSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
+  }
+
+  onPressedLogin() async {
+    try {
+      String email = emailController.text;
+      String password = passwordController.text;
+      String confirmPassword = confirmPassWordController.text;
+      String phone = phoneController.text;
+      String name = nameController.text;
+
+      int validationStatus =
+          isValidated(email, password, confirmPassword, phone, name);
+      if (validationStatus == 0) {
+        _showLoadingOverlay(context);
+
+        // Chuyển đổi chữ cái đầu của tên thành viết hoa
+        String? capitalizedFirstName = Validation.capitalizeFirstLetter(name);
+
+        if (capitalizedFirstName == null) {
+          _hideLoadingOverlay();
+          _showErrorDialog(OnInvalidInputMessage.invalidName);
+          return;
+        }
+
+        int statusCode = await callAuthenticationApi.register(
+            email, name, password, confirmPassword, phone);
+        if (statusCode == 200) {
+          showSnackBar(
+              OperationSuccessMessage.signUpSuccess(capitalizedFirstName));
+          navigationReplacement(Login.routeName);
+        } else if (statusCode == 409) {
+          showSnackBar(OnInvalidInputMessage.alreadyExist);
+        }
+      } else {
+        // Hiển thị thông báo lỗi cho trạng thái kiểm tra không hợp lệ
+        _hideLoadingOverlay();
+        switch (validationStatus) {
+          case 1:
+            _showErrorDialog(OnInvalidInputMessage.emptyInput);
+            break;
+          case 2:
+            _showErrorDialog(OnInvalidInputMessage.invalidEmail);
+            break;
+          case 3:
+            _showErrorDialog(OnInvalidInputMessage.invalidPhoneNumber);
+            break;
+          case 4:
+            _showErrorDialog(OnInvalidInputMessage.invalidPassword);
+            break;
+          case 5:
+            _showErrorDialog('Mật khẩu không khớp. Vui lòng kiểm tra lại!');
+            break;
+          default:
+            _showErrorDialog(OperationErrorMessage.systemError);
+            break;
+        }
+      }
+    } catch (e) {
+      // Xử lý bất kỳ ngoại lệ nào ở đây
+      log.e('Lỗi xảy ra: $e');
+      _showErrorDialog(OperationErrorMessage.systemError);
+    } finally {
+      _hideLoadingOverlay();
+    }
+  }
+
+  //show dialog show error when isValidate return false
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (context) => CustomAlertDialog(
+        title: Text(
+          OnInvalidInputMessage.invalidInputTitle,
+          style: GoogleFonts.roboto(
+            color: ColorPalette.blueBold2,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        message: Text(message),
+        confirmText: 'OK',
+      ),
+    );
   }
 
   @override
@@ -74,6 +216,7 @@ class _SignUpState extends State<SignUp> {
                 SafeArea(
                   child: Center(
                     child: SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
                       child: FractionallySizedBox(
                         widthFactor: 0.9,
                         child: Column(
@@ -89,7 +232,6 @@ class _SignUpState extends State<SignUp> {
                               ),
                             ),
 
-                            //welcome back, you've been missed!
                             const Text(
                               'Đăng ký',
                               style: TextStyle(
@@ -100,12 +242,12 @@ class _SignUpState extends State<SignUp> {
                             ),
 
                             const SizedBox(
-                              height: 15,
+                              height: 20,
                             ),
 
                             //name textfield
                             MyTextfield(
-                              controller: emailController,
+                              controller: nameController,
                               labelText: 'Họ và Tên',
                               hintText: 'Nguyễn Văn A',
                               floatingLabelBehavior:
@@ -125,6 +267,7 @@ class _SignUpState extends State<SignUp> {
                               hintText: 'a@gmail.com',
                               floatingLabelBehavior:
                                   FloatingLabelBehavior.always,
+                              keyboardType: TextInputType.emailAddress,
                               obscureText: false,
                               textInputAction: TextInputAction.next,
                             ),
@@ -138,8 +281,10 @@ class _SignUpState extends State<SignUp> {
                               controller: phoneController,
                               labelText: 'Số điện thoại',
                               hintText: '0912345678',
+                              maxLength: 10,
                               floatingLabelBehavior:
                                   FloatingLabelBehavior.always,
+                              keyboardType: TextInputType.phone,
                               obscureText: false,
                               textInputAction: TextInputAction.next,
                             ),
@@ -156,6 +301,7 @@ class _SignUpState extends State<SignUp> {
                                   obscureText: _passwordInVisible,
                                   labelText: 'Mật khẩu',
                                   hintText: 'Nhập mật khẩu của bạn...',
+                                  keyboardType: TextInputType.visiblePassword,
                                   floatingLabelBehavior:
                                       FloatingLabelBehavior.always,
                                   textInputAction: TextInputAction.next,
@@ -189,6 +335,7 @@ class _SignUpState extends State<SignUp> {
                                   obscureText: _confirmPasswordInVisible,
                                   labelText: 'Nhập lại mật khẩu',
                                   hintText: 'Nhập lại mật khẩu...!',
+                                  keyboardType: TextInputType.visiblePassword,
                                   floatingLabelBehavior:
                                       FloatingLabelBehavior.always,
                                   textInputAction: TextInputAction.done,
@@ -211,37 +358,94 @@ class _SignUpState extends State<SignUp> {
                               },
                             ),
 
+                            Tooltip(
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 40),
+                              richMessage: TextSpan(
+                                text: OnInvalidInputMessage.signUpGuide,
+                                style: GoogleFonts.roboto(
+                                    color: ColorPalette.blueBold2,
+                                    fontSize: 14),
+                              ),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.rectangle,
+                                backgroundBlendMode: BlendMode.srcOver,
+                                color: ColorPalette.bluelight,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              waitDuration: const Duration(milliseconds: 600),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Hướng dẫn đăng ký ",
+                                    style: GoogleFonts.roboto(
+                                      color: ColorPalette.blueBold2,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                  const Icon(
+                                    Icons.info,
+                                    color: ColorPalette.blueBold2,
+                                    size: 15,
+                                  ),
+                                ],
+                              ),
+                            ),
+
                             const SizedBox(
                               height: 8,
                             ),
 
-                            Text(
-                              "Bằng việc đồng ý tạo tài khoản, bạn đã đồng ý với các điều khoản và chính sách của chúng tôi.",
-                              style: GoogleFonts.roboto(
-                                color: ColorPalette.blueBold2.withOpacity(0.42),
-                                fontWeight: FontWeight.normal,
-                                fontSize: 14,
+                            Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              width: double.infinity,
+                              child: RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text:
+                                          'Bằng việc đăng ký tài khoản tại Lumos, tôi đã đọc và đồng ý với các ',
+                                      style: GoogleFonts.roboto(
+                                        color: ColorPalette.blueBold2
+                                            .withOpacity(0.42),
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: 'điều khoản và chính sách',
+                                      onEnter: (event) {
+                                        //launch https://lumos.com/term
+                                      },
+                                      style: GoogleFonts.roboto(
+                                        color: ColorPalette.pinkBold
+                                            .withOpacity(0.42),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: ' của Lumos.',
+                                      style: GoogleFonts.roboto(
+                                        color: ColorPalette.blueBold2
+                                            .withOpacity(0.42),
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                              textAlign: TextAlign.center,
                             ),
 
                             const SizedBox(
-                              height: 12,
+                              height: 15,
                             ),
 
                             //sign-in button
-                            MyButton(
-                              onTap: onPressedLogin,
-                              borderRadius: 66.5,
-                              height: 55,
-                              color: ColorPalette.pink,
-                              widget: const Text(
-                                'Hoàn Thành',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
-                                    color: ColorPalette.white),
-                              ),
+                            SignUpButton(
+                              onPressed: onPressedLogin,
                             ),
 
                             const SizedBox(
@@ -261,7 +465,7 @@ class _SignUpState extends State<SignUp> {
                                 GestureDetector(
                                   onTap: () {
                                     Navigator.of(context)
-                                        .pushNamed(Login.routeName);
+                                        .pushReplacementNamed(Login.routeName);
                                   },
                                   child: const Text(
                                     'Đăng nhập',
@@ -296,6 +500,29 @@ class _SignUpState extends State<SignUp> {
             );
           }
         },
+      ),
+    );
+  }
+}
+
+class SignUpButton extends StatelessWidget {
+  final VoidCallback onPressed;
+
+  const SignUpButton({super.key, required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return MyButton(
+      onTap: onPressed,
+      borderRadius: 66.5,
+      height: 55,
+      color: ColorPalette.pink,
+      widget: const Text(
+        'Hoàn thành',
+        style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+            color: ColorPalette.white),
       ),
     );
   }

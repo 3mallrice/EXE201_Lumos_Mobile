@@ -74,7 +74,8 @@ class CallCustomerApi {
       if (response.statusCode == 200) {
         final responseBody = json.decode(response.body);
         final responseData = responseBody['data'];
-        return responseData['statusCode'] == 'success' ? true : false;
+        log.i('New medical report added: $responseData[\'message\']');
+        return true;
       } else {
         throw Exception(
             'Failed to add new medical report: ${response.statusCode} - ${response.reasonPhrase}');

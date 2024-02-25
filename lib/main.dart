@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
+      themeMode: ThemeMode.dark,
       title: 'Lumos - Health and Trust',
       theme: ThemeData(
         fontFamily: GoogleFonts.roboto().fontFamily,
