@@ -134,4 +134,36 @@ class CallCustomerApi {
       throw Exception('Failed to get address: $e');
     }
   }
+
+  //POST: medical-report
+  Future<bool> addNewAddress(int customerId, Address newAddress) async {
+    var url = Uri.parse('$api/address');
+    token = LocalStorageHelper.getValue("token");
+
+    try {
+      http.Response response = await http.post(
+        url,
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json'
+        },
+        body: json.encode({
+          'displayName': newAddress.displayName,
+          'address': newAddress.address,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        final responseBody = json.decode(response.body);
+        final responseData = responseBody['data'];
+        return responseData['statusCode'] == 'success' ? true : false;
+      } else {
+        throw Exception(
+            'Failed to add new address: ${response.statusCode} - ${response.reasonPhrase}');
+      }
+    } catch (e) {
+      log.i("Failed to add new address: $e");
+      throw Exception('Failed to add new address: $e');
+    }
+  }
 }

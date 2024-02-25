@@ -1,3 +1,5 @@
+import 'package:exe201_lumos_mobile/representation/member/member_address.dart';
+
 import '../../api_model/authentication/login.dart';
 import '../../core/const/back-end/error_reponse.dart';
 import '../../core/helper/local_storage_helper.dart';
@@ -112,16 +114,6 @@ class _AccountScreenState extends State<AccountScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // if (userDetails == null) {
-    //   return Scaffold(
-    //     body: Center(
-    //       child: LoadingAnimationWidget.fourRotatingDots(
-    //         color: ColorPalette.pinkBold,
-    //         size: 80,
-    //       ),
-    //     ),
-    //   );
-    // }
     return Scaffold(
         appBar: const AppBarCom(
           leading: false,
@@ -165,7 +157,7 @@ class _AccountScreenState extends State<AccountScreen> {
                           const SizedBox(height: 10),
                           _buildButtonList(
                             text: 'Hóa đơn',
-                            leftIcon: Icons.credit_card,
+                            leftIcon: Icons.receipt_long_rounded,
                             rightIcon: Icons.arrow_forward_ios,
                             onPressed: () {
                               Navigator.of(context)
@@ -175,7 +167,7 @@ class _AccountScreenState extends State<AccountScreen> {
                           const SizedBox(height: 10),
                           _buildButtonList(
                             text: 'Đặt chỗ',
-                            leftIcon: Icons.calendar_month_outlined,
+                            leftIcon: Icons.calendar_month_rounded,
                             rightIcon: Icons.arrow_forward_ios,
                             onPressed: () {
                               // Navigate to reservation screen
@@ -184,11 +176,21 @@ class _AccountScreenState extends State<AccountScreen> {
                           const SizedBox(height: 10),
                           _buildButtonList(
                             text: 'Danh sách bệnh nhân',
-                            leftIcon: Icons.paste_sharp,
+                            leftIcon: Icons.person_rounded,
                             rightIcon: Icons.arrow_forward_ios,
                             onPressed: () {
                               Navigator.of(context)
                                   .pushNamed(MedicalReportPage.routeName);
+                            },
+                          ),
+                          const SizedBox(height: 10),
+                          _buildButtonList(
+                            text: 'Danh sách địa chỉ',
+                            leftIcon: Icons.location_on_rounded,
+                            rightIcon: Icons.arrow_forward_ios,
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .pushNamed(MemberAddress.routeName);
                             },
                           ),
                           const SizedBox(height: 10),

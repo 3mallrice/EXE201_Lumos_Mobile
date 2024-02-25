@@ -1,6 +1,8 @@
 import 'package:exe201_lumos_mobile/api_model/customer/address.dart';
 import 'package:exe201_lumos_mobile/api_model/partner/partner.dart';
 import 'package:exe201_lumos_mobile/core/const/back-end/error_reponse.dart';
+import 'package:exe201_lumos_mobile/representation/member/medical_report_addnew.dart';
+import 'package:exe201_lumos_mobile/representation/member/member_address_add.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:logger/logger.dart';
 
@@ -794,8 +796,7 @@ class _BookingPageState extends State<BookingPage> {
                       left: 10, right: 8, top: 8, bottom: 8),
                 ),
                 onPressed: () {
-                  // Navigator.of(context).pop();
-                  // Navigator.of(context).pushNamed(MemberAddress.routeName);
+                  Navigator.of(context).pushNamed(AddressAdd.routeName);
                 },
                 child: const Icon(
                   Icons.add_business,

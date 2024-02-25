@@ -1,10 +1,12 @@
 import 'package:exe201_lumos_mobile/login.dart';
 import 'package:exe201_lumos_mobile/representation/intro_screen.dart';
+import 'package:exe201_lumos_mobile/representation/member/map_add_address.dart';
 import 'package:exe201_lumos_mobile/representation/member/medical_report.dart';
 import 'package:exe201_lumos_mobile/representation/member/medical_report_addnew.dart';
 import 'package:exe201_lumos_mobile/representation/member/medical_report_detail.dart';
 import 'package:exe201_lumos_mobile/representation/member/medical_report_update.dart';
 import 'package:exe201_lumos_mobile/representation/member/member_address.dart';
+import 'package:exe201_lumos_mobile/representation/member/member_address_add.dart';
 import 'package:exe201_lumos_mobile/representation/member/member_bill_detail.dart';
 import 'package:exe201_lumos_mobile/representation/member/member_coming_booking.dart';
 import 'package:exe201_lumos_mobile/representation/member/member_home.dart';
@@ -46,4 +48,6 @@ final Map<String, WidgetBuilder> routes = {
   BillDetail.routeName: (context) => const BillDetail(),
   PartnerServiceList.routeName: (context) => const PartnerServiceList(),
   BookingPage.routeName: (context) => const BookingPage(),
+  AddressAdd.routeName: (context) => const AddressAdd(),
+  MapAddressAdd.routeName: (context) => const MapAddressAdd(),
 };

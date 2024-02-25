@@ -3,7 +3,8 @@ import 'package:exe201_lumos_mobile/api_model/customer/address.dart';
 import 'package:exe201_lumos_mobile/api_services/customer_service.dart';
 import 'package:exe201_lumos_mobile/core/helper/local_storage_helper.dart';
 import 'package:exe201_lumos_mobile/login.dart';
-import 'package:exe201_lumos_mobile/representation/member/member_booking.dart';
+import 'package:exe201_lumos_mobile/representation/member/medical_report_addnew.dart';
+import 'package:exe201_lumos_mobile/representation/member/member_address_add.dart';
 import 'package:logger/logger.dart';
 
 import '../../component/app_bar.dart';
@@ -79,7 +80,7 @@ class _MemberAddressState extends State<MemberAddress> {
     return Scaffold(
       appBar: const AppBarCom(
         leading: true,
-        appBarText: 'Chọn địa chỉ đặt lịch',
+        appBarText: 'Danh sách địa chỉ',
       ),
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -105,41 +106,29 @@ class _MemberAddressState extends State<MemberAddress> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                        child: InkWell(
-                          onTap: () => {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => BookingPage(
-                                  address: item.address,
-                                ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              item.displayName,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: ColorPalette.blueBold2,
+                                fontSize: 16,
+                                fontFamily: 'roboto',
                               ),
                             ),
-                          },
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                item.displayName,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: ColorPalette.blueBold2,
-                                  fontSize: 16,
-                                  fontFamily: 'roboto',
-                                ),
+                            Text(
+                              item.address,
+                              style: const TextStyle(
+                                fontFamily: 'roboto',
+                                color: ColorPalette.bluelight2,
+                                fontSize: 14,
+                                fontWeight: FontWeight.normal,
                               ),
-                              Text(
-                                item.address,
-                                style: const TextStyle(
-                                  fontFamily: 'roboto',
-                                  color: ColorPalette.bluelight2,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.normal,
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                       Align(
@@ -160,11 +149,12 @@ class _MemberAddressState extends State<MemberAddress> {
                     ],
                   ),
                 ),
-                const Divider(
-                  thickness: 2,
-                  height: 2,
-                  color: ColorPalette.white,
-                ),
+                if (index < _address.length - 1 && _address.length > 1)
+                  const Divider(
+                    thickness: 2,
+                    height: 2,
+                    color: ColorPalette.white,
+                  ),
               ],
             );
           },
@@ -174,7 +164,7 @@ class _MemberAddressState extends State<MemberAddress> {
         margin: const EdgeInsets.only(bottom: 12),
         child: ElevatedButton(
           onPressed: () {
-            //Navigator.of(context).pushNamed(MedicalReportAdd.routeName);
+            Navigator.of(context).pushNamed(AddressAdd.routeName);
             log.i('Button pressed');
           },
           style: ElevatedButton.styleFrom(

@@ -316,7 +316,8 @@ class _SearchBookingState extends State<SearchBooking> {
                               ),
                             ),
                           ),
-                          if (index < _partner.length - 1)
+                          if (index < _partner.length - 1 &&
+                              _partner.length > 1)
                             const Divider(
                               thickness: 2,
                               height: 2,

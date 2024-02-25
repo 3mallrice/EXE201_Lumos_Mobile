@@ -123,22 +123,21 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
           _selectedGender = true;
           _selectedBloodType = 0;
           _selectedDate = DateTime.now();
-          Navigator.of(context).pushNamed(MedicalReportPage.routeName);
         });
+        Navigator.of(context).pushNamed(MedicalReportPage.routeName);
       } catch (error) {
         log.e('Error adding new medical report: $error');
       }
     }
   }
 
-  //show success dialog
-  void _showSuccessDialog() {
+  void _showResultDialog(String title, String content) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Thành công'),
-          content: const Text('Thêm mới bệnh nhân thành công!'),
+          title: Text(title),
+          content: Text(content),
           actions: <Widget>[
             TextButton(
               onPressed: () {
@@ -152,24 +151,13 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
     );
   }
 
+  void _showSuccessDialog() {
+    _showResultDialog('Thành công', 'Thêm mới bệnh nhân thành công!');
+  }
+
   void _showFailDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Thất bại'),
-          content: const Text('Thêm mới bệnh nhân thất bại!'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
+    _showResultDialog(
+        'Thất bại', 'Thêm mới bệnh nhân thất bại! Vui lòng thử lại!');
   }
 
   Future<void> _selectDate(BuildContext context) async {
@@ -210,6 +198,14 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
   int _selectedPronoun = 0;
   bool _selectedGender = true;
   int _selectedBloodType = 0;
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _phoneNumberController.dispose();
+    _noteController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

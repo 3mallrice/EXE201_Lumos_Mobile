@@ -86,33 +86,33 @@ class CallAuthenticationApi {
   //POST: /register
   //request: SingUp(email, fullname, password, rePassword, phone)
   //response: true or false
-  Future<int> register(String email, String fullname, String password,
-      String rePassword, String phone) async {
-    try {
-      var url = Uri.parse('$api/register');
-      SignUp request = SignUp(
-        email: email,
-        fullname: fullname,
-        password: password,
-        confirmPassword: rePassword,
-        phone: phone,
-      );
-      var body = jsonEncode(request.toJson());
+  // Future<int> register(String email, String fullname, String password,
+  //     String rePassword, String phone) async {
+  //   try {
+  //     var url = Uri.parse('$api/register');
+  //     SignUp request = SignUp(
+  //       email: email,
+  //       fullname: fullname,
+  //       password: password,
+  //       confirmPassword: rePassword,
+  //       phone: phone,
+  //     );
+  //     var body = jsonEncode(request.toJson());
 
-      http.Response response = await http.post(
-        url,
-        headers: {'Content-Type': 'application/json'},
-        body: body,
-      );
+  //     http.Response response = await http.post(
+  //       url,
+  //       headers: {'Content-Type': 'application/json'},
+  //       body: body,
+  //     );
 
-      if (response.statusCode == 200 || response.statusCode == 409) {
-        return response.statusCode;
-      } else {
-        throw Exception(
-            'Failed to register: ${response.statusCode} - ${response.reasonPhrase}');
-      }
-    } catch (e) {
-      throw Exception('Failed to register: $e');
-    }
-  }
+  //     if (response.statusCode == 200 || response.statusCode == 409) {
+  //       return response.statusCode;
+  //     } else {
+  //       throw Exception(
+  //           'Failed to register: ${response.statusCode} - ${response.reasonPhrase}');
+  //     }
+  //   } catch (e) {
+  //     throw Exception('Failed to register: $e');
+  //   }
+  // }
 }

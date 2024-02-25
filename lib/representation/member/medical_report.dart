@@ -142,9 +142,29 @@ class _MedicalReportPageState extends State<MedicalReportPage> {
                               ),
                             ),
                           ),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: TextButton(
+                                  onPressed: () {},
+                                  child: const Text(
+                                    'Sửa',
+                                    style: TextStyle(
+                                      color: ColorPalette.pink,
+                                      fontSize: 16,
+                                      fontFamily: 'roboto',
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                      if (index < _reports.length - 1)
+                      if (index < _reports.length - 1 && _reports.length > 1)
                         const Divider(
                           thickness: 2,
                           height: 2,
