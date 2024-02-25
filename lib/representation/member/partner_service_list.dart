@@ -110,7 +110,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
   CartModel onAddToCart(int? reportId, PartnerService service) {
     if (reportId == null) return carts.first;
 
-    // Kiểm tra xem đã có cart cho bệnh nhân này chưa
+    // Kiểm tra xem đã có cart cho hồ sơ này chưa
     var existingCartIndex =
         carts.indexWhere((cart) => cart.medicalReportId == reportId);
 
@@ -174,7 +174,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
           backgroundColor: ColorPalette.blue2,
           alignment: Alignment.center,
           title: Text(
-            'Chọn bệnh nhân',
+            'Chọn hồ sơ',
             style: GoogleFonts.roboto(
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -313,6 +313,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                   MaterialPageRoute(
                     builder: (context) => BookingPage(
                       cart: carts,
+                      partner: partner,
                     ),
                   ),
                 );

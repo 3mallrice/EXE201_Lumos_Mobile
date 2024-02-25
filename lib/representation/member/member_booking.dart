@@ -1,5 +1,5 @@
-import 'package:exe201_lumos_mobile/component/alert_dialog.dart';
-import 'package:exe201_lumos_mobile/representation/member/member_home.dart';
+import '../../component/alert_dialog.dart';
+import 'member_home.dart';
 
 import '../../api_model/customer/address.dart';
 import '../../api_model/partner/partner.dart';
@@ -26,9 +26,13 @@ import '../../login.dart';
 
 class BookingPage extends StatefulWidget {
   final List<CartModel>? cart;
-  final String? address;
+  final Partner? partner;
 
-  const BookingPage({super.key, this.cart, this.address});
+  const BookingPage({
+    super.key,
+    this.cart,
+    this.partner,
+  });
 
   static String routeName = '/booking';
 
@@ -422,6 +426,7 @@ class _BookingPageState extends State<BookingPage> {
     String formattedDate = DateFormat('dd-MM-yyyy').format(selectedDate);
     String formattedTime = selectedTime.format(context);
     int totalPrice = 0;
+    Partner? partner = widget.partner;
 
     for (var ser in medicalReportServices) {
       for (var item in ser!.services) {
@@ -457,7 +462,7 @@ class _BookingPageState extends State<BookingPage> {
                 Container(
                   margin: const EdgeInsets.only(top: 20),
                   child: Text(
-                    'Bệnh viện đại học Y Dược Hà Nội',
+                    partner?.displayName ?? "Partner Name",
                     textAlign: TextAlign.center,
                     style: GoogleFonts.roboto(
                       fontWeight: FontWeight.w600,
