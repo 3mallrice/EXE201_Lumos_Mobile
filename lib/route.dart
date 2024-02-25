@@ -1,26 +1,25 @@
-import 'package:exe201_lumos_mobile/login.dart';
-import 'package:exe201_lumos_mobile/representation/intro_screen.dart';
-import 'package:exe201_lumos_mobile/representation/member/map_add_address.dart';
-import 'package:exe201_lumos_mobile/representation/member/medical_report.dart';
-import 'package:exe201_lumos_mobile/representation/member/medical_report_addnew.dart';
-import 'package:exe201_lumos_mobile/representation/member/medical_report_detail.dart';
-import 'package:exe201_lumos_mobile/representation/member/medical_report_update.dart';
-import 'package:exe201_lumos_mobile/representation/member/member_address.dart';
-import 'package:exe201_lumos_mobile/representation/member/member_address_add.dart';
-import 'package:exe201_lumos_mobile/representation/member/member_bill_detail.dart';
-import 'package:exe201_lumos_mobile/representation/member/member_coming_booking.dart';
-import 'package:exe201_lumos_mobile/representation/member/member_home.dart';
-import 'package:exe201_lumos_mobile/representation/member/member_main_navbar.dart';
-import 'package:exe201_lumos_mobile/representation/member/partner_service_list.dart';
-import 'package:exe201_lumos_mobile/representation/member/payment_method.dart';
-import 'package:exe201_lumos_mobile/representation/member/search_booking.dart';
-import 'package:exe201_lumos_mobile/representation/share/about_lumos.dart';
-import 'package:exe201_lumos_mobile/representation/share/account_screen.dart';
-import 'package:exe201_lumos_mobile/representation/share/account_update.dart';
-import 'package:exe201_lumos_mobile/representation/share/bill_screen.dart';
-import 'package:exe201_lumos_mobile/representation/share/notification_screen.dart';
-import 'package:exe201_lumos_mobile/representation/splash_screen.dart';
-import 'package:exe201_lumos_mobile/sign_up.dart';
+import 'login.dart';
+import 'representation/intro_screen.dart';
+import 'representation/member/medical_report.dart';
+import 'representation/member/medical_report_addnew.dart';
+import 'representation/member/medical_report_detail.dart';
+import 'representation/member/medical_report_update.dart';
+import 'representation/member/member_address.dart';
+import 'representation/member/member_address_add.dart';
+import 'representation/member/member_bill_detail.dart';
+import 'representation/member/member_coming_booking.dart';
+import 'representation/member/member_home.dart';
+import 'representation/member/member_main_navbar.dart';
+import 'representation/member/partner_service_list.dart';
+import 'representation/member/payment_method.dart';
+import 'representation/member/search_booking.dart';
+import 'representation/share/about_lumos.dart';
+import 'representation/share/account_screen.dart';
+import 'representation/share/account_update.dart';
+import 'representation/share/bill_screen.dart';
+import 'representation/share/notification_screen.dart';
+import 'representation/splash_screen.dart';
+import 'sign_up.dart';
 import 'package:flutter/material.dart';
 
 import 'representation/member/member_booking.dart';
@@ -49,5 +48,4 @@ final Map<String, WidgetBuilder> routes = {
   PartnerServiceList.routeName: (context) => const PartnerServiceList(),
   BookingPage.routeName: (context) => const BookingPage(),
   AddressAdd.routeName: (context) => const AddressAdd(),
-  MapAddressAdd.routeName: (context) => const MapAddressAdd(),
 };
