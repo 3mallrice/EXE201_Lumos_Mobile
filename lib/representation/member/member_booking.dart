@@ -462,7 +462,7 @@ class _BookingPageState extends State<BookingPage> {
                 Container(
                   margin: const EdgeInsets.only(top: 20),
                   child: Text(
-                    partner?.displayName ?? "Partner Name",
+                    partner?.partnerName ?? "...",
                     textAlign: TextAlign.center,
                     style: GoogleFonts.roboto(
                       fontWeight: FontWeight.w600,
