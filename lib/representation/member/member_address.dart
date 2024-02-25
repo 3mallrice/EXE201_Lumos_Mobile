@@ -1,10 +1,9 @@
-import 'package:exe201_lumos_mobile/api_model/authentication/login.dart';
-import 'package:exe201_lumos_mobile/api_model/customer/address.dart';
-import 'package:exe201_lumos_mobile/api_services/customer_service.dart';
-import 'package:exe201_lumos_mobile/core/helper/local_storage_helper.dart';
-import 'package:exe201_lumos_mobile/login.dart';
-import 'package:exe201_lumos_mobile/representation/member/medical_report_addnew.dart';
-import 'package:exe201_lumos_mobile/representation/member/member_address_add.dart';
+import '../../api_model/authentication/login.dart';
+import '../../api_model/customer/address.dart';
+import '../../api_services/customer_service.dart';
+import '../../core/helper/local_storage_helper.dart';
+import '../../login.dart';
+import 'member_address_add.dart';
 import 'package:logger/logger.dart';
 
 import '../../component/app_bar.dart';
