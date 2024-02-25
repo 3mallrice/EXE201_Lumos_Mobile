@@ -27,7 +27,7 @@ class MedicalReportDetail extends StatelessWidget {
     return Scaffold(
       appBar: const AppBarCom(
         leading: true,
-        appBarText: "Hồ sơ bệnh nhân",
+        appBarText: "Hồ sơ hồ sơ",
       ),
       body: Align(
         alignment: Alignment.topCenter,

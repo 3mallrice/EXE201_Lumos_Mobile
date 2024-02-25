@@ -248,12 +248,11 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
   }
 
   void _showSuccessDialog() {
-    _showResultDialog('Thành công', 'Thêm mới bệnh nhân thành công!');
+    _showResultDialog('Thành công', 'Thêm mới hồ sơ thành công!');
   }
 
   void _showFailDialog() {
-    _showResultDialog(
-        'Thất bại', 'Thêm mới bệnh nhân thất bại! Vui lòng thử lại!');
+    _showResultDialog('Thất bại', 'Thêm mới hồ sơ thất bại! Vui lòng thử lại!');
   }
 
   Future<void> _selectDate(BuildContext context) async {

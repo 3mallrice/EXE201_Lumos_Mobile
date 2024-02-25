@@ -85,7 +85,7 @@ class _MedicalReportPageState extends State<MedicalReportPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const AppBarCom(
-        appBarText: "Danh sách bệnh nhân",
+        appBarText: "Danh sách hồ sơ",
         leading: true,
       ),
       body: _isEmptyList
