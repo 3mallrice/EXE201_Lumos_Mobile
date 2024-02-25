@@ -1,3 +1,6 @@
+import 'package:exe201_lumos_mobile/component/alert_dialog.dart';
+import 'package:exe201_lumos_mobile/representation/member/member_home.dart';
+
 import '../../api_model/customer/address.dart';
 import '../../api_model/partner/partner.dart';
 import '../../core/const/back-end/error_reponse.dart';
@@ -180,157 +183,237 @@ class _BookingPageState extends State<BookingPage> {
 
   dynamic Function() onTap() {
     if (medicalReportServices.isEmpty) {
-      return () {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              backgroundColor: ColorPalette.blue2,
-              title: const Text(
-                DiaLogMessage.title,
-                style: TextStyle(
-                  color: ColorPalette.pinkBold,
-                ),
-              ),
-              content: const Text(
-                BookingErrorMessage.emptyList,
-                style: TextStyle(
-                  color: ColorPalette.blueBold2,
-                ),
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text(
-                    DiaLogMessage.ok,
-                    style: TextStyle(
-                      color: ColorPalette.blueBold2,
-                    ),
-                  ),
-                ),
-              ],
-            );
-          },
-        );
-      };
+      showErrorDialog();
     }
     return () {
-      showModalBottomSheet(
-        backgroundColor: ColorPalette.blue2,
+      showPaymentListBottomSheet();
+    };
+  }
+
+  void showPaymentListBottomSheet() {
+    showModalBottomSheet(
+      backgroundColor: ColorPalette.blue2,
+      context: context,
+      builder: (BuildContext context) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Container(
+              height: 50,
+              alignment: Alignment.center,
+              child: Text(
+                'Chọn phương thức thanh toán',
+                style: GoogleFonts.roboto(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: ColorPalette.blueBold2,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.payments_rounded,
+                color: ColorPalette.blueBold2,
+              ),
+              title: const Text(
+                'Thanh toán COD',
+                style: TextStyle(
+                  color: ColorPalette.blueBold2,
+                ),
+              ),
+              onTap: () => {
+                showConfirmDialog(),
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.wallet_rounded,
+                color: ColorPalette.blueBold2,
+              ),
+              title: const Text(
+                'Thanh toán bằng ví điện tử Momo',
+                style: TextStyle(
+                  color: ColorPalette.blueBold2,
+                ),
+              ),
+              subtitle: const Text(
+                'Đang phát triển ...',
+                style: TextStyle(color: ColorPalette.grey),
+              ),
+              onTap: () => {
+                /* Xử lý khi chọn 'Music' */
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                FontAwesomeIcons.ccVisa,
+                color: ColorPalette.blueBold2,
+              ),
+              title: const Text(
+                'Thanh toán bằng thẻ Visa',
+                style: TextStyle(
+                  color: ColorPalette.blueBold2,
+                ),
+              ),
+              subtitle: const Text(
+                'Đang phát triển ...',
+                style: TextStyle(color: ColorPalette.grey),
+              ),
+              onTap: () => {
+                /* Xử lý khi chọn 'Photos' */
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                FontAwesomeIcons.ccMastercard,
+                color: ColorPalette.blueBold2,
+              ),
+              title: const Text(
+                'Thanh toán bằng thẻ MasterCard',
+                style: TextStyle(
+                  color: ColorPalette.blueBold2,
+                ),
+              ),
+              subtitle: const Text(
+                'Đang phát triển ...',
+                style: TextStyle(color: ColorPalette.grey),
+              ),
+              onTap: () => {
+                /* Xử lý khi chọn 'Video' */
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                FontAwesomeIcons.buildingColumns,
+                color: ColorPalette.blueBold2,
+              ),
+              title: const Text(
+                'Thanh toán bằng ngân hàng',
+                style: TextStyle(
+                  color: ColorPalette.blueBold2,
+                ),
+              ),
+              subtitle: const Text(
+                'Đang phát triển ...',
+                style: TextStyle(color: ColorPalette.grey),
+              ),
+              onTap: () => {
+                //
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Function showErrorDialog() {
+    return () {
+      showDialog(
         context: context,
         builder: (BuildContext context) {
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Container(
-                height: 50,
-                alignment: Alignment.center,
-                child: Text(
-                  'Chọn phương thức thanh toán',
-                  style: GoogleFonts.roboto(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: ColorPalette.blueBold2,
-                  ),
-                ),
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            backgroundColor: ColorPalette.blue2,
+            title: const Text(
+              DiaLogMessage.title,
+              style: TextStyle(
+                color: ColorPalette.pinkBold,
               ),
-              ListTile(
-                leading: const Icon(
-                  Icons.payments_rounded,
-                  color: ColorPalette.blueBold2,
-                ),
-                title: const Text(
-                  'Thanh toán COD',
+            ),
+            content: const Text(
+              BookingErrorMessage.emptyList,
+              style: TextStyle(
+                color: ColorPalette.blueBold2,
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text(
+                  DiaLogMessage.ok,
                   style: TextStyle(
                     color: ColorPalette.blueBold2,
                   ),
                 ),
-                onTap: () => {
-                  /* Xử lý khi chọn 'Music' */
-                },
-              ),
-              ListTile(
-                leading: const Icon(
-                  Icons.wallet_rounded,
-                  color: ColorPalette.blueBold2,
-                ),
-                title: const Text(
-                  'Thanh toán bằng ví điện tử Momo',
-                  style: TextStyle(
-                    color: ColorPalette.blueBold2,
-                  ),
-                ),
-                onTap: () => {
-                  /* Xử lý khi chọn 'Music' */
-                },
-              ),
-              ListTile(
-                leading: const Icon(
-                  FontAwesomeIcons.ccVisa,
-                  color: ColorPalette.blueBold2,
-                ),
-                title: const Text(
-                  'Thanh toán bằng thẻ Visa',
-                  style: TextStyle(
-                    color: ColorPalette.blueBold2,
-                  ),
-                ),
-                subtitle: const Text(
-                  'Đang phát triển ...',
-                  style: TextStyle(color: ColorPalette.grey),
-                ),
-                onTap: () => {
-                  /* Xử lý khi chọn 'Photos' */
-                },
-              ),
-              ListTile(
-                leading: const Icon(
-                  FontAwesomeIcons.ccMastercard,
-                  color: ColorPalette.blueBold2,
-                ),
-                title: const Text(
-                  'Thanh toán bằng thẻ MasterCard',
-                  style: TextStyle(
-                    color: ColorPalette.blueBold2,
-                  ),
-                ),
-                subtitle: const Text(
-                  'Đang phát triển ...',
-                  style: TextStyle(color: ColorPalette.grey),
-                ),
-                onTap: () => {
-                  /* Xử lý khi chọn 'Video' */
-                },
-              ),
-              ListTile(
-                leading: const Icon(
-                  FontAwesomeIcons.buildingColumns,
-                  color: ColorPalette.blueBold2,
-                ),
-                title: const Text(
-                  'Thanh toán bằng ngân hàng',
-                  style: TextStyle(
-                    color: ColorPalette.blueBold2,
-                  ),
-                ),
-                subtitle: const Text(
-                  'Đang phát triển ...',
-                  style: TextStyle(color: ColorPalette.grey),
-                ),
-                onTap: () => {
-                  /* Xử lý khi chọn 'Video' */
-                },
               ),
             ],
           );
         },
       );
     };
+  }
+
+  //show confirm dialog after choose payment method using CustomAlertDialog
+  void showConfirmDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return CustomAlertDialog(
+          title: const Text(
+            DiaLogMessage.title,
+            style: TextStyle(
+              color: ColorPalette.pinkBold,
+            ),
+          ),
+          message: const Text(
+            "Xác nhận đặt lịch hẹn?",
+            style: TextStyle(
+              color: ColorPalette.blueBold2,
+            ),
+          ),
+          action: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text(
+                  DiaLogMessage.cancel,
+                  style: TextStyle(
+                    color: ColorPalette.blueBold2,
+                  ),
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  showSuccessSnackBar();
+                  Navigator.of(context)
+                      .pushReplacementNamed(MemberHome.routeName);
+                },
+                child: const Text(
+                  DiaLogMessage.confirm,
+                  style: TextStyle(
+                    color: ColorPalette.blueBold2,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  //show success snack bar after choose payment method
+  void showSuccessSnackBar() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text(
+          BookingSuccessMessage.bookingSuccess,
+          style: TextStyle(
+            color: ColorPalette.white,
+          ),
+        ),
+        backgroundColor: ColorPalette.blueBold2,
+        duration: Duration(seconds: 3),
+      ),
+    );
   }
 
   @override

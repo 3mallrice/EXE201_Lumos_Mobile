@@ -26,7 +26,7 @@ android {
     configurations {
       all*.exclude group: 'io.flutter.plugins.googlemaps', module: 'google_maps_flutter_android'
   }
-    compileSdkVersion 33
+    compileSdkVersion 34
     namespace "com.lumos.exe201_lumos_mobile"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion

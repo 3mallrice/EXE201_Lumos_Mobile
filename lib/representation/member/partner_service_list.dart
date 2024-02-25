@@ -71,16 +71,12 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
           this.partner = partner;
         });
       } else {
-        setState(() {
-          log.e("Partner id is null.");
-          partner = null;
-        });
+        log.e("Partner id is null.");
+        partner = null;
       }
     } catch (e) {
-      setState(() {
-        log.e("Error when fetching partner data: $e");
-        partner = null;
-      });
+      log.e("Error when fetching partner data: $e");
+      partner = null;
     }
   }
 
