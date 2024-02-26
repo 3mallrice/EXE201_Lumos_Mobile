@@ -137,7 +137,7 @@ class CallCustomerApi {
   }
 
   //POST: medical-report
-  Future<bool> addNewAddress(int customerId, Address newAddress) async {
+  Future<bool> addNewAddress(Address newAddress) async {
     var url = Uri.parse('$api/address');
     token = LocalStorageHelper.getValue("token");
 
@@ -148,10 +148,13 @@ class CallCustomerApi {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json'
         },
-        body: json.encode({
-          'displayName': newAddress.displayName,
-          'address': newAddress.address,
-        }),
+        body: json.encode(
+          {
+            'displayName': newAddress.displayName,
+            'address1': newAddress.address,
+            'customerId': newAddress.customerId,
+          },
+        ),
       );
 
       if (response.statusCode == 200) {

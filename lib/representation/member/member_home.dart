@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+
 import '../../core/const/front-end/color_const.dart';
 import '../../core/helper/asset_helper.dart';
 import 'search_booking.dart';
@@ -40,6 +42,7 @@ class _MemberHomeState extends State<MemberHome> {
     await Future.wait([
       precacheImage(const AssetImage(AssetHelper.imglogo2), context),
       precacheImage(const AssetImage(AssetHelper.memberBanner), context),
+      precacheImage(const AssetImage(AssetHelper.memberBanner2), context),
       precacheImage(const AssetImage(AssetHelper.home1), context),
       precacheImage(const AssetImage(AssetHelper.home2), context),
       precacheImage(const AssetImage(AssetHelper.home3), context),
@@ -69,7 +72,7 @@ class _MemberHomeState extends State<MemberHome> {
               elevation: 0,
             ),
             body: SingleChildScrollView(
-              padding: EdgeInsets.only(bottom: 75),
+              padding: const EdgeInsets.only(bottom: 75),
               child: Align(
                 alignment: AlignmentDirectional.center,
                 child: FractionallySizedBox(
@@ -78,25 +81,28 @@ class _MemberHomeState extends State<MemberHome> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        margin: const EdgeInsets.symmetric(vertical: 10),
-                        child: GestureDetector(
-                          onTap: () {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return const FullScreenImageDialog(
-                                    imagePath: AssetHelper.memberBanner);
-                              },
-                            );
-                          },
-                          child: const ClipRRect(
-                            borderRadius: BorderRadius.all(Radius.circular(16)),
-                            child: Image(
-                              width: double.infinity,
-                              image: AssetImage(AssetHelper.memberBanner),
+                        margin: const EdgeInsets.only(bottom: 10),
+                        child: ImageSlideshow(
+                          width: double.infinity,
+                          indicatorColor: ColorPalette.blueBold2,
+                          indicatorBackgroundColor: ColorPalette.pinkBold,
+                          initialPage: 0,
+                          autoPlayInterval: 3000,
+                          isLoop: true,
+                          children: [
+                            Image.asset(
+                              AssetHelper.memberBanner,
                               fit: BoxFit.fill,
                             ),
-                          ),
+                            Image.asset(
+                              AssetHelper.memberBanner2,
+                              fit: BoxFit.fill,
+                            ),
+                            Image.asset(
+                              AssetHelper.memberBanner,
+                              fit: BoxFit.fill,
+                            ),
+                          ],
                         ),
                       ),
                       Container(

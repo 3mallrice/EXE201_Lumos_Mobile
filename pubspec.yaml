@@ -63,6 +63,7 @@ dependencies:
   hive_flutter: ^1.1.0
   flutter_osm_plugin: ^0.70.4
   flutter_location_search: ^1.1.4
+  flutter_image_slideshow: ^0.1.6
 
 flutter_launcher_icons:
   android: "launcher_icon"

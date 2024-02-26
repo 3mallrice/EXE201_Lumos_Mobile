@@ -117,6 +117,7 @@ class _AddressAddState extends State<AddressAdd> {
               ),
               confirmText: "OK",
               onConfirm: () {
+                setState(() {});
                 Navigator.of(context).pop();
               },
             );
@@ -131,11 +132,12 @@ class _AddressAddState extends State<AddressAdd> {
       final newAddress = Address(
         displayName: displayName[name],
         address: getAddress,
+        customerId: customerId,
       );
 
       try {
         _showLoadingOverlay(context);
-        bool isSuccess = await api.addNewAddress(customerId!, newAddress);
+        bool isSuccess = await api.addNewAddress(newAddress);
 
         if (isSuccess) {
           //show dialog
@@ -180,11 +182,12 @@ class _AddressAddState extends State<AddressAdd> {
   }
 
   void _showSuccessDialog() {
-    _showResultDialog('Thành công', 'Thêm mới hồ sơ thành công!');
+    _showResultDialog('Thành công', 'Thêm mới địa chỉ thành công!');
   }
 
   void _showFailDialog() {
-    _showResultDialog('Thất bại', 'Thêm mới hồ sơ thất bại! Vui lòng thử lại!');
+    _showResultDialog(
+        'Thất bại', 'Thêm mới địa chỉ thất bại! Vui lòng thử lại!');
   }
 
   @override
