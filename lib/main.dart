@@ -40,6 +40,15 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         primaryColor: ColorPalette.white,
         scaffoldBackgroundColor: ColorPalette.white,
+        dialogTheme: const DialogTheme(
+          backgroundColor: ColorPalette.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(10),
+            ),
+          ),
+          elevation: 4,
+        ),
       ),
       debugShowCheckedModeBanner: false,
       home: const AspectRatio(
