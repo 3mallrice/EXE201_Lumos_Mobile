@@ -8,7 +8,7 @@ class Address {
   final String? createdBy;
   final String? lastUpdate;
   final String? updatedBy;
-  final int customerId;
+  final int? customerId;
 
   Address({
     this.addressId,
@@ -20,7 +20,7 @@ class Address {
     this.createdBy,
     this.lastUpdate,
     this.updatedBy,
-    required this.customerId,
+    this.customerId,
   });
 
   factory Address.fromJson(Map<String, dynamic> json) {

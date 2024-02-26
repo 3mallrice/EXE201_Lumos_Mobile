@@ -311,336 +311,34 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
         appBarText: "Tạo mới hồ sơ",
         leading: true,
       ),
-      body: Align(
-        alignment: Alignment.topCenter,
-        child: SizedBox(
-          width: screenWidth * 0.9,
-          height: double.infinity,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(height: 15),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Họ và tên',
-                      style: GoogleFonts.roboto(
-                        fontWeight: FontWeight.normal,
-                        fontSize: 16,
-                        color: ColorPalette.blueBold2,
-                      ),
-                    ),
-                    TextField(
-                      controller: _nameController,
-                      textAlign: TextAlign.start,
-                      maxLength: 20,
-                      decoration: InputDecoration(
-                        hintText: 'Nguyễn Văn A',
-                        hintStyle: GoogleFonts.roboto(
-                          color: ColorPalette.blueBold2.withOpacity(0.65),
-                        ),
-                        filled: true,
-                        fillColor: ColorPalette.secondaryWhite,
-                        focusedBorder: const OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: ColorPalette.grey2, width: 2.0),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(12),
-                          ),
-                        ),
-                        enabledBorder: const OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: ColorPalette.grey2, width: 1.0),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(16),
-                          ),
+      body: SingleChildScrollView(
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: SizedBox(
+            width: screenWidth * 0.9,
+            height: double.infinity,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 15),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Họ và tên',
+                        style: GoogleFonts.roboto(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 16,
+                          color: ColorPalette.blueBold2,
                         ),
                       ),
-                      style: GoogleFonts.roboto(
-                        color: ColorPalette.blueBold2.withOpacity(0.65),
-                      ),
-                    )
-                  ],
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Danh xưng',
-                            style: GoogleFonts.roboto(
-                              fontWeight: FontWeight.normal,
-                              fontSize: 16,
-                              color: ColorPalette.blueBold2,
-                            ),
-                          ),
-                          CustomDropdown<String>(
-                            closedHeaderPadding: const EdgeInsets.all(20),
-                            hintText: 'Chọn danh xưng',
-                            items: _listPro,
-                            initialItem: _listPro[0],
-                            onChanged: (value) {
-                              setState(() {
-                                _selectedPronoun = _listPro.indexOf(value);
-                              });
-                            },
-                            decoration: CustomDropdownDecoration(
-                              headerStyle: GoogleFonts.roboto(
-                                color: ColorPalette.blueBold2.withOpacity(0.65),
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              hintStyle: GoogleFonts.roboto(
-                                color: ColorPalette.blueBold2.withOpacity(0.65),
-                              ),
-                              closedFillColor: ColorPalette.secondaryWhite,
-                              closedBorderRadius: const BorderRadius.all(
-                                Radius.circular(16),
-                              ),
-                              closedBorder: const Border(
-                                top: BorderSide(
-                                    color: ColorPalette.grey2, width: 1.0),
-                                left: BorderSide(
-                                    color: ColorPalette.grey2, width: 1.0),
-                                right: BorderSide(
-                                    color: ColorPalette.grey2, width: 1.0),
-                                bottom: BorderSide(
-                                    color: ColorPalette.grey2, width: 1.0),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Giới tính',
-                            style: GoogleFonts.roboto(
-                              fontWeight: FontWeight.normal,
-                              fontSize: 16,
-                              color: ColorPalette.blueBold2,
-                            ),
-                          ),
-                          CustomDropdown<String>(
-                            closedHeaderPadding: const EdgeInsets.all(20),
-                            hintText: 'Chọn giới tính',
-                            items: _listSex,
-                            initialItem: _listSex[0],
-                            onChanged: (value) {
-                              setState(() {
-                                _selectedGender = value == 'Nam';
-                              });
-                            },
-                            decoration: CustomDropdownDecoration(
-                              headerStyle: GoogleFonts.roboto(
-                                color: ColorPalette.blueBold2.withOpacity(0.65),
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              hintStyle: GoogleFonts.roboto(
-                                color: ColorPalette.blueBold2.withOpacity(0.65),
-                              ),
-                              closedFillColor: ColorPalette.secondaryWhite,
-                              closedBorderRadius: const BorderRadius.all(
-                                Radius.circular(16),
-                              ),
-                              closedBorder: const Border(
-                                top: BorderSide(
-                                    color: ColorPalette.grey2, width: 1.0),
-                                left: BorderSide(
-                                    color: ColorPalette.grey2, width: 1.0),
-                                right: BorderSide(
-                                    color: ColorPalette.grey2, width: 1.0),
-                                bottom: BorderSide(
-                                    color: ColorPalette.grey2, width: 1.0),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Ngày sinh',
-                            style: GoogleFonts.roboto(
-                              fontWeight: FontWeight.normal,
-                              fontSize: 16,
-                              color: ColorPalette.blueBold2,
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () => _selectDate(context),
-                            child: Container(
-                              padding: const EdgeInsets.all(20),
-                              decoration: BoxDecoration(
-                                color: ColorPalette.secondaryWhite,
-                                borderRadius: BorderRadius.circular(16.0),
-                                border: Border.all(
-                                  color: ColorPalette.grey2,
-                                  width: 1.0,
-                                ),
-                              ),
-                              child: Row(
-                                children: [
-                                  const Icon(
-                                    Icons.calendar_month,
-                                    color: ColorPalette.blueBold2,
-                                  ),
-                                  const SizedBox(width: 8.0),
-                                  Text(
-                                    formattedDate,
-                                    style: GoogleFonts.roboto(
-                                      color: ColorPalette.blueBold2
-                                          .withOpacity(0.65),
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Nhóm máu',
-                            style: GoogleFonts.roboto(
-                              fontWeight: FontWeight.normal,
-                              fontSize: 16,
-                              color: ColorPalette.blueBold2,
-                            ),
-                          ),
-                          CustomDropdown<String>(
-                            closedHeaderPadding: const EdgeInsets.all(20),
-                            hintText: 'Chọn nhóm máu',
-                            items: _listBlood,
-                            initialItem: _listBlood[0],
-                            onChanged: (value) {
-                              setState(() {
-                                _selectedBloodType = _listBlood.indexOf(value);
-                              });
-                            },
-                            decoration: CustomDropdownDecoration(
-                              headerStyle: GoogleFonts.roboto(
-                                color: ColorPalette.blueBold2.withOpacity(0.65),
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              hintStyle: GoogleFonts.roboto(
-                                color: ColorPalette.blueBold2.withOpacity(0.65),
-                              ),
-                              closedFillColor: ColorPalette.secondaryWhite,
-                              closedBorderRadius: const BorderRadius.all(
-                                Radius.circular(16),
-                              ),
-                              closedBorder: const Border(
-                                top: BorderSide(
-                                    color: ColorPalette.grey2, width: 1.0),
-                                left: BorderSide(
-                                    color: ColorPalette.grey2, width: 1.0),
-                                right: BorderSide(
-                                    color: ColorPalette.grey2, width: 1.0),
-                                bottom: BorderSide(
-                                    color: ColorPalette.grey2, width: 1.0),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Số điện thoại',
-                      style: GoogleFonts.roboto(
-                        fontWeight: FontWeight.normal,
-                        fontSize: 16,
-                        color: ColorPalette.blueBold2,
-                      ),
-                    ),
-                    TextField(
-                      controller: _phoneNumberController,
-                      textAlign: TextAlign.start,
-                      maxLength: 10,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        hintText: '0912345678',
-                        hintStyle: GoogleFonts.roboto(
-                          color: ColorPalette.blueBold2.withOpacity(0.65),
-                        ),
-                        filled: true,
-                        fillColor: ColorPalette.secondaryWhite,
-                        focusedBorder: const OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: ColorPalette.grey2, width: 2.0),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(12),
-                          ),
-                        ),
-                        enabledBorder: const OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: ColorPalette.grey2, width: 1.0),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(16),
-                          ),
-                        ),
-                      ),
-                      style: GoogleFonts.roboto(
-                        color: ColorPalette.blueBold2.withOpacity(0.65),
-                      ),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 7,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Ghi chú',
-                      style: GoogleFonts.roboto(
-                        fontWeight: FontWeight.normal,
-                        fontSize: 16,
-                        color: ColorPalette.blueBold2,
-                      ),
-                    ),
-                    SingleChildScrollView(
-                      child: TextField(
-                        controller: _noteController,
-                        maxLines: 3,
-                        maxLength: 255,
+                      TextField(
+                        controller: _nameController,
+                        textAlign: TextAlign.start,
+                        maxLength: 20,
                         decoration: InputDecoration(
-                          hintText: 'Hoàn toàn khỏe mạnh, bình thường...',
+                          hintText: 'Nguyễn Văn A',
                           hintStyle: GoogleFonts.roboto(
                             color: ColorPalette.blueBold2.withOpacity(0.65),
                           ),
@@ -648,7 +346,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                           fillColor: ColorPalette.secondaryWhite,
                           focusedBorder: const OutlineInputBorder(
                             borderSide: BorderSide(
-                                color: ColorPalette.grey2, width: 1.0),
+                                color: ColorPalette.grey2, width: 2.0),
                             borderRadius: BorderRadius.all(
                               Radius.circular(12),
                             ),
@@ -664,24 +362,335 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                         style: GoogleFonts.roboto(
                           color: ColorPalette.blueBold2.withOpacity(0.65),
                         ),
-                        textAlign: TextAlign.justify,
-                      ),
-                    ),
-                  ],
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Text(
-                    "Bằng việc tạo mới hồ sơ, tôi đã xác nhận rằng những thông tin trên là chính xác.",
-                    style: GoogleFonts.roboto(
-                      color: ColorPalette.blueBold2.withOpacity(0.42),
-                      fontWeight: FontWeight.normal,
-                      fontSize: 14,
-                    ),
-                    textAlign: TextAlign.center,
+                      )
+                    ],
                   ),
-                ),
-              ],
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Danh xưng',
+                              style: GoogleFonts.roboto(
+                                fontWeight: FontWeight.normal,
+                                fontSize: 16,
+                                color: ColorPalette.blueBold2,
+                              ),
+                            ),
+                            CustomDropdown<String>(
+                              closedHeaderPadding: const EdgeInsets.all(20),
+                              hintText: 'Chọn danh xưng',
+                              items: _listPro,
+                              initialItem: _listPro[0],
+                              onChanged: (value) {
+                                setState(() {
+                                  _selectedPronoun = _listPro.indexOf(value);
+                                });
+                              },
+                              decoration: CustomDropdownDecoration(
+                                headerStyle: GoogleFonts.roboto(
+                                  color:
+                                      ColorPalette.blueBold2.withOpacity(0.65),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                hintStyle: GoogleFonts.roboto(
+                                  color:
+                                      ColorPalette.blueBold2.withOpacity(0.65),
+                                ),
+                                closedFillColor: ColorPalette.secondaryWhite,
+                                closedBorderRadius: const BorderRadius.all(
+                                  Radius.circular(16),
+                                ),
+                                closedBorder: const Border(
+                                  top: BorderSide(
+                                      color: ColorPalette.grey2, width: 1.0),
+                                  left: BorderSide(
+                                      color: ColorPalette.grey2, width: 1.0),
+                                  right: BorderSide(
+                                      color: ColorPalette.grey2, width: 1.0),
+                                  bottom: BorderSide(
+                                      color: ColorPalette.grey2, width: 1.0),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Giới tính',
+                              style: GoogleFonts.roboto(
+                                fontWeight: FontWeight.normal,
+                                fontSize: 16,
+                                color: ColorPalette.blueBold2,
+                              ),
+                            ),
+                            CustomDropdown<String>(
+                              closedHeaderPadding: const EdgeInsets.all(20),
+                              hintText: 'Chọn giới tính',
+                              items: _listSex,
+                              initialItem: _listSex[0],
+                              onChanged: (value) {
+                                setState(() {
+                                  _selectedGender = value == 'Nam';
+                                });
+                              },
+                              decoration: CustomDropdownDecoration(
+                                headerStyle: GoogleFonts.roboto(
+                                  color:
+                                      ColorPalette.blueBold2.withOpacity(0.65),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                hintStyle: GoogleFonts.roboto(
+                                  color:
+                                      ColorPalette.blueBold2.withOpacity(0.65),
+                                ),
+                                closedFillColor: ColorPalette.secondaryWhite,
+                                closedBorderRadius: const BorderRadius.all(
+                                  Radius.circular(16),
+                                ),
+                                closedBorder: const Border(
+                                  top: BorderSide(
+                                      color: ColorPalette.grey2, width: 1.0),
+                                  left: BorderSide(
+                                      color: ColorPalette.grey2, width: 1.0),
+                                  right: BorderSide(
+                                      color: ColorPalette.grey2, width: 1.0),
+                                  bottom: BorderSide(
+                                      color: ColorPalette.grey2, width: 1.0),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Ngày sinh',
+                              style: GoogleFonts.roboto(
+                                fontWeight: FontWeight.normal,
+                                fontSize: 16,
+                                color: ColorPalette.blueBold2,
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () => _selectDate(context),
+                              child: Container(
+                                padding: const EdgeInsets.all(20),
+                                decoration: BoxDecoration(
+                                  color: ColorPalette.secondaryWhite,
+                                  borderRadius: BorderRadius.circular(16.0),
+                                  border: Border.all(
+                                    color: ColorPalette.grey2,
+                                    width: 1.0,
+                                  ),
+                                ),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.calendar_month,
+                                      color: ColorPalette.blueBold2,
+                                    ),
+                                    const SizedBox(width: 8.0),
+                                    Text(
+                                      formattedDate,
+                                      style: GoogleFonts.roboto(
+                                        color: ColorPalette.blueBold2
+                                            .withOpacity(0.65),
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Nhóm máu',
+                              style: GoogleFonts.roboto(
+                                fontWeight: FontWeight.normal,
+                                fontSize: 16,
+                                color: ColorPalette.blueBold2,
+                              ),
+                            ),
+                            CustomDropdown<String>(
+                              closedHeaderPadding: const EdgeInsets.all(20),
+                              hintText: 'Chọn nhóm máu',
+                              items: _listBlood,
+                              initialItem: _listBlood[0],
+                              onChanged: (value) {
+                                setState(() {
+                                  _selectedBloodType =
+                                      _listBlood.indexOf(value);
+                                });
+                              },
+                              decoration: CustomDropdownDecoration(
+                                headerStyle: GoogleFonts.roboto(
+                                  color:
+                                      ColorPalette.blueBold2.withOpacity(0.65),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                hintStyle: GoogleFonts.roboto(
+                                  color:
+                                      ColorPalette.blueBold2.withOpacity(0.65),
+                                ),
+                                closedFillColor: ColorPalette.secondaryWhite,
+                                closedBorderRadius: const BorderRadius.all(
+                                  Radius.circular(16),
+                                ),
+                                closedBorder: const Border(
+                                  top: BorderSide(
+                                      color: ColorPalette.grey2, width: 1.0),
+                                  left: BorderSide(
+                                      color: ColorPalette.grey2, width: 1.0),
+                                  right: BorderSide(
+                                      color: ColorPalette.grey2, width: 1.0),
+                                  bottom: BorderSide(
+                                      color: ColorPalette.grey2, width: 1.0),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Số điện thoại',
+                        style: GoogleFonts.roboto(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 16,
+                          color: ColorPalette.blueBold2,
+                        ),
+                      ),
+                      TextField(
+                        controller: _phoneNumberController,
+                        textAlign: TextAlign.start,
+                        maxLength: 10,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          hintText: '0912345678',
+                          hintStyle: GoogleFonts.roboto(
+                            color: ColorPalette.blueBold2.withOpacity(0.65),
+                          ),
+                          filled: true,
+                          fillColor: ColorPalette.secondaryWhite,
+                          focusedBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: ColorPalette.grey2, width: 2.0),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(12),
+                            ),
+                          ),
+                          enabledBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: ColorPalette.grey2, width: 1.0),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(16),
+                            ),
+                          ),
+                        ),
+                        style: GoogleFonts.roboto(
+                          color: ColorPalette.blueBold2.withOpacity(0.65),
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 7,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Ghi chú',
+                        style: GoogleFonts.roboto(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 16,
+                          color: ColorPalette.blueBold2,
+                        ),
+                      ),
+                      SingleChildScrollView(
+                        child: TextField(
+                          controller: _noteController,
+                          maxLines: 3,
+                          maxLength: 255,
+                          decoration: InputDecoration(
+                            hintText: 'Hoàn toàn khỏe mạnh, bình thường...',
+                            hintStyle: GoogleFonts.roboto(
+                              color: ColorPalette.blueBold2.withOpacity(0.65),
+                            ),
+                            filled: true,
+                            fillColor: ColorPalette.secondaryWhite,
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: ColorPalette.grey2, width: 1.0),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(12),
+                              ),
+                            ),
+                            enabledBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: ColorPalette.grey2, width: 1.0),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(16),
+                              ),
+                            ),
+                          ),
+                          style: GoogleFonts.roboto(
+                            color: ColorPalette.blueBold2.withOpacity(0.65),
+                          ),
+                          textAlign: TextAlign.justify,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Text(
+                      "Bằng việc tạo mới hồ sơ, tôi đã xác nhận rằng những thông tin trên là chính xác.",
+                      style: GoogleFonts.roboto(
+                        color: ColorPalette.blueBold2.withOpacity(0.42),
+                        fontWeight: FontWeight.normal,
+                        fontSize: 14,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
