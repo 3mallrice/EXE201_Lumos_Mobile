@@ -64,6 +64,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
   }
 
   Future<void> _fetchPartnerData(int? partnerId) async {
+    if (!mounted) return;
     try {
       if (partnerId != null) {
         Partner? partner = await partnerApi.getPartnerById(partnerId);
@@ -145,6 +146,11 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
         services: [service],
       ));
     }
+
+    // Cập nhật lại giao diện
+    setState(
+      () {},
+    );
 
     // Trả về giỏ hàng đã được cập nhật
     return carts[
@@ -285,6 +291,11 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
       );
     }
 
+    final int cartItemCount = carts.fold<int>(
+        0, (previousValue, element) => previousValue + element.services.length);
+
+    final bool showBadge = cartItemCount > 0;
+
     return Scaffold(
       appBar: AppBarCom(
         appBarText: 'Dịch vụ',
@@ -299,26 +310,60 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
               borderRadius: BorderRadius.circular(12),
               color: ColorPalette.blue2,
             ),
-            child: IconButton(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.only(bottom: 2),
-              icon: const Icon(
-                Ionicons.calendar_outline,
-                size: 21,
-                color: ColorPalette.blueBold2,
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => BookingPage(
-                      cart: carts,
-                      partner: partner,
+            child: showBadge
+                ? Badge(
+                    offset: const Offset(6, -6),
+                    label: Text(
+                      // Số lượng dịch vụ trong giỏ hàng
+                      '${carts.fold<int>(0, (previousValue, element) => previousValue + element.services.length)}',
+                      style: GoogleFonts.roboto(
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                        color: ColorPalette.white,
+                      ),
                     ),
+                    isLabelVisible: true,
+                    child: IconButton(
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.only(bottom: 2),
+                      icon: const Icon(
+                        Ionicons.calendar_outline,
+                        size: 21,
+                        color: ColorPalette.blueBold2,
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BookingPage(
+                              cart: carts,
+                              partner: partner,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  )
+                : IconButton(
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.only(bottom: 2),
+                    icon: const Icon(
+                      Ionicons.calendar_outline,
+                      size: 21,
+                      color: ColorPalette.blueBold2,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BookingPage(
+                            cart: carts,
+                            partner: partner,
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
           ),
         ],
       ),
