@@ -1,11 +1,10 @@
 import 'dart:convert';
 
-import 'package:exe201_lumos_mobile/api_model/customer/address.dart';
-import 'package:exe201_lumos_mobile/api_model/customer/medical_report.dart';
-import 'package:exe201_lumos_mobile/core/helper/local_storage_helper.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
-
+import '../api_model/customer/address.dart';
+import '../api_model/customer/medical_report.dart';
+import '../core/helper/local_storage_helper.dart';
 import 'api_service.dart';
 
 class CallCustomerApi {
