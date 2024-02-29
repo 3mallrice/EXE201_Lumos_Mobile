@@ -187,7 +187,7 @@ class _SearchBookingState extends State<SearchBooking> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    item.partnerName ?? '',
+                                    item.partnerName ?? 'đang cập nhật',
                                     style: GoogleFonts.roboto(
                                       textStyle: const TextStyle(
                                           fontSize: 20,
@@ -196,7 +196,7 @@ class _SearchBookingState extends State<SearchBooking> {
                                     ),
                                   ),
                                   Text(
-                                    item.address ?? "",
+                                    item.address ?? "đang cập nhật",
                                     style: GoogleFonts.roboto(
                                       textStyle: const TextStyle(
                                         fontWeight: FontWeight.normal,
@@ -229,7 +229,8 @@ class _SearchBookingState extends State<SearchBooking> {
                                                     SizedBox(
                                                       width: 200,
                                                       child: Text(
-                                                        item2.name ?? " ",
+                                                        item2.name ??
+                                                            "đang cập nhật",
                                                         style:
                                                             GoogleFonts.roboto(
                                                           textStyle:

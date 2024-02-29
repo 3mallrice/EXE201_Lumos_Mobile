@@ -48,4 +48,5 @@ final Map<String, WidgetBuilder> routes = {
   PartnerServiceList.routeName: (context) => const PartnerServiceList(),
   BookingPage.routeName: (context) => const BookingPage(),
   AddressAdd.routeName: (context) => const AddressAdd(),
+  AddressAdd.routeName: (context) => const AddressAdd(),
 };
