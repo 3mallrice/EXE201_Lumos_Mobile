@@ -1,4 +1,4 @@
-import 'package:exe201_lumos_mobile/representation/member/medical_report_addnew.dart';
+import 'package:exe201_lumos_mobile/representation/member/medical_report_add.dart';
 
 import '../../core/helper/local_storage_helper.dart';
 import '../../login.dart';

@@ -1,7 +1,7 @@
 import 'login.dart';
 import 'representation/intro_screen.dart';
 import 'representation/member/medical_report.dart';
-import 'representation/member/medical_report_addnew.dart';
+import 'representation/member/medical_report_add.dart';
 import 'representation/member/medical_report_detail.dart';
 import 'representation/member/medical_report_update.dart';
 import 'representation/member/member_address.dart';
