@@ -63,6 +63,8 @@ class BookingErrorMessage {
   static const String bookingConflict =
       "Đã có lịch đặt khác cho thời gian bạn chọn. Vui lòng chọn thời gian khác.";
   static const String emptyList = "Danh sách trống, vui lòng thử lại sau.";
+  static const String bookingDateTimeAddrEmpty =
+      "Vui lòng cung cấp đầy đủ thông tin về ngày, khung giờ và địa chỉ để đặt dịch vụ.";
 }
 
 class BookingSuccessMessage {

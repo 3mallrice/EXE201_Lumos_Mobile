@@ -20,7 +20,6 @@ class _MemberAllBookingState extends State<MemberAllBooking> {
     _fetchUserData();
   }
 
-  bool _isEmptyList = true;
   CallBookingApi api = CallBookingApi();
   var log = Logger();
 

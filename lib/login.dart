@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart';
+
 import 'core/const/back-end/role.dart';
 
 import 'api_model/authentication/login.dart';
@@ -358,14 +360,16 @@ class _LoginState extends State<Login> {
                                     ),
                                   ),
                                   const SizedBox(width: 16),
-                                  const Padding(
-                                    padding: EdgeInsets.only(right: 16.0),
-                                    child: Text(
-                                      'Đăng nhập với Google',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 18,
-                                          color: ColorPalette.primaryText),
+                                  const Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsets.only(right: 16.0),
+                                      child: Text(
+                                        'Đăng nhập với Google',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15,
+                                            color: ColorPalette.primaryText),
+                                      ),
                                     ),
                                   ),
                                 ],

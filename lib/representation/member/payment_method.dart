@@ -1,5 +1,4 @@
 import 'package:exe201_lumos_mobile/component/app_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PaymentMethod extends StatefulWidget {

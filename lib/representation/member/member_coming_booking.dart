@@ -30,7 +30,6 @@ class _MemberBookingState extends State<MemberComingBooking> {
     _fetchUserData();
   }
 
-  bool _isEmptyList = true;
   CallBookingApi api = CallBookingApi();
   var log = Logger();
 
@@ -61,7 +60,6 @@ class _MemberBookingState extends State<MemberComingBooking> {
         setState(
           () {
             _comingBooking = comingBooking;
-            _isEmptyList = _comingBooking.isEmpty;
           },
         );
       } else {
@@ -69,7 +67,6 @@ class _MemberBookingState extends State<MemberComingBooking> {
           () {
             log.e("User details or user id is null.");
             _comingBooking = [];
-            _isEmptyList = true;
           },
         );
       }
@@ -78,7 +75,6 @@ class _MemberBookingState extends State<MemberComingBooking> {
         () {
           log.e("Error when fetching coming booking: $e");
           _comingBooking = [];
-          _isEmptyList = true;
         },
       );
     }
