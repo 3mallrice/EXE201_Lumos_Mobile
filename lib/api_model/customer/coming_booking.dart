@@ -1,11 +1,11 @@
 class BookingComing {
   final int? bookingId;
-  final int? status;
+  final String? status;
   final String? partner;
   final String? bookingDate;
   final int? bookingTime;
   final String? address;
-  final int? paymentMethod;
+  final String? paymentMethod;
   final List<MedicalService> medicalServices;
 
   BookingComing({
@@ -28,7 +28,7 @@ class BookingComing {
       bookingTime: json['bookingTime'],
       address: json['address'],
       paymentMethod: json['paymentMethod'],
-      medicalServices: (json['medicalService'] as List<dynamic>?)
+      medicalServices: (json['medicalServices'] as List<dynamic>?)
               ?.map((medicalServiceJson) =>
                   MedicalService.fromJson(medicalServiceJson))
               .toList() ??

@@ -1,6 +1,7 @@
 import 'package:exe201_lumos_mobile/api_model/authentication/login.dart';
 import 'package:exe201_lumos_mobile/api_model/customer/coming_booking.dart';
 import 'package:exe201_lumos_mobile/api_services/booking_service.dart';
+import 'package:exe201_lumos_mobile/core/const/back-end/workship.dart';
 import 'package:exe201_lumos_mobile/core/helper/local_storage_helper.dart';
 import 'package:exe201_lumos_mobile/login.dart';
 
@@ -106,13 +107,11 @@ class _MemberBookingState extends State<MemberComingBooking> {
         itemCount: _comingBooking.length,
         itemBuilder: (context, index) {
           BookingComing booking = _comingBooking[index];
+          List<MedicalService> medicalServices = booking.medicalServices;
 
-          _service = _comingBooking[index].medicalServices;
-          _service2 = _comingBooking[index].medicalServices[0].services;
-          final item = _service[index];
           return Container(
-            margin: const EdgeInsets.only(top: 20, left: 16, right: 16),
-            padding: const EdgeInsets.all(16.0),
+            margin: const EdgeInsets.only(top: 10, left: 16, right: 16),
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               color: ColorPalette.blue2,
               borderRadius: BorderRadius.circular(11.0),
@@ -144,7 +143,8 @@ class _MemberBookingState extends State<MemberComingBooking> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  booking.partner ?? "đang cập nhật",
+                                  _comingBooking[index].partner ??
+                                      "đang cập nhật",
                                   style: GoogleFonts.roboto(
                                     color: ColorPalette.blueBold2,
                                     fontSize: 20,
@@ -165,9 +165,7 @@ class _MemberBookingState extends State<MemberComingBooking> {
                                           size: 15,
                                           weight: 1.4,
                                         ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
+                                        const SizedBox(width: 10),
                                         Text(
                                           booking.bookingDate.toString(),
                                           style: GoogleFonts.roboto(
@@ -197,7 +195,9 @@ class _MemberBookingState extends State<MemberComingBooking> {
                                     ),
                                     const SizedBox(width: 3),
                                     Text(
-                                      booking.bookingTime.toString(),
+                                      Workshift
+                                          .workshiftTime[booking.bookingTime]
+                                          .toString(),
                                       style: GoogleFonts.roboto(
                                         color: ColorPalette.blueBold2,
                                         fontSize: 15,
@@ -205,48 +205,56 @@ class _MemberBookingState extends State<MemberComingBooking> {
                                     ),
                                   ],
                                 ),
-                                Column(
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {},
-                                      child: ListTile(
-                                        title: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              item.medicalName ?? '',
-                                              style: GoogleFonts.roboto(
-                                                textStyle: const TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: ColorPalette.blueBold2,
-                                                ),
-                                              ),
-                                            ),
-                                            Column(
+                                ListTile(
+                                  title: GestureDetector(
+                                    onTap: () {},
+                                    child: ListTile(
+                                      title: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: medicalServices.map(
+                                          (report) {
+                                            return Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
-                                              children: _service2.map((item2) {
-                                                return Text(
-                                                  item2.name ?? '',
+                                              children: [
+                                                Text(
+                                                  report.medicalName ?? '',
                                                   style: GoogleFonts.roboto(
                                                     textStyle: const TextStyle(
                                                       fontSize: 15,
                                                       fontWeight:
-                                                          FontWeight.normal,
+                                                          FontWeight.bold,
                                                       color: ColorPalette
                                                           .blueBold2,
                                                     ),
                                                   ),
-                                                );
-                                              }).toList(),
-                                            ),
-                                          ],
-                                        ),
+                                                ),
+                                                ...report.services.map(
+                                                  (service) {
+                                                    return Text(
+                                                      service.name ?? '',
+                                                      style: GoogleFonts.roboto(
+                                                        textStyle:
+                                                            const TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          color: ColorPalette
+                                                              .blueBold2,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                ),
+                                                const SizedBox(height: 5),
+                                              ],
+                                            );
+                                          },
+                                        ).toList(),
                                       ),
                                     ),
-                                  ],
+                                  ),
                                 )
                               ],
                             ),
