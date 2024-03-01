@@ -1,4 +1,4 @@
-import '../../api_model/authentication/logout.dart';
+import '../../api_model/customer/booking.dart';
 import '../../api_services/booking_service.dart';
 import '../../component/alert_dialog.dart';
 import '../../core/const/back-end/workship.dart';
@@ -133,6 +133,35 @@ class _BookingPageState extends State<BookingPage> {
     return await LoginAccount.loadAccount();
   }
 
+  OverlayEntry? _overlayEntry;
+
+  // Hàm để hiển thị vòng loading
+  void _showLoadingOverlay(BuildContext context) {
+    _overlayEntry = OverlayEntry(
+      builder: (context) => Stack(
+        children: [
+          Positioned.fill(
+            child: Container(
+              color: Colors.black.withOpacity(0.5),
+            ),
+          ),
+          Center(
+              child: LoadingAnimationWidget.fourRotatingDots(
+            color: ColorPalette.pinkBold,
+            size: 80,
+          )),
+        ],
+      ),
+    );
+    Overlay.of(context).insert(_overlayEntry!);
+  }
+
+  // Hàm để ẩn vòng loading
+  void _hideLoadingOverlay() {
+    _overlayEntry?.remove();
+    _overlayEntry = null;
+  }
+
   void fetchUserData() async {
     userDetails = await loadAccount();
     if (userDetails == null) {
@@ -152,6 +181,28 @@ class _BookingPageState extends State<BookingPage> {
     fetchUserData();
     fetchMedicalReports();
     _fetchAddress();
+  }
+
+  Future<bool> addBooking(int paymentId, int totalPrice) async {
+    AddBooking newBooking = AddBooking(
+      partnerId: partner!.partnerId!,
+      paymentId: paymentId,
+      totalPrice: totalPrice,
+      bookingDate: selectedDate,
+      dayOfWeek: selectedDayOfWeek,
+      bookingTime: selectedTime,
+      address: _addController.text,
+      note: _noteController.text,
+      cartModel: widget.cart!
+          .map((e) => BookingCart(
+              reportId: e.medicalReportId,
+              services: List.from(e.services)
+                  .map((e) =>
+                      BookingService(serviceId: e.serviceId, price: e.price))
+                  .toList()))
+          .toList(),
+    );
+    return await postAddBooking(newBooking);
   }
 
   Future<void> _fetchAddress() async {
@@ -215,11 +266,11 @@ class _BookingPageState extends State<BookingPage> {
     }
   }
 
-  void onTap(List<MedicalReportService?> medicalReportServices,
+  void onTap(int totalPrice, List<MedicalReportService?> medicalReportServices,
       int selectedTime, String note, String address) {
     try {
       // Kiểm tra danh sách là null hoặc rỗng
-      if (medicalReportServices.isEmpty) {
+      if (totalPrice < 0 || medicalReportServices.isEmpty) {
         showErrorDialog(BookingErrorMessage.emptyList);
         return;
       }
@@ -228,7 +279,7 @@ class _BookingPageState extends State<BookingPage> {
       if (selectedTime == 0 || _addController.text.isEmpty) {
         showErrorDialog(BookingErrorMessage.bookingDateTimeAddrEmpty);
       } else {
-        showPaymentListBottomSheet();
+        showPaymentListBottomSheet(totalPrice);
       }
     } catch (e) {
       // Xử lý ngoại lệ khi dữ liệu null
@@ -251,7 +302,7 @@ class _BookingPageState extends State<BookingPage> {
     return listWorkshift;
   }
 
-  void showPaymentListBottomSheet() {
+  void showPaymentListBottomSheet(int totalPrice) {
     showModalBottomSheet(
       backgroundColor: ColorPalette.blue2,
       context: context,
@@ -282,9 +333,7 @@ class _BookingPageState extends State<BookingPage> {
                   color: ColorPalette.blueBold2,
                 ),
               ),
-              onTap: () => {
-                showConfirmDialog(),
-              },
+              onTap: () => showConfirmDialog(totalPrice),
             ),
             ListTile(
               leading: const Icon(
@@ -368,49 +417,59 @@ class _BookingPageState extends State<BookingPage> {
     );
   }
 
-  Function showErrorDialog(String systemError) {
-    return () {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
+  void showErrorDialog(String systemError) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          backgroundColor: ColorPalette.blue2,
+          title: const Text(
+            DiaLogMessage.title,
+            style: TextStyle(
+              color: ColorPalette.pinkBold,
             ),
-            backgroundColor: ColorPalette.blue2,
-            title: const Text(
-              DiaLogMessage.title,
-              style: TextStyle(
-                color: ColorPalette.pinkBold,
-              ),
+          ),
+          content: Text(
+            systemError,
+            style: const TextStyle(
+              color: ColorPalette.blueBold2,
             ),
-            content: const Text(
-              BookingErrorMessage.emptyList,
-              style: TextStyle(
-                color: ColorPalette.blueBold2,
-              ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text(
-                  DiaLogMessage.ok,
-                  style: TextStyle(
-                    color: ColorPalette.blueBold2,
-                  ),
+            textAlign: TextAlign.justify,
+            maxLines: 5,
+            overflow: TextOverflow.ellipsis,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text(
+                DiaLogMessage.ok,
+                style: TextStyle(
+                  color: ColorPalette.blueBold2,
                 ),
               ),
-            ],
-          );
-        },
-      );
-    };
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void returnToPage(String routeName) {
+    Navigator.of(context).pushReplacementNamed(routeName);
+  }
+
+  void popBack() {
+    Navigator.of(context).pop();
   }
 
   //show confirm dialog after choose payment method using CustomAlertDialog
-  void showConfirmDialog() {
+  void showConfirmDialog(int totalPrice) {
+    popBack();
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -442,10 +501,24 @@ class _BookingPageState extends State<BookingPage> {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
+                  try {
+                    popBack();
+                    _showLoadingOverlay(context);
+                    bool result = await addBooking(1, totalPrice);
+                    if (result) {
+                    } else {
+                      throw Exception(
+                          "Failed to add booking: $result - $totalPrice");
+                    }
+                  } catch (e) {
+                    log.e("Failed to add booking: $e");
+                    showErrorDialog(OperationErrorMessage.systemError);
+                  } finally {
+                    _hideLoadingOverlay();
+                  }
                   showSuccessSnackBar();
-                  Navigator.of(context)
-                      .pushReplacementNamed(MemberHome.routeName);
+                  returnToPage(MemberHome.routeName);
                 },
                 child: const Text(
                   DiaLogMessage.confirm,
@@ -482,8 +555,9 @@ class _BookingPageState extends State<BookingPage> {
     double screenWidth = MediaQuery.of(context).size.width;
     String formattedDate = DateFormat('dd-MM-yyyy').format(selectedDate);
     // String formattedTime = selectedTime.format(context);
-    int totalPrice = 0;
     Partner? partner = widget.partner;
+    // total price
+    int totalPrice = 0;
 
     for (var ser in medicalReportServices) {
       for (var item in ser!.services) {
@@ -985,6 +1059,7 @@ class _BookingPageState extends State<BookingPage> {
                 ),
                 MyButton(
                   onTap: () => onTap(
+                    totalPrice,
                     medicalReportServices,
                     selectedTime,
                     _noteController.text,

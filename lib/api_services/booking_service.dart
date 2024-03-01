@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
-import '../api_model/authentication/logout.dart';
+import '../api_model/customer/booking.dart';
 import '../api_model/customer/coming_booking.dart';
 import '../core/helper/local_storage_helper.dart';
 import 'api_service.dart';
