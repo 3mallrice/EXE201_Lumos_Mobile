@@ -1,4 +1,6 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 import '../../component/app_bar.dart';
 import '../../core/const/front-end/color_const.dart';
 import '../../core/const/front-end/zalo_icon.dart';
@@ -67,7 +69,7 @@ class _AboutUsState extends State<AboutUs> {
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 10),
                   child: Text(
-                    'Lumos.com.vn',
+                    'lumos.health.vn',
                     style: GoogleFonts.roboto(
                       textStyle: const TextStyle(
                         color: ColorPalette.blueBold2,
@@ -112,75 +114,83 @@ class _AboutUsState extends State<AboutUs> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Container(
-                            alignment: Alignment.center,
-                            margin: const EdgeInsets.all(14),
-                            decoration: const ShapeDecoration(
-                              color: ColorPalette.blueBold2,
-                              shape: CircleBorder(),
-                            ),
-                            child: IconButton(
-                              onPressed: () {
-                                // Navigator.of(context).pushNamed(UpdateAccount.routeName);
-                              },
-                              icon: const Icon(
-                                EvaIcons.facebook,
-                                size: 35,
-                                color: ColorPalette.white,
+                          Expanded(
+                            child: Container(
+                              alignment: Alignment.center,
+                              margin: const EdgeInsets.all(14),
+                              decoration: const ShapeDecoration(
+                                color: ColorPalette.blueBold2,
+                                shape: CircleBorder(),
+                              ),
+                              child: IconButton(
+                                onPressed: () {
+                                  // Navigator.of(context).pushNamed(UpdateAccount.routeName);
+                                },
+                                icon: const Icon(
+                                  EvaIcons.facebook,
+                                  size: 35,
+                                  color: ColorPalette.white,
+                                ),
                               ),
                             ),
                           ),
-                          Container(
-                            alignment: Alignment.center,
-                            margin: const EdgeInsets.all(14),
-                            decoration: const ShapeDecoration(
-                              color: ColorPalette.blueBold2,
-                              shape: CircleBorder(),
-                            ),
-                            child: IconButton(
-                              onPressed: () {
-                                // Navigator.of(context).pushNamed(UpdateAccount.routeName);
-                              },
-                              icon: const Icon(
-                                Ionicons.logo_youtube,
-                                size: 35,
-                                color: ColorPalette.white,
+                          Expanded(
+                            child: Container(
+                              alignment: Alignment.center,
+                              margin: const EdgeInsets.all(14),
+                              decoration: const ShapeDecoration(
+                                color: ColorPalette.blueBold2,
+                                shape: CircleBorder(),
+                              ),
+                              child: IconButton(
+                                onPressed: () {
+                                  // Navigator.of(context).pushNamed(UpdateAccount.routeName);
+                                },
+                                icon: const Icon(
+                                  Ionicons.logo_youtube,
+                                  size: 35,
+                                  color: ColorPalette.white,
+                                ),
                               ),
                             ),
                           ),
-                          Container(
-                            alignment: Alignment.center,
-                            margin: const EdgeInsets.all(14),
-                            decoration: const ShapeDecoration(
-                              color: ColorPalette.blueBold2,
-                              shape: CircleBorder(),
-                            ),
-                            child: IconButton(
-                              onPressed: () {
-                                // Navigator.of(context).pushNamed(UpdateAccount.routeName);
-                              },
-                              icon: const Icon(
-                                Ionicons.logo_tiktok,
-                                size: 35,
-                                color: ColorPalette.white,
+                          Expanded(
+                            child: Container(
+                              alignment: Alignment.center,
+                              margin: const EdgeInsets.all(14),
+                              decoration: const ShapeDecoration(
+                                color: ColorPalette.blueBold2,
+                                shape: CircleBorder(),
+                              ),
+                              child: IconButton(
+                                onPressed: () {
+                                  // Navigator.of(context).pushNamed(UpdateAccount.routeName);
+                                },
+                                icon: const Icon(
+                                  Ionicons.logo_tiktok,
+                                  size: 35,
+                                  color: ColorPalette.white,
+                                ),
                               ),
                             ),
                           ),
-                          Container(
-                            margin: const EdgeInsets.all(14),
-                            alignment: Alignment.center,
-                            decoration: const ShapeDecoration(
-                              color: ColorPalette.blueBold2,
-                              shape: CircleBorder(),
-                            ),
-                            child: IconButton(
-                              onPressed: () {
-                                // Navigator.of(context).pushNamed(UpdateAccount.routeName);
-                              },
-                              icon: const Icon(
-                                ZaloIcon.group_1000004349,
-                                size: 35,
-                                color: ColorPalette.white,
+                          Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.all(14),
+                              alignment: Alignment.center,
+                              decoration: const ShapeDecoration(
+                                color: ColorPalette.blueBold2,
+                                shape: CircleBorder(),
+                              ),
+                              child: IconButton(
+                                onPressed: () {
+                                  // Navigator.of(context).pushNamed(UpdateAccount.routeName);
+                                },
+                                icon: const Icon(
+                                  ZaloIcon.group_1000004349,
+                                  size: 35,
+                                  color: ColorPalette.white,
+                                ),
                               ),
                             ),
                           ),

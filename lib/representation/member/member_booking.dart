@@ -1,4 +1,7 @@
+import '../../api_model/authentication/logout.dart';
+import '../../api_services/booking_service.dart';
 import '../../component/alert_dialog.dart';
+import '../../core/const/back-end/workship.dart';
 import 'member_home.dart';
 
 import '../../api_model/customer/address.dart';
@@ -42,8 +45,12 @@ class BookingPage extends StatefulWidget {
 
 class _BookingPageState extends State<BookingPage> {
   DateTime selectedDate = DateTime.now();
-  TimeOfDay selectedTime = TimeOfDay.now();
+  // TimeOfDay? selectedTime = TimeOfDay.now();
+  int selectedDayOfWeek = 0;
+  int selectedTime = 0;
+
   final TextEditingController _addController = TextEditingController();
+  final TextEditingController _noteController = TextEditingController();
 
   BuildContext? dialogContext;
 
@@ -51,6 +58,7 @@ class _BookingPageState extends State<BookingPage> {
   List<MedicalReportService?> medicalReportServices = [];
 
   List<Address> address = [];
+  Partner? partner;
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -82,38 +90,43 @@ class _BookingPageState extends State<BookingPage> {
     if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
+        selectedTime = 0;
       });
     }
   }
 
-  Future<void> _selectTime(BuildContext context) async {
-    final TimeOfDay? picked = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now(),
-      initialEntryMode: TimePickerEntryMode.input,
-      builder: (BuildContext context, Widget? child) {
-        return Theme(
-          data: ThemeData.light().copyWith(
-            colorScheme: const ColorScheme.light(
-              primary: ColorPalette.pink,
-              onPrimary: ColorPalette.white,
-              surface: ColorPalette.blue2,
-              onSurface: ColorPalette.blueBold2,
-            ),
-          ),
-          child: child!,
-        );
-      },
-    );
+  ///=== Note ===
+  // Future<void> _selectTime(BuildContext context) async {
+  //   final TimeOfDay? picked = await showTimePicker(
+  //     context: context,
+  //     initialTime: TimeOfDay.now(),
+  //     initialEntryMode: TimePickerEntryMode.input,
+  //     builder: (BuildContext context, Widget? child) {
+  //       return Theme(
+  //         data: ThemeData.light().copyWith(
+  //           colorScheme: const ColorScheme.light(
+  //             primary: ColorPalette.pink,
+  //             onPrimary: ColorPalette.white,
+  //             surface: ColorPalette.blue2,
+  //             onSurface: ColorPalette.blueBold2,
+  //           ),
+  //         ),
+  //         child: child!,
+  //       );
+  //     },
+  //   );
 
-    if (picked != null && picked != selectedTime) {
-      setState(() {
-        selectedTime = picked;
-      });
-    }
-  }
+  //   if (picked != null && picked != selectedTime) {
+  //     setState(() {
+  //       selectedTime = picked;
+  //     });
+  //   }
+  // }
+
+  ///=== Note ===
 
   CallCustomerApi calCustomerlApi = CallCustomerApi();
+  CallBookingApi callBookingApi = CallBookingApi();
   UserDetails? userDetails;
 
   Future<UserDetails>? loadAccount() async {
@@ -123,12 +136,10 @@ class _BookingPageState extends State<BookingPage> {
   void fetchUserData() async {
     userDetails = await loadAccount();
     if (userDetails == null) {
-      Future.delayed(
-        Duration.zero,
-        () {
-          Navigator.of(context).pushReplacementNamed(Login.routeName);
-        },
-      );
+      Future.delayed(Duration.zero, () {
+        Navigator.of(context).pushReplacementNamed(Login.routeName);
+        setState(() {});
+      });
     } else {
       // _fetchAddress();
     }
@@ -137,6 +148,7 @@ class _BookingPageState extends State<BookingPage> {
   @override
   void initState() {
     super.initState();
+    partner = widget.partner;
     fetchUserData();
     fetchMedicalReports();
     _fetchAddress();
@@ -147,10 +159,16 @@ class _BookingPageState extends State<BookingPage> {
       if (userDetails != null && userDetails!.id != null) {
         List<Address>? addressList =
             await calCustomerlApi.getCustomerAddress(userDetails!.id!);
-        setState(
+        Future.delayed(
+          Duration.zero,
           () {
-            address = addressList;
-            log.i(address.length);
+            setState(
+              () {
+                address = addressList;
+                log.i(address.length);
+              },
+            );
+            log.i(address);
           },
         );
       } else {
@@ -185,13 +203,52 @@ class _BookingPageState extends State<BookingPage> {
     return await calCustomerlApi.getMedicalReportById(reportId);
   }
 
-  dynamic Function() onTap() {
-    if (medicalReportServices.isEmpty) {
-      showErrorDialog();
+  Future<bool> postAddBooking(AddBooking newBooking) async {
+    try {
+      bool result =
+          await callBookingApi.addBooking(userDetails!.id!, newBooking);
+      return result;
+    } catch (e) {
+      log.e("Failed to add booking: $e");
+      showErrorDialog(OperationErrorMessage.systemError);
+      return false;
     }
-    return () {
-      showPaymentListBottomSheet();
-    };
+  }
+
+  void onTap(List<MedicalReportService?> medicalReportServices,
+      int selectedTime, String note, String address) {
+    try {
+      // Kiểm tra danh sách là null hoặc rỗng
+      if (medicalReportServices.isEmpty) {
+        showErrorDialog(BookingErrorMessage.emptyList);
+        return;
+      }
+
+      // Kiểm tra danh sách không null và không rỗng
+      if (selectedTime == 0 || _addController.text.isEmpty) {
+        showErrorDialog(BookingErrorMessage.bookingDateTimeAddrEmpty);
+      } else {
+        showPaymentListBottomSheet();
+      }
+    } catch (e) {
+      // Xử lý ngoại lệ khi dữ liệu null
+      showErrorDialog(OperationErrorMessage.systemError);
+    }
+  }
+
+  List<String> listWorkshift = [];
+
+  List<String> getListWorkshift() {
+    List<String> listWorkshift = [];
+    selectedDayOfWeek = selectedDate.weekday + 1;
+    for (Schedule schedule in partner!.schedules!) {
+      if (schedule.dayOfWeek == selectedDayOfWeek) {
+        int workshift = schedule.workShift!;
+        listWorkshift.add(Workshift.workshiftTime[workshift]!);
+      }
+    }
+    setState(() {});
+    return listWorkshift;
   }
 
   void showPaymentListBottomSheet() {
@@ -245,7 +302,7 @@ class _BookingPageState extends State<BookingPage> {
                 style: TextStyle(color: ColorPalette.grey),
               ),
               onTap: () => {
-                /* Xử lý khi chọn 'Music' */
+                //snackBar show on development
               },
             ),
             ListTile(
@@ -302,7 +359,7 @@ class _BookingPageState extends State<BookingPage> {
                 style: TextStyle(color: ColorPalette.grey),
               ),
               onTap: () => {
-                //
+                // showOnDevelopmentSnackBar(),
               },
             ),
           ],
@@ -311,7 +368,7 @@ class _BookingPageState extends State<BookingPage> {
     );
   }
 
-  Function showErrorDialog() {
+  Function showErrorDialog(String systemError) {
     return () {
       showDialog(
         context: context,
@@ -424,7 +481,7 @@ class _BookingPageState extends State<BookingPage> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     String formattedDate = DateFormat('dd-MM-yyyy').format(selectedDate);
-    String formattedTime = selectedTime.format(context);
+    // String formattedTime = selectedTime.format(context);
     int totalPrice = 0;
     Partner? partner = widget.partner;
 
@@ -483,6 +540,7 @@ class _BookingPageState extends State<BookingPage> {
                     style: TextStyle(
                       color: ColorPalette.pinkBold,
                     ),
+                    textAlign: TextAlign.center,
                   )
                 else
                   Container(
@@ -669,44 +727,131 @@ class _BookingPageState extends State<BookingPage> {
                       ),
                     ),
                     const SizedBox(width: 10),
+                    // Expanded(
+                    //   child: InkWell(
+                    //     onTap: () => _selectTime(context),
+                    //     child: Container(
+                    //       alignment: Alignment.centerLeft,
+                    //       padding: const EdgeInsets.symmetric(
+                    //         vertical: 10.0,
+                    //         horizontal: 20.0,
+                    //       ),
+                    //       decoration: BoxDecoration(
+                    //         color: ColorPalette.white,
+                    //         borderRadius: BorderRadius.circular(16.0),
+                    //         border: Border.all(
+                    //           color: ColorPalette.grey2,
+                    //           width: 1.0,
+                    //         ),
+                    //       ),
+                    //       child: Column(
+                    //         crossAxisAlignment: CrossAxisAlignment.start,
+                    //         children: [
+                    //           Text(
+                    //             'Giờ',
+                    //             style: GoogleFonts.roboto(
+                    //               fontWeight: FontWeight.normal,
+                    //               fontSize: 13,
+                    //               color: ColorPalette.blue3,
+                    //             ),
+                    //           ),
+                    //           Text(
+                    //             formattedTime,
+                    //             style: GoogleFonts.roboto(
+                    //               color: ColorPalette.blueBold2,
+                    //               fontSize: 16,
+                    //               fontWeight: FontWeight.bold,
+                    //             ),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     Expanded(
-                      child: InkWell(
-                        onTap: () => _selectTime(context),
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 10.0,
-                            horizontal: 20.0,
+                      child: Container(
+                        alignment: Alignment.centerLeft,
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 10.0,
+                          horizontal: 20.0,
+                        ),
+                        decoration: BoxDecoration(
+                          color: ColorPalette.white,
+                          borderRadius: BorderRadius.circular(16.0),
+                          border: Border.all(
+                            color: ColorPalette.grey2,
+                            width: 1.0,
                           ),
-                          decoration: BoxDecoration(
-                            color: ColorPalette.white,
-                            borderRadius: BorderRadius.circular(16.0),
-                            border: Border.all(
-                              color: ColorPalette.grey2,
-                              width: 1.0,
-                            ),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Giờ',
-                                style: GoogleFonts.roboto(
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 13,
-                                  color: ColorPalette.blue3,
-                                ),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Khung giờ',
+                              style: GoogleFonts.roboto(
+                                fontWeight: FontWeight.normal,
+                                fontSize: 13,
+                                color: ColorPalette.blue3,
                               ),
-                              Text(
-                                formattedTime,
+                            ),
+                            DropdownButton<String>(
+                              isExpanded: true,
+                              hint: Text(
+                                'Chọn khung giờ',
                                 style: GoogleFonts.roboto(
                                   color: ColorPalette.blueBold2,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                 ),
+                                overflow: TextOverflow.ellipsis,
                               ),
-                            ],
-                          ),
+                              isDense: true,
+                              value: Workshift.workshiftTime[selectedTime],
+                              items: getListWorkshift().map((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value,
+                                      style: GoogleFonts.roboto(
+                                        color: ColorPalette.blueBold2,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                );
+                              }).toList(),
+                              icon: const Icon(
+                                Icons.arrow_drop_down_outlined,
+                                color: ColorPalette.blueBold2,
+                              ),
+                              iconSize: 24,
+                              elevation: 3,
+                              iconEnabledColor: ColorPalette.blueBold2,
+                              style: GoogleFonts.roboto(
+                                color: ColorPalette.blueBold2,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              underline: Container(
+                                height: 0,
+                              ),
+                              onChanged: (String? newValue) {
+                                setState(
+                                  () {
+                                    selectedTime =
+                                        Workshift.workshiftTime.entries
+                                            .firstWhere(
+                                              (element) =>
+                                                  element.value == newValue,
+                                            )
+                                            .key;
+                                  },
+                                );
+                              },
+                              alignment: Alignment.center,
+                              dropdownColor: ColorPalette.white,
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -785,8 +930,11 @@ class _BookingPageState extends State<BookingPage> {
                     ),
                     SingleChildScrollView(
                       child: TextField(
+                        controller: _noteController,
                         maxLines: 3,
                         maxLength: 255,
+                        keyboardAppearance: Brightness.light,
+                        keyboardType: TextInputType.multiline,
                         decoration: InputDecoration(
                           hintText: 'Nhập ghi chú...',
                           hintStyle: GoogleFonts.roboto(
@@ -823,7 +971,7 @@ class _BookingPageState extends State<BookingPage> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    "Bằng đặt hẹn, tôi đã xác nhận rằng những thông tin trên là chính xác.",
+                    "Bằng đặt hẹn, tôi đã chắc chắn rằng những thông tin trên là chính xác.",
                     style: GoogleFonts.roboto(
                       color: ColorPalette.blueBold2.withOpacity(0.42),
                       fontWeight: FontWeight.normal,
@@ -836,7 +984,12 @@ class _BookingPageState extends State<BookingPage> {
                   height: 20,
                 ),
                 MyButton(
-                  onTap: onTap(),
+                  onTap: () => onTap(
+                    medicalReportServices,
+                    selectedTime,
+                    _noteController.text,
+                    _addController.text,
+                  ),
                   borderRadius: 50,
                   color: ColorPalette.pinkBold,
                   widget: Text(
@@ -923,7 +1076,8 @@ class _BookingPageState extends State<BookingPage> {
                     ),
                   ),
                   onTap: () {
-                    _addController.text = item.displayName;
+                    _addController.text =
+                        '${item.displayName}, ${item.address}';
                     Navigator.of(context).pop();
                     log.e(item.displayName);
                   },

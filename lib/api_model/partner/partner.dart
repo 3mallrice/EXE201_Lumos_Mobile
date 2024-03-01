@@ -10,6 +10,7 @@ class Partner {
   final String? imgUrl;
   final String? businessLicenseNumber;
   final List<PartnerService>? partnerServices;
+  final List<Schedule>? schedules; // Thêm thuộc tính schedules
 
   Partner({
     this.code,
@@ -23,6 +24,7 @@ class Partner {
     this.businessLicenseNumber,
     this.imgUrl,
     this.partnerServices,
+    this.schedules,
   });
 
   factory Partner.fromJson(Map<String, dynamic> json) {
@@ -31,6 +33,12 @@ class Partner {
     if (servicesJson != null) {
       services =
           servicesJson.map((json) => PartnerService.fromJson(json)).toList();
+    }
+
+    List<dynamic>? schedulesJson = json['schedules'];
+    List<Schedule>? schedules;
+    if (schedulesJson != null) {
+      schedules = schedulesJson.map((json) => Schedule.fromJson(json)).toList();
     }
 
     return Partner(
@@ -45,6 +53,33 @@ class Partner {
       imgUrl: json['imgUrl'],
       businessLicenseNumber: json['businessLicenseNumber'],
       partnerServices: services,
+      schedules: schedules, // Gán giá trị cho thuộc tính schedules
+    );
+  }
+}
+
+class Schedule {
+  final int? scheduleId;
+  final int? workShift;
+  final int? dayOfWeek;
+  final String? from;
+  final String? to;
+
+  Schedule({
+    this.scheduleId,
+    this.workShift,
+    this.dayOfWeek,
+    this.from,
+    this.to,
+  });
+
+  factory Schedule.fromJson(Map<String, dynamic> json) {
+    return Schedule(
+      scheduleId: json['scheduleId'],
+      workShift: json['workShift'],
+      dayOfWeek: json['dayOfWeek'],
+      from: json['from'],
+      to: json['to'],
     );
   }
 }
@@ -58,7 +93,6 @@ class PartnerService {
   final String? description;
   final int? price;
   final int? quantity;
-
   PartnerService({
     this.serviceId,
     this.code,
@@ -69,7 +103,6 @@ class PartnerService {
     this.price,
     this.quantity,
   });
-
   factory PartnerService.fromJson(Map<String, dynamic> json) {
     return PartnerService(
       serviceId: json['serviceId'],
