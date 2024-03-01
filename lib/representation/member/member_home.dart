@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
 import '../../core/const/front-end/color_const.dart';
@@ -27,6 +29,14 @@ class _MemberHomeState extends State<MemberHome> {
   ];
   int _hintIndex = 0;
   late Timer _timer;
+
+  final List<String> _service = [
+    "Tắm cho bé",
+    "Quấn nóng giảm eo bụng cho mẹ Passw0rd!",
+    "Massage thảo mộc cho bé",
+    "Massage thảo mộc cho mẹ",
+    "Chăm sóc bé"
+  ];
 
   @override
   void initState() {
@@ -223,6 +233,7 @@ class _MemberHomeState extends State<MemberHome> {
                       ),
                       Container(
                         margin: const EdgeInsets.symmetric(vertical: 10),
+                        padding: const EdgeInsets.only(bottom: 10),
                         decoration: BoxDecoration(
                           color: ColorPalette.pinklight,
                           borderRadius: BorderRadius.circular(16),
@@ -232,216 +243,91 @@ class _MemberHomeState extends State<MemberHome> {
                           mainAxisAlignment: MainAxisAlignment.center, //dọc
                           children: [
                             const Padding(
-                              padding: EdgeInsets.only(
-                                  left: 14, top: 14, right: 14, bottom: 8),
+                              padding:
+                                  EdgeInsets.only(left: 14, top: 14, right: 14),
                               child: Text(
                                 'Dịch vụ gần đây',
                                 style: TextStyle(
                                   color: ColorPalette.blueBold2,
-                                  fontSize: 11,
+                                  fontSize: 12,
                                   fontFamily: 'roboto',
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 8, right: 8, bottom: 8),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                            SizedBox(
+                              height:
+                                  MediaQuery.of(context).size.height * 0.105,
+                              child: ListView.builder(
+                                clipBehavior: Clip.antiAlias,
+                                shrinkWrap: true,
+                                itemCount: _service.length,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  final item = _service[index];
+                                  return Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          //
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: ColorPalette.pink,
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10),
-                                          shape: const CircleBorder(),
-                                        ),
-                                        child: const Padding(
-                                          padding: EdgeInsets.all(9.0),
-                                          child: Icon(
-                                            Icons.pregnant_woman,
-                                            color: ColorPalette.pinkBold,
-                                            size: 20,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(height: 5),
-                                      const Align(
-                                        alignment: Alignment.bottomCenter,
-                                        child: Text(
-                                          'Gội đầu',
-                                          style: TextStyle(
-                                            color: ColorPalette.pinkBold,
-                                            fontSize: 10,
-                                            overflow: TextOverflow.ellipsis,
-                                            fontFamily: 'roboto',
-                                            fontWeight: FontWeight.w500,
-                                          ),
+                                      Center(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                //
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor:
+                                                    ColorPalette.pink,
+                                                shape: const CircleBorder(),
+                                              ),
+                                              child: const Padding(
+                                                padding: EdgeInsets.all(9.0),
+                                                child: Icon(
+                                                  Icons.pregnant_woman,
+                                                  color: ColorPalette.pinkBold,
+                                                  size: 20,
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(height: 5),
+                                            Expanded(
+                                              child: Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.2,
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.25,
+                                                child: Text(
+                                                  item,
+                                                  style: const TextStyle(
+                                                    color:
+                                                        ColorPalette.pinkBold,
+                                                    fontSize: 10,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    fontFamily: 'roboto',
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 2,
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
-                                  ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          //
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: ColorPalette.pink,
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10),
-                                          shape: const CircleBorder(),
-                                        ),
-                                        child: const Padding(
-                                          padding: EdgeInsets.all(9.0),
-                                          child: Icon(
-                                            Icons.pregnant_woman,
-                                            color: ColorPalette.pinkBold,
-                                            size: 20,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(height: 5),
-                                      const Align(
-                                        alignment: Alignment.bottomCenter,
-                                        child: Text(
-                                          'Gội đầu dưỡng sinh',
-                                          style: TextStyle(
-                                            color: ColorPalette.pinkBold,
-                                            fontSize: 10,
-                                            fontFamily: 'roboto',
-                                            overflow: TextOverflow.ellipsis,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          //
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: ColorPalette.pink,
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10),
-                                          shape: const CircleBorder(),
-                                        ),
-                                        child: const Padding(
-                                          padding: EdgeInsets.all(9.0),
-                                          child: Icon(
-                                            Icons.pregnant_woman,
-                                            color: ColorPalette.pinkBold,
-                                            size: 20,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(height: 5),
-                                      const Align(
-                                        alignment: Alignment.bottomCenter,
-                                        child: Text(
-                                          'Massage',
-                                          style: TextStyle(
-                                            color: ColorPalette.pinkBold,
-                                            fontSize: 10,
-                                            overflow: TextOverflow.ellipsis,
-                                            fontFamily: 'roboto',
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          //
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: ColorPalette.pink,
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10),
-                                          shape: const CircleBorder(),
-                                        ),
-                                        child: const Padding(
-                                          padding: EdgeInsets.all(9.0),
-                                          child: Icon(
-                                            Icons.child_friendly_sharp,
-                                            color: ColorPalette.pinkBold,
-                                            size: 20,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(height: 5),
-                                      const Align(
-                                        alignment: Alignment.bottomCenter,
-                                        child: Text(
-                                          'Tắm cho bé',
-                                          style: TextStyle(
-                                            color: ColorPalette.pinkBold,
-                                            fontSize: 10,
-                                            fontFamily: 'roboto',
-                                            overflow: TextOverflow.ellipsis,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          //
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: ColorPalette.pink,
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10),
-                                          shape: const CircleBorder(),
-                                        ),
-                                        child: const Padding(
-                                          padding: EdgeInsets.all(9.0),
-                                          child: Icon(
-                                            Icons.child_friendly,
-                                            color: ColorPalette.pinkBold,
-                                            size: 20,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(height: 5),
-                                      const Align(
-                                        alignment: Alignment.bottomCenter,
-                                        child: Text(
-                                          'Vật lý trị liệu',
-                                          style: TextStyle(
-                                            color: ColorPalette.pinkBold,
-                                            fontSize: 10,
-                                            overflow: TextOverflow.ellipsis,
-                                            fontFamily: 'roboto',
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                  );
+                                },
                               ),
                             ),
                           ],
