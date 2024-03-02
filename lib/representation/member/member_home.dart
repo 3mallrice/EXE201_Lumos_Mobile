@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
 import '../../core/const/front-end/color_const.dart';
@@ -295,7 +293,7 @@ class _MemberHomeState extends State<MemberHome> {
                                             ),
                                             const SizedBox(height: 5),
                                             Expanded(
-                                              child: Container(
+                                              child: SizedBox(
                                                 width: MediaQuery.of(context)
                                                         .size
                                                         .width *

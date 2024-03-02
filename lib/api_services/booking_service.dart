@@ -70,4 +70,30 @@ class CallBookingApi {
       throw Exception('Failed to add booking: $e');
     }
   }
+
+  Future<List<BookingComing>> getBookings() async {
+    var url = Uri.parse(api);
+    token = LocalStorageHelper.getValue("token");
+
+    try {
+      http.Response response = await http.get(url, headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json'
+      });
+
+      if (response.statusCode == 200) {
+        final responseBody = json.decode(response.body);
+        final responseData = responseBody['data'];
+        List<BookingComing> list = responseData
+            .map<BookingComing>((item) => BookingComing.fromJson(item))
+            .toList();
+        return list;
+      } else {
+        throw Exception(
+            'Failed to get booking: ${response.statusCode} - ${response.reasonPhrase}');
+      }
+    } catch (e) {
+      throw Exception('Failed to get booking: $e');
+    }
+  }
 }

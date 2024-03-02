@@ -1,3 +1,5 @@
+import '../member/member_booking_all.dart';
+
 import '../../core/const/front-end/lumos_icons.dart';
 import '../member/medical_report.dart';
 import '../member/member_address.dart';
@@ -179,8 +181,9 @@ class _AccountScreenState extends State<AccountScreen> {
                             leftIcon: Icons.credit_card,
                             rightIcon: Icons.arrow_forward_ios,
                             onPressed: () {
-                              Navigator.of(context)
-                                  .pushNamed(BillScreen.routeName);
+                              Navigator.of(context).pushNamed(
+                                BillScreen.routeName,
+                              );
                             },
                           ),
                           const SizedBox(height: 10),
@@ -189,7 +192,9 @@ class _AccountScreenState extends State<AccountScreen> {
                             leftIcon: Icons.calendar_month_outlined,
                             rightIcon: Icons.arrow_forward_ios,
                             onPressed: () {
-                              // Navigate to reservation screen
+                              Navigator.of(context).pushNamed(
+                                MemberAllBooking.routeName,
+                              );
                             },
                           ),
                           const SizedBox(height: 10),
@@ -198,8 +203,9 @@ class _AccountScreenState extends State<AccountScreen> {
                             leftIcon: Icons.paste_sharp,
                             rightIcon: Icons.arrow_forward_ios,
                             onPressed: () {
-                              Navigator.of(context)
-                                  .pushNamed(MedicalReportPage.routeName);
+                              Navigator.of(context).pushNamed(
+                                MedicalReportPage.routeName,
+                              );
                             },
                           ),
                           const SizedBox(height: 10),
@@ -208,8 +214,9 @@ class _AccountScreenState extends State<AccountScreen> {
                             leftIcon: Icons.location_on_rounded,
                             rightIcon: Icons.arrow_forward_ios,
                             onPressed: () {
-                              Navigator.of(context)
-                                  .pushNamed(MemberAddress.routeName);
+                              Navigator.of(context).pushNamed(
+                                MemberAddress.routeName,
+                              );
                             },
                           ),
                           const SizedBox(height: 10),
@@ -218,8 +225,9 @@ class _AccountScreenState extends State<AccountScreen> {
                             leftIcon: LumosIcons.hearticon,
                             rightIcon: Icons.arrow_forward_ios,
                             onPressed: () {
-                              Navigator.of(context)
-                                  .pushNamed(AboutUs.routeName);
+                              Navigator.of(context).pushNamed(
+                                AboutUs.routeName,
+                              );
                             },
                           ),
                           const SizedBox(height: 30),

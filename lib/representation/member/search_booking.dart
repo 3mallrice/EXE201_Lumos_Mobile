@@ -46,9 +46,12 @@ class _SearchBookingState extends State<SearchBooking> {
   void _fetchUserData() async {
     userDetails = await loadAccount();
     if (userDetails == null) {
-      Future.delayed(Duration.zero, () {
-        Navigator.of(context).pushReplacementNamed(Login.routeName);
-      });
+      Future.delayed(
+        Duration.zero,
+        () {
+          Navigator.of(context).pushReplacementNamed(Login.routeName);
+        },
+      );
     } else {
       _fetchPartners();
     }
@@ -84,29 +87,37 @@ class _SearchBookingState extends State<SearchBooking> {
         List<Partner>? partner =
             await api.getPartnerPartnerServiceByKeyword(keyword);
         if (mounted) {
-          setState(() {
-            setState(() {
-              _partner = partner;
-              isEmptyList = _partner.isEmpty;
-            });
-          });
+          setState(
+            () {
+              setState(
+                () {
+                  _partner = partner;
+                  isEmptyList = _partner.isEmpty;
+                },
+              );
+            },
+          );
         }
       } else {
         if (mounted) {
-          setState(() {
-            log.e("User details or user keyword is null.");
-            _partner = [];
-            isEmptyList = true;
-          });
+          setState(
+            () {
+              log.e("User details or user keyword is null.");
+              _partner = [];
+              isEmptyList = true;
+            },
+          );
         }
       }
     } catch (e) {
       if (mounted) {
-        setState(() {
-          log.e("Error when fetching partner: $e");
-          _partner = [];
-          isEmptyList = true;
-        });
+        setState(
+          () {
+            log.e("Error when fetching partner: $e");
+            _partner = [];
+            isEmptyList = true;
+          },
+        );
       }
     }
   }
@@ -138,7 +149,9 @@ class _SearchBookingState extends State<SearchBooking> {
                   focusedBorder: OutlineInputBorder(
                     borderSide:
                         BorderSide(color: ColorPalette.grey2, width: 2.0),
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(16),
+                    ),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderSide:
@@ -224,23 +237,25 @@ class _SearchBookingState extends State<SearchBooking> {
                                           item.displayName ?? 'Đang cập nhật',
                                           style: GoogleFonts.roboto(
                                             textStyle: const TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w600,
-                                                color: ColorPalette.blueBold2),
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w600,
+                                              color: ColorPalette.blueBold2,
+                                            ),
                                           ),
                                           textAlign: TextAlign.start,
                                         ),
                                         const SizedBox(
                                           height: 3,
                                         ),
-                                        //icontext
                                         RichText(
                                           text: TextSpan(
                                             children: [
                                               const WidgetSpan(
                                                 child: Padding(
                                                   padding: EdgeInsets.only(
-                                                      right: 5, bottom: 3),
+                                                    right: 5,
+                                                    bottom: 3,
+                                                  ),
                                                   child: Icon(
                                                     Icons.location_on_rounded,
                                                     size: 15,
@@ -265,7 +280,6 @@ class _SearchBookingState extends State<SearchBooking> {
                                             ],
                                           ),
                                         ),
-
                                         Container(
                                           padding:
                                               const EdgeInsets.only(left: 15),

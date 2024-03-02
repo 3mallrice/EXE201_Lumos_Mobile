@@ -33,9 +33,7 @@ class _IntroScreenState extends State<IntroScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
-        //stack dùng để khi muốn các ảnh chồng lên nhau
         children: [
-          // Slides
           PageView(
             controller: _pageController,
             children: [
@@ -57,7 +55,6 @@ class _IntroScreenState extends State<IntroScreen> {
                   title: 'Get Started',
                   ontap: () {
                     Navigator.of(context).pushReplacementNamed(Login.routeName);
-                    //Navigator.of(context).pushNamed(MemberHome.routeName);
                   },
                 ),
               ),

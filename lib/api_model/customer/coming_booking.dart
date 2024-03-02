@@ -1,6 +1,6 @@
 class BookingComing {
   final int? bookingId;
-  final String? status;
+  final int? status;
   final String? partner;
   final String? bookingDate;
   final int? bookingTime;

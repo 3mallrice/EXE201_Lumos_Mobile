@@ -1,3 +1,5 @@
+import 'representation/member/member_booking_all.dart';
+
 import 'representation/member/partner_page.dart';
 
 import 'login.dart';
@@ -50,4 +52,5 @@ final Map<String, WidgetBuilder> routes = {
   AddressAdd.routeName: (context) => const AddressAdd(),
   AddressAdd.routeName: (context) => const AddressAdd(),
   PartnerPage.routeName: (context) => const PartnerPage(),
+  MemberAllBooking.routeName: (context) => const MemberAllBooking(),
 };
