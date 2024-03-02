@@ -92,9 +92,7 @@ class _MemberBookingState extends State<MemberComingBooking> {
           IconButton(
             splashColor: Colors.transparent,
             onPressed: () {
-              Navigator.of(context).pushReplacementNamed(
-                MemberAllBooking.routeName,
-              );
+              Navigator.of(context).pushNamed(MemberAllBooking.routeName);
             },
             icon: Icon(
               Icons.ballot_rounded,
