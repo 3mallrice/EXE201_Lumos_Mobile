@@ -1,10 +1,11 @@
 import 'dart:async';
 
-import 'package:exe201_lumos_mobile/api_model/authentication/login.dart';
-import 'package:exe201_lumos_mobile/api_model/partner/partner.dart';
-import 'package:exe201_lumos_mobile/api_services/partner_service.dart';
-import 'package:exe201_lumos_mobile/core/helper/local_storage_helper.dart';
-import 'package:exe201_lumos_mobile/login.dart';
+import '../../api_model/authentication/login.dart';
+import '../../api_model/partner/partner.dart';
+import '../../api_services/partner_service.dart';
+import '../../core/helper/asset_helper.dart';
+import '../../core/helper/local_storage_helper.dart';
+import '../../login.dart';
 import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
@@ -69,7 +70,7 @@ class _SearchBookingState extends State<SearchBooking> {
   void _onSearchChanged() {
     if (_debounce?.isActive ?? false) _debounce?.cancel();
     _debounce = Timer(
-      const Duration(milliseconds: 0),
+      const Duration(milliseconds: 10),
       () {
         _fetchPartners();
       },
@@ -78,7 +79,7 @@ class _SearchBookingState extends State<SearchBooking> {
 
   void _fetchPartners() async {
     try {
-      String keyword = _searchController.text;
+      String? keyword = _searchController.text;
       if (userDetails != null) {
         List<Partner>? partner =
             await api.getPartnerPartnerServiceByKeyword(keyword);
@@ -158,176 +159,247 @@ class _SearchBookingState extends State<SearchBooking> {
                       borderRadius: BorderRadius.circular(11),
                     ),
                   ),
-                  child: ListView.builder(
-                    clipBehavior: Clip.antiAlias,
-                    shrinkWrap: true,
-                    itemCount: _partner.length,
-                    itemBuilder: (context, index) {
-                      _service =
-                          _partner[index].partnerServices?.isEmpty ?? true
-                              ? []
-                              : _partner[index].partnerServices
-                                  as List<PartnerService>;
-                      final item = _partner[index];
-                      return Column(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => PartnerServiceList(
-                                    partnerId: item.partnerId,
-                                  ),
-                                ),
-                              );
-                            },
-                            child: ListTile(
-                              title: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    item.partnerName ?? 'đang cập nhật',
-                                    style: GoogleFonts.roboto(
-                                      textStyle: const TextStyle(
+                  child: _partner.isEmpty
+                      ? Center(
+                          child: isEmptyList
+                              ? Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      AssetHelper.imgLogo,
+                                      fit: BoxFit.fitWidth,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.5,
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      'Không tìm thấy kết quả',
+                                      style: GoogleFonts.roboto(
+                                        textStyle: const TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.w600,
-                                          color: ColorPalette.blueBold2),
-                                    ),
-                                  ),
-                                  Text(
-                                    item.address ?? "đang cập nhật",
-                                    style: GoogleFonts.roboto(
-                                      textStyle: const TextStyle(
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 16,
-                                        color: ColorPalette.blueBold2,
+                                          color: ColorPalette.blueBold2,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.only(left: 15),
-                                    child: Column(
+                                  ],
+                                )
+                              : const CircularProgressIndicator(
+                                  color: ColorPalette.pink,
+                                ),
+                        )
+                      : ListView.builder(
+                          clipBehavior: Clip.antiAlias,
+                          shrinkWrap: true,
+                          itemCount: _partner.length,
+                          itemBuilder: (context, index) {
+                            _service =
+                                _partner[index].partnerServices?.isEmpty ?? true
+                                    ? []
+                                    : _partner[index].partnerServices
+                                        as List<PartnerService>;
+                            final item = _partner[index];
+                            return Column(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            PartnerServiceList(
+                                          partnerId: item.partnerId,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: ListTile(
+                                    title: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
-                                      children: _service.map((item2) {
-                                        return Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            InkWell(
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 5),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    SizedBox(
-                                                      width: 200,
-                                                      child: Text(
-                                                        item2.name ??
-                                                            "đang cập nhật",
-                                                        style:
-                                                            GoogleFonts.roboto(
-                                                          textStyle:
-                                                              const TextStyle(
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .normal,
-                                                            fontSize: 16,
-                                                            color: ColorPalette
-                                                                .blueBold2,
-                                                          ),
-                                                        ),
-                                                        maxLines: 2,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        softWrap: true,
-                                                      ),
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        const RatingStars(
-                                                          value: 3.5,
-                                                          starColor:
-                                                              ColorPalette.pink,
-                                                          starSize: 13,
-                                                          valueLabelVisibility:
-                                                              false,
-                                                        ),
-                                                        Container(
-                                                          height: 13,
-                                                          width: 1.2,
-                                                          color: ColorPalette
-                                                              .blueBold2,
-                                                          margin:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  left: 10,
-                                                                  right: 6),
-                                                        ),
-                                                        const Icon(
-                                                          FontAwesomeIcons
-                                                              .calendarCheck,
-                                                          size: 13,
-                                                          color: ColorPalette
-                                                              .blueBold2,
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  top: 3.5),
-                                                          child: Text(
-                                                            ' ${item2.quantity.toString()} lượt',
-                                                            style: GoogleFonts
-                                                                .roboto(
-                                                              fontSize: 13,
-                                                              color: ColorPalette
-                                                                  .blueBold2,
-                                                            ),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    )
-                                                  ],
+                                      children: [
+                                        Text(
+                                          item.displayName ?? 'Đang cập nhật',
+                                          style: GoogleFonts.roboto(
+                                            textStyle: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w600,
+                                                color: ColorPalette.blueBold2),
+                                          ),
+                                          textAlign: TextAlign.start,
+                                        ),
+                                        const SizedBox(
+                                          height: 3,
+                                        ),
+                                        //icontext
+                                        RichText(
+                                          text: TextSpan(
+                                            children: [
+                                              const WidgetSpan(
+                                                child: Padding(
+                                                  padding: EdgeInsets.only(
+                                                      right: 5, bottom: 3),
+                                                  child: Icon(
+                                                    Icons.location_on_rounded,
+                                                    size: 15,
+                                                    color:
+                                                        ColorPalette.blueBold2,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            Text(
-                                              '₫ ${formatCurrency(item2.price ?? 0)}',
-                                              style: GoogleFonts.aBeeZee(
-                                                fontSize: 13,
-                                                color: ColorPalette.blueBold2,
+                                              TextSpan(
+                                                text: item.address ??
+                                                    "Đang cập nhật",
+                                                style: GoogleFonts.roboto(
+                                                  textStyle: const TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    fontSize: 16,
+                                                    color:
+                                                        ColorPalette.blueBold2,
+                                                  ),
+                                                ),
                                               ),
-                                            ),
-                                          ],
-                                        );
-                                      }).toList(),
+                                            ],
+                                          ),
+                                        ),
+
+                                        Container(
+                                          padding:
+                                              const EdgeInsets.only(left: 15),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: _service.map((item2) {
+                                              return Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  InkWell(
+                                                    child: Padding(
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
+                                                          vertical: 5),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          SizedBox(
+                                                            width: 200,
+                                                            child: Text(
+                                                              item2.name ??
+                                                                  "Đang cập nhật",
+                                                              style: GoogleFonts
+                                                                  .roboto(
+                                                                textStyle:
+                                                                    const TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .normal,
+                                                                  fontSize: 16,
+                                                                  color: ColorPalette
+                                                                      .blueBold2,
+                                                                ),
+                                                              ),
+                                                              maxLines: 2,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                              softWrap: true,
+                                                            ),
+                                                          ),
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              const RatingStars(
+                                                                value: 3.5,
+                                                                starColor:
+                                                                    ColorPalette
+                                                                        .pink,
+                                                                starSize: 13,
+                                                                valueLabelVisibility:
+                                                                    false,
+                                                              ),
+                                                              Container(
+                                                                height: 13,
+                                                                width: 1.2,
+                                                                color: ColorPalette
+                                                                    .blueBold2,
+                                                                margin:
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                        left:
+                                                                            10,
+                                                                        right:
+                                                                            6),
+                                                              ),
+                                                              const Icon(
+                                                                FontAwesomeIcons
+                                                                    .calendarCheck,
+                                                                size: 13,
+                                                                color: ColorPalette
+                                                                    .blueBold2,
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                        top:
+                                                                            3.5),
+                                                                child: Text(
+                                                                  ' ${item2.quantity.toString()} lượt',
+                                                                  style:
+                                                                      GoogleFonts
+                                                                          .roboto(
+                                                                    fontSize:
+                                                                        13,
+                                                                    color: ColorPalette
+                                                                        .blueBold2,
+                                                                  ),
+                                                                ),
+                                                              )
+                                                            ],
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    '₫ ${formatCurrency(item2.price ?? 0)}',
+                                                    style: GoogleFonts.aBeeZee(
+                                                      fontSize: 13,
+                                                      color: ColorPalette
+                                                          .blueBold2,
+                                                    ),
+                                                  ),
+                                                ],
+                                              );
+                                            }).toList(),
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                          if (index < _partner.length - 1 &&
-                              _partner.length > 1)
-                            const Divider(
-                              thickness: 2,
-                              height: 2,
-                              color: ColorPalette.white,
-                            ),
-                        ],
-                      );
-                    },
-                  ),
+                                  ),
+                                ),
+                                if (index < _partner.length - 1 &&
+                                    _partner.length > 1)
+                                  const Divider(
+                                    thickness: 2,
+                                    height: 2,
+                                    color: ColorPalette.white,
+                                  ),
+                              ],
+                            );
+                          },
+                        ),
                 ),
               )
             ],

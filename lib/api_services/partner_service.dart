@@ -18,8 +18,9 @@ class CallPartnerApi {
 
   //GET: Get partner service, partner by keyword
   Future<List<Partner>> getPartnerPartnerServiceByKeyword(
-      String keyword) async {
-    var url = Uri.parse('$api?keyword=$keyword');
+      String? keyword) async {
+    var url =
+        keyword != "" ? Uri.parse('$api?keyword=$keyword') : Uri.parse(api);
     token = LocalStorageHelper.getValue("token");
 
     try {

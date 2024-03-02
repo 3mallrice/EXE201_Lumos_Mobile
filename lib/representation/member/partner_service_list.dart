@@ -24,6 +24,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:rich_readmore/rich_readmore.dart';
 
+// import 'partner_page.dart';
+
 class PartnerServiceList extends StatefulWidget {
   final int? partnerId;
 
@@ -344,26 +346,37 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                       },
                     ),
                   )
-                : IconButton(
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.only(bottom: 2),
-                    icon: const Icon(
-                      Ionicons.calendar_outline,
-                      size: 21,
-                      color: ColorPalette.blueBold2,
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => BookingPage(
-                            cart: carts,
-                            partner: partner,
-                          ),
+                : (partner!.partnerServices!.isEmpty)
+                    ? IconButton(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.only(bottom: 2),
+                        icon: Icon(
+                          Ionicons.calendar_outline,
+                          size: 21,
+                          color: ColorPalette.blueBold2.withOpacity(0.7),
                         ),
-                      );
-                    },
-                  ),
+                        onPressed: () {},
+                      )
+                    : IconButton(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.only(bottom: 2),
+                        icon: const Icon(
+                          Ionicons.calendar_outline,
+                          size: 21,
+                          color: ColorPalette.blueBold2,
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BookingPage(
+                                cart: carts,
+                                partner: partner,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
           ),
         ],
       ),
@@ -373,13 +386,21 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 10),
             child: ListTile(
+              //go to partner page
+              // onTap: () {
+              //   Navigator.pushNamed(
+              //     context,
+              //     PartnerPage.routeName,
+              //     arguments: partner,
+              //   );
+              // },
               title: Text(
-                partner!.partnerName ?? "Tên cơ sở y tế",
+                partner!.displayName ?? "Đang cập nhật",
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
               titleTextStyle: GoogleFonts.roboto(
-                fontSize: 22,
+                fontSize: 25,
                 fontWeight: FontWeight.bold,
                 color: ColorPalette.blueBold2,
               ),
@@ -393,17 +414,17 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                         starOffColor: ColorPalette.grey2,
                         value: 4.5,
                         valueLabelVisibility: false,
-                        starSize: 16,
+                        starSize: 14,
                       ),
                       Container(
-                        height: 20,
+                        height: 14,
                         width: 1.2,
                         color: ColorPalette.blueBold2,
                         margin: const EdgeInsets.symmetric(horizontal: 10),
                       ),
                       const Icon(
                         FontAwesomeIcons.calendarCheck,
-                        size: 16,
+                        size: 14,
                         color: ColorPalette.blueBold2,
                       ),
                       const SizedBox(
@@ -435,6 +456,20 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
                       onPressed: () {
                         setState(() {
                           _isFavorited = !_isFavorited;
+                          //showSnackBar to show the on development message
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                OnDevelopmentMessage.featureOnDevelopment,
+                                style: TextStyle(
+                                  color: ColorPalette.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              backgroundColor: ColorPalette.pink,
+                            ),
+                          );
                         });
                       },
                     ),
@@ -447,97 +482,132 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
             height: 10,
             color: ColorPalette.grey2,
           ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              children: partner!.partnerServices!.map((service) {
-                return Column(
-                  children: [
-                    InkWell(
-                      onTap: () => onTap(service),
-                      child: ListTile(
-                        leading: const Icon(
-                          Icons.medical_services,
-                          size: 23,
-                          color: ColorPalette.pink,
-                        ),
-                        title: Text(
-                          service.name ?? "Tên dịch vụ",
-                          style: GoogleFonts.roboto(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: ColorPalette.blueBold2,
+          (partner!.partnerServices!.isEmpty)
+              ? Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Center(
+                    child: isEmptyList
+                        ? Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                AssetHelper.imgLogo,
+                                fit: BoxFit.fitWidth,
+                                width: MediaQuery.of(context).size.width * 0.5,
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                'Đối tác chưa cung cấp dịch vụ nào',
+                                style: GoogleFonts.roboto(
+                                  textStyle: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                    color: ColorPalette.blueBold2,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        : const CircularProgressIndicator(
+                            color: ColorPalette.pink,
                           ),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        subtitle: Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                  ),
+                )
+              : Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    children: partner!.partnerServices!.map((service) {
+                      return Column(
+                        children: [
+                          InkWell(
+                            onTap: () => onTap(service),
+                            child: ListTile(
+                              leading: const Icon(
+                                Icons.medical_services,
+                                size: 23,
+                                color: ColorPalette.pink,
+                              ),
+                              title: Text(
+                                service.name ?? "Tên dịch vụ",
+                                style: GoogleFonts.roboto(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: ColorPalette.blueBold2,
+                                ),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              subtitle: Row(
                                 children: [
-                                  Text(
-                                    '${service.duration} phút',
-                                    style: GoogleFonts.roboto(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.normal,
-                                      color: ColorPalette.blueBold2,
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          '${service.duration} phút',
+                                          style: GoogleFonts.roboto(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.normal,
+                                            color: ColorPalette.blueBold2,
+                                          ),
+                                        ),
+                                        RichReadMoreText.fromString(
+                                          text: service.description ??
+                                              "Mô tả dịch vụ",
+                                          textStyle: GoogleFonts.roboto(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.normal,
+                                            color: ColorPalette.bluelight2,
+                                            decorationStyle:
+                                                TextDecorationStyle.solid,
+                                            textBaseline:
+                                                TextBaseline.alphabetic,
+                                          ),
+                                          settings: LineModeSettings(
+                                            trimLines: 2,
+                                            trimCollapsedText: '... Xem thêm',
+                                            trimExpandedText: ' Rút gọn',
+                                            moreStyle: const TextStyle(
+                                              color: ColorPalette.blueBold2,
+                                            ),
+                                            lessStyle: const TextStyle(
+                                              color: ColorPalette.blueBold2,
+                                            ),
+                                            textAlign: TextAlign.justify,
+                                          ),
+                                        ),
+                                        Container(
+                                          alignment: Alignment.centerRight,
+                                          child: Text(
+                                            '₫ ${formatCurrency(service.price!)}',
+                                            style: GoogleFonts.roboto(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: ColorPalette.pink,
+                                            ),
+                                          ),
+                                        )
+                                      ],
                                     ),
                                   ),
-                                  RichReadMoreText.fromString(
-                                    text:
-                                        service.description ?? "Mô tả dịch vụ",
-                                    textStyle: GoogleFonts.roboto(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.normal,
-                                      color: ColorPalette.bluelight2,
-                                      decorationStyle:
-                                          TextDecorationStyle.solid,
-                                      textBaseline: TextBaseline.alphabetic,
-                                    ),
-                                    settings: LineModeSettings(
-                                      trimLines: 2,
-                                      trimCollapsedText: '... Xem thêm',
-                                      trimExpandedText: ' Rút gọn',
-                                      moreStyle: const TextStyle(
-                                        color: ColorPalette.blueBold2,
-                                      ),
-                                      lessStyle: const TextStyle(
-                                        color: ColorPalette.blueBold2,
-                                      ),
-                                      textAlign: TextAlign.justify,
-                                    ),
-                                  ),
-                                  Container(
-                                    alignment: Alignment.centerRight,
-                                    child: Text(
-                                      '₫ ${formatCurrency(service.price!)}',
-                                      style: GoogleFonts.roboto(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        color: ColorPalette.pink,
-                                      ),
-                                    ),
-                                  )
                                 ],
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    if (service != partner!.partnerServices!.last)
-                      const Divider(
-                        thickness: 0.7,
-                        height: 2,
-                        color: ColorPalette.blue2,
-                      ),
-                  ],
-                );
-              }).toList(),
-            ),
-          ),
+                          ),
+                          if (service != partner!.partnerServices!.last)
+                            const Divider(
+                              thickness: 0.7,
+                              height: 2,
+                              color: ColorPalette.blue2,
+                            ),
+                        ],
+                      );
+                    }).toList(),
+                  ),
+                ),
           Container(
             height: 10,
           ),

@@ -1,4 +1,5 @@
-import 'package:exe201_lumos_mobile/core/const/back-end/error_reponse.dart';
+import '../../core/const/back-end/error_reponse.dart';
+import '../member/member_main_navbar.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../api_model/authentication/login.dart';
@@ -12,7 +13,6 @@ import '../../component/my_button.dart';
 import '../../component/my_textfield.dart';
 import '../../core/helper/local_storage_helper.dart';
 import '../../login.dart';
-import 'account_screen.dart';
 
 class UpdateAccount extends StatefulWidget {
   const UpdateAccount({super.key});
@@ -53,11 +53,10 @@ class _UpdateAccountState extends State<UpdateAccount> {
           ),
           action: GestureDetector(
             onTap: () {
-              Navigator.of(context)
-                  .pushReplacementNamed(AccountScreen.routeName);
+              Navigator.of(context).pushReplacementNamed(MemberMain.routeName);
             },
             child: Text(
-              "Về trang Tài khoản",
+              "Về Màn hình chính",
               style: GoogleFonts.roboto(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,

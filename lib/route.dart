@@ -1,3 +1,5 @@
+import 'representation/member/partner_page.dart';
+
 import 'login.dart';
 import 'representation/intro_screen.dart';
 import 'representation/member/medical_report.dart';
@@ -11,7 +13,6 @@ import 'representation/member/member_coming_booking.dart';
 import 'representation/member/member_home.dart';
 import 'representation/member/member_main_navbar.dart';
 import 'representation/member/partner_service_list.dart';
-import 'representation/member/payment_method.dart';
 import 'representation/member/search_booking.dart';
 import 'representation/share/about_lumos.dart';
 import 'representation/share/account_screen.dart';
@@ -35,7 +36,6 @@ final Map<String, WidgetBuilder> routes = {
   AboutUs.routeName: (context) => const AboutUs(),
   MemberMain.routeName: (context) => const MemberMain(),
   MemberHome.routeName: (context) => const MemberHome(),
-  PaymentMethod.routeName: (context) => const PaymentMethod(),
   MemberComingBooking.routeName: (context) => const MemberComingBooking(),
   MedicalReportPage.routeName: (context) => const MedicalReportPage(),
   MedicalReportDetail.routeName: (context) => const MedicalReportDetail(),
@@ -49,4 +49,5 @@ final Map<String, WidgetBuilder> routes = {
   BookingPage.routeName: (context) => const BookingPage(),
   AddressAdd.routeName: (context) => const AddressAdd(),
   AddressAdd.routeName: (context) => const AddressAdd(),
+  PartnerPage.routeName: (context) => const PartnerPage(),
 };
