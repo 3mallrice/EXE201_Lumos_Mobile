@@ -9,6 +9,7 @@ import 'package:exe201_lumos_mobile/login.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
+import 'package:intl/intl.dart';
 
 class MemberAllBooking extends StatefulWidget {
   const MemberAllBooking({super.key});
@@ -88,7 +89,7 @@ class _MemberAllBookingState extends State<MemberAllBooking> {
         leading: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.only(top: 15),
+        padding: const EdgeInsets.symmetric(vertical: 15),
         child: ListView.builder(
           itemCount: _bookings.length,
           itemBuilder: (context, index) {
@@ -145,53 +146,60 @@ class _MemberAllBookingState extends State<MemberAllBooking> {
                                   ),
                                   Row(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceAround,
                                     children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              const Icon(
+                                                Icons.calendar_month_sharp,
+                                                color: ColorPalette.blueBold2,
+                                                size: 15,
+                                                weight: 1.4,
+                                              ),
+                                              const SizedBox(width: 10),
+                                              Text(
+                                                formatDate(
+                                                    booking.bookingDate!),
+                                                style: GoogleFonts.roboto(
+                                                  color: ColorPalette.blueBold2,
+                                                  fontSize: 15,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                       Row(
                                         children: [
                                           const Icon(
-                                            Icons.calendar_month_sharp,
+                                            Icons.access_time,
                                             color: ColorPalette.blueBold2,
                                             size: 15,
-                                            weight: 1.4,
+                                            weight: 5,
                                           ),
-                                          const SizedBox(width: 10),
+                                          const SizedBox(width: 3),
+                                          Icon(
+                                            Icons.circle,
+                                            color: ColorPalette.blueBold2
+                                                .withOpacity(0.5),
+                                            weight: 5,
+                                            size: 5.5,
+                                          ),
+                                          const SizedBox(width: 3),
                                           Text(
-                                            booking.bookingDate.toString(),
+                                            Workshift.workshiftTime[
+                                                    booking.bookingTime]
+                                                .toString(),
                                             style: GoogleFonts.roboto(
                                               color: ColorPalette.blueBold2,
                                               fontSize: 15,
                                             ),
-                                          )
+                                          ),
                                         ],
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      const Icon(
-                                        Icons.access_time,
-                                        color: ColorPalette.blueBold2,
-                                        size: 15,
-                                        weight: 5,
-                                      ),
-                                      const SizedBox(width: 3),
-                                      Icon(
-                                        Icons.circle,
-                                        color: ColorPalette.blueBold2
-                                            .withOpacity(0.5),
-                                        weight: 5,
-                                        size: 5.5,
-                                      ),
-                                      const SizedBox(width: 3),
-                                      Text(
-                                        Workshift
-                                            .workshiftTime[booking.bookingTime]
-                                            .toString(),
-                                        style: GoogleFonts.roboto(
-                                          color: ColorPalette.blueBold2,
-                                          fontSize: 15,
-                                        ),
                                       ),
                                     ],
                                   ),
@@ -277,6 +285,11 @@ class _MemberAllBookingState extends State<MemberAllBooking> {
         ),
       ),
     );
+  }
+
+  String formatDate(String dateString) {
+    DateTime dateTime = DateTime.parse(dateString);
+    return DateFormat('dd/MM/yyyy').format(dateTime);
   }
 
   Color getStatusColor(int status) {
