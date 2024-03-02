@@ -22,8 +22,6 @@ class MemberComingBooking extends StatefulWidget {
 
 class _MemberBookingState extends State<MemberComingBooking> {
   List<BookingComing> _comingBooking = [];
-  List<MedicalService> _service = [];
-  List<Service> _service2 = [];
 
   @override
   void initState() {
@@ -103,183 +101,190 @@ class _MemberBookingState extends State<MemberComingBooking> {
           )
         ],
       ),
-      body: ListView.builder(
-        itemCount: _comingBooking.length,
-        itemBuilder: (context, index) {
-          BookingComing booking = _comingBooking[index];
-          List<MedicalService> medicalServices = booking.medicalServices;
+      body: Padding(
+        padding: const EdgeInsets.only(top: 15),
+        child: ListView.builder(
+          itemCount: _comingBooking.length,
+          itemBuilder: (context, index) {
+            BookingComing booking = _comingBooking[index];
+            List<MedicalService> medicalServices = booking.medicalServices;
 
-          return Container(
-            margin: const EdgeInsets.only(top: 10, left: 16, right: 16),
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: ColorPalette.blue2,
-              borderRadius: BorderRadius.circular(11.0),
-            ),
-            child: InkWell(
-              onTap: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => MemberBookingDetail(
-                //       booking: booking,
-                //     ),
-                //   ),
-                // );
-              },
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Cột 1 - Thông tin về booking
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  _comingBooking[index].partner ??
-                                      "đang cập nhật",
-                                  style: GoogleFonts.roboto(
-                                    color: ColorPalette.blueBold2,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  maxLines: 3,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.calendar_month_sharp,
-                                          color: ColorPalette.blueBold2,
-                                          size: 15,
-                                          weight: 1.4,
-                                        ),
-                                        const SizedBox(width: 10),
-                                        Text(
-                                          booking.bookingDate.toString(),
-                                          style: GoogleFonts.roboto(
-                                            color: ColorPalette.blueBold2,
-                                            fontSize: 15,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.access_time,
+            return Container(
+              margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: ColorPalette.blue2,
+                borderRadius: BorderRadius.circular(11.0),
+              ),
+              child: InkWell(
+                onTap: () {
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => MemberBookingDetail(
+                  //       booking: booking,
+                  //     ),
+                  //   ),
+                  // );
+                },
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Cột 1 - Thông tin về booking
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    _comingBooking[index].partner ??
+                                        "Đang cập nhật",
+                                    style: GoogleFonts.roboto(
                                       color: ColorPalette.blueBold2,
-                                      size: 15,
-                                      weight: 5,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                    const SizedBox(width: 3),
-                                    Icon(
-                                      Icons.circle,
-                                      color: ColorPalette.blueBold2
-                                          .withOpacity(0.5),
-                                      weight: 5,
-                                      size: 5.5,
-                                    ),
-                                    const SizedBox(width: 3),
-                                    Text(
-                                      Workshift
-                                          .workshiftTime[booking.bookingTime]
-                                          .toString(),
-                                      style: GoogleFonts.roboto(
-                                        color: ColorPalette.blueBold2,
-                                        fontSize: 15,
+                                    maxLines: 3,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.calendar_month_sharp,
+                                            color: ColorPalette.blueBold2,
+                                            size: 15,
+                                            weight: 1.4,
+                                          ),
+                                          const SizedBox(width: 10),
+                                          Text(
+                                            booking.bookingDate.toString(),
+                                            style: GoogleFonts.roboto(
+                                              color: ColorPalette.blueBold2,
+                                              fontSize: 15,
+                                            ),
+                                          )
+                                        ],
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                ListTile(
-                                  title: GestureDetector(
-                                    onTap: () {},
-                                    child: ListTile(
-                                      title: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: medicalServices.map(
-                                          (report) {
-                                            return Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  report.medicalName ?? '',
-                                                  style: GoogleFonts.roboto(
-                                                    textStyle: const TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: ColorPalette
-                                                          .blueBold2,
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.access_time,
+                                        color: ColorPalette.blueBold2,
+                                        size: 15,
+                                        weight: 5,
+                                      ),
+                                      const SizedBox(width: 3),
+                                      Icon(
+                                        Icons.circle,
+                                        color: ColorPalette.blueBold2
+                                            .withOpacity(0.5),
+                                        weight: 5,
+                                        size: 5.5,
+                                      ),
+                                      const SizedBox(width: 3),
+                                      Text(
+                                        Workshift
+                                            .workshiftTime[booking.bookingTime]
+                                            .toString(),
+                                        style: GoogleFonts.roboto(
+                                          color: ColorPalette.blueBold2,
+                                          fontSize: 15,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ListTile(
+                                    title: GestureDetector(
+                                      onTap: () {},
+                                      child: ListTile(
+                                        title: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: medicalServices.map(
+                                            (report) {
+                                              return Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    report.medicalName ?? '',
+                                                    style: GoogleFonts.roboto(
+                                                      textStyle:
+                                                          const TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: ColorPalette
+                                                            .blueBold2,
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                                ...report.services.map(
-                                                  (service) {
-                                                    return Text(
-                                                      service.name ?? '',
-                                                      style: GoogleFonts.roboto(
-                                                        textStyle:
-                                                            const TextStyle(
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: ColorPalette
-                                                              .blueBold2,
+                                                  ...report.services.map(
+                                                    (service) {
+                                                      return Text(
+                                                        service.name ?? '',
+                                                        style:
+                                                            GoogleFonts.roboto(
+                                                          textStyle:
+                                                              const TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .normal,
+                                                            color: ColorPalette
+                                                                .blueBold2,
+                                                          ),
                                                         ),
-                                                      ),
-                                                    );
-                                                  },
-                                                ),
-                                                const SizedBox(height: 5),
-                                              ],
-                                            );
-                                          },
-                                        ).toList(),
+                                                      );
+                                                    },
+                                                  ),
+                                                  const SizedBox(height: 5),
+                                                ],
+                                              );
+                                            },
+                                          ).toList(),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      Transform.scale(
-                        scale: 1.0,
-                        child: Transform(
-                          alignment: Alignment.center,
-                          transform: Matrix4.rotationY(185), // Lật theo trục Y
-                          child: const Icon(
-                            Icons.medical_information_outlined,
-                            color: ColorPalette.blueBold2,
-                            size: 40,
+                                  )
+                                ],
+                              ),
+                            ],
                           ),
                         ),
-                      )
-                    ],
-                  ),
-                ],
+                        Transform.scale(
+                          scale: 1.0,
+                          child: Transform(
+                            alignment: Alignment.center,
+                            transform:
+                                Matrix4.rotationY(185), // Lật theo trục Y
+                            child: const Icon(
+                              Icons.medical_information_outlined,
+                              color: ColorPalette.blueBold2,
+                              size: 40,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

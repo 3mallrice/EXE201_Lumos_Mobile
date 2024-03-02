@@ -75,7 +75,7 @@ class BookingSuccessMessage {
 class OnDevelopmentMessage {
   static const String fearureOnDevelopmentTitle = "Tính năng đang phát triển";
   static const String featureOnDevelopment =
-      "Tính năng này đang được phát triển. Vui lòng quay lại sau.";
+      "Tính năng này đang được phát triển. Vui lòng thử lại sau.";
 }
 
 class OnInvalidInputMessage {
