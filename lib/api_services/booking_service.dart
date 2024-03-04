@@ -96,4 +96,54 @@ class CallBookingApi {
       throw Exception('Failed to get booking: $e');
     }
   }
+
+  Future<List<BookingComing>> getBillings() async {
+    var url = Uri.parse('$api/bill');
+    token = LocalStorageHelper.getValue("token");
+
+    try {
+      http.Response response = await http.get(url, headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json'
+      });
+
+      if (response.statusCode == 200) {
+        final responseBody = json.decode(response.body);
+        final responseData = responseBody['data'];
+        List<BookingComing> comingList = responseData
+            .map<BookingComing>((item) => BookingComing.fromJson(item))
+            .toList();
+        return comingList;
+      } else {
+        throw Exception(
+            'Failed to get billings: ${response.statusCode} - ${response.reasonPhrase}');
+      }
+    } catch (e) {
+      throw Exception('Failed to get billings: $e');
+    }
+  }
+
+  Future<BookingComing> getBookingDetail(int bookingId) async {
+    var url = Uri.parse('$api/$bookingId/detail');
+    token = LocalStorageHelper.getValue("token");
+
+    try {
+      http.Response response = await http.get(url, headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json'
+      });
+
+      if (response.statusCode == 200) {
+        final responseBody = json.decode(response.body);
+        final responseData = responseBody['data'];
+
+        return BookingComing.fromJson(responseData);
+      } else {
+        throw Exception(
+            'Failed to get booking detail: ${response.statusCode} - ${response.reasonPhrase}');
+      }
+    } catch (e) {
+      throw Exception('Failed to get booking detail: $e');
+    }
+  }
 }

@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDYE_XhtekdPQQPkBYKrLBJ-UhKC7BIIKk',
-    appId: '1:873249372678:android:3358572d3b280e9bcca187',
+    appId: '1:873249372678:android:e186bd6167749a88cca187',
     messagingSenderId: '873249372678',
     projectId: 'lumos-841a0',
     storageBucket: 'lumos-841a0.appspot.com',

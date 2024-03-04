@@ -7,17 +7,20 @@ class BookingComing {
   final String? address;
   final String? paymentMethod;
   final List<MedicalService> medicalServices;
+  final String? note;
+  final String? code;
 
-  BookingComing({
-    this.bookingId,
-    this.status,
-    this.partner,
-    this.bookingDate,
-    this.bookingTime,
-    this.address,
-    this.paymentMethod,
-    required this.medicalServices,
-  });
+  BookingComing(
+      {this.bookingId,
+      this.status,
+      this.partner,
+      this.bookingDate,
+      this.bookingTime,
+      this.address,
+      this.paymentMethod,
+      required this.medicalServices,
+      this.code,
+      this.note});
 
   factory BookingComing.fromJson(Map<String, dynamic> json) {
     return BookingComing(
@@ -33,6 +36,8 @@ class BookingComing {
                   MedicalService.fromJson(medicalServiceJson))
               .toList() ??
           [],
+      note: json['note'],
+      code: json['bookingCode'],
     );
   }
 }

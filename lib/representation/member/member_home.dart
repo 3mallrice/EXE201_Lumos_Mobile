@@ -51,6 +51,8 @@ class _MemberHomeState extends State<MemberHome> {
       precacheImage(const AssetImage(AssetHelper.imglogo2), context),
       precacheImage(const AssetImage(AssetHelper.memberBanner), context),
       precacheImage(const AssetImage(AssetHelper.memberBanner2), context),
+      precacheImage(const AssetImage(AssetHelper.memberBanner3), context),
+      precacheImage(const AssetImage(AssetHelper.memberBanner4), context),
       precacheImage(const AssetImage(AssetHelper.home1), context),
       precacheImage(const AssetImage(AssetHelper.home2), context),
       precacheImage(const AssetImage(AssetHelper.home3), context),
@@ -98,17 +100,33 @@ class _MemberHomeState extends State<MemberHome> {
                           autoPlayInterval: 3000,
                           isLoop: true,
                           children: [
-                            Image.asset(
-                              AssetHelper.memberBanner,
-                              fit: BoxFit.fill,
+                            Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: Image.asset(
+                                AssetHelper.memberBanner,
+                                fit: BoxFit.fill,
+                              ),
                             ),
-                            Image.asset(
-                              AssetHelper.memberBanner2,
-                              fit: BoxFit.fill,
+                            Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: Image.asset(
+                                AssetHelper.memberBanner2,
+                                fit: BoxFit.fill,
+                              ),
                             ),
-                            Image.asset(
-                              AssetHelper.memberBanner,
-                              fit: BoxFit.fill,
+                            Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: Image.asset(
+                                AssetHelper.memberBanner3,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: Image.asset(
+                                AssetHelper.memberBanner4,
+                                fit: BoxFit.fill,
+                              ),
                             ),
                           ],
                         ),

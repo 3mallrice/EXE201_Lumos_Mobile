@@ -296,11 +296,11 @@ class _MemberAllBookingState extends State<MemberAllBooking> {
     switch (status) {
       case 0:
         return ColorPalette.pinkBold;
-      case 1:
       case 2:
-        return ColorPalette.blue2;
       case 3:
+        return ColorPalette.blue2;
       case 4:
+      case 5:
         return ColorPalette.white;
       default:
         return ColorPalette.blue2;

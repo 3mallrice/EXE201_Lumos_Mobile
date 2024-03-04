@@ -1,3 +1,5 @@
+import 'package:exe201_lumos_mobile/representation/member/member_booking_detail.dart';
+
 import 'representation/member/member_booking_all.dart';
 
 import 'representation/member/partner_page.dart';
@@ -53,4 +55,5 @@ final Map<String, WidgetBuilder> routes = {
   AddressAdd.routeName: (context) => const AddressAdd(),
   PartnerPage.routeName: (context) => const PartnerPage(),
   MemberAllBooking.routeName: (context) => const MemberAllBooking(),
+  BookingDetail.routeName: (context) => const BookingDetail(),
 };
