@@ -41,6 +41,8 @@ class CallAuthenticationApi {
           email: userdetailData['email'],
           role: userdetailData['role'],
           status: userdetailData['status'],
+          phone: userdetailData['phone'],
+          pronounce: userdetailData['pronounce'],
           createdDate: userdetailData['createdDate'],
           createdBy: userdetailData['createdBy'],
           lastUpdate: userdetailData['lastUpdate'],

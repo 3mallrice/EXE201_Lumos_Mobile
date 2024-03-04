@@ -45,6 +45,8 @@ class UserDetails {
   final String code;
   final int role;
   final int status;
+  final String phone;
+  final int pronounce;
   final String createdDate;
   final String? createdBy;
   final String lastUpdate;
@@ -58,6 +60,8 @@ class UserDetails {
     required this.code,
     required this.role,
     required this.status,
+    required this.phone,
+    required this.pronounce,
     required this.createdDate,
     this.createdBy,
     required this.lastUpdate,
@@ -73,6 +77,8 @@ class UserDetails {
       code: json['code'],
       role: json['role'],
       status: json['status'],
+      phone: json['phone'],
+      pronounce: json['pronounce'],
       createdDate: json['createdDate'],
       createdBy: json['createdBy'],
       lastUpdate: json['lastUpdate'],

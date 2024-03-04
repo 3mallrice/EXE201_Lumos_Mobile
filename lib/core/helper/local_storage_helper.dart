@@ -41,6 +41,8 @@ class LoginAccount {
         email: await LocalStorageHelper.getValue('email'),
         code: await LocalStorageHelper.getValue('code'),
         role: await LocalStorageHelper.getValue('role'),
+        phone: await LocalStorageHelper.getValue('phone'),
+        pronounce: await LocalStorageHelper.getValue('pronounce'),
         status: await LocalStorageHelper.getValue('status'),
         createdDate: await LocalStorageHelper.getValue('createdDate'),
         lastUpdate: await LocalStorageHelper.getValue('lastUpdate'),
@@ -57,6 +59,8 @@ class LoginAccount {
     await LocalStorageHelper.setValue('code', userDetails.code);
     await LocalStorageHelper.setValue('role', userDetails.role);
     await LocalStorageHelper.setValue('status', userDetails.status);
+    await LocalStorageHelper.setValue('phone', userDetails.phone);
+    await LocalStorageHelper.setValue('pronounce', userDetails.pronounce);
     await LocalStorageHelper.setValue('createdDate', userDetails.createdDate);
     await LocalStorageHelper.setValue('lastUpdate', userDetails.lastUpdate);
     await LocalStorageHelper.setValue('updatedBy', userDetails.updatedBy);
