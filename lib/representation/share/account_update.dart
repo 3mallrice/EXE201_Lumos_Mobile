@@ -79,6 +79,7 @@ class _UpdateAccountState extends State<UpdateAccount> {
     userDetails = await loadAccount();
     nameController.text = userDetails!.username;
     emailController.text = userDetails!.email;
+    phoneController.text = userDetails!.phone;
     if (userDetails == null) {
       Future.delayed(
         Duration.zero,
@@ -192,7 +193,7 @@ class _UpdateAccountState extends State<UpdateAccount> {
               floatingLabelBehavior: FloatingLabelBehavior.always,
               obscureText: false,
               textInputAction: TextInputAction.done,
-              maxLength: 10,
+              maxLength: 12,
               keyboardType: TextInputType.number,
             ),
             const SizedBox(
