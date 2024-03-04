@@ -1,4 +1,5 @@
-import 'package:exe201_lumos_mobile/representation/member/medical_report_add.dart';
+import 'medical_report_add.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../core/helper/local_storage_helper.dart';
 import '../../login.dart';
@@ -29,9 +30,53 @@ class _MedicalReportPageState extends State<MedicalReportPage> {
 
   List<MedicalReport> _reports = [];
   List<MedicalReport>? reports;
-  bool _isEmptyList = true;
+  bool _isEmptyList = false;
 
   UserDetails? userDetails;
+
+  OverlayEntry? _overlayEntry;
+
+  // Hàm để hiển thị vòng loading
+  void _showLoadingOverlay(BuildContext context) {
+    _overlayEntry = OverlayEntry(
+      builder: (context) => Stack(
+        children: [
+          Positioned.fill(
+            child: Container(
+              color: Colors.black.withOpacity(0.5),
+            ),
+          ),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                LoadingAnimationWidget.fourRotatingDots(
+                  color: ColorPalette.pinkBold,
+                  size: 80,
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  "Đang tải dữ liệu...",
+                  style: TextStyle(
+                    color: ColorPalette.blueBold2,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+    Overlay.of(context).insert(_overlayEntry!);
+  }
+
+  // Hàm để ẩn vòng loading
+  void _hideLoadingOverlay() {
+    _overlayEntry?.remove();
+    _overlayEntry = null;
+  }
 
   Future<UserDetails>? loadAccount() async {
     return await LoginAccount.loadAccount();
@@ -59,6 +104,7 @@ class _MedicalReportPageState extends State<MedicalReportPage> {
 
   void _fetchMedicalReports() async {
     try {
+      _showLoadingOverlay(context);
       if (userDetails != null && userDetails!.id != null) {
         reports = await api.getMedicalReport(userDetails!.id!);
         setState(() {
@@ -78,6 +124,8 @@ class _MedicalReportPageState extends State<MedicalReportPage> {
         _reports = [];
         _isEmptyList = true;
       });
+    } finally {
+      _hideLoadingOverlay();
     }
   }
 

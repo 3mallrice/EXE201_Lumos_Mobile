@@ -1,7 +1,6 @@
 class AddBooking {
   final int partnerId;
   final int paymentId;
-  final int totalPrice;
   final DateTime bookingDate;
   final int dayOfWeek;
   final int bookingTime;
@@ -12,7 +11,6 @@ class AddBooking {
   AddBooking({
     required this.partnerId,
     required this.paymentId,
-    required this.totalPrice,
     required this.bookingDate,
     required this.dayOfWeek,
     required this.bookingTime,
@@ -25,7 +23,6 @@ class AddBooking {
     return {
       "partnerId": partnerId,
       "paymentId": paymentId,
-      "totalPrice": totalPrice,
       "bookingDate": bookingDate.toIso8601String(),
       "dayOfWeek": dayOfWeek,
       "bookingTime": bookingTime,
@@ -38,7 +35,7 @@ class AddBooking {
 
 class BookingCart {
   final int reportId;
-  final List<BookingService> services;
+  final List<int> services;
 
   BookingCart({
     required this.reportId,
@@ -48,24 +45,24 @@ class BookingCart {
   Map<String, dynamic> toJson() {
     return {
       "reportId": reportId,
-      "services": services.map((service) => service.toJson()).toList(),
+      "services": services,
     };
   }
 }
 
-class BookingService {
-  final int serviceId;
-  final int price;
+class AddBookingResponse {
+  final int bookingId;
+  final int totalPrice;
 
-  BookingService({
-    required this.serviceId,
-    required this.price,
+  AddBookingResponse({
+    required this.bookingId,
+    required this.totalPrice,
   });
 
-  Map<String, dynamic> toJson() {
-    return {
-      "serviceId": serviceId,
-      "price": price,
-    };
+  factory AddBookingResponse.fromJson(Map<String, dynamic> json) {
+    return AddBookingResponse(
+      bookingId: json['bookingId'],
+      totalPrice: json['totalPrice'],
+    );
   }
 }

@@ -1,8 +1,7 @@
-// ignore: unused_import
 import 'dart:convert';
 
-import 'package:exe201_lumos_mobile/api_model/partner/partner.dart';
-import 'package:exe201_lumos_mobile/core/helper/local_storage_helper.dart';
+import '../api_model/partner/partner.dart';
+import '../core/helper/local_storage_helper.dart';
 import 'package:http/http.dart' as http;
 
 import 'api_service.dart';

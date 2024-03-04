@@ -1,8 +1,12 @@
+import 'member_main_navbar.dart';
+import 'payment_information.dart';
+
 import '../../api_model/customer/booking.dart';
+import '../../api_model/payment/payment.dart';
 import '../../api_services/booking_service.dart';
+import '../../api_services/payment_service.dart';
 import '../../component/alert_dialog.dart';
 import '../../core/const/back-end/workship.dart';
-import 'member_home.dart';
 
 import '../../api_model/customer/address.dart';
 import '../../api_model/partner/partner.dart';
@@ -19,7 +23,6 @@ import 'member_address_add.dart';
 import '../../component/app_bar.dart';
 import '../../component/my_button.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -127,7 +130,9 @@ class _BookingPageState extends State<BookingPage> {
 
   CallCustomerApi calCustomerlApi = CallCustomerApi();
   CallBookingApi callBookingApi = CallBookingApi();
+  CallPaymentAPI callPaymentAPI = CallPaymentAPI();
   UserDetails? userDetails;
+  List<Payment> payments = [];
 
   Future<UserDetails>? loadAccount() async {
     return await LoginAccount.loadAccount();
@@ -181,13 +186,13 @@ class _BookingPageState extends State<BookingPage> {
     fetchUserData();
     fetchMedicalReports();
     _fetchAddress();
+    fetchPayments();
   }
 
-  Future<bool> addBooking(int paymentId, int totalPrice) async {
+  Future<AddBookingResponse> addBooking(int paymentId) async {
     AddBooking newBooking = AddBooking(
       partnerId: partner!.partnerId!,
       paymentId: paymentId,
-      totalPrice: totalPrice,
       bookingDate: selectedDate,
       dayOfWeek: selectedDayOfWeek,
       bookingTime: selectedTime,
@@ -195,11 +200,9 @@ class _BookingPageState extends State<BookingPage> {
       note: _noteController.text,
       cartModel: widget.cart!
           .map((e) => BookingCart(
-              reportId: e.medicalReportId,
-              services: List.from(e.services)
-                  .map((e) =>
-                      BookingService(serviceId: e.serviceId, price: e.price))
-                  .toList()))
+                reportId: e.medicalReportId,
+                services: e.services.map((e) => e.serviceId!).toList(),
+              ))
           .toList(),
     );
     return await postAddBooking(newBooking);
@@ -223,16 +226,11 @@ class _BookingPageState extends State<BookingPage> {
           },
         );
       } else {
-        setState(() {
-          log.e("User details or user id is null.");
-          address = [];
-        });
+        log.e("User details or user id is null.");
+        throw Exception("User details or user id is null.");
       }
     } catch (e) {
-      setState(() {
-        log.e("Error when fetching address: $e");
-        address = [];
-      });
+      log.e("Error when fetching address: $e");
     }
   }
 
@@ -254,15 +252,30 @@ class _BookingPageState extends State<BookingPage> {
     return await calCustomerlApi.getMedicalReportById(reportId);
   }
 
-  Future<bool> postAddBooking(AddBooking newBooking) async {
+  Future<bool> fetchPayments() async {
     try {
-      bool result =
-          await callBookingApi.addBooking(userDetails!.id!, newBooking);
+      List<Payment> paymentList = await callPaymentAPI.getAllPayment();
+      if (paymentList.isEmpty) {
+        throw Exception("Failed to get all payment: $paymentList");
+      } else {
+        setState(() {
+          payments = paymentList;
+        });
+        return true;
+      }
+    } catch (e) {
+      log.e("Failed to get all payment: $e");
+      return false;
+    }
+  }
+
+  Future<AddBookingResponse> postAddBooking(AddBooking newBooking) async {
+    try {
+      AddBookingResponse result = await callBookingApi.addBooking(newBooking);
       return result;
     } catch (e) {
       log.e("Failed to add booking: $e");
-      showErrorDialog(OperationErrorMessage.systemError);
-      return false;
+      throw Exception("Failed to add booking: $e");
     }
   }
 
@@ -279,7 +292,7 @@ class _BookingPageState extends State<BookingPage> {
       if (selectedTime == 0 || _addController.text.isEmpty) {
         showErrorDialog(BookingErrorMessage.bookingDateTimeAddrEmpty);
       } else {
-        showPaymentListBottomSheet(totalPrice);
+        showPaymentListBottomSheet();
       }
     } catch (e) {
       // Xử lý ngoại lệ khi dữ liệu null
@@ -302,116 +315,77 @@ class _BookingPageState extends State<BookingPage> {
     return listWorkshift;
   }
 
-  void showPaymentListBottomSheet(int totalPrice) {
+  void showPaymentListBottomSheet() {
     showModalBottomSheet(
       backgroundColor: ColorPalette.blue2,
       context: context,
       builder: (BuildContext context) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Container(
-              height: 50,
-              alignment: Alignment.center,
-              child: Text(
-                'Chọn phương thức thanh toán',
-                style: GoogleFonts.roboto(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: ColorPalette.blueBold2,
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Container(
+                height: 50,
+                alignment: Alignment.center,
+                child: Text(
+                  'Chọn phương thức thanh toán',
+                  style: GoogleFonts.roboto(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                    color: ColorPalette.blueBold2,
+                  ),
                 ),
               ),
-            ),
-            ListTile(
-              leading: const Icon(
-                Icons.payments_rounded,
-                color: ColorPalette.blueBold2,
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: payments.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    leading: Icon(
+                      Icons.double_arrow_sharp,
+                      size: 30,
+                      color: payments[index].status == 1
+                          ? ColorPalette.pinkBold
+                          : ColorPalette.pinkBold.withOpacity(0.6),
+                    ),
+                    title: Text(
+                      payments[index].name,
+                      style: GoogleFonts.roboto(
+                        fontSize: 18,
+                        fontWeight: payments[index].status == 1
+                            ? FontWeight.bold
+                            : FontWeight.normal,
+                        color: payments[index].status == 1
+                            ? ColorPalette.blueBold2
+                            : ColorPalette.blueBold2.withOpacity(0.6),
+                      ),
+                    ),
+                    subtitle: payments[index].status == 1
+                        ? const Text(
+                            'Đang hoạt động',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: ColorPalette.blueBold2,
+                            ),
+                          )
+                        : Text(
+                            OnDevelopmentMessage.fearureOnDevelopmentTitle,
+                            style: TextStyle(
+                              color: ColorPalette.blueBold2.withOpacity(0.6),
+                            ),
+                          ),
+                    onTap: payments[index].status == 1
+                        ? () => showConfirmDialog(payments[index].paymentId)
+                        : () {
+                            showErrorDialog(
+                                OnDevelopmentMessage.fearureOnDevelopmentTitle);
+                          },
+                  );
+                },
               ),
-              title: const Text(
-                'Thanh toán COD',
-                style: TextStyle(
-                  color: ColorPalette.blueBold2,
-                ),
-              ),
-              onTap: () => showConfirmDialog(totalPrice),
-            ),
-            ListTile(
-              leading: const Icon(
-                Icons.wallet_rounded,
-                color: ColorPalette.blueBold2,
-              ),
-              title: const Text(
-                'Thanh toán bằng ví điện tử Momo',
-                style: TextStyle(
-                  color: ColorPalette.blueBold2,
-                ),
-              ),
-              subtitle: const Text(
-                'Đang phát triển ...',
-                style: TextStyle(color: ColorPalette.grey),
-              ),
-              onTap: () => {
-                //snackBar show on development
-              },
-            ),
-            ListTile(
-              leading: const Icon(
-                FontAwesomeIcons.ccVisa,
-                color: ColorPalette.blueBold2,
-              ),
-              title: const Text(
-                'Thanh toán bằng thẻ Visa',
-                style: TextStyle(
-                  color: ColorPalette.blueBold2,
-                ),
-              ),
-              subtitle: const Text(
-                'Đang phát triển ...',
-                style: TextStyle(color: ColorPalette.grey),
-              ),
-              onTap: () => {
-                /* Xử lý khi chọn 'Photos' */
-              },
-            ),
-            ListTile(
-              leading: const Icon(
-                FontAwesomeIcons.ccMastercard,
-                color: ColorPalette.blueBold2,
-              ),
-              title: const Text(
-                'Thanh toán bằng thẻ MasterCard',
-                style: TextStyle(
-                  color: ColorPalette.blueBold2,
-                ),
-              ),
-              subtitle: const Text(
-                'Đang phát triển ...',
-                style: TextStyle(color: ColorPalette.grey),
-              ),
-              onTap: () => {
-                /* Xử lý khi chọn 'Video' */
-              },
-            ),
-            ListTile(
-              leading: const Icon(
-                FontAwesomeIcons.buildingColumns,
-                color: ColorPalette.blueBold2,
-              ),
-              title: const Text(
-                'Thanh toán bằng ngân hàng',
-                style: TextStyle(
-                  color: ColorPalette.blueBold2,
-                ),
-              ),
-              subtitle: const Text(
-                'Đang phát triển ...',
-                style: TextStyle(color: ColorPalette.grey),
-              ),
-              onTap: () => {
-                // showOnDevelopmentSnackBar(),
-              },
-            ),
-          ],
+            ],
+          ),
         );
       },
     );
@@ -467,8 +441,15 @@ class _BookingPageState extends State<BookingPage> {
     Navigator.of(context).pop();
   }
 
+  void pushToPage(String routeName, Object? arguments) {
+    Navigator.of(context).pushNamed(
+      routeName,
+      arguments: arguments,
+    );
+  }
+
   //show confirm dialog after choose payment method using CustomAlertDialog
-  void showConfirmDialog(int totalPrice) {
+  void showConfirmDialog(int paymentId) {
     popBack();
     showDialog(
       context: context,
@@ -487,9 +468,10 @@ class _BookingPageState extends State<BookingPage> {
             ),
           ),
           action: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ElevatedButton(
+              TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -500,16 +482,39 @@ class _BookingPageState extends State<BookingPage> {
                   ),
                 ),
               ),
-              ElevatedButton(
+              TextButton(
                 onPressed: () async {
                   try {
                     popBack();
                     _showLoadingOverlay(context);
-                    bool result = await addBooking(1, totalPrice);
-                    if (result) {
+                    AddBookingResponse result = await addBooking(paymentId);
+                    if (result.bookingId > 0 && result.totalPrice > 0) {
+                      AddPayment addPayment = AddPayment(
+                        buyerName: userDetails!.username,
+                        buyerEmail: userDetails!.email,
+                        buyerPhone: userDetails!.phone,
+                        buyerAddress: _addController.text,
+                        bookingId: result.bookingId,
+                        description:
+                            "Thanh toán cho đơn hàng Lumos của ${userDetails!.username} tại ${partner!.displayName} vào ngày ${selectedDate.day}/${selectedDate.month}/${selectedDate.year} lúc ${Workshift.workshiftTime[selectedTime]}",
+                      );
+
+                      AddPaymentResponse addPaymentResponse =
+                          await callPaymentAPI.addPayment(addPayment);
+                      if (addPaymentResponse.checkoutUrl.isNotEmpty) {
+                        //push to payment page
+                        pushToPage(QrPayment.routeName, addPaymentResponse);
+                        log.i("Add payment success: $addPaymentResponse");
+
+                        showSuccessSnackBar();
+                        returnToPage(MemberMain.routeName);
+                      } else {
+                        throw Exception(
+                            "Failed to add payment: $addPaymentResponse. Please try again.");
+                      }
                     } else {
                       throw Exception(
-                          "Failed to add booking: $result - $totalPrice");
+                          "Failed to add booking: $result. Please try again.");
                     }
                   } catch (e) {
                     log.e("Failed to add booking: $e");
@@ -517,8 +522,6 @@ class _BookingPageState extends State<BookingPage> {
                   } finally {
                     _hideLoadingOverlay();
                   }
-                  showSuccessSnackBar();
-                  returnToPage(MemberHome.routeName);
                 },
                 child: const Text(
                   DiaLogMessage.confirm,
@@ -1151,10 +1154,9 @@ class _BookingPageState extends State<BookingPage> {
                     ),
                   ),
                   onTap: () {
-                    _addController.text =
-                        '${item.displayName}, ${item.address}';
+                    _addController.text = item.address;
                     Navigator.of(context).pop();
-                    log.e(item.displayName);
+                    log.i(item.displayName);
                   },
                 );
               },

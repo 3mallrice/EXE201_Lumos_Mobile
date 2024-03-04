@@ -29,11 +29,11 @@ class _MemberHomeState extends State<MemberHome> {
   late Timer _timer;
 
   final List<String> _service = [
-    "Tắm cho bé",
-    "Quấn nóng giảm eo bụng cho mẹ Passw0rd!",
+    "Tắm cho bé sơ sinh",
+    "Quấn nóng giảm eo bụng cho mẹ",
     "Massage thảo mộc cho bé",
     "Massage thảo mộc cho mẹ",
-    "Chăm sóc bé"
+    "Massage bụng cho mẹ bầu",
   ];
 
   @override
@@ -97,7 +97,8 @@ class _MemberHomeState extends State<MemberHome> {
                           indicatorColor: ColorPalette.blueBold2,
                           indicatorBackgroundColor: ColorPalette.pinkBold,
                           initialPage: 0,
-                          autoPlayInterval: 3000,
+                          indicatorPadding: 5,
+                          autoPlayInterval: 5000,
                           isLoop: true,
                           children: [
                             Padding(
@@ -265,12 +266,13 @@ class _MemberHomeState extends State<MemberHome> {
                                 'Dịch vụ gần đây',
                                 style: TextStyle(
                                   color: ColorPalette.blueBold2,
-                                  fontSize: 12,
+                                  fontSize: 15,
                                   fontFamily: 'roboto',
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
+                            const SizedBox(height: 5),
                             SizedBox(
                               height:
                                   MediaQuery.of(context).size.height * 0.105,
@@ -285,60 +287,66 @@ class _MemberHomeState extends State<MemberHome> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Center(
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            ElevatedButton(
-                                              onPressed: () {
-                                                //
-                                              },
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor:
-                                                    ColorPalette.pink,
-                                                shape: const CircleBorder(),
-                                              ),
-                                              child: const Padding(
-                                                padding: EdgeInsets.all(9.0),
-                                                child: Icon(
-                                                  Icons.pregnant_woman,
-                                                  color: ColorPalette.pinkBold,
-                                                  size: 20,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 3),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              ElevatedButton(
+                                                onPressed: () {
+                                                  //
+                                                },
+                                                style: ElevatedButton.styleFrom(
+                                                  backgroundColor:
+                                                      ColorPalette.pink,
+                                                  shape: const CircleBorder(),
                                                 ),
-                                              ),
-                                            ),
-                                            const SizedBox(height: 5),
-                                            Expanded(
-                                              child: SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.2,
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.25,
-                                                child: Text(
-                                                  item,
-                                                  style: const TextStyle(
+                                                child: const Padding(
+                                                  padding: EdgeInsets.all(9.0),
+                                                  child: Icon(
+                                                    Icons.pregnant_woman,
                                                     color:
                                                         ColorPalette.pinkBold,
-                                                    fontSize: 10,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    fontFamily: 'roboto',
-                                                    fontWeight: FontWeight.w500,
+                                                    size: 20,
                                                   ),
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  maxLines: 2,
-                                                  textAlign: TextAlign.center,
                                                 ),
                                               ),
-                                            ),
-                                          ],
+                                              const SizedBox(height: 5),
+                                              Expanded(
+                                                child: SizedBox(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.2,
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.25,
+                                                  child: Text(
+                                                    item,
+                                                    style: const TextStyle(
+                                                      color:
+                                                          ColorPalette.pinkBold,
+                                                      fontSize: 10,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      fontFamily: 'roboto',
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    maxLines: 2,
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ],

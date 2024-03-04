@@ -46,7 +46,7 @@ class CallBookingApi {
   // POST: /customer
   // request: AddBooking()
   // response: bool
-  Future<bool> addBooking(int customerId, AddBooking newBooking) async {
+  Future<AddBookingResponse> addBooking(AddBooking newBooking) async {
     var url = Uri.parse('$api/customer');
     token = LocalStorageHelper.getValue("token");
 
@@ -61,7 +61,11 @@ class CallBookingApi {
       );
 
       if (response.statusCode == 200) {
-        return true;
+        final responseBody = json.decode(response.body);
+        final responseData = responseBody['data'];
+        AddBookingResponse addBookingResponse =
+            AddBookingResponse.fromJson(responseData);
+        return addBookingResponse;
       } else {
         throw Exception(
             'Failed to add booking: ${response.statusCode} - ${response.reasonPhrase}');

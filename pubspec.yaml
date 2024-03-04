@@ -65,6 +65,8 @@ dependencies:
   flutter_location_search: ^1.1.4
   flutter_image_slideshow: ^0.1.6
   cloud_firestore: ^4.14.0
+  qr_flutter: ^4.1.0
+  card_swiper: ^3.0.1
 
 flutter_launcher_icons:
   android: "launcher_icon"
