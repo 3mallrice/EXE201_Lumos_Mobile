@@ -129,6 +129,13 @@ class _MemberHomeState extends State<MemberHome> {
                                 fit: BoxFit.fill,
                               ),
                             ),
+                            Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: Image.asset(
+                                AssetHelper.memberBanner5,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
                           ],
                         ),
                       ),

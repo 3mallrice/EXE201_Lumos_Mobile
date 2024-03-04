@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'package:exe201_lumos_mobile/api_model/customer/billdetail.dart';
+import 'package:exe201_lumos_mobile/representation/member/member_bill_detail.dart';
+
 import '../api_model/customer/bill.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
@@ -149,6 +152,30 @@ class CallBookingApi {
       }
     } catch (e) {
       throw Exception('Failed to get booking detail: $e');
+    }
+  }
+
+  Future<BillDetailId> getBillingDetail(int bookingId) async {
+    var url = Uri.parse('$api/bill/$bookingId');
+    token = LocalStorageHelper.getValue("token");
+
+    try {
+      http.Response response = await http.get(url, headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json'
+      });
+
+      if (response.statusCode == 200) {
+        final responseBody = json.decode(response.body);
+        final responseData = responseBody['data'];
+
+        return BillDetailId.fromJson(responseData);
+      } else {
+        throw Exception(
+            'Failed to get billing detail: ${response.statusCode} - ${response.reasonPhrase}');
+      }
+    } catch (e) {
+      throw Exception('Failed to get billing detail: $e');
     }
   }
 }
