@@ -5,7 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:fdottedline_nullsafety/fdottedline__nullsafety.dart';
 
 class BillDetail extends StatefulWidget {
-  const BillDetail({super.key});
+  final int? billId;
+  const BillDetail({super.key, this.billId});
 
   static String routeName = '/bill_detail';
 

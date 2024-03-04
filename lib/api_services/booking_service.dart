@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import '../api_model/customer/bill.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 import '../api_model/customer/booking.dart';
@@ -101,7 +102,7 @@ class CallBookingApi {
     }
   }
 
-  Future<List<BookingComing>> getBillings() async {
+  Future<List<Billing>> getBillings() async {
     var url = Uri.parse('$api/bill');
     token = LocalStorageHelper.getValue("token");
 
@@ -114,8 +115,8 @@ class CallBookingApi {
       if (response.statusCode == 200) {
         final responseBody = json.decode(response.body);
         final responseData = responseBody['data'];
-        List<BookingComing> comingList = responseData
-            .map<BookingComing>((item) => BookingComing.fromJson(item))
+        List<Billing> comingList = responseData
+            .map<Billing>((item) => Billing.fromJson(item))
             .toList();
         return comingList;
       } else {
