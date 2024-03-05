@@ -1,4 +1,5 @@
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+
 import '../../core/helper/asset_helper.dart';
 
 import '../../api_model/authentication/login.dart';
@@ -83,7 +84,7 @@ class _BillDetailState extends State<BillDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarCom(
-        appBarText: '#${_billing?.bookingCode ?? ''}',
+        appBarText: !isLoaded ? '' : '#${_billing?.bookingCode}',
         leading: true,
       ),
       body: !isLoaded
@@ -142,7 +143,6 @@ class _BillDetailState extends State<BillDetail> {
                         crossAxisAlignment: CrossAxisAlignment.baseline,
                         textBaseline: TextBaseline.alphabetic,
                         children: [
-
                           Text(
                             'Mã đặt chỗ: ',
                             style: GoogleFonts.roboto(
@@ -151,82 +151,6 @@ class _BillDetailState extends State<BillDetail> {
                                 fontWeight: FontWeight.normal,
                                 color: ColorPalette.bluelight2,
                               ),
-
-                          ListTile(
-                            title: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  medicalService[index].medicalName,
-                                  style: GoogleFonts.roboto(
-                                    textStyle: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: ColorPalette.blueBold2),
-                                  ),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.only(left: 10),
-                                  child: ListView.builder(
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    clipBehavior: Clip.antiAlias,
-                                    shrinkWrap: true,
-                                    itemCount:
-                                        medicalService[index].services.length,
-                                    itemBuilder: (context, index) {
-                                      if (index < medicalService.length) {
-                                        var ser =
-                                            medicalService[index].services;
-                                        return Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            for (var s in ser)
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Expanded(
-                                                    child: Text(
-                                                      s.name,
-                                                      style: GoogleFonts.roboto(
-                                                        textStyle:
-                                                            const TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          fontSize: 16,
-                                                          color: ColorPalette
-                                                              .blueBold2,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    '₫ ${formatCurrency(s.price)}',
-                                                    style: GoogleFonts.roboto(
-                                                      textStyle:
-                                                          const TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                        fontSize: 16,
-                                                        color: ColorPalette
-                                                            .blueBold2,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                          ],
-                                        );
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                ),
-                              ],
-
                             ),
                           ),
                           Text(
@@ -279,7 +203,6 @@ class _BillDetailState extends State<BillDetail> {
                             ),
                           ),
                           children: [
-
                             TextSpan(
                               text: _billing?.address ?? 'đang cập nhật',
                               style: GoogleFonts.roboto(
@@ -287,9 +210,8 @@ class _BillDetailState extends State<BillDetail> {
                                   fontSize: 18,
                                   fontWeight: FontWeight.w600,
                                   color: ColorPalette.blueBold2,
-                                  ),),
-
-                           
+                                ),
+                              ),
                             )
                           ],
                         ),
@@ -308,7 +230,6 @@ class _BillDetailState extends State<BillDetail> {
                           shrinkWrap: true,
                           itemCount: medicalService.length,
                           itemBuilder: (context, index) {
-                            MedServices med = medicalService[index];
                             return Column(
                               children: [
                                 ListTile(
@@ -317,7 +238,7 @@ class _BillDetailState extends State<BillDetail> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        med.medicalName,
+                                        medicalService[index].medicalName,
                                         style: GoogleFonts.roboto(
                                           textStyle: const TextStyle(
                                               fontSize: 20,
@@ -329,26 +250,46 @@ class _BillDetailState extends State<BillDetail> {
                                         padding:
                                             const EdgeInsets.only(left: 10),
                                         child: ListView.builder(
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
                                           clipBehavior: Clip.antiAlias,
                                           shrinkWrap: true,
                                           itemCount: medicalService[index]
                                               .services
                                               .length,
                                           itemBuilder: (context, index) {
-                                            List<PService> ser = med.services;
-                                            return Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                for (PService s in ser)
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Expanded(
-                                                        child: Text(
-                                                          s.name,
+                                            if (index < medicalService.length) {
+                                              var ser = medicalService[index]
+                                                  .services;
+                                              return Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  for (var s in ser)
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Expanded(
+                                                          child: Text(
+                                                            s.name,
+                                                            style: GoogleFonts
+                                                                .roboto(
+                                                              textStyle:
+                                                                  const TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .normal,
+                                                                fontSize: 16,
+                                                                color: ColorPalette
+                                                                    .blueBold2,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          '₫ ${formatCurrency(s.price)}',
                                                           style: GoogleFonts
                                                               .roboto(
                                                             textStyle:
@@ -362,29 +303,15 @@ class _BillDetailState extends State<BillDetail> {
                                                             ),
                                                           ),
                                                         ),
-                                                      ),
-                                                      Text(
-                                                        '₫ ${formatCurrency(s.price)}',
-                                                        style:
-                                                            GoogleFonts.roboto(
-                                                          textStyle:
-                                                              const TextStyle(
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .normal,
-                                                            fontSize: 16,
-                                                            color: ColorPalette
-                                                                .blueBold2,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                              ],
-                                            );
+                                                      ],
+                                                    ),
+                                                ],
+                                              );
+                                            }
+                                            return null;
                                           },
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -440,10 +367,15 @@ class _BillDetailState extends State<BillDetail> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   if (_billing?.isPay == 'Yes')
-                                    const Icon(
-                                      Icons.check,
-                                      size: 120,
-                                      color: Colors.green,
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 30.0),
+                                      child: Transform.rotate(
+                                        angle: -0.3,
+                                        child: Image.asset(
+                                          AssetHelper.paid,
+                                          width: 100,
+                                        ),
+                                      ),
                                     ),
                                 ],
                               ),
@@ -558,6 +490,7 @@ class _BillDetailState extends State<BillDetail> {
     if (dateString == null) {
       return 'đang cập nhật';
     }
+
     DateTime dateTime = DateTime.parse(dateString);
     return DateFormat('dd/MM/yyyy').format(dateTime);
   }
@@ -566,6 +499,7 @@ class _BillDetailState extends State<BillDetail> {
     if (amount == null) {
       return 'đang cập nhật';
     }
+
     final formatCurrency = NumberFormat("#,##0", "vi_VN");
     return formatCurrency.format(amount);
   }
