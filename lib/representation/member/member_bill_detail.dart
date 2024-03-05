@@ -1,4 +1,5 @@
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import '../../core/helper/asset_helper.dart';
 
 import '../../api_model/authentication/login.dart';
 import '../../api_model/customer/billdetail.dart';
@@ -201,6 +202,7 @@ class _BillDetailState extends State<BillDetail> {
                             ),
                           ),
                           children: [
+
                             TextSpan(
                               text: _billing?.address ?? 'đang cập nhật',
                               style: GoogleFonts.roboto(
@@ -208,8 +210,9 @@ class _BillDetailState extends State<BillDetail> {
                                   fontSize: 18,
                                   fontWeight: FontWeight.w600,
                                   color: ColorPalette.blueBold2,
-                                ),
-                              ),
+                                  ),),
+
+                           
                             )
                           ],
                         ),

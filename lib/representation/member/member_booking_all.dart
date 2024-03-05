@@ -6,6 +6,7 @@ import 'package:exe201_lumos_mobile/core/const/back-end/workship.dart';
 import 'package:exe201_lumos_mobile/core/const/front-end/color_const.dart';
 import 'package:exe201_lumos_mobile/core/helper/local_storage_helper.dart';
 import 'package:exe201_lumos_mobile/login.dart';
+import 'package:exe201_lumos_mobile/representation/member/member_booking_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
@@ -117,7 +118,14 @@ class _MemberAllBookingState extends State<MemberAllBooking> {
               ),
               child: InkWell(
                 onTap: () {
-                  //Navigator.of(context).pushNamed(MemberAllBooking.routeName);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BookingDetail(
+                        bookingId: booking.bookingId!,
+                      ),
+                    ),
+                  );
                 },
                 child: Column(
                   children: [

@@ -27,4 +27,5 @@ class AssetHelper {
   static const String memberBanner4 = 'assets/img/memberBanner4.png';
   static const String memberBanner5 = 'assets/img/memberBanner5.png';
   static const String partnerImage = 'assets/img/partnerImage.png';
+  static const String paid = 'assets/img/paid.png';
 }

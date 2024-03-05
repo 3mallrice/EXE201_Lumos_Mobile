@@ -142,14 +142,28 @@ class _BookingDetailState extends State<BookingDetail> {
                   ),
                   softWrap: true,
                 ),
-                Text(
-                  'Tình trạng: $statusText',
-                  style: GoogleFonts.roboto(
-                    fontSize: 16,
-                    fontWeight: FontWeight.normal,
-                    color: ColorPalette.blueBold2,
-                  ),
-                  softWrap: true,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Tình trạng: ',
+                      style: GoogleFonts.roboto(
+                        fontSize: 16,
+                        fontWeight: FontWeight.normal,
+                        color: ColorPalette.blueBold2,
+                      ),
+                      softWrap: true,
+                    ),
+                    Text(
+                      statusText,
+                      style: GoogleFonts.roboto(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: ColorPalette.blueBold2,
+                      ),
+                      softWrap: true,
+                    ),
+                  ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -228,7 +242,7 @@ class _BookingDetailState extends State<BookingDetail> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            medical.medicalName ?? 'đang phát triển',
+                            medical.medicalName ?? 'đang cập nhật',
                             style: GoogleFonts.roboto(
                               textStyle: const TextStyle(
                                 fontSize: 16,
@@ -270,7 +284,7 @@ class _BookingDetailState extends State<BookingDetail> {
                   ),
                 ),
                 Text(
-                  'Ghi chú: ${bookingComing?.note ?? 'N/A'}',
+                  'Ghi chú: ${bookingComing?.note ?? ''}',
                   style: GoogleFonts.roboto(
                     fontSize: 16,
                     fontWeight: FontWeight.normal,
@@ -279,6 +293,25 @@ class _BookingDetailState extends State<BookingDetail> {
                   softWrap: true,
                   textAlign: TextAlign.justify,
                 ),
+                if (bookingComing?.status == 2)
+                  ElevatedButton(
+                    onPressed: () async {
+                      //await api.cancelBooking(bookingComing.id);
+                      Navigator.pop(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: ColorPalette.pinkBold,
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 10,
+                        horizontal: 20,
+                      ),
+                      textStyle: GoogleFonts.roboto(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    child: const Text('Hoàn thành'),
+                  ),
               ],
             ),
           ),
