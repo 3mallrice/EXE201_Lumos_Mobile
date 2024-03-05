@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 class Payment {
   final int paymentId;
   final String name;
@@ -41,9 +43,15 @@ class AddPayment {
       'buyerEmail': buyerEmail,
       'buyerPhone': buyerPhone,
       'buyerAddress': buyerAddress,
-      'orderId': bookingId,
+      'bookingId': bookingId,
       'description': description,
     };
+  }
+
+  //to string
+  @override
+  String toString() {
+    return 'AddPayment{buyerName: $buyerName, buyerEmail: $buyerEmail, buyerPhone: $buyerPhone, buyerAddress: $buyerAddress, bookingId: $bookingId, description: $description}';
   }
 }
 
@@ -92,4 +100,63 @@ class AddPaymentResponse {
   String toString() {
     return 'AddPaymentResponse{bin: $bin, accountNumber: $accountNumber, amount: $amount, description: $description, orderCode: $orderCode, currency: $currency, paymentLinkId: $paymentLinkId, status: $status, checkoutUrl: $checkoutUrl, qrCode: $qrCode}';
   }
+}
+
+//check status
+class CheckPayment {
+  final String id;
+  final int orderCode;
+  final int amount;
+  final int amountPaid;
+  final int amountRemaining;
+  final String status;
+  final DateTime createdAt;
+  final DateTime? canceledAt;
+  final String? cancellationReason;
+
+  CheckPayment({
+    required this.id,
+    required this.orderCode,
+    required this.amount,
+    required this.amountPaid,
+    required this.amountRemaining,
+    required this.status,
+    required this.createdAt,
+    this.canceledAt,
+    this.cancellationReason,
+  });
+
+  factory CheckPayment.fromJson(Map<String, dynamic> json) {
+    return CheckPayment(
+      id: json['id'] as String,
+      orderCode: json['orderCode'] as int,
+      amount: json['amount'] as int,
+      amountPaid: json['amountPaid'] as int,
+      amountRemaining: json['amountRemaining'] as int,
+      status: json['status'] as String,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      canceledAt: json['canceledAt'] != null
+          ? DateTime.parse(json['canceledAt'] as String)
+          : null,
+      cancellationReason: json['cancellationReason'] as String?,
+    );
+  }
+
+  //to string
+  @override
+  String toString() {
+    return 'CheckPayment{id: $id, orderCode: $orderCode, amount: $amount, amountPaid: $amountPaid, amountRemaining: $amountRemaining, status: $status, createdAt: $createdAt, canceledAt: $canceledAt, cancellationReason: $cancellationReason}';
+  }
+}
+
+// PAID - Đã thanh toán
+// PENDING - Chờ thanh toán
+// PROCESSING - Đang xử lý
+// CANCELLED - Đã hủy
+class PaymentStatus {
+  static const String PAID = 'PAID';
+  static const String PENDING = 'PENDING';
+  static const String PROCESSING = 'PROCESSING';
+  static const String CANCELLED = 'CANCELLED';
+  static const String EXPIRED = 'EXPIRED';
 }
