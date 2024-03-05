@@ -1,9 +1,3 @@
-import 'package:exe201_lumos_mobile/core/const/front-end/lumos_icons.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
-import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
-
 import '../../api_model/authentication/login.dart';
 import '../../api_model/customer/billdetail.dart';
 import '../../api_services/booking_service.dart';

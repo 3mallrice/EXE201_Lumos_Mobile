@@ -42,6 +42,8 @@ class OperationErrorMessage {
       "Bạn không có quyền truy cập vào tài nguyên này.";
   static const String deleteError =
       "Không thể xóa mục này. Vui lòng thử lại sau hoặc liên hệ với quản trị viên.";
+  static const String killAppUnexpectly =
+      "Ứng dụng đã bị đóng bất ngờ. Vui lòng thử lại sau.";
 }
 
 class OperationSuccessMessage {
@@ -67,9 +69,18 @@ class BookingErrorMessage {
       "Vui lòng cung cấp đầy đủ thông tin về ngày, khung giờ và địa chỉ để đặt dịch vụ.";
 }
 
-class BookingSuccessMessage {
-  static const String bookingSuccess =
-      "Đặt dịch vụ thành công. Xin cảm ơn bạn đã sử dụng dịch vụ của chúng tôi!";
+class PaymentMessage {
+  static const String paymentSuccess =
+      "Thanh toán thành công. Xin cảm ơn bạn đã sử dụng dịch vụ của chúng tôi!";
+  static String paymentError(int bookingId) =>
+      "Thanh toán thất bại. Vui lòng liên hệ Lumos để được hỗ trợ.\n BookingId = $bookingId";
+  static const String paymentPending = "Chưa thanh toán. Vui lòng thử lại sau.";
+  static const String paymentProcessing = "Thanh toán đang được xử lý.";
+  static const String paymentCancelled = "Thanh toán đã bị hủy.";
+  static const String paymentExpired = "Thời gian thanh toán đã hết hạn.";
+  static const String paymentCancelSuccess = "Đã hủy thanh toán thành công.";
+  static const String paymentCancelNoti =
+      "Khi bạn hủy thanh toán, dịch vụ sẽ không được thực hiện.";
 }
 
 class OnDevelopmentMessage {

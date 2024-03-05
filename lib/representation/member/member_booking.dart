@@ -1,4 +1,3 @@
-import 'member_main_navbar.dart';
 import 'payment_information.dart';
 
 import '../../api_model/customer/booking.dart';
@@ -495,8 +494,7 @@ class _BookingPageState extends State<BookingPage> {
                         buyerPhone: userDetails!.phone,
                         buyerAddress: _addController.text,
                         bookingId: result.bookingId,
-                        description:
-                            "Thanh toán cho đơn hàng Lumos của ${userDetails!.username} tại ${partner!.displayName} vào ngày ${selectedDate.day}/${selectedDate.month}/${selectedDate.year} lúc ${Workshift.workshiftTime[selectedTime]}",
+                        description: "Thanh toán đơn hàng Lumos",
                       );
 
                       AddPaymentResponse addPaymentResponse =
@@ -505,9 +503,6 @@ class _BookingPageState extends State<BookingPage> {
                         //push to payment page
                         pushToPage(QrPayment.routeName, addPaymentResponse);
                         log.i("Add payment success: $addPaymentResponse");
-
-                        showSuccessSnackBar();
-                        returnToPage(MemberMain.routeName);
                       } else {
                         throw Exception(
                             "Failed to add payment: $addPaymentResponse. Please try again.");
@@ -542,7 +537,7 @@ class _BookingPageState extends State<BookingPage> {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text(
-          BookingSuccessMessage.bookingSuccess,
+          PaymentMessage.paymentSuccess,
           style: TextStyle(
             color: ColorPalette.white,
           ),
