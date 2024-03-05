@@ -89,8 +89,13 @@ class _AccountScreenState extends State<AccountScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               TextButton(
-                onPressed: () {
-                  Navigator.of(context).pushReplacementNamed(Login.routeName);
+                onPressed: () async {
+                  await await LoginAccount.clearLoginAccount();
+                  await await LocalStorageHelper.setValue("token", "");
+
+                  log.i(LoginAccount.loadAccount());
+                  log.i("Token: $LocalStorageHelper.getValue(\"token\")");
+                  backToLoginPage();
                 },
                 child: Text(
                   OnSignOutMessage.signOutConfirm,

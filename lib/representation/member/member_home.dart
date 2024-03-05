@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/widgets.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
 import '../../core/const/front-end/color_const.dart';
@@ -94,6 +95,7 @@ class _MemberHomeState extends State<MemberHome> {
                         margin: const EdgeInsets.only(bottom: 10),
                         child: ImageSlideshow(
                           width: double.infinity,
+                          height: MediaQuery.of(context).size.height * 0.25,
                           indicatorColor: ColorPalette.blueBold2,
                           indicatorBackgroundColor: ColorPalette.pinkBold,
                           initialPage: 0,
@@ -273,13 +275,13 @@ class _MemberHomeState extends State<MemberHome> {
                                 'Dịch vụ gần đây',
                                 style: TextStyle(
                                   color: ColorPalette.blueBold2,
-                                  fontSize: 15,
+                                  fontSize: 18,
                                   fontFamily: 'roboto',
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 5),
+                            const SizedBox(height: 10),
                             SizedBox(
                               height:
                                   MediaQuery.of(context).size.height * 0.105,
@@ -379,13 +381,14 @@ class _MemberHomeState extends State<MemberHome> {
                                   },
                                 );
                               },
-                              child: const ClipRRect(
+                              child: ClipRRect(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(16)),
+                                    const BorderRadius.all(Radius.circular(16)),
                                 child: Image(
                                   width: double.infinity,
-                                  height: 132,
-                                  image: AssetImage(AssetHelper.home1),
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.2,
+                                  image: const AssetImage(AssetHelper.home1),
                                   fit: BoxFit.cover,
                                 ),
                               ),
