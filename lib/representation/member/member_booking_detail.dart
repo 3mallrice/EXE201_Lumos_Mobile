@@ -2,6 +2,7 @@ import 'package:exe201_lumos_mobile/api_model/authentication/login.dart';
 import 'package:exe201_lumos_mobile/api_model/customer/coming_booking.dart';
 import 'package:exe201_lumos_mobile/api_services/booking_service.dart';
 import 'package:exe201_lumos_mobile/component/app_bar.dart';
+import 'package:exe201_lumos_mobile/core/const/back-end/booking_status.dart';
 import 'package:exe201_lumos_mobile/core/const/back-end/workship.dart';
 import 'package:exe201_lumos_mobile/core/const/front-end/color_const.dart';
 import 'package:exe201_lumos_mobile/core/helper/local_storage_helper.dart';
@@ -93,12 +94,18 @@ class _BookingDetailState extends State<BookingDetail> {
 
     int? status = bookingComing?.status;
 
-    if (status == 2) {
-      statusText = 'Đang chờ xác nhận';
+    if (status == 0) {
+      statusText = BookingStatus.status[0] ?? 'N/A';
+    } else if (status == 2) {
+      statusText = BookingStatus.status[2] ?? 'N/A';
     } else if (status == 3) {
-      statusText = 'Đang thực hiện';
+      statusText = BookingStatus.status[3] ?? 'N/A';
+    } else if (status == 4) {
+      statusText = BookingStatus.status[4] ?? 'N/A';
+    } else if (status == 5) {
+      statusText = BookingStatus.status[5] ?? 'N/A';
     } else {
-      statusText = 'Trạng thái không hợp lệ';
+      statusText = 'N/A';
     }
 
     return Scaffold(
