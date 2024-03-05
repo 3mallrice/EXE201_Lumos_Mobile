@@ -217,9 +217,7 @@ class _BillDetailState extends State<BillDetail> {
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.symmetric(
-                            vertical: 15, horizontal: 5),
-                        padding: const EdgeInsets.all(5),
+                        margin: const EdgeInsets.symmetric(vertical: 15),
                         decoration: ShapeDecoration(
                           color: ColorPalette.bgColor,
                           shape: RoundedRectangleBorder(
@@ -228,6 +226,7 @@ class _BillDetailState extends State<BillDetail> {
                         ),
                         child: ListView.builder(
                           shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
                           itemCount: medicalService.length,
                           itemBuilder: (context, index) {
                             return Column(

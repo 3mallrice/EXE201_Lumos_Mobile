@@ -125,7 +125,6 @@ class _BookingDetailState extends State<BookingDetail> {
               borderRadius: BorderRadius.all(Radius.circular(12)),
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   bookingComing?.partner ?? '',
@@ -137,9 +136,7 @@ class _BookingDetailState extends State<BookingDetail> {
                   softWrap: true,
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 10),
-                const Divider(color: ColorPalette.white, thickness: 2),
-                const SizedBox(height: 10),
+                const SizedBox(height: 5),
                 Text(
                   'Mã đặt hẹn: #${bookingComing?.code ?? ''}',
                   style: GoogleFonts.roboto(
@@ -148,7 +145,11 @@ class _BookingDetailState extends State<BookingDetail> {
                     color: ColorPalette.blueBold2,
                   ),
                   softWrap: true,
+                  textAlign: TextAlign.center,
                 ),
+                const SizedBox(height: 10),
+                const Divider(color: ColorPalette.white, thickness: 2),
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -231,8 +232,7 @@ class _BookingDetailState extends State<BookingDetail> {
                   softWrap: true,
                 ),
                 Container(
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 15, horizontal: 5),
+                  margin: const EdgeInsets.symmetric(vertical: 15),
                   padding: const EdgeInsets.all(10),
                   decoration: ShapeDecoration(
                     color: ColorPalette.bgColor,
@@ -242,6 +242,7 @@ class _BookingDetailState extends State<BookingDetail> {
                   ),
                   child: ListView.builder(
                     shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: medicalService.length,
                     itemBuilder: (context, index) {
                       MedicalService medical = medicalService[index];
@@ -258,27 +259,29 @@ class _BookingDetailState extends State<BookingDetail> {
                               ),
                             ),
                           ),
-                          ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: medical.services.length,
-                            itemBuilder: (context, serviceIndex) {
-                              Service service = medical.services[serviceIndex];
-                              return ListTile(
-                                title: Text(
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10, top: 5),
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: medical.services.length,
+                              itemBuilder: (context, serviceIndex) {
+                                Service service =
+                                    medical.services[serviceIndex];
+                                return Text(
                                   service.name ?? '',
                                   style: GoogleFonts.roboto(
                                     fontSize: 16,
                                     fontWeight: FontWeight.normal,
                                     color: ColorPalette.blueBold2,
                                   ),
-                                ),
-                              );
-                            },
+                                );
+                              },
+                            ),
                           ),
                           if (index < medicalService.length - 1)
                             const Padding(
-                              padding: EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(5),
                               child: Divider(
                                 thickness: 1,
                                 height: 2,
@@ -290,15 +293,18 @@ class _BookingDetailState extends State<BookingDetail> {
                     },
                   ),
                 ),
-                Text(
-                  'Ghi chú: ${bookingComing?.note ?? ''}',
-                  style: GoogleFonts.roboto(
-                    fontSize: 16,
-                    fontWeight: FontWeight.normal,
-                    color: ColorPalette.blueBold2,
+                Container(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Ghi chú: ${bookingComing?.note ?? '\n \n'}',
+                    style: GoogleFonts.roboto(
+                      fontSize: 16,
+                      fontWeight: FontWeight.normal,
+                      color: ColorPalette.blueBold2,
+                    ),
+                    softWrap: true,
+                    textAlign: TextAlign.justify,
                   ),
-                  softWrap: true,
-                  textAlign: TextAlign.justify,
                 ),
                 if (bookingComing?.status == 2)
                   ElevatedButton(
