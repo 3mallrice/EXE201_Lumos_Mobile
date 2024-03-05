@@ -236,26 +236,43 @@ class _BillDetailState extends State<BillDetail> {
                                 Container(
                                   padding: const EdgeInsets.only(left: 10),
                                   child: ListView.builder(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
                                     clipBehavior: Clip.antiAlias,
                                     shrinkWrap: true,
                                     itemCount:
                                         medicalService[index].services.length,
                                     itemBuilder: (context, index) {
-                                      List<PService> ser =
-                                          medicalService[index].services;
-                                      return Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          for (PService s in ser)
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Expanded(
-                                                  child: Text(
-                                                    s.name,
+                                      if (index < medicalService.length) {
+                                        var ser =
+                                            medicalService[index].services;
+                                        return Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            for (var s in ser)
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Expanded(
+                                                    child: Text(
+                                                      s.name,
+                                                      style: GoogleFonts.roboto(
+                                                        textStyle:
+                                                            const TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          fontSize: 16,
+                                                          color: ColorPalette
+                                                              .blueBold2,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    '₫ ${formatCurrency(s.price)}',
                                                     style: GoogleFonts.roboto(
                                                       textStyle:
                                                           const TextStyle(
@@ -267,26 +284,15 @@ class _BillDetailState extends State<BillDetail> {
                                                       ),
                                                     ),
                                                   ),
-                                                ),
-                                                Text(
-                                                  '₫ ${formatCurrency(s.price)}',
-                                                  style: GoogleFonts.roboto(
-                                                    textStyle: const TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                      fontSize: 16,
-                                                      color: ColorPalette
-                                                          .blueBold2,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                        ],
-                                      );
+                                                ],
+                                              ),
+                                          ],
+                                        );
+                                      }
+                                      return null;
                                     },
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           ),
