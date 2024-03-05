@@ -38,8 +38,7 @@ class CallBookingApi {
             .toList();
         return comingList;
       } else {
-        throw Exception(
-            'Failed to get coming booking: ${response.statusCode} - ${response.reasonPhrase}');
+        throw Exception('${response.statusCode} - ${response.reasonPhrase}');
       }
     } catch (e) {
       throw Exception('Failed to get coming booking: $e');
@@ -70,8 +69,7 @@ class CallBookingApi {
             AddBookingResponse.fromJson(responseData);
         return addBookingResponse;
       } else {
-        throw Exception(
-            'Failed to add booking: ${response.statusCode} - ${response.reasonPhrase}');
+        throw Exception('${response.statusCode} - ${response.reasonPhrase}');
       }
     } catch (e) {
       throw Exception('Failed to add booking: $e');
@@ -96,8 +94,7 @@ class CallBookingApi {
             .toList();
         return list;
       } else {
-        throw Exception(
-            'Failed to get booking: ${response.statusCode} - ${response.reasonPhrase}');
+        throw Exception('${response.statusCode} - ${response.reasonPhrase}');
       }
     } catch (e) {
       throw Exception('Failed to get booking: $e');
@@ -122,8 +119,7 @@ class CallBookingApi {
             .toList();
         return list;
       } else {
-        throw Exception(
-            'Failed to get bills: ${response.statusCode} - ${response.reasonPhrase}');
+        throw Exception('${response.statusCode} - ${response.reasonPhrase}');
       }
     } catch (e) {
       throw Exception('Failed to get bills: $e');
@@ -146,8 +142,7 @@ class CallBookingApi {
 
         return BookingComing.fromJson(responseData);
       } else {
-        throw Exception(
-            'Failed to get booking detail: ${response.statusCode} - ${response.reasonPhrase}');
+        throw Exception('${response.statusCode} - ${response.reasonPhrase}');
       }
     } catch (e) {
       throw Exception('Failed to get booking detail: $e');
@@ -176,6 +171,66 @@ class CallBookingApi {
       }
     } catch (e) {
       throw Exception('Failed to get billing detail: $e');
+    }
+  }
+
+  // POST:/api/booking/{bookingId}/cancel
+  // request: int bookingId, String reason
+  // response: bool
+  // update booking status from waiting/pending to cancel
+  Future<bool> cancelBooking(int bookingId, String reason) async {
+    var url = Uri.parse('$api/$bookingId/cancel');
+    token = LocalStorageHelper.getValue("token");
+
+    try {
+      http.Response response = await http.post(
+        url,
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json'
+        },
+        body: json.encode({'cancellationReason': reason}),
+      );
+
+      if (response.statusCode == 200) {
+        // final responseBody = json.decode(response.body);
+        // final responseData = responseBody['data'];
+        return true;
+      } else {
+        throw Exception('${response.statusCode} - ${response.reasonPhrase}');
+      }
+    } catch (e) {
+      throw Exception('Failed to cancel booking: $e');
+    }
+  }
+
+  // POST:/api/booking/{bookingId}/pending
+  // request: int bookingId, String paymentLinkId
+  // response: bool
+  // update booking status from waiting to pending
+  Future<bool> pendingBooking(int bookingId, String paymentLinkId) async {
+    var url = Uri.parse('$api/$bookingId/pending');
+    token = LocalStorageHelper.getValue("token");
+
+    try {
+      http.Response response = await http.post(
+        url,
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json'
+        },
+        body: json.encode({'paymentLinkId': paymentLinkId}),
+      );
+
+      if (response.statusCode == 200) {
+        // final responseBody = json.decode(response.body);
+        // final responseData = responseBody['data'];
+        return true;
+      } else {
+        throw Exception('${response.statusCode} - ${response.reasonPhrase}');
+      }
+    } catch (e) {
+      throw Exception('Failed to pending booking: $e');
     }
   }
 }
