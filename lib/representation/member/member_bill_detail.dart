@@ -1,4 +1,5 @@
 import 'package:exe201_lumos_mobile/core/const/front-end/lumos_icons.dart';
+import 'package:exe201_lumos_mobile/core/helper/asset_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
@@ -346,10 +347,15 @@ class _BillDetailState extends State<BillDetail> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             if (_billing?.isPay == 'Yes')
-                              const Icon(
-                                Icons.check,
-                                size: 120,
-                                color: Colors.green,
+                              Padding(
+                                padding: const EdgeInsets.only(top: 30.0),
+                                child: Transform.rotate(
+                                  angle: -0.3,
+                                  child: Image.asset(
+                                    AssetHelper.paid,
+                                    width: 100,
+                                  ),
+                                ),
                               ),
                           ],
                         ),

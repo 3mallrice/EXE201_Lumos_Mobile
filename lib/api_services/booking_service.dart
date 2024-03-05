@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:exe201_lumos_mobile/api_model/customer/billdetail.dart';
+import 'package:exe201_lumos_mobile/api_model/customer/feedback.dart';
 
 import '../api_model/customer/bill.dart';
 import 'package:http/http.dart' as http;
@@ -178,4 +179,43 @@ class CallBookingApi {
       throw Exception('Failed to get billing detail: $e');
     }
   }
+
+  // Future<Feedback> setCompleted(int bookingId) async {
+  //   var url = Uri.parse('$api/$bookingId/complete');
+  //   token = LocalStorageHelper.getValue("token");
+
+  //   try {
+  //     http.Response response = await http.post(
+  //       url,
+  //       headers: {
+  //         'Authorization': 'Bearer $token',
+  //         'Content-Type': 'application/json'
+  //       },
+  //     );
+
+  //     if (response.statusCode == 200) {
+  //       final responseBody = json.decode(response.body);
+
+  //       Feedback setCompletedResponse = Feedback();
+
+  //       setCompletedResponse.reason = responseBody["reason"];
+
+  //       var feedback = responseBody["feedback"];
+  //       Feedback feedbackData = Feedback();
+  //       feedbackData.rating = feedback["rating"];
+  //       feedbackData.feedbackPartner = feedback["feedbackPartner"];
+  //       feedbackData.feedbackLumos = feedback["feedbackLumos"];
+  //       feedbackData.feedbackImage = feedback["feedbackImage"];
+
+  //       setCompletedResponse.feedback = feedbackData;
+
+  //       return setCompletedResponse;
+  //     } else {
+  //       throw Exception(
+  //           'Failed to complete booking: ${response.statusCode} - ${response.reasonPhrase}');
+  //     }
+  //   } catch (e) {
+  //     throw Exception('Failed to complete booking: $e');
+  //   }
+  // }
 }
