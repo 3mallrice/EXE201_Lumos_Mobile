@@ -1,7 +1,13 @@
-import 'package:exe201_lumos_mobile/api_model/authentication/login.dart';
-import 'package:exe201_lumos_mobile/api_model/customer/billdetail.dart';
-import 'package:exe201_lumos_mobile/api_services/booking_service.dart';
-import 'package:exe201_lumos_mobile/core/helper/local_storage_helper.dart';
+import 'package:exe201_lumos_mobile/core/const/front-end/lumos_icons.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
+import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
+
+import '../../api_model/authentication/login.dart';
+import '../../api_model/customer/billdetail.dart';
+import '../../api_services/booking_service.dart';
+import '../../core/helper/local_storage_helper.dart';
 import 'package:exe201_lumos_mobile/login.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
@@ -24,8 +30,8 @@ class BillDetail extends StatefulWidget {
 
 class _BillDetailState extends State<BillDetail> {
   BillDetailId? _billing;
-  List<MedicalServices> medicalService = [];
-  List<Servicess> service = [];
+  List<MedServices> medicalService = [];
+  List<PService> service = [];
 
   @override
   void initState() {
@@ -56,24 +62,20 @@ class _BillDetailState extends State<BillDetail> {
     }
   }
 
-  Future<void> _fetchBillingDetail(int? bookingId) async {
+  Future<void> _fetchBillingDetail(int? billId) async {
     if (!mounted) return;
     try {
-      if (bookingId != null) {
-        BillDetailId? billing = await api.getBillingDetail(bookingId);
+      if (billId != null) {
+        BillDetailId? billing = await api.getBillingDetail(billId);
         setState(() {
           _billing = billing;
           medicalService = billing.medicalServices;
         });
       } else {
         log.e("Booking id is null.");
-        _billing = null;
-        medicalService = [];
       }
     } catch (e) {
       log.e("Error when fetching billing detail: $e");
-      _billing = null;
-      medicalService = [];
     }
   }
 
@@ -96,8 +98,6 @@ class _BillDetailState extends State<BillDetail> {
               borderRadius: BorderRadius.all(Radius.circular(12)),
             ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   _billing?.partner ?? 'đang cập nhật',
@@ -108,18 +108,22 @@ class _BillDetailState extends State<BillDetail> {
                       color: ColorPalette.blueBold2,
                     ),
                   ),
+                  softWrap: true,
+                  textAlign: TextAlign.center,
                 ),
-                Text(
-                  formatDate(_billing!.bookingDate),
-                  style: GoogleFonts.roboto(
-                    textStyle: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: ColorPalette.blueBold2,
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Text(
+                    'Ngày lên lịch: ${formatDate(_billing?.createDate)}',
+                    style: GoogleFonts.roboto(
+                      textStyle: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.normal,
+                        color: ColorPalette.blueBold2,
+                      ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 10),
                 const Divider(
                   thickness: 3,
                   height: 2,
@@ -153,39 +157,13 @@ class _BillDetailState extends State<BillDetail> {
                     ),
                   ],
                 ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.start,
-                //   crossAxisAlignment: CrossAxisAlignment.baseline,
-                //   textBaseline: TextBaseline.alphabetic,
-                //   children: [
-                //     Text(
-                //       'Ngày lên lịch: ',
-                //       style: GoogleFonts.roboto(
-                //         textStyle: const TextStyle(
-                //           fontSize: 18,
-                //           fontWeight: FontWeight.normal,
-                //           color: ColorPalette.bluelight2,
-                //         ),
-                //       ),
-                //     ),
-                //     Text(
-                //       '26/10/2023 - 09:45',
-                //       style: GoogleFonts.roboto(
-                //         textStyle: const TextStyle(
-                //           fontSize: 18,
-                //           fontWeight: FontWeight.w600,
-                //           color: ColorPalette.blueBold2,
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                Column(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  textBaseline: TextBaseline.alphabetic,
                   children: [
                     Text(
-                      'Địa chỉ: ',
+                      'Ngày hẹn: ',
                       style: GoogleFonts.roboto(
                         textStyle: const TextStyle(
                           fontSize: 18,
@@ -195,7 +173,7 @@ class _BillDetailState extends State<BillDetail> {
                       ),
                     ),
                     Text(
-                      _billing?.address ?? 'đang cập nhật',
+                      formatDate(_billing?.bookingDate),
                       style: GoogleFonts.roboto(
                         textStyle: const TextStyle(
                           fontSize: 18,
@@ -205,6 +183,30 @@ class _BillDetailState extends State<BillDetail> {
                       ),
                     ),
                   ],
+                ),
+                Text.rich(
+                  TextSpan(
+                    text: 'Địa chỉ: ',
+                    style: GoogleFonts.roboto(
+                      textStyle: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.normal,
+                        color: ColorPalette.bluelight2,
+                      ),
+                    ),
+                    children: [
+                      TextSpan(
+                        text: _billing?.address ?? 'đang cập nhật',
+                        style: GoogleFonts.roboto(
+                          textStyle: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            color: ColorPalette.blueBold2,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
                 Container(
                   margin:
@@ -240,22 +242,50 @@ class _BillDetailState extends State<BillDetail> {
                                   child: ListView.builder(
                                     clipBehavior: Clip.antiAlias,
                                     shrinkWrap: true,
-                                    itemCount: service.length,
+                                    itemCount:
+                                        medicalService[index].services.length,
                                     itemBuilder: (context, index) {
+                                      List<PService> ser =
+                                          medicalService[index].services;
                                       return Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            service[index].name,
-                                            style: GoogleFonts.roboto(
-                                              textStyle: const TextStyle(
-                                                fontWeight: FontWeight.normal,
-                                                fontSize: 16,
-                                                color: ColorPalette.blueBold2,
-                                              ),
+                                          for (PService s in ser)
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Expanded(
+                                                  child: Text(
+                                                    s.name,
+                                                    style: GoogleFonts.roboto(
+                                                      textStyle:
+                                                          const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        fontSize: 16,
+                                                        color: ColorPalette
+                                                            .blueBold2,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Text(
+                                                  '₫ ${formatCurrency(s.price)}',
+                                                  style: GoogleFonts.roboto(
+                                                    textStyle: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                      fontSize: 16,
+                                                      color: ColorPalette
+                                                          .blueBold2,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                          ),
                                         ],
                                       );
                                     },
@@ -290,7 +320,7 @@ class _BillDetailState extends State<BillDetail> {
                       ),
                     ),
                     Text(
-                      _billing?.note ?? 'đang cập nhật',
+                      _billing?.note ?? '',
                       style: GoogleFonts.roboto(
                         textStyle: const TextStyle(
                           fontSize: 18,
@@ -310,89 +340,109 @@ class _BillDetailState extends State<BillDetail> {
                         space: 3.0,
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.baseline,
-                      textBaseline: TextBaseline.alphabetic,
+                    Stack(
                       children: [
-                        Text(
-                          'Tổng tiền dịch vụ: ',
-                          style: GoogleFonts.roboto(
-                            textStyle: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.normal,
-                              color: ColorPalette.bluelight2,
-                            ),
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            if (_billing?.isPay == 'Yes')
+                              const Icon(
+                                Icons.check,
+                                size: 120,
+                                color: Colors.green,
+                              ),
+                          ],
                         ),
-                        Text(
-                          '₫ ${formatCurrency(_billing!.totalPrice)}',
-                          style: GoogleFonts.roboto(
-                            textStyle: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.normal,
-                              color: ColorPalette.bluelight2,
+                        Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.baseline,
+                              textBaseline: TextBaseline.alphabetic,
+                              children: [
+                                Text(
+                                  'Tổng tiền dịch vụ: ',
+                                  style: GoogleFonts.roboto(
+                                    textStyle: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.normal,
+                                      color: ColorPalette.bluelight2,
+                                    ),
+                                  ),
+                                ),
+                                Text(
+                                  '₫ ${formatCurrency(_billing?.totalPrice)}',
+                                  style: GoogleFonts.roboto(
+                                    textStyle: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.normal,
+                                      color: ColorPalette.bluelight2,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.baseline,
-                      textBaseline: TextBaseline.alphabetic,
-                      children: [
-                        Text(
-                          'Phụ phí: ',
-                          style: GoogleFonts.roboto(
-                            textStyle: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.normal,
-                              color: ColorPalette.bluelight2,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.baseline,
+                              textBaseline: TextBaseline.alphabetic,
+                              children: [
+                                Text(
+                                  'Phụ phí: ',
+                                  style: GoogleFonts.roboto(
+                                    textStyle: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.normal,
+                                      color: ColorPalette.bluelight2,
+                                    ),
+                                  ),
+                                ),
+                                Text(
+                                  '₫ ${formatCurrency(_billing!.additionalFee)}',
+                                  style: GoogleFonts.roboto(
+                                    textStyle: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.normal,
+                                      color: ColorPalette.bluelight2,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ),
-                        Text(
-                          '₫ ${formatCurrency(_billing!.additionalFee) ?? 0}',
-                          style: GoogleFonts.roboto(
-                            textStyle: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.normal,
-                              color: ColorPalette.bluelight2,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.baseline,
-                        textBaseline: TextBaseline.alphabetic,
-                        children: [
-                          Text(
-                            'Thành tiền: ',
-                            style: GoogleFonts.roboto(
-                              textStyle: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: ColorPalette.blueBold2,
+                            Container(
+                              margin: const EdgeInsets.symmetric(vertical: 10),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.baseline,
+                                textBaseline: TextBaseline.alphabetic,
+                                children: [
+                                  Text(
+                                    'Thành tiền: ',
+                                    style: GoogleFonts.roboto(
+                                      textStyle: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: ColorPalette.blueBold2,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    '₫ ${formatCurrency(_billing!.totalPrice)}',
+                                    style: GoogleFonts.roboto(
+                                      textStyle: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: ColorPalette.blueBold2,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ),
-                          Text(
-                            '230.000 đ',
-                            style: GoogleFonts.roboto(
-                              textStyle: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: ColorPalette.blueBold2,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                          ],
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -404,12 +454,15 @@ class _BillDetailState extends State<BillDetail> {
     );
   }
 
-  String formatDate(String dateString) {
+  String formatDate(String? dateString) {
+    if (dateString == null) {
+      return 'đang cập nhật';
+    }
     DateTime dateTime = DateTime.parse(dateString);
     return DateFormat('dd/MM/yyyy').format(dateTime);
   }
 
-  String formatCurrency(int amount) {
+  String formatCurrency(int? amount) {
     final formatCurrency = NumberFormat("#,##0", "vi_VN");
     return formatCurrency.format(amount);
   }

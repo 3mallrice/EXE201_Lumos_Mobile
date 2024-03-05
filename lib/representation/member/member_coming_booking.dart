@@ -115,32 +115,32 @@ class _MemberBookingState extends State<MemberComingBooking> {
             BookingComing booking = _comingBooking[index];
             List<MedicalService> medicalServices = booking.medicalServices;
 
-            return Container(
-              margin: const EdgeInsets.symmetric(vertical: 7, horizontal: 15),
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: ColorPalette.blue2,
-                borderRadius: BorderRadius.circular(11.0),
-                boxShadow: [
-                  BoxShadow(
-                    color: ColorPalette.grey.withOpacity(0.5),
-                    spreadRadius: 1,
-                    blurRadius: 5,
-                    offset: const Offset(0, 3),
-                  ),
-                ],
-              ),
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BookingDetail(
-                        bookingId: booking.bookingId,
-                      ),
+            return InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BookingDetail(
+                      bookingId: booking.bookingId,
                     ),
-                  );
-                },
+                  ),
+                );
+              },
+              child: Container(
+                margin: const EdgeInsets.symmetric(vertical: 7, horizontal: 15),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: ColorPalette.blue2,
+                  borderRadius: BorderRadius.circular(11.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: ColorPalette.grey.withOpacity(0.5),
+                      spreadRadius: 1,
+                      blurRadius: 5,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
                 child: Column(
                   children: [
                     Row(
@@ -173,7 +173,7 @@ class _MemberBookingState extends State<MemberComingBooking> {
                                     children: [
                                       Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                            MainAxisAlignment.spaceEvenly,
                                         children: [
                                           Row(
                                             children: [

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:exe201_lumos_mobile/api_model/customer/billdetail.dart';
-import 'package:exe201_lumos_mobile/representation/member/member_bill_detail.dart';
 
 import '../api_model/customer/bill.dart';
 import 'package:http/http.dart' as http;
@@ -118,16 +117,16 @@ class CallBookingApi {
       if (response.statusCode == 200) {
         final responseBody = json.decode(response.body);
         final responseData = responseBody['data'];
-        List<Billing> comingList = responseData
+        List<Billing> list = responseData
             .map<Billing>((item) => Billing.fromJson(item))
             .toList();
-        return comingList;
+        return list;
       } else {
         throw Exception(
-            'Failed to get billings: ${response.statusCode} - ${response.reasonPhrase}');
+            'Failed to get bills: ${response.statusCode} - ${response.reasonPhrase}');
       }
     } catch (e) {
-      throw Exception('Failed to get billings: $e');
+      throw Exception('Failed to get bills: $e');
     }
   }
 
@@ -168,8 +167,9 @@ class CallBookingApi {
       if (response.statusCode == 200) {
         final responseBody = json.decode(response.body);
         final responseData = responseBody['data'];
+        BillDetailId billDetail = BillDetailId.fromJson(responseData);
 
-        return BillDetailId.fromJson(responseData);
+        return billDetail;
       } else {
         throw Exception(
             'Failed to get billing detail: ${response.statusCode} - ${response.reasonPhrase}');

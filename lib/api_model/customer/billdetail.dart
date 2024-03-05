@@ -5,14 +5,15 @@ class BillDetailId {
   final String partner;
   final int totalPrice;
   final int additionalFee;
+  final String createDate;
   final String bookingDate;
   final int bookingTime;
   final String address;
   final String paymentMethod;
-  final String note;
-  final dynamic rating;
+  final String? note;
+  final double? rating;
   final String isPay;
-  final List<MedicalServices> medicalServices;
+  final List<MedServices> medicalServices;
 
   BillDetailId({
     required this.bookingId,
@@ -21,19 +22,20 @@ class BillDetailId {
     required this.partner,
     required this.totalPrice,
     required this.additionalFee,
+    required this.createDate,
     required this.bookingDate,
     required this.bookingTime,
     required this.address,
     required this.paymentMethod,
-    required this.note,
-    required this.rating,
+    this.note,
+    this.rating,
     required this.isPay,
     required this.medicalServices,
   });
 
   factory BillDetailId.fromJson(Map<String, dynamic> json) {
     final medicalServices = (json['medicalServices'] as List)
-        .map((service) => MedicalServices.fromJson(service))
+        .map((service) => MedServices.fromJson(service))
         .toList();
 
     return BillDetailId(
@@ -43,6 +45,7 @@ class BillDetailId {
       partner: json['partner'],
       totalPrice: json['totalPrice'],
       additionalFee: json['additionalFee'],
+      createDate: json['createDate'],
       bookingDate: json['bookingDate'],
       bookingTime: json['bookingTime'],
       address: json['address'],
@@ -55,38 +58,38 @@ class BillDetailId {
   }
 }
 
-class MedicalServices {
+class MedServices {
   final String medicalName;
-  final List<Servicess> services;
+  final List<PService> services;
 
-  MedicalServices({
+  MedServices({
     required this.medicalName,
     required this.services,
   });
 
-  factory MedicalServices.fromJson(Map<String, dynamic> json) {
+  factory MedServices.fromJson(Map<String, dynamic> json) {
     final services = (json['services'] as List)
-        .map((service) => Servicess.fromJson(service))
+        .map((service) => PService.fromJson(service))
         .toList();
 
-    return MedicalServices(
+    return MedServices(
       medicalName: json['medicalName'],
       services: services,
     );
   }
 }
 
-class Servicess {
+class PService {
   final String name;
   final int price;
 
-  Servicess({
+  PService({
     required this.name,
     required this.price,
   });
 
-  factory Servicess.fromJson(Map<String, dynamic> json) {
-    return Servicess(
+  factory PService.fromJson(Map<String, dynamic> json) {
+    return PService(
       name: json['name'],
       price: json['price'],
     );

@@ -4,6 +4,7 @@ import 'package:exe201_lumos_mobile/api_services/booking_service.dart';
 import 'package:exe201_lumos_mobile/core/helper/local_storage_helper.dart';
 import 'package:exe201_lumos_mobile/login.dart';
 import 'package:intl/intl.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:logger/logger.dart';
 
 import '../../component/app_bar.dart';
@@ -27,6 +28,7 @@ class _BillScreenState extends State<BillScreen> {
   CallBookingApi api = CallBookingApi();
   var log = Logger();
   bool isEmptyList = true;
+  bool isDataLoaded = false;
 
   UserDetails? userDetails;
 
@@ -44,7 +46,7 @@ class _BillScreenState extends State<BillScreen> {
         },
       );
     } else {
-      _fetchBookings();
+      await _fetchBookings();
     }
   }
 
@@ -61,6 +63,7 @@ class _BillScreenState extends State<BillScreen> {
         setState(
           () {
             bills = billing;
+            isDataLoaded = true;
           },
         );
       } else {
@@ -79,228 +82,175 @@ class _BillScreenState extends State<BillScreen> {
         appBarText: 'Danh sách hóa đơn',
         leading: true,
       ),
-      body: FutureBuilder(
-        future: _fetchBookings(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (snapshot.hasError) {
-            return const Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.error,
-                    color: ColorPalette.grey2,
-                    size: 50,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    'Có lỗi xảy ra khi tải dữ liệu',
-                    style: TextStyle(
-                      color: ColorPalette.grey2,
-                      fontSize: 20,
-                    ),
-                  ),
-                ],
+      body: !isDataLoaded
+          ? Center(
+              child: LoadingAnimationWidget.fourRotatingDots(
+                color: ColorPalette.pinkBold,
+                size: 80,
               ),
-            );
-          } else {
-            bills = snapshot.data as List<Billing>?;
-            if (bills!.isEmpty) {
-              return const Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.error,
-                      color: ColorPalette.pinkBold,
-                      size: 50,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      'Không có hóa đơn nào',
-                      style: TextStyle(
-                        color: ColorPalette.pinkBold,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            } else {
-              return Container(
-                margin: const EdgeInsets.all(20),
-                child: ListView.builder(
-                  itemCount: bills!.length,
-                  itemBuilder: (context, index) {
-                    Billing bill = bills![index];
-                    return InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => BillDetail(
-                              billId: bill.id,
-                            ),
+            )
+          : Container(
+              margin: const EdgeInsets.all(20),
+              child: ListView.builder(
+                itemCount: bills!.length,
+                itemBuilder: (context, index) {
+                  Billing bill = bills![index];
+                  return InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BillDetail(
+                            billId: bill.bookingId,
                           ),
-                        );
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.only(bottom: 15),
-                        padding: const EdgeInsets.all(16.0),
-                        decoration: BoxDecoration(
-                          color: ColorPalette.bluelight,
-                          borderRadius: BorderRadius.circular(11.0),
-                          border: Border.all(
-                            color: getStatusColor(bill.status),
-                            width: 2,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: ColorPalette.grey.withOpacity(0.5),
-                              spreadRadius: 1,
-                              blurRadius: 5,
-                              offset: const Offset(0, 3),
-                            ),
-                          ],
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              bill.partnerName,
-                              style: GoogleFonts.roboto(
-                                textStyle: GoogleFonts.roboto(
-                                  fontWeight: FontWeight.bold,
-                                  color: ColorPalette.blueBold2,
-                                  fontSize: 20,
-                                ),
+                      );
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 15),
+                      padding: const EdgeInsets.all(16.0),
+                      decoration: BoxDecoration(
+                        color: ColorPalette.bluelight,
+                        borderRadius: BorderRadius.circular(11.0),
+                        border: Border.all(
+                          color: getStatusColor(bill.status),
+                          width: 2,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: ColorPalette.grey.withOpacity(0.5),
+                            spreadRadius: 1,
+                            blurRadius: 5,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            bill.partnerName,
+                            style: GoogleFonts.roboto(
+                              textStyle: GoogleFonts.roboto(
+                                fontWeight: FontWeight.bold,
+                                color: ColorPalette.blueBold2,
+                                fontSize: 20,
                               ),
                             ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Row(
-                              children: [
-                                const Icon(
-                                  Icons.bookmarks_sharp,
-                                  color: ColorPalette.blueBold2,
-                                  size: 16,
-                                  weight: 1.4,
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  "#${bill.bookingCode}",
-                                  style: GoogleFonts.roboto(
-                                    textStyle: const TextStyle(
-                                      color: ColorPalette.blueBold2,
-                                      fontSize: 16,
-                                    ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.bookmarks_sharp,
+                                color: ColorPalette.blueBold2,
+                                size: 16,
+                                weight: 1.4,
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                "#${bill.bookingCode}",
+                                style: GoogleFonts.roboto(
+                                  textStyle: const TextStyle(
+                                    color: ColorPalette.blueBold2,
+                                    fontSize: 16,
                                   ),
                                 ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 3,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.calendar_month_sharp,
-                                      color: ColorPalette.blueBold2,
-                                      size: 16,
-                                      weight: 1.4,
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      formatDate(bill.bookingDate),
-                                      style: GoogleFonts.roboto(
-                                        textStyle: const TextStyle(
-                                          color: ColorPalette.blueBold2,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 3,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Ghi chú:",
-                                  style: GoogleFonts.roboto(
-                                    textStyle: const TextStyle(
-                                      color: ColorPalette.blueBold2,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ),
-                                Text(
-                                  bill.note,
-                                  style: GoogleFonts.roboto(
-                                    textStyle: const TextStyle(
-                                      color: ColorPalette.blueBold2,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                  textAlign: TextAlign.justify,
-                                  maxLines: 3,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ],
-                            ),
-                            const Divider(
-                              color: ColorPalette.white,
-                              thickness: 2,
-                            ),
-                            SizedBox(
-                              width: double.infinity,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 3,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
                                 children: [
-                                  Text(
-                                    '₫ ${formatCurrency(bill.totalPrice)}',
-                                    style: const TextStyle(
-                                      color: ColorPalette.blueBold2,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    textAlign: TextAlign.right,
+                                  const Icon(
+                                    Icons.calendar_month_sharp,
+                                    color: ColorPalette.blueBold2,
+                                    size: 16,
+                                    weight: 1.4,
                                   ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    formatDate(bill.bookingDate),
+                                    style: GoogleFonts.roboto(
+                                      textStyle: const TextStyle(
+                                        color: ColorPalette.blueBold2,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  )
                                 ],
                               ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 3,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Ghi chú:",
+                                style: GoogleFonts.roboto(
+                                  textStyle: const TextStyle(
+                                    color: ColorPalette.blueBold2,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                bill.note ?? "Không có ghi chú",
+                                style: GoogleFonts.roboto(
+                                  textStyle: const TextStyle(
+                                    color: ColorPalette.blueBold2,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                textAlign: TextAlign.justify,
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
+                          ),
+                          const Divider(
+                            color: ColorPalette.white,
+                            thickness: 2,
+                          ),
+                          SizedBox(
+                            width: double.infinity,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text(
+                                  '₫ ${formatCurrency(bill.totalPrice)}',
+                                  style: const TextStyle(
+                                    color: ColorPalette.blueBold2,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  textAlign: TextAlign.right,
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    );
-                  },
-                ),
-              );
-            }
-          }
-        },
-      ),
+                    ),
+                  );
+                },
+              ),
+            ),
     );
   }
 

@@ -9,6 +9,7 @@ import 'package:exe201_lumos_mobile/login.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:logger/logger.dart';
 
 class BookingDetail extends StatefulWidget {
@@ -34,6 +35,7 @@ class _BookingDetailState extends State<BookingDetail> {
 
   CallBookingApi api = CallBookingApi();
   var log = Logger();
+  bool isLoading = true;
 
   UserDetails? userDetails;
 
@@ -63,22 +65,31 @@ class _BookingDetailState extends State<BookingDetail> {
         setState(() {
           bookingComing = booking;
           medicalService = booking.medicalServices;
+          isLoading = false;
         });
       } else {
         log.e("Booking id is null.");
-        bookingComing = null;
-        medicalService = [];
       }
     } catch (e) {
       log.e("Error when fetching booking detail: $e");
-      bookingComing = null;
-      medicalService = [];
+      throw Exception("Error when fetching booking detail: $e");
     }
   }
 
   @override
   Widget build(BuildContext context) {
     String statusText;
+
+    if (isLoading) {
+      return Scaffold(
+        body: Center(
+          child: LoadingAnimationWidget.fourRotatingDots(
+            color: ColorPalette.pinkBold,
+            size: 80,
+          ),
+        ),
+      );
+    }
 
     int? status = bookingComing?.status;
 
@@ -153,7 +164,7 @@ class _BookingDetailState extends State<BookingDetail> {
                         ),
                         const SizedBox(width: 10),
                         Text(
-                          formatDate(bookingComing?.bookingDate ?? ''),
+                          formatDate(bookingComing?.bookingDate),
                           style: GoogleFonts.roboto(
                             color: ColorPalette.blueBold2,
                             fontSize: 16,
@@ -276,8 +287,12 @@ class _BookingDetailState extends State<BookingDetail> {
     );
   }
 
-  String formatDate(String dateString) {
-    DateTime dateTime = DateTime.parse(dateString);
-    return DateFormat('dd/MM/yyyy').format(dateTime);
+  String formatDate(String? dateString) {
+    if (dateString == null) {
+      return 'N/A';
+    } else {
+      DateTime date = DateTime.parse(dateString);
+      return DateFormat('dd/MM/yyyy').format(date);
+    }
   }
 }
