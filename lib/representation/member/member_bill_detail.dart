@@ -142,6 +142,7 @@ class _BillDetailState extends State<BillDetail> {
                         crossAxisAlignment: CrossAxisAlignment.baseline,
                         textBaseline: TextBaseline.alphabetic,
                         children: [
+
                           Text(
                             'Mã đặt chỗ: ',
                             style: GoogleFonts.roboto(
@@ -150,6 +151,82 @@ class _BillDetailState extends State<BillDetail> {
                                 fontWeight: FontWeight.normal,
                                 color: ColorPalette.bluelight2,
                               ),
+
+                          ListTile(
+                            title: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  medicalService[index].medicalName,
+                                  style: GoogleFonts.roboto(
+                                    textStyle: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: ColorPalette.blueBold2),
+                                  ),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: ListView.builder(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    clipBehavior: Clip.antiAlias,
+                                    shrinkWrap: true,
+                                    itemCount:
+                                        medicalService[index].services.length,
+                                    itemBuilder: (context, index) {
+                                      if (index < medicalService.length) {
+                                        var ser =
+                                            medicalService[index].services;
+                                        return Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            for (var s in ser)
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Expanded(
+                                                    child: Text(
+                                                      s.name,
+                                                      style: GoogleFonts.roboto(
+                                                        textStyle:
+                                                            const TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          fontSize: 16,
+                                                          color: ColorPalette
+                                                              .blueBold2,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    '₫ ${formatCurrency(s.price)}',
+                                                    style: GoogleFonts.roboto(
+                                                      textStyle:
+                                                          const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        fontSize: 16,
+                                                        color: ColorPalette
+                                                            .blueBold2,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                          ],
+                                        );
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ),
+                              ],
+
                             ),
                           ),
                           Text(
