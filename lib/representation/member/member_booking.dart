@@ -283,13 +283,13 @@ class _BookingPageState extends State<BookingPage> {
     try {
       // Kiểm tra danh sách là null hoặc rỗng
       if (totalPrice < 0 || medicalReportServices.isEmpty) {
-        showErrorDialog(BookingErrorMessage.emptyList);
+        showErrorDialog(BookingMessage.emptyList);
         return;
       }
 
       // Kiểm tra danh sách không null và không rỗng
       if (selectedTime == 0 || _addController.text.isEmpty) {
-        showErrorDialog(BookingErrorMessage.bookingDateTimeAddrEmpty);
+        showErrorDialog(BookingMessage.bookingDateTimeAddrEmpty);
       } else {
         showPaymentListBottomSheet();
       }

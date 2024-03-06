@@ -95,7 +95,7 @@ class _MemberHomeState extends State<MemberHome> {
                         margin: const EdgeInsets.only(bottom: 10),
                         child: ImageSlideshow(
                           width: double.infinity,
-                          height: MediaQuery.of(context).size.height * 0.25,
+                          height: MediaQuery.of(context).size.height * 0.27,
                           indicatorColor: ColorPalette.blueBold2,
                           indicatorBackgroundColor: ColorPalette.pinkBold,
                           initialPage: 0,

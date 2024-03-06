@@ -66,6 +66,8 @@ dependencies:
   flutter_image_slideshow: ^0.1.6
   cloud_firestore: ^4.14.0
   pretty_qr_code: ^3.2.1
+  external_app_launcher: ^4.0.0
+  url_launcher: ^6.0.9
 
 flutter_launcher_icons:
   android: "launcher_icon"

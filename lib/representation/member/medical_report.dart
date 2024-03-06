@@ -1,3 +1,5 @@
+import '../../component/alert_dialog.dart';
+import '../../core/const/back-end/error_reponse.dart';
 import 'medical_report_add.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
@@ -30,53 +32,10 @@ class _MedicalReportPageState extends State<MedicalReportPage> {
 
   List<MedicalReport> _reports = [];
   List<MedicalReport>? reports;
-  bool _isEmptyList = false;
+  bool _isEmptyList = true;
+  bool isLoaded = false;
 
   UserDetails? userDetails;
-
-  OverlayEntry? _overlayEntry;
-
-  // Hàm để hiển thị vòng loading
-  void _showLoadingOverlay(BuildContext context) {
-    _overlayEntry = OverlayEntry(
-      builder: (context) => Stack(
-        children: [
-          Positioned.fill(
-            child: Container(
-              color: Colors.black.withOpacity(0.5),
-            ),
-          ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                LoadingAnimationWidget.fourRotatingDots(
-                  color: ColorPalette.pinkBold,
-                  size: 80,
-                ),
-                const SizedBox(height: 20),
-                const Text(
-                  "Đang tải dữ liệu...",
-                  style: TextStyle(
-                    color: ColorPalette.blueBold2,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-    Overlay.of(context).insert(_overlayEntry!);
-  }
-
-  // Hàm để ẩn vòng loading
-  void _hideLoadingOverlay() {
-    _overlayEntry?.remove();
-    _overlayEntry = null;
-  }
 
   Future<UserDetails>? loadAccount() async {
     return await LoginAccount.loadAccount();
@@ -104,18 +63,19 @@ class _MedicalReportPageState extends State<MedicalReportPage> {
 
   void _fetchMedicalReports() async {
     try {
-      _showLoadingOverlay(context);
       if (userDetails != null && userDetails!.id != null) {
         reports = await api.getMedicalReport(userDetails!.id!);
         setState(() {
           _reports = reports!;
           _isEmptyList = _reports.isEmpty;
+          isLoaded = true;
         });
       } else {
         setState(() {
           log.e("User details or user id is null.");
           _reports = [];
           _isEmptyList = true;
+          isLoaded = true;
         });
       }
     } catch (e) {
@@ -123,9 +83,8 @@ class _MedicalReportPageState extends State<MedicalReportPage> {
         log.e("Error when fetching medical reports: $e");
         _reports = [];
         _isEmptyList = true;
+        isLoaded = true;
       });
-    } finally {
-      _hideLoadingOverlay();
     }
   }
 
@@ -136,93 +95,102 @@ class _MedicalReportPageState extends State<MedicalReportPage> {
         appBarText: "Danh sách hồ sơ",
         leading: true,
       ),
-      body: _isEmptyList
+      body: !isLoaded
           ? Center(
-              child: Text(
-                "Không tìm thấy dữ liệu nào!",
-                style: GoogleFonts.roboto(
-                  textStyle: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.normal,
-                    color: ColorPalette.blueBold2,
-                  ),
-                ),
-                textAlign: TextAlign.center,
+              child: LoadingAnimationWidget.fourRotatingDots(
+                color: ColorPalette.pinkBold,
+                size: 80,
               ),
             )
-          : Container(
-              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-              padding: const EdgeInsets.all(10),
-              decoration: ShapeDecoration(
-                color: ColorPalette.blue2,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(11),
-                ),
-              ),
-              child: ListView.builder(
-                clipBehavior: Clip.antiAlias,
-                shrinkWrap: true,
-                itemCount: _reports.length,
-                itemBuilder: (context, index) {
-                  final item = _reports[index];
-                  return Column(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).pushNamed(
-                            MedicalReportDetail.routeName,
-                            arguments: reports![index],
-                          );
-                        },
-                        child: ListTile(
-                          leading: const Icon(
-                            Icons.medical_services,
-                            size: 23,
-                            color: ColorPalette.pink,
-                          ),
-                          title: Text(
-                            item.fullname,
-                            style: GoogleFonts.roboto(
-                              textStyle: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.normal,
-                                color: ColorPalette.blueBold2,
+          : _isEmptyList
+              ? Center(
+                  child: Text(
+                    "Không có hồ sơ nào, hãy thêm hồ sơ!",
+                    style: GoogleFonts.roboto(
+                      textStyle: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.normal,
+                        color: ColorPalette.blueBold2,
+                      ),
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                )
+              : Container(
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  padding: const EdgeInsets.all(10),
+                  decoration: ShapeDecoration(
+                    color: ColorPalette.blue2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(11),
+                    ),
+                  ),
+                  child: ListView.builder(
+                    clipBehavior: Clip.antiAlias,
+                    shrinkWrap: true,
+                    itemCount: _reports.length,
+                    itemBuilder: (context, index) {
+                      final item = _reports[index];
+                      return Column(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              Navigator.of(context).pushNamed(
+                                MedicalReportDetail.routeName,
+                                arguments: reports![index],
+                              );
+                            },
+                            child: ListTile(
+                              leading: const Icon(
+                                Icons.medical_services,
+                                size: 23,
+                                color: ColorPalette.pink,
                               ),
-                            ),
-                          ),
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Align(
-                                alignment: Alignment.centerRight,
-                                child: TextButton(
-                                  onPressed: () {},
-                                  child: const Text(
-                                    'Sửa',
-                                    style: TextStyle(
-                                      color: ColorPalette.pink,
-                                      fontSize: 16,
-                                      fontFamily: 'roboto',
-                                      fontWeight: FontWeight.w400,
-                                    ),
+                              title: Text(
+                                item.fullname,
+                                style: GoogleFonts.roboto(
+                                  textStyle: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.normal,
+                                    color: ColorPalette.blueBold2,
                                   ),
                                 ),
                               ),
-                            ],
+                              trailing: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Align(
+                                    alignment: Alignment.centerRight,
+                                    child: TextButton(
+                                      onPressed: () => onDevelopmentFeature(),
+                                      child: const Text(
+                                        'Sửa',
+                                        style: TextStyle(
+                                          color: ColorPalette.pink,
+                                          fontSize: 16,
+                                          fontFamily: 'roboto',
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      if (index < _reports.length - 1 && _reports.length > 1)
-                        const Divider(
-                          thickness: 2,
-                          height: 2,
-                          color: ColorPalette.white,
-                        ),
-                    ],
-                  );
-                },
-              ),
-            ),
+                          if (index < _reports.length - 1 &&
+                              _reports.length > 1)
+                            const Divider(
+                              thickness: 2,
+                              height: 2,
+                              color: ColorPalette.white,
+                            ),
+                        ],
+                      );
+                    },
+                  ),
+                ),
       bottomNavigationBar: Container(
         margin: const EdgeInsets.only(bottom: 12),
         child: ElevatedButton(
@@ -241,6 +209,35 @@ class _MedicalReportPageState extends State<MedicalReportPage> {
           ),
         ),
       ),
+    );
+  }
+
+  void onDevelopmentFeature() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return CustomAlertDialog(
+          title: Text(OnDevelopmentMessage.fearureOnDevelopmentTitle,
+              style: GoogleFonts.roboto(
+                color: ColorPalette.blueBold2,
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+              )),
+          message: Text(
+            OnDevelopmentMessage.featureOnDevelopment,
+            style: GoogleFonts.roboto(
+              color: ColorPalette.blueBold2,
+              fontSize: 16,
+              fontWeight: FontWeight.normal,
+            ),
+          ),
+          confirmText: "OK",
+          onConfirm: () {
+            setState(() {});
+            Navigator.of(context).pop();
+          },
+        );
+      },
     );
   }
 }

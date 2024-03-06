@@ -66,3 +66,32 @@ class AddBookingResponse {
     );
   }
 }
+
+class BookingFeedback {
+  final double rating;
+  final String? feedbackPartner;
+  final String? feedbackLumos;
+  final String? feedbackImage;
+
+  BookingFeedback({
+    required this.rating,
+    this.feedbackPartner,
+    this.feedbackLumos,
+    this.feedbackImage,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      "rating": rating,
+      "feedbackPartner": feedbackPartner,
+      "feedbackLumos": feedbackLumos,
+      "feedbackImage": feedbackImage,
+    };
+  }
+
+  //toString
+  @override
+  String toString() {
+    return 'Feedback{rating: $rating, feedbackPartner: $feedbackPartner, feedbackLumos: $feedbackLumos, feedbackImage: $feedbackImage}';
+  }
+}

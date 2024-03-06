@@ -316,7 +316,6 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
           alignment: Alignment.topCenter,
           child: SizedBox(
             width: screenWidth * 0.9,
-            height: double.infinity,
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

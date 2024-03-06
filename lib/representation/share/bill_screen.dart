@@ -1,8 +1,8 @@
-import 'package:exe201_lumos_mobile/api_model/authentication/login.dart';
-import 'package:exe201_lumos_mobile/api_model/customer/bill.dart';
-import 'package:exe201_lumos_mobile/api_services/booking_service.dart';
-import 'package:exe201_lumos_mobile/core/helper/local_storage_helper.dart';
-import 'package:exe201_lumos_mobile/login.dart';
+import '../../api_model/authentication/login.dart';
+import '../../api_model/customer/bill.dart';
+import '../../api_services/booking_service.dart';
+import '../../core/helper/local_storage_helper.dart';
+import '../../login.dart';
 import 'package:intl/intl.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:logger/logger.dart';
