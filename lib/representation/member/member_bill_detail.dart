@@ -1,4 +1,5 @@
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:rich_readmore/rich_readmore.dart';
 
 import '../../core/helper/asset_helper.dart';
 
@@ -339,16 +340,31 @@ class _BillDetailState extends State<BillDetail> {
                               ),
                             ),
                           ),
-                          Text(
-                            _billing?.note ?? '',
-                            style: GoogleFonts.roboto(
+                          RichReadMoreText.fromString(
+                            text: _billing?.note ?? "Không có ghi chú\n",
+                            textStyle: GoogleFonts.roboto(
                               textStyle: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.normal,
                                 color: ColorPalette.blueBold2,
+                                fontSize: 16,
+                                decorationStyle: TextDecorationStyle.solid,
+                                textBaseline: TextBaseline.alphabetic,
                               ),
                             ),
-                            textAlign: TextAlign.justify,
+                            settings: LineModeSettings(
+                              trimLines: 2,
+                              trimCollapsedText: '... Xem thêm',
+                              trimExpandedText: ' Rút gọn',
+                              moreStyle: const TextStyle(
+                                color: ColorPalette.blueBold2,
+                              ),
+                              lessStyle: const TextStyle(
+                                color: ColorPalette.blueBold2,
+                              ),
+                              textAlign: TextAlign.justify,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
                           ),
                           Container(
                             margin: const EdgeInsets.symmetric(vertical: 10),
@@ -359,6 +375,9 @@ class _BillDetailState extends State<BillDetail> {
                               dottedLength: 5.0,
                               space: 3.0,
                             ),
+                          ),
+                          const SizedBox(
+                            height: 10,
                           ),
                           Stack(
                             children: [
@@ -438,6 +457,9 @@ class _BillDetailState extends State<BillDetail> {
                                       ),
                                     ],
                                   ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
                                   Container(
                                     margin: const EdgeInsets.symmetric(
                                         vertical: 10),
@@ -452,7 +474,7 @@ class _BillDetailState extends State<BillDetail> {
                                           'Thành tiền: ',
                                           style: GoogleFonts.roboto(
                                             textStyle: const TextStyle(
-                                              fontSize: 20,
+                                              fontSize: 21,
                                               fontWeight: FontWeight.bold,
                                               color: ColorPalette.blueBold2,
                                             ),
@@ -462,7 +484,7 @@ class _BillDetailState extends State<BillDetail> {
                                           '₫ ${formatCurrency(_billing?.totalPrice)}',
                                           style: GoogleFonts.roboto(
                                             textStyle: const TextStyle(
-                                              fontSize: 20,
+                                              fontSize: 21,
                                               fontWeight: FontWeight.bold,
                                               color: ColorPalette.blueBold2,
                                             ),

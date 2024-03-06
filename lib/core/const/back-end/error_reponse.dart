@@ -46,6 +46,12 @@ class OperationErrorMessage {
       "Ứng dụng đã bị đóng bất ngờ. Vui lòng thử lại sau.";
 }
 
+class LumosMessage {
+  //any confuse please contact Lumos to get support
+  static const String contactSupport =
+      "Nếu bạn gặp bất kỳ vấn đề gì, hãy liên hệ với Lumos để được hỗ trợ!.";
+}
+
 class OperationSuccessMessage {
   static String changePasswordSuccess(String username) =>
       "Mật khẩu của $username đã được thay đổi thành công.";
@@ -59,7 +65,7 @@ class OperationSuccessMessage {
       "Đã xóa $itemName thành công.";
 }
 
-class BookingErrorMessage {
+class BookingMessage {
   static const String invalidTimeSlot =
       "Thời gian bạn chọn không khả dụng. Vui lòng chọn thời gian khác.";
   static const String bookingConflict =
@@ -67,6 +73,16 @@ class BookingErrorMessage {
   static const String emptyList = "Danh sách trống, vui lòng thử lại sau.";
   static const String bookingDateTimeAddrEmpty =
       "Vui lòng cung cấp đầy đủ thông tin về ngày, khung giờ và địa chỉ để đặt dịch vụ.";
+
+  //update booking status
+  static const String bookingStatusSuccess =
+      "Cảm ơn bạn đã sử dụng dịch vụ của Lumos, chúc bạn một ngày tốt lành!";
+  static const String bookingStatusCancel =
+      "Đã hủy đặt dịch vụ thành công. Hy vọng Lumos sẽ được phục vụ bạn lần gần nhất.";
+  static const String cancelBookingError =
+      "Không thể hủy đặt dịch vụ. Vui lòng thử lại sau hoặc liên hệ với Lumos để được hỗ trợ.";
+  static const String completeBookingError =
+      "Không thể hoàn thành đặt dịch vụ. Vui lòng thử lại sau hoặc liên hệ với Lumos để được hỗ trợ.";
 }
 
 class PaymentMessage {

@@ -68,15 +68,15 @@ class LoginAccount {
   }
 
   static clearLoginAccount() async {
-    await LocalStorageHelper.setValue('id', null);
-    await LocalStorageHelper.setValue('username', null);
-    await LocalStorageHelper.setValue('email', null);
-    await LocalStorageHelper.setValue('code', null);
-    await LocalStorageHelper.setValue('role', null);
-    await LocalStorageHelper.setValue('status', null);
-    await LocalStorageHelper.setValue('createdDate', null);
-    await LocalStorageHelper.setValue('lastUpdate', null);
-    await LocalStorageHelper.setValue('updatedBy', null);
-    await LocalStorageHelper.setValue('imgUrl', null);
+    await LocalStorageHelper.setValue('id', -1);
+    await LocalStorageHelper.setValue('username', '');
+    await LocalStorageHelper.setValue('email', '');
+    await LocalStorageHelper.setValue('code', '');
+    await LocalStorageHelper.setValue('role', -1);
+    await LocalStorageHelper.setValue('status', -1);
+    await LocalStorageHelper.setValue('createdDate', '');
+    await LocalStorageHelper.setValue('lastUpdate', '');
+    await LocalStorageHelper.setValue('updatedBy', '');
+    await LocalStorageHelper.setValue('imgUrl', '');
   }
 }

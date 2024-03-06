@@ -1,10 +1,9 @@
 import 'dart:convert';
 
-import 'package:exe201_lumos_mobile/api_model/customer/billdetail.dart';
-
 import '../api_model/customer/bill.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
+import '../api_model/customer/billdetail.dart';
 import '../api_model/customer/booking.dart';
 import '../api_model/customer/coming_booking.dart';
 import '../core/helper/local_storage_helper.dart';
@@ -231,6 +230,40 @@ class CallBookingApi {
       }
     } catch (e) {
       throw Exception('Failed to pending booking: $e');
+    }
+  }
+
+  // POST:/api/booking/{bookingId}/complete
+  // request: param: int bookingId, body: String reason, Feedback feedback
+  // response: bool
+  // update booking status from pending to complete
+  Future<bool> completeBooking(
+      int bookingId, String reason, BookingFeedback feedback) async {
+    var url = Uri.parse('$api/$bookingId/complete');
+    token = LocalStorageHelper.getValue("token");
+
+    try {
+      http.Response response = await http.post(
+        url,
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json'
+        },
+        body: json.encode({
+          'reason': reason,
+          'feedback': feedback.toJson(),
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        // final responseBody = json.decode(response.body);
+        // final responseData = responseBody['data'];
+        return true;
+      } else {
+        throw Exception('${response.statusCode} - ${response.reasonPhrase}');
+      }
+    } catch (e) {
+      throw Exception('Failed to complete booking: $e');
     }
   }
 }

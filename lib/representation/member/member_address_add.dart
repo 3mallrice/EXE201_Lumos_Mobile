@@ -1,6 +1,6 @@
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
-import 'package:exe201_lumos_mobile/component/alert_dialog.dart';
-import 'package:exe201_lumos_mobile/core/const/back-end/error_reponse.dart';
+import '../../component/alert_dialog.dart';
+import '../../core/const/back-end/error_reponse.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_location_search/flutter_location_search.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,6 +15,7 @@ import '../../api_model/authentication/login.dart';
 import '../../api_services/customer_service.dart';
 import '../../component/app_bar.dart';
 import '../../core/const/front-end/color_const.dart';
+import 'member_address.dart';
 
 class AddressAdd extends StatefulWidget {
   const AddressAdd({super.key});
@@ -163,10 +164,10 @@ class _AddressAddState extends State<AddressAdd> {
       context: context,
       builder: (BuildContext context) {
         return CustomAlertDialog(
-          title: const Text('Thành công'),
+          title: Text(title),
           confirmText: "OK",
           message: Text(
-            OperationSuccessMessage.createSuccess("hồ sơ"),
+            content,
             style: GoogleFonts.roboto(
               color: ColorPalette.blueBold2,
               fontSize: 16,
@@ -174,7 +175,7 @@ class _AddressAddState extends State<AddressAdd> {
             ),
           ),
           onConfirm: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).pushReplacementNamed(MemberAddress.routeName);
           },
         );
       },
@@ -182,7 +183,8 @@ class _AddressAddState extends State<AddressAdd> {
   }
 
   void _showSuccessDialog() {
-    _showResultDialog('Thành công', 'Thêm mới địa chỉ thành công!');
+    _showResultDialog(
+        'Thành công', OperationSuccessMessage.createSuccess("đia chỉ"));
   }
 
   void _showFailDialog() {

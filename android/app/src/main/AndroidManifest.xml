@@ -1,5 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <queries>
+        <package android:name="net.pulsesecure.pulsesecure" /> // your android package name
+    </queries>
+
     <application
         android:label="Lumos"
         android:name="${applicationName}"
@@ -24,6 +29,9 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
+
+                <category android:name="android.intent.category.HOME"/> 
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.

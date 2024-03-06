@@ -1,5 +1,4 @@
 import '../../core/const/back-end/error_reponse.dart';
-import '../member/member_main_navbar.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../api_model/authentication/login.dart';
@@ -53,10 +52,10 @@ class _UpdateAccountState extends State<UpdateAccount> {
           ),
           action: GestureDetector(
             onTap: () {
-              Navigator.of(context).pushReplacementNamed(MemberMain.routeName);
+              Navigator.of(context).pop();
             },
             child: Text(
-              "Về Màn hình chính",
+              DiaLogMessage.ok,
               style: GoogleFonts.roboto(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
