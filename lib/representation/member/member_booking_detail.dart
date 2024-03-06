@@ -1,7 +1,4 @@
-import 'package:exe201_lumos_mobile/core/const/back-end/error_reponse.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
+import '../../core/const/back-end/error_reponse.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 
 import '../../api_model/authentication/login.dart';
@@ -51,10 +48,6 @@ class _BookingDetailState extends State<BookingDetail> {
   bool isEmptyList = true;
 
   TextEditingController cancelReasonController = TextEditingController();
-
-  double rating = 0;
-  TextEditingController feedbackPartnerController = TextEditingController();
-  TextEditingController feedbackLumosController = TextEditingController();
 
   UserDetails? userDetails;
 
@@ -415,7 +408,7 @@ class _BookingDetailState extends State<BookingDetail> {
   void cancelBooking(int bookingId, String reason) async {
     try {
       await api.cancelBooking(bookingId, reason);
-
+      backToPage();
       //snackbar
       callSnackbar(BookingMessage.bookingStatusCancel);
 
@@ -428,9 +421,14 @@ class _BookingDetailState extends State<BookingDetail> {
     }
   }
 
+  void backToPage() {
+    Navigator.of(context).pop();
+  }
+
   void completeBooking(
       int bookingId, String reason, BookingFeedback feedback) async {
     try {
+      _showLoadingOverlay(context);
       await api.completeBooking(bookingId, reason, feedback);
 
       //snackbar
@@ -448,8 +446,16 @@ class _BookingDetailState extends State<BookingDetail> {
   void callSnackbar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(message),
+        content: Text(
+          message,
+          style: GoogleFonts.roboto(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         duration: const Duration(seconds: 3),
+        backgroundColor: ColorPalette.pinkBold,
       ),
     );
   }
@@ -503,131 +509,10 @@ class _BookingDetailState extends State<BookingDetail> {
       context: context,
       isScrollControlled: true,
       builder: (BuildContext context) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Container(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      height: 50,
-                      alignment: Alignment.center,
-                      child: const Text(
-                        'Đánh giá và phản hồi',
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: ColorPalette.blueBold2,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    //rating
-                    RatingStars(
-                      value: value,
-                      onValueChanged: (v) => setState(() {
-                        value = v;
-                        log.i(value);
-                      }),
-                      starBuilder: (index, color) => Icon(
-                        Icons.star,
-                        color: color,
-                      ),
-                      starCount: 5,
-                      starSize: 50,
-                      maxValue: 5,
-                      starSpacing: 3,
-                      valueLabelVisibility: false,
-                      animationDuration: const Duration(milliseconds: 1000),
-                      starOffColor: ColorPalette.grey2,
-                      starColor: ColorPalette.pinkBold,
-                    ),
-                    const SizedBox(height: 20),
-                    //feedback
-                    TextField(
-                      maxLines: 3,
-                      controller: feedbackPartnerController,
-                      keyboardType: TextInputType.multiline,
-                      decoration: InputDecoration(
-                        labelStyle: GoogleFonts.roboto(
-                          fontSize: 16,
-                          fontWeight: FontWeight.normal,
-                          color: ColorPalette.blueBold2,
-                        ),
-                        floatingLabelStyle: GoogleFonts.roboto(
-                          fontSize: 16,
-                          fontWeight: FontWeight.normal,
-                          color: ColorPalette.blueBold2,
-                        ),
-                        border: const OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: ColorPalette.blueBold2,
-                          ),
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                        labelText: 'Đánh giá $partnerName',
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    TextField(
-                      maxLines: 3,
-                      controller: feedbackLumosController,
-                      keyboardType: TextInputType.multiline,
-                      decoration: InputDecoration(
-                        labelStyle: GoogleFonts.roboto(
-                          fontSize: 16,
-                          fontWeight: FontWeight.normal,
-                          color: ColorPalette.blueBold2,
-                        ),
-                        floatingLabelStyle: GoogleFonts.roboto(
-                          fontSize: 16,
-                          fontWeight: FontWeight.normal,
-                          color: ColorPalette.blueBold2,
-                        ),
-                        border: const OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: ColorPalette.blueBold2,
-                          ),
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                        labelText: 'Đánh giá Lumos',
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    MyButton(
-                      onTap: () {
-                        _showLoadingOverlay(context);
-                        completeBooking(
-                          widget.bookingId!,
-                          feedbackPartnerController.text,
-                          BookingFeedback(
-                            rating: rating.toDouble(),
-                            feedbackPartner: feedbackPartnerController.text,
-                            feedbackLumos: feedbackLumosController.text,
-                          ),
-                        );
-                      },
-                      borderRadius: 10,
-                      width: MediaQuery.of(context).size.width * 0.3,
-                      color: ColorPalette.pinkBold,
-                      widget: const Text(
-                        DiaLogMessage.confirm,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: ColorPalette.white,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        );
+        return RatingBottomSheet(
+            partnerName: partnerName,
+            bookingId: widget.bookingId,
+            completeBooking: completeBooking);
       },
     );
   }
@@ -700,8 +585,11 @@ class _BookingDetailState extends State<BookingDetail> {
                     MyButton(
                       onTap: () {
                         _showLoadingOverlay(context);
-                        cancelBooking(
-                            widget.bookingId!, cancelReasonController.text);
+                        String cancelReason =
+                            cancelReasonController.text.isEmpty
+                                ? OperationSuccessMessage.updateByUser
+                                : cancelReasonController.text;
+                        cancelBooking(widget.bookingId!, cancelReason);
                       },
                       borderRadius: 10,
                       width: MediaQuery.of(context).size.width * 0.3,
@@ -761,5 +649,176 @@ class _BookingDetailState extends State<BookingDetail> {
   void _hideLoadingOverlay() {
     _overlayEntry?.remove();
     _overlayEntry = null;
+  }
+}
+
+class RatingBottomSheet extends StatefulWidget {
+  final String partnerName;
+  final int? bookingId;
+  final Function completeBooking;
+
+  const RatingBottomSheet(
+      {super.key,
+      required this.partnerName,
+      this.bookingId,
+      required this.completeBooking});
+
+  @override
+  RatingBottomSheetState createState() => RatingBottomSheetState();
+}
+
+class RatingBottomSheetState extends State<RatingBottomSheet> {
+  double _ratingValue = 0.0;
+  var log = Logger();
+
+  final TextEditingController feedbackPartnerController =
+      TextEditingController();
+  final TextEditingController feedbackLumosController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    String partnerName = widget.partnerName;
+    return StatefulBuilder(
+        builder: (BuildContext context, StateSetter setState) {
+      return Container(
+        decoration: const BoxDecoration(
+          color: ColorPalette.thirdWhite,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Container(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      height: 50,
+                      alignment: Alignment.center,
+                      child: const Text(
+                        'Đánh giá và phản hồi',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: ColorPalette.blueBold2,
+                        ),
+                      ),
+                    ),
+                    // const SizedBox(height: 10),
+                    //rating
+                    RatingStars(
+                      value: _ratingValue,
+                      onValueChanged: (v) => setState(() {
+                        _ratingValue = v;
+                        log.i(_ratingValue);
+                      }),
+                      starBuilder: (index, color) => Icon(
+                        Icons.star,
+                        color: color,
+                      ),
+                      starCount: 5,
+                      starSize: 60,
+                      maxValue: 5,
+                      starSpacing: 3,
+                      valueLabelVisibility: false,
+                      animationDuration: const Duration(milliseconds: 1000),
+                      starOffColor: ColorPalette.grey,
+                      starColor: ColorPalette.pinkBold,
+                    ),
+                    const SizedBox(height: 10),
+                    //feedback
+                    TextField(
+                      maxLines: 3,
+                      enableSuggestions: true,
+                      textInputAction: TextInputAction.next,
+                      controller: feedbackPartnerController,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        labelStyle: GoogleFonts.roboto(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                          color: ColorPalette.blueBold2,
+                        ),
+                        floatingLabelStyle: GoogleFonts.roboto(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                          color: ColorPalette.blueBold2,
+                        ),
+                        border: const OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: ColorPalette.blueBold2,
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        ),
+                        labelText: 'Đánh giá $partnerName',
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    TextField(
+                      maxLines: 3,
+                      enableSuggestions: true,
+                      textInputAction: TextInputAction.done,
+                      controller: feedbackLumosController,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        labelStyle: GoogleFonts.roboto(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                          color: ColorPalette.blueBold2,
+                        ),
+                        floatingLabelStyle: GoogleFonts.roboto(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                          color: ColorPalette.blueBold2,
+                        ),
+                        border: const OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: ColorPalette.blueBold2,
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        ),
+                        labelText: 'Đánh giá Lumos',
+                      ),
+                    ),
+                    const SizedBox(height: 25),
+                    MyButton(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        widget.completeBooking(
+                          widget.bookingId!,
+                          OperationSuccessMessage.updateByUser,
+                          BookingFeedback(
+                            rating: _ratingValue.toDouble(),
+                            feedbackPartner: feedbackPartnerController.text,
+                            feedbackLumos: feedbackLumosController.text,
+                            feedbackImage: "",
+                          ),
+                        );
+                      },
+                      borderRadius: 10,
+                      width: MediaQuery.of(context).size.width * 0.3,
+                      color: ColorPalette.pinkBold,
+                      widget: const Text(
+                        DiaLogMessage.confirm,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: ColorPalette.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    });
   }
 }
