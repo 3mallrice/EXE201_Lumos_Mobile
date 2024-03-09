@@ -1,18 +1,17 @@
-# exe201_lumos_mobile
-
-A Mobile App of Lumos for Member
+<div align="center">
+    <img src="https://github.com/3mallrice/EXE201_Lumos_Mobile/blob/main/assets/img/logo1.png" alt="LUMOS LOGO"/>
+</div>
 <div>
+    <h3>Lumos on social media</h3>
     <a href="https://www.tiktok.com/@lumoshealthycare">
-        <img src"https://github.com/3mallrice/EXE201_Lumos_Mobile/blob/main/assets/img/tiktok.png" alt="TikTok Logo">
+        <img src="assets/img/tiktok2.png" alt="Tiktok Logo">
     </a>
     <a href="https://www.facebook.com/lumos.health.vn">
         <img src="https://github.com/3mallrice/EXE201_Lumos_Mobile/blob/main/assets/img/facebook1.png" alt="Facebook Logo">
     </a>
 </div>
-<div align="center">
-    <img src="https://github.com/3mallrice/EXE201_Lumos_Mobile/blob/main/assets/img/logo1.png" alt="LUMOS LOGO"/>
-</div>
-![Lumos](https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/91b6a2d6-1e3d-49aa-bdbe-68f43fa5891a)
+
+https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/d4f4d2f4-5c10-4046-b12d-e21265644291
 
 ## Table of Contents
 <details>
@@ -29,14 +28,12 @@ A Mobile App of Lumos for Member
 
 ## Introduction
 
-Treer is an online bonsai selling website with many different types of bonsai. In particular, Treer also provides an auction feature for special bonsai, giving customers the opportunity to own rare ornamental plants. and unique with reasonable price. Our project follow the 3-tier architecture model and use the following technologies:
+<Strong>Lumos</Strong> is a platform that directly connects medical centers providing home health services to individuals in need of those services. To create a convenient and efficient system, <Strong>Lumos</Strong> simplifies the process of finding and registering for in-home health care services. Users can easily search for suitable service providers in their area, compare service packages and prices, and then register online quickly. With <Strong>Lumos</Strong>, high-quality health care right at home is just a few clicks away. Our project follow the 3-tier architecture model and use the following technologies:
 
-- JS, JSP, Boostrap to build up the front-end
-- Java to build up the back-end
+- Flutter, Dart to for mobile app (IOS & Android)
+- JS, React to build website for admin, clinic
+- C# .NET6 to build up the back-end
 - MS SQL Server to store data
-<div align="center">
-    <img src="https://github.com/emallrice/TreerAntV3-1/blob/main/images/TREER.png" alt="OVERALL SYSTEM ARCHITECTURE"/>
-</div>
 
 ## Tech Stack
 
@@ -62,12 +59,10 @@ Treer is an online bonsai selling website with many different types of bonsai. I
 
 The website provides basic features such as:
 
-- Register account
 - Login account
-- Auction system
+- Search clinic or service
 - Payment and Checkout
 - Feedback and comment
-- Admin dashboard
 
 ## Gallery
 
@@ -94,9 +89,10 @@ The website provides basic features such as:
 
 ## Contributions
 
-- [LETUANKIET29](https://github.com/LETUANKIET29)
 - [emallrice](https://github.com/emallrice)
-- [ChanhXaoSa](https://github.com/ChanhXaoSa)
+- [maotou](https://github.com/maotou-spy)
+- [tonyandy5630](https://github.com/tonyandy5630)
+- [nvtiendev](https://github.com/nvtiendev)
 
 ## License
 
