@@ -3,17 +3,17 @@
 A Mobile App of Lumos for Member
 <div>
     <a href="https://www.tiktok.com/@lumoshealthycare">
-        <img src="https://icons8.com/icon/118638/tiktok" alt="TikTok Logo">
+        <img src"https://github.com/3mallrice/EXE201_Lumos_Mobile/blob/main/assets/img/tiktok2.png" alt="TikTok Logo">
     </a>
     <a href="https://www.facebook.com/lumos.health.vn">
-        <img src="https://icons8.com/icon/13912/facebook" alt="Facebook Logo">
+        <img src="https://github.com/3mallrice/EXE201_Lumos_Mobile/blob/main/assets/img/facebook1.png" alt="Facebook Logo">
     </a>
 </div>
 <div align="center">
     <img src="https://github.com/3mallrice/EXE201_Lumos_Mobile/blob/main/assets/img/logo1.png" alt="LUMOS LOGO"/>
 </div>
 <div>
-    
+    https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/96225e49-f324-4016-ac8c-5015e4980b4b
 </div>
 
 ## Table of Contents
