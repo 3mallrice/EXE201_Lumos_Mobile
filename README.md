@@ -1,17 +1,21 @@
 # exe201_lumos_mobile
 
 A Mobile App of Lumos for Member
-
+<div>
+    <a href="https://www.tiktok.com/@lumoshealthycare">
+        <img src="https://github.com/3mallrice/EXE201_Lumos_Mobile/blob/main/assets/img/tiktok.png" alt="TikTok Logo">
+    </a>
+    <a href="https://www.facebook.com/lumos.health.vn">
+        <img src="https://github.com/3mallrice/EXE201_Lumos_Mobile/blob/main/assets/img/facebook.png" alt="Facebook Logo">
+    </a>
+</div>
 <div align="center">
     <img src="https://github.com/3mallrice/EXE201_Lumos_Mobile/blob/main/assets/img/logo1.png" alt="LUMOS LOGO"/>
 </div>
 <div>
     
 </div>
-<div>
-    <a href="https://www.tiktok.com/@lumoshealthycare">Tiktok</a>
-    <a href="https://www.facebook.com/lumos.health.vn">Facebook</a>
-</div>
+
 ## Table of Contents
 <details>
   <summary>Click to expand</summary>
