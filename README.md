@@ -12,10 +12,7 @@ A Mobile App of Lumos for Member
 <div align="center">
     <img src="https://github.com/3mallrice/EXE201_Lumos_Mobile/blob/main/assets/img/logo1.png" alt="LUMOS LOGO"/>
 </div>
-<video width="500" controls>
-  <source src="https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/97a1c19e-82bd-4f68-bab7-790f76814b57" type="video/mp4">
-  Trinh duyet cua ban khong ho tro the video.
-</video>
+https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/97a1c19e-82bd-4f68-bab7-790f76814b57
 
 ## Table of Contents
 <details>
