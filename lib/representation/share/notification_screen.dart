@@ -16,7 +16,7 @@ class NotificationScreen extends StatefulWidget {
 class _NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
-    List<String> _notis = [
+    List<String> notis = [
       "Chào mừng bạn đến với Lumos",
       "Hãy chia sẻ Lumos đến với bạn bè của bạn nhé",
       "Chúc bạn một ngày tối lành",
@@ -54,9 +54,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
           padding: const EdgeInsets.all(10),
           clipBehavior: Clip.antiAlias,
           shrinkWrap: true,
-          itemCount: _notis.length,
+          itemCount: notis.length,
           itemBuilder: (context, index) {
-            final item = _notis[index];
+            final item = notis[index];
             return Column(
               children: [
                 InkWell(
@@ -81,7 +81,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     ),
                   ),
                 ),
-                if (index < _notis.length - 1)
+                if (index < notis.length - 1)
                   const Divider(
                     thickness: 2,
                     height: 2,

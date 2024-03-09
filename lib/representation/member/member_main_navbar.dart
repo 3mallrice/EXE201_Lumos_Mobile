@@ -95,4 +95,5 @@ class _MemberMainState extends State<MemberMain> {
   }
 }
 
+// ignore: constant_identifier_names
 enum _SelectedTab { Home, Booking, Notification, Account }

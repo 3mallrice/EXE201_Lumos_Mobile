@@ -10,6 +10,7 @@ class IntroScreen extends StatefulWidget {
   static String routeName = '/intro_screen';
 
   @override
+  // ignore: library_private_types_in_public_api
   _IntroScreenState createState() => _IntroScreenState();
 }
 

@@ -1,7 +1,4 @@
 import 'package:exe201_lumos_mobile/core/const/back-end/error_reponse.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 
 import '../../api_model/authentication/login.dart';
