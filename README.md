@@ -12,7 +12,7 @@ A Mobile App of Lumos for Member
 <div align="center">
     <img src="https://github.com/3mallrice/EXE201_Lumos_Mobile/blob/main/assets/img/logo1.png" alt="LUMOS LOGO"/>
 </div>
-https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/97a1c19e-82bd-4f68-bab7-790f76814b57
+![Lumos](https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/91b6a2d6-1e3d-49aa-bdbe-68f43fa5891a)
 
 ## Table of Contents
 <details>
