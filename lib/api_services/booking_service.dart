@@ -249,11 +249,12 @@ class CallBookingApi {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json'
         },
-        body: json.encode({
-          'reason': reason,
-          'feedback': feedback.toJson(),
-        }),
+        body: json.encode({'reason': reason, 'feedback': feedback}),
       );
+
+      log.i(
+          'request: ${json.encode({'reason': reason, 'feedback': feedback})}');
+      log.i('response: ${response.body}');
 
       if (response.statusCode == 200) {
         // final responseBody = json.decode(response.body);

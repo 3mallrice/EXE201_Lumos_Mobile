@@ -63,6 +63,8 @@ class OperationSuccessMessage {
       "Đã cập nhật thông tin $itemName thành công.";
   static String deleteSuccess(String itemName) =>
       "Đã xóa $itemName thành công.";
+
+  static const String updateByUser = "Thông tin được cập nhật bởi người dùng.";
 }
 
 class BookingMessage {
