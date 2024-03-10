@@ -1,7 +1,5 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:external_app_launcher/external_app_launcher.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../component/app_bar.dart';
 import '../../core/const/front-end/color_const.dart';
