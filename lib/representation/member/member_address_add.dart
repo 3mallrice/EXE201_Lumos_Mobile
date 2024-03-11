@@ -1,20 +1,19 @@
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
-import '../../component/alert_dialog.dart';
-import '../../core/const/back-end/error_reponse.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_location_search/flutter_location_search.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:logger/logger.dart';
-import '../../api_model/customer/address.dart';
-
-import '../../core/helper/local_storage_helper.dart';
-import '../../login.dart';
 
 import '../../api_model/authentication/login.dart';
+import '../../api_model/customer/address.dart';
 import '../../api_services/customer_service.dart';
+import '../../component/alert_dialog.dart';
 import '../../component/app_bar.dart';
+import '../../core/const/back-end/error_reponse.dart';
 import '../../core/const/front-end/color_const.dart';
+import '../../core/helper/local_storage_helper.dart';
+import '../../login.dart';
 import 'member_address.dart';
 
 class AddressAdd extends StatefulWidget {
@@ -202,7 +201,7 @@ class _AddressAddState extends State<AddressAdd> {
   @override
   void setState(VoidCallback fn) {
     // TODO: implement setState
-    if(mounted){
+    if (mounted) {
       super.setState(fn);
     }
   }
@@ -304,7 +303,7 @@ class _AddressAddState extends State<AddressAdd> {
                         LocationData? locationData = await LocationSearch.show(
                           context: context,
                           lightAdress: true,
-                          mode: Mode.overlay,
+                          mode: Mode.fullscreen,
                           countryCodes: ['VN'],
                           language: 'vi',
                           searchBarHintText: 'Nhập địa chỉ',

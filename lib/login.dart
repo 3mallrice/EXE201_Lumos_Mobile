@@ -357,7 +357,7 @@ class _LoginState extends State<Login> with RestorationMixin {
                               onTap: onGoogleLogin,
                               borderRadius: 66.5,
                               height: 55,
-                              width: 300,
+                              // width: 300,
                               color: ColorPalette.white,
                               borderColor: ColorPalette.primaryText,
                               widget: Row(
@@ -380,6 +380,13 @@ class _LoginState extends State<Login> with RestorationMixin {
                                             fontWeight: FontWeight.bold,
                                             fontSize: 15,
                                             color: ColorPalette.primaryText),
+                                        overflow: TextOverflow.ellipsis,
+                                        textAlign: TextAlign.center,
+                                        locale: Locale('vi'),
+                                        textDirection: TextDirection.ltr,
+                                        textWidthBasis:
+                                            TextWidthBasis.longestLine,
+                                        maxLines: 1,
                                       ),
                                     ),
                                   ),
