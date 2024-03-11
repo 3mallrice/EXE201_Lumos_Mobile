@@ -64,9 +64,9 @@ dependencies:
   flutter_osm_plugin: ^0.70.4
   flutter_location_search: ^1.1.4
   flutter_image_slideshow: ^0.1.6
-  cloud_firestore: ^4.14.0
+  cloud_firestore: ^4.15.8
   pretty_qr_code: ^3.2.1
-  external_app_launcher: ^4.0.0
+  #  external_app_launcher: ^4.0.0
   url_launcher: ^6.0.9
 
 flutter_launcher_icons:
