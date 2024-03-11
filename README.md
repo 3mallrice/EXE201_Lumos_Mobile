@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="https://github.com/3mallrice/EXE201_Lumos_Mobile/blob/main/assets/img/logo1.png" alt="LUMOS LOGO"/>
+    <img width="60%" src="https://github.com/3mallrice/EXE201_Lumos_Mobile/blob/main/assets/img/logo1.png" alt="LUMOS LOGO"/>
 </div>
 <div>
     <h3>Lumos on social media</h3>
@@ -67,29 +67,27 @@ The website provides basic features such as:
 ## Gallery
 
 <div style="display: flex; justify-content: center;">
-    <table style="border-collapse: collapse; border: none;">
-        <tr>
-            <td style="text-align: center; border: none;">
-                <img width="50%" src="https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/8b309ac8-e7f4-427d-beaa-f9ef2846729c" alt="login-page"/>
-                <p>Login screen</p>
-            </td>
-            <td style="text-align: center; border: none;">
-                <img width="50%" src="https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/2741d605-0bff-4ac7-88ce-57fe0438f659" alt="login-page"/>
-                <p>Register screen</p>
-            </td>
-        </tr>
-    </table>
+    <div style="display: flex;">
+        <div style="text-align: center;">
+            <img width="30%" src="https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/8b309ac8-e7f4-427d-beaa-f9ef2846729c" alt="login-page"/>
+            <p>Login screen</p>
+        </div>
+        <div style="text-align: center;">
+            <img width="30%" src="https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/2741d605-0bff-4ac7-88ce-57fe0438f659" alt="login-page"/>
+            <p>Register screen</p>
+        </div>
+    </div>
 </div>
 <div align="center">
-    <img width="50%" src=https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/72f4fbde-6efe-43f0-bd12-527a83f9e573" alt="home-page"/>
+    <img width="30%" src=https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/72f4fbde-6efe-43f0-bd12-527a83f9e573" alt="home-page"/>
     <p>Home screen</p>
 </div>
 <div align="center">
-    <img width="50%" src="https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/334d60e1-7201-4266-95ff-f46f3c462c29" alt="product-detail"/>
+    <img width="30%" src="https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/334d60e1-7201-4266-95ff-f46f3c462c29" alt="product-detail"/>
     <p>Account screen</p>
 </div>
 <div align="center">
-    <img height="50%" src="https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/7404e46c-f7e2-45f6-879c-06297e8959fa" alt="Auction"/>
+    <img width="30%" src="https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/7404e46c-f7e2-45f6-879c-06297e8959fa" alt="Auction"/>
     <p>Search screen</p>
 </div>
 
