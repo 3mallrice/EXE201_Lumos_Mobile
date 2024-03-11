@@ -100,79 +100,139 @@ class _MemberHomeState extends State<MemberHome> {
                           indicatorPadding: 5,
                           autoPlayInterval: 5000,
                           isLoop: true,
-                          children: const [
+                          children: [
                             Padding(
-                              padding: EdgeInsets.all(3.0),
-                              child: ClipRRect(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(16)),
-                                child: Image(
-                                  width: double.infinity,
-                                  height: 139,
-                                  image: AssetImage(
-                                    AssetHelper.memberBanner,
+                              padding: const EdgeInsets.all(3.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return const FullScreenImageDialog(
+                                        imagePath: AssetHelper.memberBanner,
+                                      );
+                                    },
+                                  );
+                                },
+                                child: const ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(16)),
+                                  child: Image(
+                                    width: double.infinity,
+                                    height: 139,
+                                    image: AssetImage(
+                                      AssetHelper.memberBanner,
+                                    ),
+                                    fit: BoxFit.cover,
                                   ),
-                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.all(3.0),
-                              child: ClipRRect(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(16)),
-                                child: Image(
-                                  width: double.infinity,
-                                  height: 139,
-                                  image: AssetImage(
-                                    AssetHelper.memberBanner2,
+                              padding: const EdgeInsets.all(3.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return const FullScreenImageDialog(
+                                        imagePath: AssetHelper.memberBanner2,
+                                      );
+                                    },
+                                  );
+                                },
+                                child: const ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(16)),
+                                  child: Image(
+                                    width: double.infinity,
+                                    height: 139,
+                                    image: AssetImage(
+                                      AssetHelper.memberBanner2,
+                                    ),
+                                    fit: BoxFit.cover,
                                   ),
-                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.all(3.0),
-                              child: ClipRRect(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(16)),
-                                child: Image(
-                                  width: double.infinity,
-                                  height: 139,
-                                  image: AssetImage(
-                                    AssetHelper.memberBanner3,
+                              padding: const EdgeInsets.all(3.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return const FullScreenImageDialog(
+                                        imagePath: AssetHelper.memberBanner3,
+                                      );
+                                    },
+                                  );
+                                },
+                                child: const ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(16)),
+                                  child: Image(
+                                    width: double.infinity,
+                                    height: 139,
+                                    image: AssetImage(
+                                      AssetHelper.memberBanner3,
+                                    ),
+                                    fit: BoxFit.cover,
                                   ),
-                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.all(3.0),
-                              child: ClipRRect(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(16)),
-                                child: Image(
-                                  width: double.infinity,
-                                  height: 139,
-                                  image: AssetImage(
-                                    AssetHelper.memberBanner4,
+                              padding: const EdgeInsets.all(3.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return const FullScreenImageDialog(
+                                        imagePath: AssetHelper.memberBanner4,
+                                      );
+                                    },
+                                  );
+                                },
+                                child: const ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(16)),
+                                  child: Image(
+                                    width: double.infinity,
+                                    height: 139,
+                                    image: AssetImage(
+                                      AssetHelper.memberBanner4,
+                                    ),
+                                    fit: BoxFit.cover,
                                   ),
-                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.all(3.0),
-                              child: ClipRRect(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(16)),
-                                child: Image(
-                                  width: double.infinity,
-                                  height: 139,
-                                  image: AssetImage(
-                                    AssetHelper.memberBanner5,
+                              padding: const EdgeInsets.all(3.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return const FullScreenImageDialog(
+                                        imagePath: AssetHelper.memberBanner5,
+                                      );
+                                    },
+                                  );
+                                },
+                                child: const ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(16)),
+                                  child: Image(
+                                    width: double.infinity,
+                                    height: 139,
+                                    image: AssetImage(
+                                      AssetHelper.memberBanner5,
+                                    ),
+                                    fit: BoxFit.cover,
                                   ),
-                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),
