@@ -1,21 +1,21 @@
 import 'dart:async';
 
-import '../../api_model/authentication/login.dart';
-import '../../api_model/partner/partner.dart';
-import '../../api_services/partner_service.dart';
-import '../../core/helper/asset_helper.dart';
-import '../../core/helper/local_storage_helper.dart';
-import '../../login.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 
+import '../../api_model/authentication/login.dart';
+import '../../api_model/partner/partner.dart';
+import '../../api_services/partner_service.dart';
 import '../../component/app_bar.dart';
 import '../../core/const/front-end/color_const.dart';
+import '../../core/helper/asset_helper.dart';
+import '../../core/helper/local_storage_helper.dart';
+import '../../login.dart';
 import 'partner_service_list.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 
 class SearchBooking extends StatefulWidget {
   const SearchBooking({super.key});
@@ -178,22 +178,27 @@ class _SearchBookingState extends State<SearchBooking> {
                               ? Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Image.asset(
-                                      AssetHelper.imgLogo,
-                                      fit: BoxFit.fitWidth,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.5,
+                                    Expanded(
+                                      child: Image.asset(
+                                        AssetHelper.imgLogo,
+                                        fit: BoxFit.fitWidth,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.5,
+                                      ),
                                     ),
                                     const SizedBox(
                                       height: 5,
                                     ),
-                                    Text(
-                                      'Không tìm thấy kết quả',
-                                      style: GoogleFonts.roboto(
-                                        textStyle: const TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w600,
-                                          color: ColorPalette.blueBold2,
+                                    Expanded(
+                                      child: Text(
+                                        'Không tìm thấy kết quả',
+                                        style: GoogleFonts.roboto(
+                                          textStyle: const TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w600,
+                                            color: ColorPalette.blueBold2,
+                                          ),
                                         ),
                                       ),
                                     ),
