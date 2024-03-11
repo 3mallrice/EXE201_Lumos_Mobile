@@ -55,7 +55,7 @@ https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/d4f4d2f4-5c10-
 <div align="center">   
     <a href="https://developer.android.com/studio" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/Android_Studio-3DDC84?style=for-the-badge&logo=android-studio&logoColor=white"/></a>
     <a href="https://code.visualstudio.com/" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white"/></a>
-    <a href="https://visualstudio.microsoft.com/" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white"/></a>
+    <a href="https://visualstudio.microsoft.com/" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/Visual_Studio-5C2D91?style=for-the-badge&logo=visual%20studio&logoColor=white"/></a>
 </div>
 
 ## Features
