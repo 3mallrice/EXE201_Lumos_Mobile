@@ -40,7 +40,6 @@ https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/d4f4d2f4-5c10-
 
 ## Tech Stack
 
-<!-- Front-end -->
 <div align="center">
   <a href="https://dotnet.microsoft.com/en-us/" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white"/></a> 
   <a href="https://html.com/html5" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/HTML5-E34F26.svg?style=for-the-badge&logo=html5&logoColor=white&labelColor=383838"/></a>
@@ -51,7 +50,12 @@ https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/d4f4d2f4-5c10-
   <a href="https://flutter.dev/" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white"/></a>
   <a href="https://aws.amazon.com/vi/" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/Amazon_AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white"/></a>
   <a href="https://portal.azure.com/#home" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/Microsoft_Azure-0089D6?style=for-the-badge&logo=microsoft-azure&logoColor=white"/></a>
-  <a href="https://www.microsoft.com/en-us/sql-server" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white"/></a> 
+    <a href="https://www.microsoft.com/en-us/sql-server" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white"/></a> 
+</div>
+<div align="center">   
+    <a href="https://developer.android.com/studio" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/Android_Studio-3DDC84?style=for-the-badge&logo=android-studio&logoColor=white"/></a>
+    <a href="https://code.visualstudio.com/" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white"/></a>
+    <a href="https://visualstudio.microsoft.com/" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white"/></a>
 </div>
 
 ## Features
