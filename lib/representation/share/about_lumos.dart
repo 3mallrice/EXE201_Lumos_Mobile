@@ -1,12 +1,12 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
-import 'package:external_app_launcher/external_app_launcher.dart';
-import 'package:url_launcher/url_launcher.dart';
-import '../../component/app_bar.dart';
-import '../../core/const/front-end/color_const.dart';
-import '../../core/const/front-end/zalo_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../../component/app_bar.dart';
+import '../../core/const/front-end/color_const.dart';
+import '../../core/const/front-end/zalo_icon.dart';
 
 class AboutUs extends StatefulWidget {
   const AboutUs({super.key});
@@ -21,7 +21,7 @@ class _AboutUsState extends State<AboutUs> {
   @override
   void setState(VoidCallback fn) {
     // TODO: implement setState
-    if(mounted){
+    if (mounted) {
       super.setState(fn);
     }
   }
@@ -138,16 +138,20 @@ class _AboutUsState extends State<AboutUs> {
                               ),
                               child: IconButton(
                                 onPressed: () async {
-                                  const String urlScheme =
-                                      'fb://page/61554951387944';
+                                  const String url =
+                                      'https://www.facebook.com/lumos.health.vn/';
+                                  launchUrl(Uri.parse(url));
 
-                                  await LaunchApp.openApp(
-                                    androidPackageName: 'com.facebook.katana',
-                                    openStore: true,
-                                    iosUrlScheme: urlScheme,
-                                    appStoreLink:
-                                        'itms-apps://itunes.apple.com/us/app/facebook/id284882215',
-                                  );
+                                  // const String urlScheme =
+                                  //     'fb://page/61554951387944';
+                                  //
+                                  // await LaunchApp.openApp(
+                                  //   androidPackageName: 'com.facebook.katana',
+                                  //   openStore: true,
+                                  //   iosUrlScheme: urlScheme,
+                                  //   appStoreLink:
+                                  //       'itms-apps://itunes.apple.com/us/app/facebook/id284882215',
+                                  // );
                                 },
                                 icon: const Icon(
                                   EvaIcons.facebook,
@@ -187,17 +191,21 @@ class _AboutUsState extends State<AboutUs> {
                               ),
                               child: IconButton(
                                 onPressed: () async {
+                                  const String url =
+                                      'https://www.tiktok.com/@lumoshealthycare?is_from_webapp=1&sender_device=pc/';
+                                  launchUrl(Uri.parse(url));
+
                                   // Navigator.of(context).pushNamed(UpdateAccount.routeName);
-                                  const String urlScheme =
-                                      'tiktok://user/@lumoshealthycare';
-                                  await LaunchApp.openApp(
-                                    androidPackageName:
-                                        'com.ss.android.ugc.trill',
-                                    openStore: true,
-                                    iosUrlScheme: urlScheme,
-                                    appStoreLink:
-                                        'itms-apps://itunes.apple.com/us/app/tiktok/id1235601864',
-                                  );
+                                  // const String urlScheme =
+                                  //     'tiktok://user/@lumoshealthycare';
+                                  // await LaunchApp.openApp(
+                                  //   androidPackageName:
+                                  //       'com.ss.android.ugc.trill',
+                                  //   openStore: true,
+                                  //   iosUrlScheme: urlScheme,
+                                  //   appStoreLink:
+                                  //       'itms-apps://itunes.apple.com/us/app/tiktok/id1235601864',
+                                  // );
                                 },
                                 icon: const Icon(
                                   Ionicons.logo_tiktok,
