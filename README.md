@@ -4,10 +4,13 @@
 <div>
     <h3>Lumos on social media</h3>
     <a href="https://www.tiktok.com/@lumoshealthycare">
-        <img src="assets/img/tiktok2.png" alt="Tiktok Logo">
+        <img src="https://img.shields.io/badge/TikTok-000000?style=for-the-badge&logo=tiktok&logoColor=white" alt="Tiktok Logo">
     </a>
     <a href="https://www.facebook.com/lumos.health.vn">
-        <img src="https://github.com/3mallrice/EXE201_Lumos_Mobile/blob/main/assets/img/facebook1.png" alt="Facebook Logo">
+        <img src="https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white" alt="Facebook Logo">
+    </a>
+    <a href="#">
+        <img src="https://img.shields.io/badge/Google_Play-414141?style=for-the-badge&logo=google-play&logoColor=white" alt=" Logo">
     </a>
 </div>
 
@@ -39,19 +42,15 @@ https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/d4f4d2f4-5c10-
 
 <!-- Front-end -->
 <div align="center">
-  <a href="https://jsp.com" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/JSP-blue.svg?style=for-the-badge&logo=apache-tomcat&logoColor=white&labelColor=22272E"/></a> 
+  <a href="https://dotnet.microsoft.com/en-us/" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white"/></a> 
   <a href="https://html.com/html5" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/HTML5-E34F26.svg?style=for-the-badge&logo=html5&logoColor=white&labelColor=383838"/></a>
   <a href="https://css3.com" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/CSS3-1572B6.svg?style=for-the-badge&logo=css3&logoColor=white&labelColor=2A2A2A"/></a>
-  <a href="https://getbootstrap.com" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/Bootstrap-563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white&labelColor=563D7C"/></a>
-  <a href="https://www.chartjs.org" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/chart.js-F5788D.svg?style=for-the-badge&logo=chart.js&logoColor=white"/></a>
-  <a href="#" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=for-the-badge&logo=javascript&logoColor=black"/></a>
-</div>
-<!-- Back-end -->
-<div align="center">
-  <a href="https://java.com" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/Java-19-red.svg?style=for-the-badge&logo=java&logoColor=white&labelColor=2C2D72"/></a>
-</div>
-<!-- Database -->
-<div align="center">
+  <a href="https://learn.microsoft.com/en-us/dotnet/csharp/" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white"/></a>
+  <a href="https://dart.dev/guides" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white"/></a>
+  <a href="https://mui.com/material-ui/" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/Material--UI-0081CB?style=for-the-badge&logo=material-ui&logoColor=white"/></a>
+  <a href="https://flutter.dev/" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white"/></a>
+  <a href="https://aws.amazon.com/vi/" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/Amazon_AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white"/></a>
+  <a href="https://portal.azure.com/#home" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/Microsoft_Azure-0089D6?style=for-the-badge&logo=microsoft-azure&logoColor=white"/></a>
   <a href="https://www.microsoft.com/en-us/sql-server" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white"/></a> 
 </div>
 
@@ -74,14 +73,16 @@ The website provides basic features such as:
   <img width="30%" src="https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/ce71c7b4-77e6-466b-944d-c8351cb207b8" alt="search screen" style="margin: 10px;"/>
   <img width="30%" src="https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/f80f1f0e-5ecd-4686-ba54-1324919e817f" alt="partner screen" style="margin: 10px;"/>
   <img width="30%" src="https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/40e3a3f3-fa18-49c5-97c3-fe473a8f1090" alt="booking screen" style="margin: 10px;"/>
+  <img width="30%" src="https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/1f35dcb5-fb2d-4b11-ae6c-456554688477" alt="bill detail screen" style="margin: 10px;"/>
+  <img width="30%" src="https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/a7831e93-6454-4468-98c8-5a1ec558d0c8" alt="booking detail screen" style="margin: 10px;"/>
 </div>
 
 ## Contributions
 
-- [emallrice](https://github.com/emallrice)
-- [maotou](https://github.com/maotou-spy)
-- [tonyandy5630](https://github.com/tonyandy5630)
-- [nvtiendev](https://github.com/nvtiendev)
+- Bùi Hữu Đức - [emallrice](https://github.com/emallrice)
+- Bùi Hữu Phúc - [maotou](https://github.com/maotou-spy)
+- Bùi Thanh Tú - [tonyandy5630](https://github.com/tonyandy5630)
+- Nguyễn Văn Tiến - [nvtiendev](https://github.com/nvtiendev)
 
 ## License
 
