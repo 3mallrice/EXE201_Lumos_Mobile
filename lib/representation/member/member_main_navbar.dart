@@ -40,56 +40,58 @@ class _MemberMainState extends State<MemberMain> {
       ),
       extendBody: true,
       extendBodyBehindAppBar: true,
-      bottomNavigationBar: DotNavigationBar(
-        backgroundColor: ColorPalette.pink,
-        currentIndex: _SelectedTab.values.indexOf(_selectedTab),
-        onTap: _handleIndexChanged,
-        dotIndicatorColor: ColorPalette.pink,
-        unselectedItemColor: ColorPalette.white,
-        splashBorderRadius: 50,
-        enableFloatingNavBar: true,
-        enablePaddingAnimation: false,
-        splashColor: Colors.transparent,
-        //disable splash
-        marginR: const EdgeInsets.symmetric(horizontal: 40),
-        paddingR: const EdgeInsets.symmetric(vertical: 3),
-        items: [
-          /// Home
-          DotNavigationBarItem(
-            icon: const Icon(
-              LumosIcons.home_1icon,
-              size: 30,
+      bottomNavigationBar: Expanded(
+        child: DotNavigationBar(
+          backgroundColor: ColorPalette.pink,
+          currentIndex: _SelectedTab.values.indexOf(_selectedTab),
+          onTap: _handleIndexChanged,
+          dotIndicatorColor: ColorPalette.pink,
+          unselectedItemColor: ColorPalette.white,
+          splashBorderRadius: 50,
+          enableFloatingNavBar: true,
+          enablePaddingAnimation: false,
+          splashColor: Colors.transparent,
+          //disable splash
+          marginR: const EdgeInsets.symmetric(horizontal: 20),
+          paddingR: const EdgeInsets.symmetric(vertical: 3),
+          items: [
+            /// Home
+            DotNavigationBarItem(
+              icon: const Icon(
+                LumosIcons.home_1icon,
+                size: 30,
+              ),
+              selectedColor: ColorPalette.selectedPink,
             ),
-            selectedColor: ColorPalette.selectedPink,
-          ),
 
-          /// booking
-          DotNavigationBarItem(
-            icon: const Icon(
-              Icons.calendar_month_outlined,
-              size: 30,
+            /// booking
+            DotNavigationBarItem(
+              icon: const Icon(
+                Icons.calendar_month_outlined,
+                size: 30,
+              ),
+              selectedColor: ColorPalette.selectedPink,
             ),
-            selectedColor: ColorPalette.selectedPink,
-          ),
 
-          /// notification
-          DotNavigationBarItem(
-            icon: const Icon(
-              LumosIcons.bellicon,
-              size: 30,
+            /// notification
+            DotNavigationBarItem(
+              icon: const Icon(
+                LumosIcons.bellicon,
+                size: 30,
+              ),
+              selectedColor: ColorPalette.selectedPink,
             ),
-            selectedColor: ColorPalette.selectedPink,
-          ),
 
-          /// Account
-          DotNavigationBarItem(
-            icon: const Icon(
-              Icons.person,
-              size: 30,
+            /// Account
+            DotNavigationBarItem(
+              icon: const Icon(
+                Icons.person,
+                size: 30,
+              ),
+              selectedColor: ColorPalette.selectedPink,
             ),
-            selectedColor: ColorPalette.selectedPink,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

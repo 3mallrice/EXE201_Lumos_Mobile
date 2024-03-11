@@ -1,5 +1,6 @@
-import '../core/const/front-end/color_const.dart';
 import 'package:flutter/material.dart';
+
+import '../core/const/front-end/color_const.dart';
 
 class MyButtonList extends StatelessWidget {
   final String text;
@@ -32,32 +33,29 @@ class MyButtonList extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Icon(
-                  leftIcon,
-                  color: ColorPalette.blueBold2,
-                  size: 41,
-                ),
-                const SizedBox(width: 10),
-                SizedBox(
-                  width: 200,
-                  child: Text(
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Icon(
+                    leftIcon,
+                    color: ColorPalette.blueBold2,
+                    size: 24,
+                  ),
+                  const SizedBox(width: 5),
+                  Text(
                     text,
                     style: const TextStyle(
                       color: ColorPalette.blueBold2,
                       fontSize: 18,
                       fontFamily: 'roboto',
                       fontWeight: FontWeight.w400,
-                      height: 0.08,
-                      letterSpacing: 0.10,
                     ),
+                    textAlign: TextAlign.start,
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-            const SizedBox(width: 10),
             Icon(
               rightIcon,
               color: ColorPalette.pink,
