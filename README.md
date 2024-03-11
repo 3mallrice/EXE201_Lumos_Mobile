@@ -66,29 +66,14 @@ The website provides basic features such as:
 
 ## Gallery
 
-<div style="display: flex; justify-content: center;">
-    <div style="display: flex;">
-        <div style="text-align: center;">
-            <img width="30%" src="https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/8b309ac8-e7f4-427d-beaa-f9ef2846729c" alt="login-page"/>
-            <p>Login screen</p>
-        </div>
-        <div style="text-align: center;">
-            <img width="30%" src="https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/2741d605-0bff-4ac7-88ce-57fe0438f659" alt="login-page"/>
-            <p>Register screen</p>
-        </div>
-    </div>
-</div>
-<div align="center">
-    <img width="30%" src=https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/72f4fbde-6efe-43f0-bd12-527a83f9e573" alt="home-page"/>
-    <p>Home screen</p>
-</div>
-<div align="center">
-    <img width="30%" src="https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/334d60e1-7201-4266-95ff-f46f3c462c29" alt="product-detail"/>
-    <p>Account screen</p>
-</div>
-<div align="center">
-    <img width="30%" src="https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/7404e46c-f7e2-45f6-879c-06297e8959fa" alt="Auction"/>
-    <p>Search screen</p>
+<div style="display: flex; justify-content: center; flex-wrap: wrap;">
+  <img width="30%" src="https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/8b309ac8-e7f4-427d-beaa-f9ef2846729c" alt="login-page" style="margin: 10px;"/>
+  <img width="30%" src="https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/2741d605-0bff-4ac7-88ce-57fe0438f659" alt="login-page" style="margin: 10px;"/>
+  <img width="30%" src="https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/72f4fbde-6efe-43f0-bd12-527a83f9e573" alt="home screen" style="margin: 10px;"/>
+  <img width="30%" src="https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/334d60e1-7201-4266-95ff-f46f3c462c29" alt="account screen" style="margin: 10px;"/>
+  <img width="30%" src="https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/ce71c7b4-77e6-466b-944d-c8351cb207b8" alt="search screen" style="margin: 10px;"/>
+  <img width="30%" src="https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/f80f1f0e-5ecd-4686-ba54-1324919e817f" alt="partner screen" style="margin: 10px;"/>
+  <img width="30%" src="https://github.com/3mallrice/EXE201_Lumos_Mobile/assets/117875129/40e3a3f3-fa18-49c5-97c3-fe473a8f1090" alt="booking screen" style="margin: 10px;"/>
 </div>
 
 ## Contributions
