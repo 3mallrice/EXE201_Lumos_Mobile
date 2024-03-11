@@ -1,13 +1,12 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/const/front-end/color_const.dart';
 import '../../core/helper/asset_helper.dart';
 import 'search_booking.dart';
-
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class MemberHome extends StatefulWidget {
   const MemberHome({super.key});
@@ -101,40 +100,80 @@ class _MemberHomeState extends State<MemberHome> {
                           indicatorPadding: 5,
                           autoPlayInterval: 5000,
                           isLoop: true,
-                          children: [
+                          children: const [
                             Padding(
-                              padding: const EdgeInsets.all(3.0),
-                              child: Image.asset(
-                                AssetHelper.memberBanner,
-                                fit: BoxFit.fill,
+                              padding: EdgeInsets.all(3.0),
+                              child: ClipRRect(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(16)),
+                                child: Image(
+                                  width: double.infinity,
+                                  height: 139,
+                                  image: AssetImage(
+                                    AssetHelper.memberBanner,
+                                  ),
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.all(3.0),
-                              child: Image.asset(
-                                AssetHelper.memberBanner2,
-                                fit: BoxFit.fill,
+                              padding: EdgeInsets.all(3.0),
+                              child: ClipRRect(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(16)),
+                                child: Image(
+                                  width: double.infinity,
+                                  height: 139,
+                                  image: AssetImage(
+                                    AssetHelper.memberBanner2,
+                                  ),
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.all(3.0),
-                              child: Image.asset(
-                                AssetHelper.memberBanner3,
-                                fit: BoxFit.fill,
+                              padding: EdgeInsets.all(3.0),
+                              child: ClipRRect(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(16)),
+                                child: Image(
+                                  width: double.infinity,
+                                  height: 139,
+                                  image: AssetImage(
+                                    AssetHelper.memberBanner3,
+                                  ),
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.all(3.0),
-                              child: Image.asset(
-                                AssetHelper.memberBanner4,
-                                fit: BoxFit.fill,
+                              padding: EdgeInsets.all(3.0),
+                              child: ClipRRect(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(16)),
+                                child: Image(
+                                  width: double.infinity,
+                                  height: 139,
+                                  image: AssetImage(
+                                    AssetHelper.memberBanner4,
+                                  ),
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.all(3.0),
-                              child: Image.asset(
-                                AssetHelper.memberBanner5,
-                                fit: BoxFit.fill,
+                              padding: EdgeInsets.all(3.0),
+                              child: ClipRRect(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(16)),
+                                child: Image(
+                                  width: double.infinity,
+                                  height: 139,
+                                  image: AssetImage(
+                                    AssetHelper.memberBanner5,
+                                  ),
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           ],
