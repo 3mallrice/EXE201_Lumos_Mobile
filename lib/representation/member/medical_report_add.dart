@@ -115,6 +115,14 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
     _fetchUserData();
   }
 
+  @override
+  void setState(VoidCallback fn) {
+    // TODO: implement setState
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
   bool isEmpty(String name, String phoneNumber) {
     return name.isEmpty || phoneNumber.isEmpty;
   }

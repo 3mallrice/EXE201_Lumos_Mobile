@@ -42,6 +42,14 @@ class _AccountScreenState extends State<AccountScreen> {
     return await LoginAccount.loadAccount();
   }
 
+  @override
+  void setState(VoidCallback fn) {
+    // TODO: implement setState
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
   void fetchUserData() async {
     if (userDetails == null) {
       Future.delayed(

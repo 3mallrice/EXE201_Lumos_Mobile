@@ -1,22 +1,21 @@
-import 'core/const/back-end/role.dart';
-
-import 'api_model/authentication/login.dart';
 import 'package:flutter/material.dart';
-import 'core/helper/local_storage_helper.dart';
-import 'sign_up.dart';
-import 'core/const/front-end/color_const.dart';
-import 'api_services/authentication_service.dart';
-import 'component/my_button.dart';
-import 'component/my_textfield.dart';
-import 'core/const/back-end/error_reponse.dart';
-import 'core/helper/image_helper.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:logger/logger.dart';
 
+import 'api_model/authentication/login.dart';
+import 'api_services/authentication_service.dart';
 import 'component/alert_dialog.dart';
+import 'component/my_button.dart';
+import 'component/my_textfield.dart';
+import 'core/const/back-end/error_reponse.dart';
+import 'core/const/back-end/role.dart';
+import 'core/const/front-end/color_const.dart';
 import 'core/helper/asset_helper.dart';
+import 'core/helper/image_helper.dart';
+import 'core/helper/local_storage_helper.dart';
 import 'representation/member/member_main_navbar.dart';
+import 'sign_up.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -27,9 +26,11 @@ class Login extends StatefulWidget {
   State<Login> createState() => _LoginState();
 }
 
-class _LoginState extends State<Login> {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+class _LoginState extends State<Login> with RestorationMixin {
+  final RestorableTextEditingController emailController =
+      RestorableTextEditingController();
+  final RestorableTextEditingController passwordController =
+      RestorableTextEditingController();
   final CallAuthenticationApi authApi = CallAuthenticationApi();
   var logger = Logger();
 
@@ -102,7 +103,7 @@ class _LoginState extends State<Login> {
 
   // Hàm hiển thị hộp thoại thành công
   void onSuccess(String username) {
-    //Snackbar
+    //Snack bar
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
@@ -116,9 +117,10 @@ class _LoginState extends State<Login> {
       ),
     );
 
-    Future.delayed(const Duration(seconds: 3));
-    //delay 3s to navigate to main screen
-    Navigator.of(context).pushReplacementNamed(MemberMain.routeName);
+    Future.delayed(const Duration(seconds: 2));
+
+    // Navigator.of(context).pushReplacementNamed(MemberMain.routeName);
+    Navigator.restorablePushReplacementNamed(context, MemberMain.routeName);
   }
 
   void _onEmptyField() {
@@ -137,6 +139,8 @@ class _LoginState extends State<Login> {
 
   // Hàm hiển thị hộp thoại thất bại
   void _showFailDialog() {
+    // //show keyboard when click login
+
     _showOKDialog(
       context,
       title: const Text(
@@ -151,14 +155,15 @@ class _LoginState extends State<Login> {
   }
 
   onPressedLogin() async {
-    String email = emailController.text.toLowerCase().trim();
-    String password = passwordController.text.trim();
+    String email = emailController.value.text.toLowerCase().trim();
+    String password = passwordController.value.text.trim();
 
     try {
       if (email.isEmpty || password.isEmpty) {
         _onEmptyField();
         return;
       }
+
       _showLoadingOverlay(context);
       LoginResponse response = await authApi.login(email, password);
 
@@ -204,6 +209,14 @@ class _LoginState extends State<Login> {
 
   Future<void> _load() async {
     await precacheImage(const AssetImage(AssetHelper.imglogo1), context);
+  }
+
+  @override
+  void setState(VoidCallback fn) {
+    // TODO: implement setState
+    if (mounted) {
+      super.setState(fn);
+    }
   }
 
   @override
@@ -261,7 +274,7 @@ class _LoginState extends State<Login> {
                             ),
                             MyTextfield(
                               validator: emailValidator,
-                              controller: emailController,
+                              controller: emailController.value,
                               labelText: 'Email',
                               hintText: 'a@gmail.com',
                               floatingLabelBehavior:
@@ -276,7 +289,7 @@ class _LoginState extends State<Login> {
                               builder: (context, setState) {
                                 return MyTextfield(
                                   validator: passwordValidator,
-                                  controller: passwordController,
+                                  controller: passwordController.value,
                                   obscureText: _passwordInVisible,
                                   labelText: 'Mật khẩu',
                                   hintText: 'Mật khẩu của bạn...',
@@ -422,6 +435,17 @@ class _LoginState extends State<Login> {
         }
       },
     );
+  }
+
+  @override
+  // TODO: implement restorationId
+  String? get restorationId => Login.routeName;
+
+  @override
+  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
+    // TODO: implement restoreState
+    registerForRestoration(emailController, "login_email");
+    registerForRestoration(passwordController, "login_password");
   }
 }
 

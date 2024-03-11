@@ -28,13 +28,17 @@ class MyApp extends StatelessWidget {
       supportedLocales: const [
         Locale('vi', 'VN'),
       ],
+
+      //Restoration State
+      restorationScopeId: "Lumos",
+
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
       themeMode: ThemeMode.dark,
-      title: 'Lumos - Health and Trust',
+      title: 'Lumos - Mothers\' Home Healthcare',
       theme: ThemeData(
         fontFamily: GoogleFonts.roboto().fontFamily,
         useMaterial3: true,

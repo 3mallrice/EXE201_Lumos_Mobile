@@ -56,6 +56,14 @@ class _BillScreenState extends State<BillScreen> {
     _fetchUserData();
   }
 
+  @override
+  void setState(VoidCallback fn) {
+    // TODO: implement setState
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
   Future<void> _fetchBookings() async {
     try {
       if (userDetails != null) {

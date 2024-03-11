@@ -200,6 +200,14 @@ class _AddressAddState extends State<AddressAdd> {
   }
 
   @override
+  void setState(VoidCallback fn) {
+    // TODO: implement setState
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
+  @override
   void initState() {
     super.initState();
     _fetchUserData();

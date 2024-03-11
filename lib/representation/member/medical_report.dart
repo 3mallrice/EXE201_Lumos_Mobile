@@ -61,6 +61,14 @@ class _MedicalReportPageState extends State<MedicalReportPage> {
     _fetchUserData();
   }
 
+  @override
+  void setState(VoidCallback fn) {
+    // TODO: implement setState
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
   void _fetchMedicalReports() async {
     try {
       if (userDetails != null && userDetails!.id != null) {
@@ -71,12 +79,8 @@ class _MedicalReportPageState extends State<MedicalReportPage> {
           isLoaded = true;
         });
       } else {
-        setState(() {
-          log.e("User details or user id is null.");
-          _reports = [];
-          _isEmptyList = true;
-          isLoaded = true;
-        });
+        log.e("User details or user id is null.");
+        throw new Exception("User details or user id is null.");
       }
     } catch (e) {
       setState(() {

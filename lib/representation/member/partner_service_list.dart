@@ -55,9 +55,11 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
   void _fetchUserData() async {
     userDetails = await loadAccount();
     if (userDetails == null) {
-      Future.delayed(Duration.zero, () {
-        Navigator.of(context).pushReplacementNamed(Login.routeName);
-      });
+      Future.delayed(
+        Duration.zero,
+        () =>
+            Navigator.restorablePushReplacementNamed(context, Login.routeName),
+      );
     } else {
       await _fetchPartnerData(widget.partnerId);
     }

@@ -14,15 +14,24 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen> with RestorationMixin {
   @override
   void initState() {
     super.initState();
     redirectIntro();
   }
 
+  @override
+  void setState(VoidCallback fn) {
+    // TODO: implement setState
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+
   void redirectTo(String redirectTo) {
-    Navigator.of(context).pushReplacementNamed(redirectTo);
+    Navigator.restorablePushReplacementNamed(context, redirectTo);
+    // Navigator.of(context).pushReplacementNamed(redirectTo);
   }
 
   void redirectIntro() async {
@@ -50,5 +59,14 @@ class _SplashScreenState extends State<SplashScreen> {
         Positioned.fill(child: ImageHelper.loadFormAsset(AssetHelper.imglogo1)),
       ],
     );
+  }
+
+  @override
+  // TODO: implement restorationId
+  String? get restorationId => SplashScreen.routeName;
+
+  @override
+  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
+    // TODO: implement restoreState
   }
 }

@@ -1,5 +1,5 @@
 class ApiService {
-  static const String rootApi = 'http://54.252.239.12/api';
+  static const String rootApi = 'https://apiserver.online/api';
 }
 
 class ApiResponse<T> {

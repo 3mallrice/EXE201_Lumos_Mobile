@@ -61,6 +61,14 @@ class _MemberAddressState extends State<MemberAddress> {
     _fetchUserData();
   }
 
+  @override
+  void setState(VoidCallback fn) {
+    // TODO: implement setState
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
   void _fetchAddress() async {
     try {
       if (userDetails != null && userDetails!.id != null) {
