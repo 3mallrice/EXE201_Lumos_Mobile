@@ -87,6 +87,14 @@ class _MemberBookingState extends State<MemberComingBooking> {
   }
 
   @override
+  void setState(VoidCallback fn) {
+    // TODO: implement setState
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorPalette.secondaryWhite,

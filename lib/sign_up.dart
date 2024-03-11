@@ -403,6 +403,7 @@ class _SignUpState extends State<SignUp> {
                                   const EdgeInsets.symmetric(horizontal: 20),
                               width: double.infinity,
                               child: RichText(
+                                textAlign: TextAlign.center,
                                 text: TextSpan(
                                   children: [
                                     TextSpan(

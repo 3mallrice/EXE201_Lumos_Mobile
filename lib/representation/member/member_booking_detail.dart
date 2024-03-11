@@ -89,6 +89,14 @@ class _BookingDetailState extends State<BookingDetail> {
   }
 
   @override
+  void setState(VoidCallback fn) {
+    // TODO: implement setState
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     String statusText;
     int? status = bookingComing?.status;

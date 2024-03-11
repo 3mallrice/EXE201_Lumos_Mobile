@@ -29,6 +29,14 @@ class _UpdateAccountState extends State<UpdateAccount> {
   // final TextEditingController addressController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
 
+  @override
+  void setState(VoidCallback fn) {
+    // TODO: implement setState
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
   //"Xong" button
   onPressedUpdate() {
     //show custom alert dialog to tell developing feature

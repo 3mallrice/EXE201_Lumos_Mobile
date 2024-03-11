@@ -29,10 +29,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    configurations {
-      all*.exclude group: 'io.flutter.plugins.googlemaps', module: 'google_maps_flutter_android'
-  }
-    compileSdkVersion 34
+    compileSdkVersion 33
     namespace "com.lumos.exe201_lumos_mobile"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
@@ -44,7 +41,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.lumos.exe201_lumos_mobile"
+        applicationId "com.lumos.lumos"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion 23
@@ -77,5 +74,4 @@ flutter {
 
 dependencies {
     implementation "com.android.support:multidex:1.0.3"
-    implementation "com.google.android.material:material:1.11.0"
 }

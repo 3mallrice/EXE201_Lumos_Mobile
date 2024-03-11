@@ -58,6 +58,14 @@ class _MemberAllBookingState extends State<MemberAllBooking> {
     _fetchUserData();
   }
 
+  @override
+  void setState(VoidCallback fn) {
+    // TODO: implement setState
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
   void _fetchBookings() async {
     try {
       if (userDetails != null) {

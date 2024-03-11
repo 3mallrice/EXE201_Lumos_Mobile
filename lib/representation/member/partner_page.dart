@@ -54,6 +54,14 @@ class _PartnerPageState extends State<PartnerPage> {
   }
 
   @override
+  void setState(VoidCallback fn) {
+    // TODO: implement setState
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     if (partner == null) {
       return Scaffold(
