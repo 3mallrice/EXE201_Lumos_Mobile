@@ -1,13 +1,12 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/const/front-end/color_const.dart';
 import '../../core/helper/asset_helper.dart';
 import 'search_booking.dart';
-
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class MemberHome extends StatefulWidget {
   const MemberHome({super.key});
@@ -104,37 +103,137 @@ class _MemberHomeState extends State<MemberHome> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(3.0),
-                              child: Image.asset(
-                                AssetHelper.memberBanner,
-                                fit: BoxFit.fill,
+                              child: GestureDetector(
+                                onTap: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return const FullScreenImageDialog(
+                                        imagePath: AssetHelper.memberBanner,
+                                      );
+                                    },
+                                  );
+                                },
+                                child: const ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(16)),
+                                  child: Image(
+                                    width: double.infinity,
+                                    height: 139,
+                                    image: AssetImage(
+                                      AssetHelper.memberBanner,
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(3.0),
-                              child: Image.asset(
-                                AssetHelper.memberBanner2,
-                                fit: BoxFit.fill,
+                              child: GestureDetector(
+                                onTap: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return const FullScreenImageDialog(
+                                        imagePath: AssetHelper.memberBanner2,
+                                      );
+                                    },
+                                  );
+                                },
+                                child: const ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(16)),
+                                  child: Image(
+                                    width: double.infinity,
+                                    height: 139,
+                                    image: AssetImage(
+                                      AssetHelper.memberBanner2,
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(3.0),
-                              child: Image.asset(
-                                AssetHelper.memberBanner3,
-                                fit: BoxFit.fill,
+                              child: GestureDetector(
+                                onTap: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return const FullScreenImageDialog(
+                                        imagePath: AssetHelper.memberBanner3,
+                                      );
+                                    },
+                                  );
+                                },
+                                child: const ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(16)),
+                                  child: Image(
+                                    width: double.infinity,
+                                    height: 139,
+                                    image: AssetImage(
+                                      AssetHelper.memberBanner3,
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(3.0),
-                              child: Image.asset(
-                                AssetHelper.memberBanner4,
-                                fit: BoxFit.fill,
+                              child: GestureDetector(
+                                onTap: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return const FullScreenImageDialog(
+                                        imagePath: AssetHelper.memberBanner4,
+                                      );
+                                    },
+                                  );
+                                },
+                                child: const ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(16)),
+                                  child: Image(
+                                    width: double.infinity,
+                                    height: 139,
+                                    image: AssetImage(
+                                      AssetHelper.memberBanner4,
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(3.0),
-                              child: Image.asset(
-                                AssetHelper.memberBanner5,
-                                fit: BoxFit.fill,
+                              child: GestureDetector(
+                                onTap: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return const FullScreenImageDialog(
+                                        imagePath: AssetHelper.memberBanner5,
+                                      );
+                                    },
+                                  );
+                                },
+                                child: const ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(16)),
+                                  child: Image(
+                                    width: double.infinity,
+                                    height: 139,
+                                    image: AssetImage(
+                                      AssetHelper.memberBanner5,
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
                             ),
                           ],
