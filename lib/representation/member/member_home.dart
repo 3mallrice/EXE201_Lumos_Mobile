@@ -45,22 +45,9 @@ class _MemberHomeState extends State<MemberHome> {
     });
   }
 
-  Future<void> _loadImage() async {
-    await Future.wait([
-      precacheImage(const AssetImage(AssetHelper.imglogo2), context),
-      precacheImage(const AssetImage(AssetHelper.memberBanner), context),
-      precacheImage(const AssetImage(AssetHelper.memberBanner2), context),
-      precacheImage(const AssetImage(AssetHelper.memberBanner3), context),
-      precacheImage(const AssetImage(AssetHelper.memberBanner4), context),
-      precacheImage(const AssetImage(AssetHelper.home1), context),
-      precacheImage(const AssetImage(AssetHelper.home2), context),
-      precacheImage(const AssetImage(AssetHelper.home3), context),
-    ]);
-  }
-
   @override
   Widget build(BuildContext context) {
-    _loadImage();
+    //_loadImage();
     // double screenWidth = MediaQuery.of(context).size.width;
     return Builder(
       builder: (context) {

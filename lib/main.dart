@@ -1,3 +1,5 @@
+import 'package:exe201_lumos_mobile/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,6 +15,24 @@ void main() async {
   //initiate hive
   await Hive.initFlutter();
   await LocalStorageHelper.initLocalStorageHelper();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  // Initialize Firebase.
+  // await Firebase.initializeApp();
+  //
+  // Future<void> _loadImage() async {
+  //   await Future.wait([
+  //     precacheImage(const AssetImage(AssetHelper.imglogo2), context),
+  //     precacheImage(const AssetImage(AssetHelper.memberBanner), context),
+  //     precacheImage(const AssetImage(AssetHelper.memberBanner2), context),
+  //     precacheImage(const AssetImage(AssetHelper.memberBanner3), context),
+  //     precacheImage(const AssetImage(AssetHelper.memberBanner4), context),
+  //     precacheImage(const AssetImage(AssetHelper.home1), context),
+  //     precacheImage(const AssetImage(AssetHelper.home2), context),
+  //     precacheImage(const AssetImage(AssetHelper.home3), context),
+  //   ]);
+  // }
 
   runApp(const MyApp());
 }

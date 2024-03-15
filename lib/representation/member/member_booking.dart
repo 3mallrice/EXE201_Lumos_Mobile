@@ -181,7 +181,7 @@ class _BookingPageState extends State<BookingPage> {
     partner = widget.partner;
     fetchUserData();
     fetchMedicalReports();
-    _fetchAddress();
+    //_fetchAddress();
     fetchPayments();
   }
 
@@ -663,8 +663,7 @@ class _BookingPageState extends State<BookingPage> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                SizedBox(
-                                                  width: screenWidth * 0.5,
+                                                Expanded(
                                                   child: Text(
                                                     item2.name ?? "",
                                                     style: GoogleFonts.roboto(
@@ -683,15 +682,18 @@ class _BookingPageState extends State<BookingPage> {
                                                     softWrap: true,
                                                   ),
                                                 ),
-                                                Text(
-                                                  '₫ ${formatCurrency(item2.price!)}',
-                                                  style: GoogleFonts.roboto(
-                                                    textStyle: const TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                      fontSize: 16,
-                                                      color: ColorPalette
-                                                          .blueBold2,
+                                                Expanded(
+                                                  child: Text(
+                                                    '₫ ${formatCurrency(item2.price!)}',
+                                                    style: GoogleFonts.roboto(
+                                                      textStyle:
+                                                          const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        fontSize: 16,
+                                                        color: ColorPalette
+                                                            .blueBold2,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
