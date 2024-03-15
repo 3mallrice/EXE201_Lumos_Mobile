@@ -298,17 +298,53 @@ class _BookingPageState extends State<BookingPage> {
 
   List<String> listWorkshift = [];
 
-  List<String> getListWorkshift() {
-    List<String> listWorkshift = [];
-    selectedDayOfWeek = selectedDate.weekday + 1;
+  bool canBookForWorkshift(int workshift, int currentHour, int currentMinute) {
+    int morningEndTime = Workshift.morningEndTime;
+    int afternoonEndTime = Workshift.afternoonEndTime;
+    int eveningEndTime = Workshift.eveningEndTime;
+
+    if (workshift == 1) {
+      return currentHour < morningEndTime - 2 ||
+          (currentHour == morningEndTime - 2 && currentMinute <= 30);
+    } else if (workshift == 2) {
+      return currentHour < afternoonEndTime - 2 ||
+          (currentHour == afternoonEndTime - 2 && currentMinute <= 30);
+    } else if (workshift == 3) {
+      return currentHour < eveningEndTime - 2 ||
+          (currentHour == eveningEndTime - 2 && currentMinute <= 30);
+    }
+    return false;
+  }
+
+  List<String> getAvailableWorkshifts() {
+    List<String> availableWorkshifts = [];
+
+    if (partner?.schedules == null) {
+      return availableWorkshifts;
+    }
+
+    int selectedDayOfWeek = selectedDate.weekday + 1;
+    DateTime now = DateTime.now();
+    int currentHour = now.hour;
+    int currentMinute = now.minute;
+
     for (Schedule schedule in partner!.schedules!) {
-      if (schedule.dayOfWeek == selectedDayOfWeek) {
-        int workshift = schedule.workShift!;
-        listWorkshift.add(Workshift.workshiftTime[workshift]!);
+      if (selectedDate.day == now.day) {
+        if (schedule.dayOfWeek == selectedDayOfWeek) {
+          int workshift = schedule.workShift!;
+          if (canBookForWorkshift(workshift, currentHour, currentMinute)) {
+            availableWorkshifts.add(Workshift.workshiftTime[workshift]!);
+          }
+        }
+      } else {
+        if (schedule.dayOfWeek == selectedDayOfWeek) {
+          availableWorkshifts
+              .add(Workshift.workshiftTime[schedule.workShift!]!);
+        }
       }
     }
-    setState(() {});
-    return listWorkshift;
+
+    return availableWorkshifts;
   }
 
   void showPaymentListBottomSheet() {
@@ -850,7 +886,7 @@ class _BookingPageState extends State<BookingPage> {
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
                               'Khung giờ',
@@ -869,11 +905,14 @@ class _BookingPageState extends State<BookingPage> {
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                 ),
+                                // textAlign: TextAlign.left,
                                 overflow: TextOverflow.ellipsis,
                               ),
                               isDense: true,
                               value: Workshift.workshiftTime[selectedTime],
-                              items: getListWorkshift().map((String value) {
+                              items: getAvailableWorkshifts().map((
+                                String value,
+                              ) {
                                 return DropdownMenuItem<String>(
                                   value: value,
                                   child: Text(value,
@@ -949,7 +988,7 @@ class _BookingPageState extends State<BookingPage> {
                       controller: _addController,
                       textAlign: TextAlign.start,
                       decoration: InputDecoration(
-                        hintText: 'Chọn địa chỉ của bạn',
+                        hintText: 'Địa chỉ của bạn',
                         hintStyle: GoogleFonts.roboto(
                           color: ColorPalette.blueBold2.withOpacity(0.65),
                         ),
@@ -1001,7 +1040,7 @@ class _BookingPageState extends State<BookingPage> {
                         keyboardAppearance: Brightness.light,
                         keyboardType: TextInputType.multiline,
                         decoration: InputDecoration(
-                          hintText: 'Nhập ghi chú...',
+                          hintText: 'Ghi chú...',
                           hintStyle: GoogleFonts.roboto(
                             color: ColorPalette.blueBold2.withOpacity(0.65),
                           ),
