@@ -1,22 +1,21 @@
 import 'dart:async';
 
-import 'package:intl/intl.dart';
-import 'package:logger/logger.dart';
-
-import '../../api_services/booking_service.dart';
-import '../../api_services/payment_service.dart';
-import 'member_main_navbar.dart';
-import 'package:flutter/services.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:pretty_qr_code/pretty_qr_code.dart';
-import '../../core/const/back-end/error_reponse.dart';
-import '../../core/const/front-end/color_const.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:logger/logger.dart';
+import 'package:pretty_qr_code/pretty_qr_code.dart';
 
 import '../../api_model/payment/payment.dart';
+import '../../api_services/booking_service.dart';
+import '../../api_services/payment_service.dart';
 import '../../component/app_bar.dart';
+import '../../core/const/back-end/error_reponse.dart';
+import '../../core/const/front-end/color_const.dart';
 import '../../core/helper/asset_helper.dart';
+import 'member_main_navbar.dart';
 
 class QrPayment extends StatefulWidget {
   const QrPayment({super.key});
@@ -141,7 +140,7 @@ class _QrPaymentState extends State<QrPayment> {
                     height: MediaQuery.of(context).size.height * 0.05,
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     textBaseline: TextBaseline.alphabetic,
                     verticalDirection: VerticalDirection.down,
                     children: [
@@ -167,25 +166,27 @@ class _QrPaymentState extends State<QrPayment> {
                           ),
                         ),
                       ),
-                      ElevatedButton(
-                        clipBehavior: Clip.antiAlias,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: ColorPalette.blueBold,
-                          minimumSize: const Size(150, 50),
-                          // elevation: 3,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                      Expanded(
+                        child: ElevatedButton(
+                          clipBehavior: Clip.antiAlias,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: ColorPalette.blueBold,
+                            minimumSize: const Size(150, 50),
+                            // elevation: 3,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                           ),
-                        ),
-                        onPressed: () => onCompleted(
-                            addPaymentResponse!.paymentLinkId,
-                            addPaymentResponse!.orderCode),
-                        child: Text(
-                          'Hoàn thành',
-                          style: GoogleFonts.roboto(
-                            fontSize: 20,
-                            color: ColorPalette.thirdWhite,
-                            fontWeight: FontWeight.bold,
+                          onPressed: () => onCompleted(
+                              addPaymentResponse!.paymentLinkId,
+                              addPaymentResponse!.orderCode),
+                          child: Text(
+                            'Hoàn thành',
+                            style: GoogleFonts.roboto(
+                              fontSize: 20,
+                              color: ColorPalette.thirdWhite,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
@@ -201,6 +202,7 @@ class _QrPaymentState extends State<QrPayment> {
   }
 
   OverlayEntry? _overlayEntry;
+
   // Hàm để hiển thị vòng loading
   void _showLoadingOverlay(BuildContext context) {
     _overlayEntry = OverlayEntry(
@@ -521,6 +523,7 @@ class FieldTransferInfo extends StatefulWidget {
 
   final String label;
   final String text;
+
   @override
   State<StatefulWidget> createState() {
     return _FieldTransferInfo();
@@ -529,6 +532,7 @@ class FieldTransferInfo extends StatefulWidget {
 
 class _FieldTransferInfo extends State<FieldTransferInfo> {
   var isClick = false;
+
   @override
   Widget build(BuildContext context) {
     return Container(

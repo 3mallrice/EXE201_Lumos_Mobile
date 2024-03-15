@@ -1,21 +1,19 @@
-import '../../component/alert_dialog.dart';
-import '../../core/const/back-end/error_reponse.dart';
-import 'medical_report_add.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-
-import '../../core/helper/local_storage_helper.dart';
-import '../../login.dart';
 import 'package:logger/logger.dart';
 
 import '../../api_model/authentication/login.dart';
 import '../../api_model/customer/medical_report.dart';
-import '../../component/app_bar.dart';
-import '../../core/const/front-end/color_const.dart';
-import 'medical_report_detail.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import '../../api_services/customer_service.dart';
+import '../../component/alert_dialog.dart';
+import '../../component/app_bar.dart';
+import '../../core/const/back-end/error_reponse.dart';
+import '../../core/const/front-end/color_const.dart';
+import '../../core/helper/local_storage_helper.dart';
+import '../../login.dart';
+import 'medical_report_add.dart';
+import 'medical_report_detail.dart';
 
 class MedicalReportPage extends StatefulWidget {
   const MedicalReportPage({super.key});
@@ -64,7 +62,7 @@ class _MedicalReportPageState extends State<MedicalReportPage> {
   @override
   void setState(VoidCallback fn) {
     // TODO: implement setState
-    if(mounted){
+    if (mounted) {
       super.setState(fn);
     }
   }
@@ -80,7 +78,7 @@ class _MedicalReportPageState extends State<MedicalReportPage> {
         });
       } else {
         log.e("User details or user id is null.");
-        throw new Exception("User details or user id is null.");
+        throw Exception("User details or user id is null.");
       }
     } catch (e) {
       setState(() {

@@ -1,33 +1,29 @@
-import 'payment_information.dart';
-
-import '../../api_model/customer/booking.dart';
-import '../../api_model/payment/payment.dart';
-import '../../api_services/booking_service.dart';
-import '../../api_services/payment_service.dart';
-import '../../component/alert_dialog.dart';
-import '../../core/const/back-end/workship.dart';
-
-import '../../api_model/customer/address.dart';
-import '../../api_model/partner/partner.dart';
-import '../../core/const/back-end/error_reponse.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:logger/logger.dart';
 
 import '../../api_model/authentication/login.dart';
+import '../../api_model/customer/address.dart';
+import '../../api_model/customer/booking.dart';
 import '../../api_model/customer/cart_model.dart';
 import '../../api_model/customer/medical_report.dart';
+import '../../api_model/partner/partner.dart';
+import '../../api_model/payment/payment.dart';
+import '../../api_services/booking_service.dart';
 import '../../api_services/customer_service.dart';
-import 'member_address_add.dart';
-
+import '../../api_services/payment_service.dart';
+import '../../component/alert_dialog.dart';
 import '../../component/app_bar.dart';
 import '../../component/my_button.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
-
+import '../../core/const/back-end/error_reponse.dart';
+import '../../core/const/back-end/workship.dart';
 import '../../core/const/front-end/color_const.dart';
 import '../../core/helper/local_storage_helper.dart';
 import '../../login.dart';
+import 'member_address_add.dart';
+import 'payment_information.dart';
 
 class BookingPage extends StatefulWidget {
   final List<CartModel>? cart;
@@ -47,6 +43,7 @@ class BookingPage extends StatefulWidget {
 
 class _BookingPageState extends State<BookingPage> {
   DateTime selectedDate = DateTime.now();
+
   // TimeOfDay? selectedTime = TimeOfDay.now();
   int selectedDayOfWeek = 0;
   int selectedTime = 0;
@@ -1106,19 +1103,21 @@ class _BookingPageState extends State<BookingPage> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: ColorPalette.pink,
-                  shape: const CircleBorder(),
-                  padding: const EdgeInsets.only(
-                      left: 10, right: 8, top: 8, bottom: 8),
-                ),
-                onPressed: () {
-                  Navigator.of(context).pushNamed(AddressAdd.routeName);
-                },
-                child: const Icon(
-                  Icons.add_business,
-                  color: ColorPalette.white,
+              Expanded(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: ColorPalette.pink,
+                    shape: const CircleBorder(),
+                    padding: const EdgeInsets.only(
+                        left: 10, right: 8, top: 8, bottom: 8),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(AddressAdd.routeName);
+                  },
+                  child: const Icon(
+                    Icons.add_business,
+                    color: ColorPalette.white,
+                  ),
                 ),
               ),
             ],

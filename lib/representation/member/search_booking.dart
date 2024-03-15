@@ -165,7 +165,7 @@ class _SearchBookingState extends State<SearchBooking> {
               Expanded(
                 child: Container(
                   margin: const EdgeInsets.symmetric(vertical: 10),
-                  padding: const EdgeInsets.all(10),
+                  // padding: const EdgeInsets.all(10),
                   decoration: ShapeDecoration(
                     color: ColorPalette.blue2,
                     shape: RoundedRectangleBorder(
@@ -287,8 +287,9 @@ class _SearchBookingState extends State<SearchBooking> {
                                         ),
                                         Container(
                                           padding:
-                                              const EdgeInsets.only(left: 15),
+                                              const EdgeInsets.only(left: 8),
                                           child: Column(
+                                            mainAxisSize: MainAxisSize.min,
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: _service.map((item2) {
@@ -391,12 +392,16 @@ class _SearchBookingState extends State<SearchBooking> {
                                                       ),
                                                     ),
                                                   ),
-                                                  Text(
-                                                    '₫ ${formatCurrency(item2.price ?? 0)}',
-                                                    style: GoogleFonts.aBeeZee(
-                                                      fontSize: 13,
-                                                      color: ColorPalette
-                                                          .blueBold2,
+                                                  Flexible(
+                                                    fit: FlexFit.loose,
+                                                    child: Text(
+                                                      '₫${formatCurrency(item2.price ?? 0)}',
+                                                      style:
+                                                          GoogleFonts.aBeeZee(
+                                                        fontSize: 13,
+                                                        color: ColorPalette
+                                                            .blueBold2,
+                                                      ),
                                                     ),
                                                   ),
                                                 ],
