@@ -296,7 +296,7 @@ class _BookingPageState extends State<BookingPage> {
     }
   }
 
-  List<String> listWorkshift = [];
+  // List<String> listWorkshift = [];
 
   bool canBookForWorkshift(int workshift, int currentHour, int currentMinute) {
     int morningEndTime = Workshift.morningEndTime;
@@ -327,6 +327,9 @@ class _BookingPageState extends State<BookingPage> {
     DateTime now = DateTime.now();
     int currentHour = now.hour;
     int currentMinute = now.minute;
+
+    // Sắp xếp danh sách schedules theo workShift trước khi xử lý
+    partner!.schedules!.sort((a, b) => a.workShift!.compareTo(b.workShift!));
 
     for (Schedule schedule in partner!.schedules!) {
       if (selectedDate.day == now.day) {
