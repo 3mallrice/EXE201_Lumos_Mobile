@@ -31,10 +31,14 @@ class AppBarCom extends StatelessWidget implements PreferredSizeWidget {
         leading: leading
             ? leftIcon ??
                 IconButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    icon: const Icon(Icons.arrow_back_ios_rounded))
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back_ios_new_rounded,
+                    size: 18,
+                  ),
+                )
             : null,
         iconTheme: const IconThemeData(color: ColorPalette.secondaryWhite),
         backgroundColor: backgroundColor ?? ColorPalette.blue,
@@ -42,7 +46,7 @@ class AppBarCom extends StatelessWidget implements PreferredSizeWidget {
         titleTextStyle: GoogleFonts.roboto(
           textStyle: TextStyle(
               color: textColor ?? ColorPalette.blueBold2,
-              fontSize: 24,
+              fontSize: 20,
               fontWeight: FontWeight.bold),
         ),
         elevation: 4,

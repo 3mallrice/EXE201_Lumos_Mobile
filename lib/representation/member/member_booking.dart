@@ -752,44 +752,42 @@ class _BookingPageState extends State<BookingPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
-                      child: InkWell(
-                        onTap: () => _selectDate(context),
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 10.0,
-                            horizontal: 20.0,
+                    InkWell(
+                      onTap: () => _selectDate(context),
+                      child: Container(
+                        alignment: Alignment.centerLeft,
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 10.0,
+                          horizontal: 20.0,
+                        ),
+                        decoration: BoxDecoration(
+                          color: ColorPalette.white,
+                          borderRadius: BorderRadius.circular(16.0),
+                          border: Border.all(
+                            color: ColorPalette.grey2,
+                            width: 1.0,
                           ),
-                          decoration: BoxDecoration(
-                            color: ColorPalette.white,
-                            borderRadius: BorderRadius.circular(16.0),
-                            border: Border.all(
-                              color: ColorPalette.grey2,
-                              width: 1.0,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Ngày',
+                              style: GoogleFonts.roboto(
+                                fontWeight: FontWeight.normal,
+                                fontSize: 13,
+                                color: ColorPalette.blue3,
+                              ),
                             ),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Ngày',
-                                style: GoogleFonts.roboto(
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 13,
-                                  color: ColorPalette.blue3,
-                                ),
+                            Text(
+                              formattedDate,
+                              style: GoogleFonts.roboto(
+                                color: ColorPalette.blueBold2,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
                               ),
-                              Text(
-                                formattedDate,
-                                style: GoogleFonts.roboto(
-                                  color: ColorPalette.blueBold2,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
