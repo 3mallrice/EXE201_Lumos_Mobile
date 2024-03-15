@@ -65,7 +65,6 @@ dependencies:
   flutter_image_slideshow: ^0.1.6
   #  cloud_firestore: ^4.15.8
   pretty_qr_code: ^3.2.1
-  #  external_app_launcher: ^4.0.0
   url_launcher: ^6.0.9
   lazy_loading_list_view: ^0.0.7
   firebase_crashlytics: ^3.4.19
@@ -100,31 +99,6 @@ flutter:
     - assets/font/
 
   fonts:
-    - family: poppins
-      fonts:
-        - asset: assets/font/Poppins-Black.otf
-        - asset: assets/font/Poppins-BlackItalic.otf
-        - asset: assets/font/Poppins-Bold.otf
-        - asset: assets/font/Poppins-BoldItalic.otf
-        - asset: assets/font/Poppins-ExtraBold.otf
-        - asset: assets/font/Poppins-ExtraBoldItalic.otf
-        - asset: assets/font/Poppins-ExtraLight.otf
-        - asset: assets/font/Poppins-ExtraLightItalic.otf
-        - asset: assets/font/Poppins-Italic.otf
-        - asset: assets/font/Poppins-Light.otf
-        - asset: assets/font/Poppins-LightItalic.otf
-        - asset: assets/font/Poppins-Medium.otf
-        - asset: assets/font/Poppins-MediumItalic.otf
-        - asset: assets/font/Poppins-Regular.otf
-        - asset: assets/font/Poppins-SemiBold.otf
-        - asset: assets/font/Poppins-SemiBoldItalic.otf
-        - asset: assets/font/Poppins-Thin.otf
-        - asset: assets/font/Poppins-ThinItalic.otf
-        - asset: assets/font/verdana.ttf
-        - asset: assets/font/verdana-bold.ttf
-        - asset: assets/font/verdana-bold-italic.ttf
-          style: normal
-
     - family: LumosIcons #tên của bộ icons . Nhớ đặt đúng tên đã đặt như trên web nhé
       fonts:
         - asset: assets/font/LumosIcons.ttf #đường dẫn file .ttf
