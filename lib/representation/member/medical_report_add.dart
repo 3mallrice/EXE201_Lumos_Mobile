@@ -45,7 +45,7 @@ const List<String> _listSex = [
 const List<String> _listBlood = [
   'A Rh+',
   'A Rh-',
-  'B Rh-',
+  'B Rh+',
   'B Rh-',
   'O Rh+',
   'O Rh-',
