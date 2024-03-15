@@ -61,6 +61,7 @@ class _SearchBookingState extends State<SearchBooking> {
   void initState() {
     super.initState();
     _searchController.addListener(_onSearchChanged);
+    _fetchPartners();
     _fetchUserData();
   }
 
@@ -82,32 +83,22 @@ class _SearchBookingState extends State<SearchBooking> {
 
   void _fetchPartners() async {
     try {
-      String? keyword = _searchController.text;
+      String? keyword =
+          _searchController.text.isEmpty ? '' : _searchController.text;
       if (userDetails != null) {
         List<Partner>? partner =
             await api.getPartnerPartnerServiceByKeyword(keyword);
         if (mounted) {
           setState(
             () {
-              setState(
-                () {
-                  _partner = partner;
-                  isEmptyList = _partner.isEmpty;
-                },
-              );
+              _partner = partner;
+              isEmptyList = _partner.isEmpty;
             },
           );
         }
       } else {
-        if (mounted) {
-          setState(
-            () {
-              log.e("User details or user keyword is null.");
-              _partner = [];
-              isEmptyList = true;
-            },
-          );
-        }
+        log.e("User details or user keyword is null.");
+        throw Exception("User details or user keyword is null.");
       }
     } catch (e) {
       if (mounted) {
@@ -292,7 +283,8 @@ class _SearchBookingState extends State<SearchBooking> {
                                             mainAxisSize: MainAxisSize.min,
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
-                                            children: _service.map((item2) {
+                                            children:
+                                                _service.take(3).map((item2) {
                                               return Row(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.center,

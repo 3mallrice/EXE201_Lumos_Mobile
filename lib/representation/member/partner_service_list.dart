@@ -1,28 +1,26 @@
-import 'package:intl/intl.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
-
-import '../../api_services/partner_service.dart';
-
-import '../../api_model/authentication/login.dart';
-import '../../api_model/partner/partner.dart';
-import '../../api_services/customer_service.dart';
-import 'package:logger/logger.dart';
-
-import '../../api_model/customer/cart_model.dart';
-import '../../api_model/customer/medical_report.dart';
-import '../../core/const/back-end/error_reponse.dart';
-import '../../core/helper/local_storage_helper.dart';
-import '../../login.dart';
-import 'member_booking.dart';
 import 'package:flutter/material.dart';
-import '../../component/app_bar.dart';
-import '../../core/const/front-end/color_const.dart';
-import '../../core/helper/asset_helper.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:logger/logger.dart';
 import 'package:rich_readmore/rich_readmore.dart';
+
+import '../../api_model/authentication/login.dart';
+import '../../api_model/customer/cart_model.dart';
+import '../../api_model/customer/medical_report.dart';
+import '../../api_model/partner/partner.dart';
+import '../../api_services/customer_service.dart';
+import '../../api_services/partner_service.dart';
+import '../../component/app_bar.dart';
+import '../../core/const/back-end/error_reponse.dart';
+import '../../core/const/front-end/color_const.dart';
+import '../../core/helper/asset_helper.dart';
+import '../../core/helper/local_storage_helper.dart';
+import '../../login.dart';
+import 'member_booking.dart';
 
 class PartnerServiceList extends StatefulWidget {
   final int? partnerId;
@@ -41,6 +39,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
   bool _isFavorited = false;
   UserDetails? userDetails;
   Partner? partner;
+  int? partnerId;
 
   var log = Logger();
 
@@ -53,6 +52,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
   }
 
   void _fetchUserData() async {
+    partnerId = widget.partnerId;
     userDetails = await loadAccount();
     if (userDetails == null) {
       Future.delayed(
@@ -61,7 +61,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
             Navigator.restorablePushReplacementNamed(context, Login.routeName),
       );
     } else {
-      await _fetchPartnerData(widget.partnerId);
+      await _fetchPartnerData(partnerId);
     }
   }
 
@@ -75,11 +75,13 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
         });
       } else {
         log.e("Partner id is null.");
-        partner = null;
+        throw Exception("Partner id is null.");
       }
     } catch (e) {
-      log.e("Error when fetching partner data: $e");
-      partner = null;
+      setState(() {
+        log.e("Error when fetching partner data: $e");
+        partner = null;
+      });
     }
   }
 
@@ -95,11 +97,8 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
           },
         );
       } else {
-        setState(() {
-          log.e("User details or user id is null.");
-          _reports = [];
-          isEmptyList = true;
-        });
+        log.e("User details or user id is null.");
+        throw Exception("User details or user id is null.");
       }
     } catch (e) {
       setState(() {
@@ -163,6 +162,13 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
   void initState() {
     super.initState();
     _fetchUserData();
+  }
+
+  @override
+  void setState(VoidCallback fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
   }
 
   List<PartnerService> services = [];

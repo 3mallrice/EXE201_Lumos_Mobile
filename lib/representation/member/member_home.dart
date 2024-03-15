@@ -47,8 +47,6 @@ class _MemberHomeState extends State<MemberHome> {
 
   @override
   Widget build(BuildContext context) {
-    //_loadImage();
-    // double screenWidth = MediaQuery.of(context).size.width;
     return Builder(
       builder: (context) {
         return PopScope(
@@ -282,14 +280,15 @@ class _MemberHomeState extends State<MemberHome> {
                                 color: ColorPalette.blueBold2,
                                 size: 42,
                               ),
-                              label: const Text(
+                              label: Text(
                                 'Mẹ bầu',
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: ColorPalette.blueBold2,
-                                  fontSize: 20,
-                                  fontFamily: 'roboto',
-                                  fontWeight: FontWeight.w500,
+                                style: GoogleFonts.roboto(
+                                  textStyle: const TextStyle(
+                                    color: ColorPalette.blueBold2,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ),
                               style: ElevatedButton.styleFrom(
