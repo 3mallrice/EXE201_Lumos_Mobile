@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart';
+
 import '../../core/const/back-end/validation.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
@@ -41,14 +43,14 @@ const List<String> _listSex = [
 ];
 
 const List<String> _listBlood = [
-  'Nhóm A Rh+',
-  'Nhóm A Rh-',
-  'Nhóm B Rh-',
-  'Nhóm B Rh-',
-  'Nhóm O Rh+',
-  'Nhóm O Rh-',
-  'Nhóm AB Rh+',
-  'Nhóm AB Rh-',
+  'A Rh+',
+  'A Rh-',
+  'B Rh-',
+  'B Rh-',
+  'O Rh+',
+  'O Rh-',
+  'AB Rh+',
+  'AB Rh-',
 ];
 
 class _MedicalReportAddState extends State<MedicalReportAdd> {
@@ -118,7 +120,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
   @override
   void setState(VoidCallback fn) {
     // TODO: implement setState
-    if(mounted){
+    if (mounted) {
       super.setState(fn);
     }
   }
@@ -487,7 +489,8 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Expanded(
+                      Flexible(
+                        flex: 3,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -535,7 +538,8 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
                         ),
                       ),
                       const SizedBox(width: 10),
-                      Expanded(
+                      Flexible(
+                        flex: 2,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
