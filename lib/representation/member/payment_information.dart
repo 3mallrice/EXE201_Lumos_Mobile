@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -140,39 +141,40 @@ class _QrPaymentState extends State<QrPayment> {
                     height: MediaQuery.of(context).size.height * 0.05,
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     textBaseline: TextBaseline.alphabetic,
                     verticalDirection: VerticalDirection.down,
                     children: [
-                      ElevatedButton(
-                        clipBehavior: Clip.antiAlias,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: ColorPalette.pink,
-                          minimumSize: const Size(150, 50),
-                          // elevation: 3,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                      Flexible(
+                        flex:
+                            1, // Sử dụng Flexible thay vì Expanded và đặt flex cho từng nút
+                        child: ElevatedButton(
+                          clipBehavior: Clip.antiAlias,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: ColorPalette.pink,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                           ),
-                        ),
-                        onPressed: () => onCanceled(
-                            addPaymentResponse!.paymentLinkId,
-                            addPaymentResponse!.orderCode),
-                        child: Text(
-                          'Hủy',
-                          style: GoogleFonts.roboto(
-                            fontSize: 20,
-                            color: ColorPalette.thirdWhite,
-                            fontWeight: FontWeight.bold,
+                          onPressed: () => onCanceled(
+                              addPaymentResponse!.paymentLinkId,
+                              addPaymentResponse!.orderCode),
+                          child: Text(
+                            'Hủy',
+                            style: GoogleFonts.roboto(
+                              fontSize: 20,
+                              color: ColorPalette.thirdWhite,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
-                      Expanded(
+                      Flexible(
+                        flex: 2,
                         child: ElevatedButton(
                           clipBehavior: Clip.antiAlias,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: ColorPalette.blueBold,
-                            minimumSize: const Size(150, 50),
-                            // elevation: 3,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
