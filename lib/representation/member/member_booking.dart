@@ -613,8 +613,6 @@ class _BookingPageState extends State<BookingPage> {
                   )
                 else
                   Container(
-                    margin:
-                        const EdgeInsets.symmetric(vertical: 15, horizontal: 5),
                     padding: const EdgeInsets.all(5),
                     decoration: ShapeDecoration(
                       color: ColorPalette.blue2,
@@ -625,6 +623,7 @@ class _BookingPageState extends State<BookingPage> {
                     child: Column(
                       children: [
                         ListView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: medicalReportServices.length,
                           itemBuilder: (context, index) {
@@ -678,22 +677,19 @@ class _BookingPageState extends State<BookingPage> {
                                                     ),
                                                     overflow:
                                                         TextOverflow.ellipsis,
-                                                    maxLines: 2,
+                                                    maxLines: 3,
                                                     softWrap: true,
                                                   ),
                                                 ),
-                                                Expanded(
-                                                  child: Text(
-                                                    '₫ ${formatCurrency(item2.price!)}',
-                                                    style: GoogleFonts.roboto(
-                                                      textStyle:
-                                                          const TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                        fontSize: 16,
-                                                        color: ColorPalette
-                                                            .blueBold2,
-                                                      ),
+                                                Text(
+                                                  '₫ ${formatCurrency(item2.price!)}',
+                                                  style: GoogleFonts.roboto(
+                                                    textStyle: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                      fontSize: 16,
+                                                      color: ColorPalette
+                                                          .blueBold2,
                                                     ),
                                                   ),
                                                 ),
@@ -705,12 +701,12 @@ class _BookingPageState extends State<BookingPage> {
                                     ],
                                   ),
                                 ),
-                                // if (index < medicalReportServices.length - 1)
-                                const Divider(
-                                  thickness: 1,
-                                  height: 2,
-                                  color: ColorPalette.blue,
-                                ),
+                                if (index < medicalReportServices.length - 1)
+                                  const Divider(
+                                    thickness: 2,
+                                    height: 2,
+                                    color: ColorPalette.white,
+                                  ),
                               ],
                             );
                           },
@@ -718,7 +714,7 @@ class _BookingPageState extends State<BookingPage> {
                         Container(
                           padding: const EdgeInsets.symmetric(
                             vertical: 5,
-                            horizontal: 23,
+                            horizontal: 15,
                           ),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
