@@ -1,9 +1,11 @@
 import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+
 import '../api_model/authentication/login.dart';
 import '../api_model/authentication/signup.dart';
 import '../core/helper/local_storage_helper.dart';
 import 'api_service.dart';
-import 'package:http/http.dart' as http;
 
 class CallAuthenticationApi {
   static const apiName = 'auth';
@@ -17,7 +19,7 @@ class CallAuthenticationApi {
   //POST: /login
   //request: email, password
   //response: LoginResponse (token, accessTokenExpiration, refreshToken, refreshTokenExpiration)
-  Future<LoginResponse> login(String email, String password) async {
+  Future<UserDetails> login(String email, String password) async {
     try {
       LoginRequest request = LoginRequest(email: email, password: password);
 
@@ -33,32 +35,12 @@ class CallAuthenticationApi {
       if (response.statusCode == 200) {
         final responseData = json.decode(response.body);
         final loginData = responseData['data'];
-        final userdetailData = loginData['userdetails'];
-        UserDetails userDetails = UserDetails(
-          id: userdetailData['id'],
-          username: loginData['username'],
-          code: userdetailData['code'],
-          email: userdetailData['email'],
-          role: userdetailData['role'],
-          status: userdetailData['status'],
-          phone: userdetailData['phone'],
-          pronounce: userdetailData['pronounce'],
-          createdDate: userdetailData['createdDate'],
-          createdBy: userdetailData['createdBy'],
-          lastUpdate: userdetailData['lastUpdate'],
-          updatedBy: userdetailData['updatedBy'],
-          imgUrl: userdetailData['imgUrl'],
-        );
-        LoginResponse loginResponse = LoginResponse(
-          username: loginData['username'],
-          accessTokenExpiration: loginData['accessTokenExpiration'],
-          token: loginData['token'],
-          userDetails: userDetails,
-        );
-        // save login userdetail to
-        token = loginResponse.token;
+        token = loginData['token'];
+        UserDetails userDetails =
+            UserDetails.fromJson(loginData['userDetails']);
+
         LocalStorageHelper.setValue("token", token);
-        return loginResponse;
+        return userDetails;
       } else {
         throw Exception(
             'Failed to login: ${response.statusCode} - ${response.reasonPhrase}');

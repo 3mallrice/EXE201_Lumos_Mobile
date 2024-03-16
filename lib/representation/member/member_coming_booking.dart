@@ -1,21 +1,20 @@
-import 'package:exe201_lumos_mobile/core/helper/asset_helper.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:logger/logger.dart';
 
 import '../../api_model/authentication/login.dart';
 import '../../api_model/customer/coming_booking.dart';
 import '../../api_services/booking_service.dart';
+import '../../component/app_bar.dart';
 import '../../core/const/back-end/workship.dart';
+import '../../core/const/front-end/color_const.dart';
+import '../../core/helper/asset_helper.dart';
 import '../../core/helper/local_storage_helper.dart';
 import '../../login.dart';
 import 'member_booking_all.dart';
 import 'member_booking_detail.dart';
-
-import '../../component/app_bar.dart';
-import '../../core/const/front-end/color_const.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:logger/logger.dart';
-import 'package:intl/intl.dart';
 
 class MemberComingBooking extends StatefulWidget {
   const MemberComingBooking({super.key});
@@ -127,6 +126,8 @@ class _MemberBookingState extends State<MemberComingBooking> {
         ],
       ),
       body: RefreshIndicator(
+        color: ColorPalette.pinkBold,
+        backgroundColor: ColorPalette.thirdWhite,
         onRefresh: _fetchComingBooking,
         child: !isLoaded
             ? Center(

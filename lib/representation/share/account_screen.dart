@@ -1,28 +1,26 @@
-import '../member/member_booking_all.dart';
-
-import '../../core/const/front-end/lumos_icons.dart';
-import '../member/medical_report.dart';
-import '../member/member_address.dart';
-import 'about_lumos.dart';
-import 'bill_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:logger/logger.dart';
 
 import '../../api_model/authentication/login.dart';
-import '../../core/const/back-end/error_reponse.dart';
-import '../../core/helper/local_storage_helper.dart';
-import '../../login.dart';
-import 'package:flutter/material.dart';
+import '../../api_services/authentication_service.dart';
+import '../../component/alert_dialog.dart';
 import '../../component/app_bar.dart';
 import '../../component/my_button.dart';
 import '../../component/my_button_list.dart';
+import '../../core/const/back-end/error_reponse.dart';
 import '../../core/const/front-end/color_const.dart';
+import '../../core/const/front-end/lumos_icons.dart';
 import '../../core/helper/asset_helper.dart';
+import '../../core/helper/local_storage_helper.dart';
+import '../../login.dart';
+import '../member/medical_report.dart';
+import '../member/member_address.dart';
+import '../member/member_booking_all.dart';
+import 'about_lumos.dart';
 import 'account_update.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:logger/logger.dart';
-
-import '../../api_services/authentication_service.dart';
-import '../../component/alert_dialog.dart';
+import 'bill_screen.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -45,7 +43,7 @@ class _AccountScreenState extends State<AccountScreen> {
   @override
   void setState(VoidCallback fn) {
     // TODO: implement setState
-    if(mounted){
+    if (mounted) {
       super.setState(fn);
     }
   }
@@ -288,7 +286,7 @@ class _AccountScreenState extends State<AccountScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          user.username.toString(),
+          user.fullname.toString(),
           style: const TextStyle(
             color: ColorPalette.blueBold2,
             fontSize: 23,

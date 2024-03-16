@@ -165,15 +165,15 @@ class _LoginState extends State<Login> with RestorationMixin {
       }
 
       _showLoadingOverlay(context);
-      LoginResponse response = await authApi.login(email, password);
+      UserDetails userDetails = await authApi.login(email, password);
 
-      UserDetails userDetails = response.userDetails;
+      // UserDetails userDetails = response.userDetails;
       if (userDetails.role == Role.customer) {
         //save userDetail in local storage
         await LoginAccount.saveLoginAccount(userDetails);
 
-        logger.i('Login success: ${response.username}');
-        onSuccess(response.username);
+        logger.i('Login success: ${userDetails.fullname}');
+        onSuccess(userDetails.fullname);
       } else {
         throw Exception('Invalid role');
       }
