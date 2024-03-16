@@ -37,16 +37,14 @@ class LoginAccount {
   static Future<UserDetails> loadAccount() async {
     UserDetails userDetails = UserDetails(
         id: await LocalStorageHelper.getValue('id'),
-        username: await LocalStorageHelper.getValue('username'),
+        fullname: await LocalStorageHelper.getValue('username'),
         email: await LocalStorageHelper.getValue('email'),
         code: await LocalStorageHelper.getValue('code'),
         role: await LocalStorageHelper.getValue('role'),
         phone: await LocalStorageHelper.getValue('phone'),
         pronounce: await LocalStorageHelper.getValue('pronounce'),
-        status: await LocalStorageHelper.getValue('status'),
-        createdDate: await LocalStorageHelper.getValue('createdDate'),
         lastUpdate: await LocalStorageHelper.getValue('lastUpdate'),
-        updatedBy: await LocalStorageHelper.getValue('updatedBy'),
+        lastLogin: await LocalStorageHelper.getValue('updatedBy'),
         imgUrl: await LocalStorageHelper.getValue('imgUrl'));
 
     return userDetails;
@@ -54,16 +52,14 @@ class LoginAccount {
 
   static saveLoginAccount(UserDetails userDetails) async {
     await LocalStorageHelper.setValue('id', userDetails.id);
-    await LocalStorageHelper.setValue('username', userDetails.username);
+    await LocalStorageHelper.setValue('username', userDetails.fullname);
     await LocalStorageHelper.setValue('email', userDetails.email);
     await LocalStorageHelper.setValue('code', userDetails.code);
     await LocalStorageHelper.setValue('role', userDetails.role);
-    await LocalStorageHelper.setValue('status', userDetails.status);
     await LocalStorageHelper.setValue('phone', userDetails.phone);
     await LocalStorageHelper.setValue('pronounce', userDetails.pronounce);
-    await LocalStorageHelper.setValue('createdDate', userDetails.createdDate);
     await LocalStorageHelper.setValue('lastUpdate', userDetails.lastUpdate);
-    await LocalStorageHelper.setValue('updatedBy', userDetails.updatedBy);
+    await LocalStorageHelper.setValue('updatedBy', userDetails.lastLogin);
     await LocalStorageHelper.setValue('imgUrl', userDetails.imgUrl);
   }
 

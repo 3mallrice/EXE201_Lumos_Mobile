@@ -1,12 +1,12 @@
-import 'package:exe201_lumos_mobile/api_model/customer/medical_report.dart';
-import 'package:exe201_lumos_mobile/core/const/back-end/error_reponse.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:rich_readmore/rich_readmore.dart';
 
+import '../../api_model/customer/medical_report.dart';
 import '../../component/app_bar.dart';
+import '../../core/const/back-end/error_reponse.dart';
 import '../../core/const/front-end/color_const.dart';
-import 'package:flutter/material.dart';
 
 class MedicalReportDetail extends StatelessWidget {
   const MedicalReportDetail({super.key});
@@ -178,50 +178,51 @@ class MedicalReportDetail extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  textBaseline: TextBaseline.alphabetic,
-                  children: [
-                    Text(
-                      'Ghi chú: ',
-                      style: GoogleFonts.roboto(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: ColorPalette.blueBold2,
-                      ),
-                      textAlign: TextAlign.start,
-                    ),
-                    RichReadMoreText.fromString(
-                      text: medicalReport.note!,
-                      textStyle: GoogleFonts.roboto(
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: [
+                      Text(
+                        'Ghi chú: ',
+                        style: GoogleFonts.roboto(
                           fontSize: 16,
-                          fontWeight: FontWeight.normal,
-                          color: ColorPalette.bluelight2,
-                          decorationStyle: TextDecorationStyle.solid,
-                          textStyle: const TextStyle(
-                            textBaseline: TextBaseline.alphabetic,
-                          )),
-                      settings: LineModeSettings(
-                        trimLines: 5,
-                        trimCollapsedText: 'Xem thêm',
-                        trimExpandedText: 'Rút gọn',
-                        // onPressReadMore: () {},
-                        // onPressReadLess: () {},
-                        lessStyle: GoogleFonts.roboto(
-                          fontSize: 16,
-                          fontWeight: FontWeight.normal,
-                          color: ColorPalette.bluelight2,
+                          fontWeight: FontWeight.w600,
+                          color: ColorPalette.blueBold2,
                         ),
-                        moreStyle: GoogleFonts.roboto(
-                          fontSize: 16,
-                          fontWeight: FontWeight.normal,
-                          color: ColorPalette.bluelight2,
-                        ),
-                        textAlign: TextAlign.justify,
+                        textAlign: TextAlign.start,
                       ),
-                    ),
-                  ],
+                      RichReadMoreText.fromString(
+                        text: medicalReport.note!,
+                        textStyle: GoogleFonts.roboto(
+                            fontSize: 16,
+                            fontWeight: FontWeight.normal,
+                            color: ColorPalette.bluelight2,
+                            decorationStyle: TextDecorationStyle.solid,
+                            textStyle: const TextStyle(
+                              textBaseline: TextBaseline.alphabetic,
+                            )),
+                        settings: LineModeSettings(
+                          trimLines: 5,
+                          trimCollapsedText: 'Xem thêm',
+                          trimExpandedText: 'Rút gọn',
+                          lessStyle: GoogleFonts.roboto(
+                            fontSize: 16,
+                            fontWeight: FontWeight.normal,
+                            color: ColorPalette.bluelight2,
+                          ),
+                          moreStyle: GoogleFonts.roboto(
+                            fontSize: 16,
+                            fontWeight: FontWeight.normal,
+                            color: ColorPalette.bluelight2,
+                          ),
+                          textAlign: TextAlign.justify,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

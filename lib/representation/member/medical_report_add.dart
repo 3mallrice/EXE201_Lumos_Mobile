@@ -1,24 +1,21 @@
-import 'package:flutter/widgets.dart';
-
-import '../../core/const/back-end/validation.dart';
+import 'package:animated_custom_dropdown/custom_dropdown.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-
-import '../../core/const/back-end/error_reponse.dart';
+import 'package:logger/logger.dart';
 
 import '../../api_model/authentication/login.dart';
 import '../../api_model/customer/medical_report.dart';
 import '../../api_services/customer_service.dart';
 import '../../component/alert_dialog.dart';
+import '../../component/app_bar.dart';
+import '../../core/const/back-end/error_reponse.dart';
+import '../../core/const/back-end/validation.dart';
+import '../../core/const/front-end/color_const.dart';
 import '../../core/helper/local_storage_helper.dart';
 import '../../login.dart';
-import 'package:logger/logger.dart';
-
-import '../../component/app_bar.dart';
-import '../../core/const/front-end/color_const.dart';
-import 'package:flutter/material.dart';
-import 'package:animated_custom_dropdown/custom_dropdown.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
+import 'medical_report.dart';
 
 class MedicalReportAdd extends StatefulWidget {
   const MedicalReportAdd({super.key});
@@ -249,9 +246,8 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
               fontWeight: FontWeight.w500,
             ),
           ),
-          onConfirm: () {
-            Navigator.of(context).pop();
-          },
+          onConfirm: () => Navigator.popUntil(
+              context, ModalRoute.withName(MedicalReportPage.routeName)),
         );
       },
     );

@@ -1,15 +1,14 @@
-import '../../core/const/back-end/error_reponse.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../api_model/authentication/login.dart';
 import '../../component/alert_dialog.dart';
 import '../../component/app_bar.dart';
-import '../../core/const/front-end/color_const.dart';
-import '../../core/helper/asset_helper.dart';
-import 'package:flutter/material.dart';
-
 import '../../component/my_button.dart';
 import '../../component/my_textfield.dart';
+import '../../core/const/back-end/error_reponse.dart';
+import '../../core/const/front-end/color_const.dart';
+import '../../core/helper/asset_helper.dart';
 import '../../core/helper/local_storage_helper.dart';
 import '../../login.dart';
 
@@ -32,7 +31,7 @@ class _UpdateAccountState extends State<UpdateAccount> {
   @override
   void setState(VoidCallback fn) {
     // TODO: implement setState
-    if(mounted){
+    if (mounted) {
       super.setState(fn);
     }
   }
@@ -84,7 +83,7 @@ class _UpdateAccountState extends State<UpdateAccount> {
 
   void fetchUserData() async {
     userDetails = await loadAccount();
-    nameController.text = userDetails!.username;
+    nameController.text = userDetails!.fullname;
     emailController.text = userDetails!.email;
     phoneController.text = userDetails!.phone;
     if (userDetails == null) {

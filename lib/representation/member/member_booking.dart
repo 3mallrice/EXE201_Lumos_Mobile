@@ -525,7 +525,7 @@ class _BookingPageState extends State<BookingPage> {
                     AddBookingResponse result = await addBooking(paymentId);
                     if (result.bookingId > 0 && result.totalPrice > 0) {
                       AddPayment addPayment = AddPayment(
-                        buyerName: userDetails!.username,
+                        buyerName: userDetails!.fullname,
                         buyerEmail: userDetails!.email,
                         buyerPhone: userDetails!.phone,
                         buyerAddress: _addController.text,
