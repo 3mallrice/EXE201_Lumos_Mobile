@@ -236,18 +236,19 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
       context: context,
       builder: (BuildContext context) {
         return CustomAlertDialog(
-            title: const Text('Thành công'),
-            confirmText: "OK",
-            message: Text(
-              OperationSuccessMessage.createSuccess("hồ sơ"),
-              style: GoogleFonts.roboto(
-                color: ColorPalette.blueBold2,
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
+          title: const Text('Thành công'),
+          confirmText: "OK",
+          message: Text(
+            OperationSuccessMessage.createSuccess("hồ sơ"),
+            style: GoogleFonts.roboto(
+              color: ColorPalette.blueBold2,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
             ),
-            onConfirm: () => Navigator.of(context)
-                .pushReplacementNamed(MedicalReportPage.routeName));
+          ),
+          onConfirm: () => Navigator.popUntil(
+              context, ModalRoute.withName(MedicalReportPage.routeName)),
+        );
       },
     );
   }

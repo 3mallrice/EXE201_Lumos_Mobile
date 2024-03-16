@@ -208,8 +208,6 @@ class MedicalReportDetail extends StatelessWidget {
                           trimLines: 5,
                           trimCollapsedText: 'Xem thêm',
                           trimExpandedText: 'Rút gọn',
-                          // onPressReadMore: () {},
-                          // onPressReadLess: () {},
                           lessStyle: GoogleFonts.roboto(
                             fontSize: 16,
                             fontWeight: FontWeight.normal,
