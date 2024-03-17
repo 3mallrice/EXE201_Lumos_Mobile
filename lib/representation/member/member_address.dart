@@ -12,6 +12,7 @@ import '../../core/const/back-end/reponse_text.dart';
 import '../../core/const/front-end/color_const.dart';
 import '../../core/helper/local_storage_helper.dart';
 import '../../login.dart';
+import '../share/account_screen.dart';
 import 'member_address_add.dart';
 
 class MemberAddress extends StatefulWidget {
@@ -98,9 +99,10 @@ class _MemberAddressState extends State<MemberAddress> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarCom(
+      appBar: AppBarCom(
         leading: true,
         appBarText: 'Danh sách địa chỉ',
+        routeName: AccountScreen.routeName,
       ),
       body: !isLoaded
           ? Center(
