@@ -64,7 +64,7 @@ class _MemberAddressState extends State<MemberAddress> {
   @override
   void setState(VoidCallback fn) {
     // TODO: implement setState
-    if(mounted){
+    if (mounted) {
       super.setState(fn);
     }
   }
@@ -176,14 +176,11 @@ class _MemberAddressState extends State<MemberAddress> {
                                   alignment: Alignment.centerRight,
                                   child: TextButton(
                                     onPressed: () => onDevelopmentFeature(),
-                                    child: const Text(
-                                      'Sửa',
-                                      style: TextStyle(
-                                        color: ColorPalette.pink,
-                                        fontSize: 16,
-                                        fontFamily: 'roboto',
-                                        fontWeight: FontWeight.w400,
-                                      ),
+                                    child: IconButton(
+                                      onPressed: () => onDevelopmentFeature(),
+                                      icon: const Icon(
+                                          Icons.edit_location_alt_rounded),
+                                      color: ColorPalette.blueBold2,
                                     ),
                                   ),
                                 ),

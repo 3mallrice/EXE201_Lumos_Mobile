@@ -159,25 +159,10 @@ class _MedicalReportPageState extends State<MedicalReportPage> {
                                   ),
                                 ),
                               ),
-                              trailing: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Align(
-                                    alignment: Alignment.centerRight,
-                                    child: TextButton(
-                                      onPressed: () => onDevelopmentFeature(),
-                                      child: const Text(
-                                        'Sửa',
-                                        style: TextStyle(
-                                          color: ColorPalette.pink,
-                                          fontSize: 16,
-                                          fontFamily: 'roboto',
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                              trailing: IconButton(
+                                onPressed: () => onDevelopmentFeature(),
+                                icon: const Icon(Icons.edit),
+                                color: ColorPalette.blueBold2,
                               ),
                             ),
                           ),
