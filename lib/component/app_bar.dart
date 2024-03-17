@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import '../../core/const/front-end/color_const.dart';
 
 class AppBarCom extends StatelessWidget implements PreferredSizeWidget {
   final String? appBarText;
   final bool leading;
   final Widget? leftIcon;
+  final String? routeName;
   final Color? backgroundColor;
   final Color? textColor;
   final List<Widget>? action;
@@ -18,6 +20,7 @@ class AppBarCom extends StatelessWidget implements PreferredSizeWidget {
     this.backgroundColor,
     this.textColor,
     this.action,
+    this.routeName,
   });
 
   @override
@@ -32,7 +35,10 @@ class AppBarCom extends StatelessWidget implements PreferredSizeWidget {
             ? leftIcon ??
                 IconButton(
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    routeName == null
+                        ? Navigator.of(context).pop()
+                        : Navigator.of(context)
+                            .pushReplacementNamed(routeName!);
                   },
                   icon: const Icon(
                     Icons.arrow_back_ios_new_rounded,

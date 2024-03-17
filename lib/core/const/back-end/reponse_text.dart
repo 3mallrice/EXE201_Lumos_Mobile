@@ -37,7 +37,7 @@ class OperationErrorMessage {
   static const String systemError =
       "Đã xảy ra lỗi hệ thống. Vui lòng thử lại sau.";
   static const String createError =
-      "Không thể thêm mới mục này. Vui lòng thử lại sau hoặc liên hệ với quản trị viên.";
+      "Không thể thêm mới. Vui lòng thử lại sau hoặc liên hệ với quản trị viên.";
   static const String accessDenied =
       "Bạn không có quyền truy cập vào tài nguyên này.";
   static const String deleteError =

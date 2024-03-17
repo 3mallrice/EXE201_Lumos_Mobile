@@ -2,21 +2,20 @@ import 'dart:async';
 
 import 'package:exe201_lumos_mobile/api_services/authentication_service.dart';
 import 'package:exe201_lumos_mobile/core/const/back-end/validation.dart';
+import 'package:flutter/material.dart';
+import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:logger/logger.dart';
 
 import 'component/alert_dialog.dart';
-import 'core/const/back-end/error_reponse.dart';
-import 'login.dart';
-import 'package:flutter/material.dart';
-import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
-
 import 'component/my_button.dart';
 import 'component/my_textfield.dart';
+import 'core/const/back-end/reponse_text.dart';
 import 'core/const/front-end/color_const.dart';
 import 'core/helper/asset_helper.dart';
 import 'core/helper/image_helper.dart';
+import 'login.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});

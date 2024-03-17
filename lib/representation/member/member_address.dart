@@ -1,19 +1,19 @@
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:logger/logger.dart';
 
 import '../../api_model/authentication/login.dart';
 import '../../api_model/customer/address.dart';
 import '../../api_services/customer_service.dart';
 import '../../component/alert_dialog.dart';
-import '../../core/const/back-end/error_reponse.dart';
+import '../../component/app_bar.dart';
+import '../../core/const/back-end/reponse_text.dart';
+import '../../core/const/front-end/color_const.dart';
 import '../../core/helper/local_storage_helper.dart';
 import '../../login.dart';
+import '../share/account_screen.dart';
 import 'member_address_add.dart';
-import 'package:logger/logger.dart';
-
-import '../../component/app_bar.dart';
-import '../../core/const/front-end/color_const.dart';
-import 'package:flutter/material.dart';
 
 class MemberAddress extends StatefulWidget {
   final String? onAddressSelected;
@@ -99,9 +99,10 @@ class _MemberAddressState extends State<MemberAddress> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarCom(
+      appBar: AppBarCom(
         leading: true,
         appBarText: 'Danh sách địa chỉ',
+        routeName: AccountScreen.routeName,
       ),
       body: !isLoaded
           ? Center(

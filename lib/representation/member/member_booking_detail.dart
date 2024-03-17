@@ -1,5 +1,10 @@
-import '../../core/const/back-end/error_reponse.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:logger/logger.dart';
+import 'package:rich_readmore/rich_readmore.dart';
 
 import '../../api_model/authentication/login.dart';
 import '../../api_model/customer/booking.dart';
@@ -8,16 +13,11 @@ import '../../api_services/booking_service.dart';
 import '../../component/app_bar.dart';
 import '../../component/my_button.dart';
 import '../../core/const/back-end/booking_status.dart';
+import '../../core/const/back-end/reponse_text.dart';
 import '../../core/const/back-end/workship.dart';
 import '../../core/const/front-end/color_const.dart';
 import '../../core/helper/local_storage_helper.dart';
 import '../../login.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:logger/logger.dart';
-import 'package:rich_readmore/rich_readmore.dart';
 
 class BookingDetail extends StatefulWidget {
   final int? bookingId;
@@ -91,7 +91,7 @@ class _BookingDetailState extends State<BookingDetail> {
   @override
   void setState(VoidCallback fn) {
     // TODO: implement setState
-    if(mounted){
+    if (mounted) {
       super.setState(fn);
     }
   }

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
+
 import '../api_model/customer/address.dart';
 import '../api_model/customer/medical_report.dart';
 import '../core/helper/local_storage_helper.dart';
@@ -76,8 +77,9 @@ class CallCustomerApi {
         log.i('New medical report added: $responseData[\'message\']');
         return true;
       } else {
-        throw Exception(
+        log.i(
             'Failed to add new medical report: ${response.statusCode} - ${response.reasonPhrase}');
+        return false;
       }
     } catch (e) {
       log.i("Failed to add new medical report: $e");

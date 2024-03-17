@@ -15,7 +15,7 @@ import '../../api_model/partner/partner.dart';
 import '../../api_services/customer_service.dart';
 import '../../api_services/partner_service.dart';
 import '../../component/app_bar.dart';
-import '../../core/const/back-end/error_reponse.dart';
+import '../../core/const/back-end/reponse_text.dart';
 import '../../core/const/front-end/color_const.dart';
 import '../../core/helper/asset_helper.dart';
 import '../../core/helper/local_storage_helper.dart';
