@@ -9,7 +9,7 @@ import '../../component/alert_dialog.dart';
 import '../../component/app_bar.dart';
 import '../../component/my_button.dart';
 import '../../component/my_button_list.dart';
-import '../../core/const/back-end/error_reponse.dart';
+import '../../core/const/back-end/reponse_text.dart';
 import '../../core/const/front-end/color_const.dart';
 import '../../core/const/front-end/lumos_icons.dart';
 import '../../core/helper/asset_helper.dart';
@@ -100,7 +100,8 @@ class _AccountScreenState extends State<AccountScreen> {
                   await await LocalStorageHelper.setValue("token", "");
 
                   log.i(LoginAccount.loadAccount());
-                  log.i("Token: $LocalStorageHelper.getValue(\"token\")");
+                  // String token = await LocalStorageHelper.getValue("token");
+                  // log.i("Token: $token");
                   backToLoginPage();
                 },
                 child: Text(
@@ -179,6 +180,10 @@ class _AccountScreenState extends State<AccountScreen> {
                               shape: BoxShape.circle,
                               image: DecorationImage(
                                 image: AssetImage(AssetHelper.accountImg),
+                                //get image from userDetails, if null then use default image
+                                // image: NetworkImage(
+                                //   user.imgUrl.toString(),
+                                // ),
                                 fit: BoxFit.fill,
                               ),
                             ),

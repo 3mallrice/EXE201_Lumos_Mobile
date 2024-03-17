@@ -17,7 +17,7 @@ import '../../api_services/payment_service.dart';
 import '../../component/alert_dialog.dart';
 import '../../component/app_bar.dart';
 import '../../component/my_button.dart';
-import '../../core/const/back-end/error_reponse.dart';
+import '../../core/const/back-end/reponse_text.dart';
 import '../../core/const/back-end/workship.dart';
 import '../../core/const/front-end/color_const.dart';
 import '../../core/helper/local_storage_helper.dart';

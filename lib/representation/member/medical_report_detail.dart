@@ -5,7 +5,7 @@ import 'package:rich_readmore/rich_readmore.dart';
 
 import '../../api_model/customer/medical_report.dart';
 import '../../component/app_bar.dart';
-import '../../core/const/back-end/error_reponse.dart';
+import '../../core/const/back-end/reponse_text.dart';
 import '../../core/const/front-end/color_const.dart';
 
 class MedicalReportDetail extends StatelessWidget {

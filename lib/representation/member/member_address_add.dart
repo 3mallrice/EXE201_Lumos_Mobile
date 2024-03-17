@@ -10,7 +10,7 @@ import '../../api_model/customer/address.dart';
 import '../../api_services/customer_service.dart';
 import '../../component/alert_dialog.dart';
 import '../../component/app_bar.dart';
-import '../../core/const/back-end/error_reponse.dart';
+import '../../core/const/back-end/reponse_text.dart';
 import '../../core/const/front-end/color_const.dart';
 import '../../core/helper/local_storage_helper.dart';
 import '../../login.dart';

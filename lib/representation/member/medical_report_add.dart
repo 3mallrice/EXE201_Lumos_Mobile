@@ -10,7 +10,7 @@ import '../../api_model/customer/medical_report.dart';
 import '../../api_services/customer_service.dart';
 import '../../component/alert_dialog.dart';
 import '../../component/app_bar.dart';
-import '../../core/const/back-end/error_reponse.dart';
+import '../../core/const/back-end/reponse_text.dart';
 import '../../core/const/back-end/validation.dart';
 import '../../core/const/front-end/color_const.dart';
 import '../../core/helper/local_storage_helper.dart';
@@ -215,7 +215,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
           //show dialog
           _showSuccessDialog();
         } else {
-          _showFailDialog();
+          _showFailDialog(null);
         }
 
         // Clear text controllers
@@ -224,6 +224,7 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
         _noteController.clear();
       } catch (error) {
         log.e('Error adding new medical report: $error');
+        _showFailDialog(OperationErrorMessage.systemError);
       } finally {
         // Ẩn vòng loading khi quá trình đăng nhập hoàn thành
         _hideLoadingOverlay();
@@ -231,34 +232,43 @@ class _MedicalReportAddState extends State<MedicalReportAdd> {
     }
   }
 
-  void _showResultDialog(String title, String content) {
+  void _showResultDialog(String content, String? routeName) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return CustomAlertDialog(
-          title: const Text('Thành công'),
+          title: Text(
+            DiaLogMessage.title,
+            style: GoogleFonts.roboto(
+              color: ColorPalette.blueBold2,
+              fontSize: 16,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
           confirmText: "OK",
           message: Text(
-            OperationSuccessMessage.createSuccess("hồ sơ"),
+            content,
             style: GoogleFonts.roboto(
               color: ColorPalette.blueBold2,
               fontSize: 16,
               fontWeight: FontWeight.w500,
             ),
           ),
-          onConfirm: () => Navigator.popUntil(
-              context, ModalRoute.withName(MedicalReportPage.routeName)),
+          onConfirm: () => routeName != null
+              ? Navigator.of(context).pushReplacementNamed(routeName)
+              : Navigator.of(context).pop(),
         );
       },
     );
   }
 
   void _showSuccessDialog() {
-    _showResultDialog('Thành công', 'Thêm mới hồ sơ thành công!');
+    _showResultDialog(OperationSuccessMessage.createSuccess("hồ sơ"),
+        MedicalReportPage.routeName);
   }
 
-  void _showFailDialog() {
-    _showResultDialog('Thất bại', 'Thêm mới hồ sơ thất bại! Vui lòng thử lại!');
+  void _showFailDialog(String? message) {
+    _showResultDialog(message ?? OperationErrorMessage.createError, null);
   }
 
   Future<void> _selectDate(BuildContext context) async {

@@ -6,7 +6,7 @@ import '../../component/alert_dialog.dart';
 import '../../component/app_bar.dart';
 import '../../component/my_button.dart';
 import '../../component/my_textfield.dart';
-import '../../core/const/back-end/error_reponse.dart';
+import '../../core/const/back-end/reponse_text.dart';
 import '../../core/const/front-end/color_const.dart';
 import '../../core/helper/asset_helper.dart';
 import '../../core/helper/local_storage_helper.dart';
