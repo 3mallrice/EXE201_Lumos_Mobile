@@ -323,7 +323,7 @@ class _BookingPageState extends State<BookingPage> {
       return availableWorkshifts;
     }
 
-    int selectedDayOfWeek = selectedDate.weekday + 1;
+    selectedDayOfWeek = selectedDate.weekday + 1;
     DateTime now = DateTime.now();
     int currentHour = now.hour;
     int currentMinute = now.minute;

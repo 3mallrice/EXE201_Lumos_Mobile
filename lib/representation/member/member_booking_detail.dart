@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -243,14 +244,17 @@ class _BookingDetailState extends State<BookingDetail> {
                               ],
                             ),
                             const SizedBox(height: 2),
-                            Text(
-                              'Địa chỉ: ${bookingComing?.address}',
-                              style: GoogleFonts.roboto(
-                                fontSize: 16,
-                                fontWeight: FontWeight.normal,
-                                color: ColorPalette.blueBold2,
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                'Địa chỉ: ${bookingComing?.address}',
+                                style: GoogleFonts.roboto(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.normal,
+                                  color: ColorPalette.blueBold2,
+                                ),
+                                softWrap: true,
                               ),
-                              softWrap: true,
                             ),
                             const SizedBox(height: 2),
                             Container(
