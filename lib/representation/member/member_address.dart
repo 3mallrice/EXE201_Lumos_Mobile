@@ -12,8 +12,8 @@ import '../../core/const/back-end/reponse_text.dart';
 import '../../core/const/front-end/color_const.dart';
 import '../../core/helper/local_storage_helper.dart';
 import '../../login.dart';
-import '../share/account_screen.dart';
 import 'member_address_add.dart';
+import 'member_main_navbar.dart';
 
 class MemberAddress extends StatefulWidget {
   final String? onAddressSelected;
@@ -102,7 +102,7 @@ class _MemberAddressState extends State<MemberAddress> {
       appBar: AppBarCom(
         leading: true,
         appBarText: 'Danh sách địa chỉ',
-        routeName: AccountScreen.routeName,
+        routeName: MemberMain.routeName,
       ),
       body: !isLoaded
           ? Center(
