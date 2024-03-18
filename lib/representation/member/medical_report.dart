@@ -12,9 +12,9 @@ import '../../core/const/back-end/reponse_text.dart';
 import '../../core/const/front-end/color_const.dart';
 import '../../core/helper/local_storage_helper.dart';
 import '../../login.dart';
-import '../share/account_screen.dart';
 import 'medical_report_add.dart';
 import 'medical_report_detail.dart';
+import 'member_main_navbar.dart';
 
 class MedicalReportPage extends StatefulWidget {
   const MedicalReportPage({super.key});
@@ -97,7 +97,7 @@ class _MedicalReportPageState extends State<MedicalReportPage> {
       appBar: AppBarCom(
         appBarText: "Danh sách hồ sơ",
         leading: true,
-        routeName: AccountScreen.routeName,
+        routeName: MemberMain.routeName,
       ),
       body: !isLoaded
           ? Center(
