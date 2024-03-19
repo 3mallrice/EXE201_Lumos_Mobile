@@ -61,7 +61,7 @@ class _PartnerServiceListState extends State<PartnerServiceList> {
             Navigator.restorablePushReplacementNamed(context, Login.routeName),
       );
     } else {
-      await _fetchPartnerData(partnerId);
+      await _fetchPartnerData(widget.partnerId);
     }
   }
 
