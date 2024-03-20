@@ -53,7 +53,7 @@ class _QrPaymentState extends State<QrPayment> {
         ModalRoute.of(context)?.settings.arguments as AddPaymentResponse;
     return Scaffold(
       appBar: const AppBarCom(
-        appBarText: "Thông tin chuyển khoản",
+        appBarText: "Thông tin thanh toán",
         leading: false,
       ),
       body: PopScope(

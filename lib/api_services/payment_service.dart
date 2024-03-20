@@ -79,8 +79,8 @@ class CallPaymentAPI {
     try {
       http.Response response = await http.get(url, headers: {
         'Authorization': 'Bearer $token',
-        'x-client-id': '2b13d4e0-5fac-42c7-b09b-5c3580d17a7f',
-        'x-api-key': '2c2991da-1a34-47d9-8902-dbe38b24146d',
+        'x-client-id': 'e2cd40e5-c2b0-45d2-b0ea-26a096707b48',
+        'x-api-key': '292a589f-ac7d-41e2-9049-3afb37f37841',
         'Content-Type': 'application/json'
       });
 
